@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import ImportsComponents from './components/ImportsComponents';
+import Navbar from './components/Navbar';
+import LoginModal from './components/LoginModal';
+import SignupModal from './components/SignupModal';
+import WebsiteGallery from './components/WebsiteGallery';
+import StylishX from './components/StylishX';
+import Nexus from './components/Nexus';
+import Lumina from './components/Lumina';
+import RaiboWeb from './components/RaiboWeb';
+import ElectroX from './components/ElectroX';
 import './styles/globals.css';
 import {
   SandpackProvider,
@@ -1751,6 +1760,11 @@ function App() {
   const [error, setError] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignupOpen, setIsSignupOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  const [viewingInternal, setViewingInternal] = useState(null);
 
   // sample imported components to preview in "imports" tab
   const importedComponentsSample = [
@@ -1818,45 +1832,36 @@ export default function Button({children, onClick}) {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <Header>
-          <HeaderContent>
-            <NavButton 
-              onClick={() => setActiveTab('home')}
-              style={{ background: activeTab === 'home' ? 'white' : 'transparent',
-                      color: activeTab === 'home' ? '#1a202c' : 'white' }}
-            >
-              Home
-            </NavButton>
-            <NavButton 
-              onClick={() => setActiveTab('components')}
-              style={{ background: activeTab === 'components' ? 'white' : 'transparent',
-                      color: activeTab === 'components' ? '#1a202c' : 'white' }}
-            >
-              Components
-            </NavButton>
-            <NavButton 
-              onClick={() => setActiveTab('imports')}
-              style={{ background: activeTab === 'imports' ? 'white' : 'transparent',
-                      color: activeTab === 'imports' ? '#1a202c' : 'white' }}
-            >
-              ImportComponents
-            </NavButton>
-            <NavButton 
-              onClick={() => setActiveTab('web')}
-              style={{ background: activeTab === 'web' ? 'white' : 'transparent',
-                      color: activeTab === 'web' ? '#1a202c' : 'white' }}
-            >
-              WEB
-            </NavButton>
-            <NavButton 
-              onClick={() => setActiveTab('fullweb')}
-              style={{ background: activeTab === 'fullweb' ? 'white' : 'transparent',
-                      color: activeTab === 'fullweb' ? '#1a202c' : 'white' }}
-            >
-              Full Web
-            </NavButton>
-          </HeaderContent>
-        </Header>
+        <Navbar 
+          activeTab={activeTab} 
+          setActiveTab={setActiveTab}
+          onLoginClick={() => setIsLoginOpen(true)}
+          onSignupClick={() => setIsSignupOpen(true)}
+          isLoggedIn={isLoggedIn}
+          onLogout={() => {
+            setIsLoggedIn(false);
+            setUserInfo(null);
+          }}
+          userInfo={userInfo}
+        />
+        <LoginModal 
+          isOpen={isLoginOpen} 
+          onClose={() => setIsLoginOpen(false)}
+          onLoginSuccess={(email) => {
+            setIsLoggedIn(true);
+            setUserInfo({ email });
+            setIsLoginOpen(false);
+          }}
+        />
+        <SignupModal 
+          isOpen={isSignupOpen} 
+          onClose={() => setIsSignupOpen(false)}
+          onSignupSuccess={(name, email) => {
+            setIsLoggedIn(true);
+            setUserInfo({ name, email });
+            setIsSignupOpen(false);
+          }}
+        />
         <Main isPreview={activeTab === 'components' || activeTab === 'imports'}>
           {activeTab === 'home' ? (
             <>
@@ -1897,9 +1902,60 @@ export default function Button({children, onClick}) {
           ) : activeTab === 'imports' ? (
             <ImportComponentsPreviewPage />
           ) : activeTab === 'web' ? (
-            <>
-              <ComponentShowcase />
-            </>
+            viewingInternal === 'stylishx' ? (
+              <div className="relative">
+                <button
+                  onClick={() => setViewingInternal(null)}
+                  className="fixed top-20 left-4 z-40 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+                >
+                  ← Back to Gallery
+                </button>
+                <StylishX />
+              </div>
+            ) : viewingInternal === 'nexus' ? (
+              <div className="relative">
+                <button
+                  onClick={() => setViewingInternal(null)}
+                  className="fixed top-20 left-4 z-40 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                >
+                  ← Back to Gallery
+                </button>
+                <Nexus />
+              </div>
+            ) : viewingInternal === 'lumina' ? (
+              <div className="relative">
+                <button
+                  onClick={() => setViewingInternal(null)}
+                  className="fixed top-20 left-4 z-40 px-4 py-2 rounded-lg hover:opacity-90 transition"
+                  style={{ backgroundColor: '#d4af37', color: '#000' }}
+                >
+                  ← Back to Gallery
+                </button>
+                <Lumina />
+              </div>
+            ) : viewingInternal === 'raiboweb' ? (
+              <div className="relative">
+                <button
+                  onClick={() => setViewingInternal(null)}
+                  className="fixed top-20 left-4 z-40 px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition"
+                >
+                  ← Back to Gallery
+                </button>
+                <RaiboWeb />
+              </div>
+            ) : viewingInternal === 'electrox' ? (
+              <div className="relative">
+                <button
+                  onClick={() => setViewingInternal(null)}
+                  className="fixed top-20 left-4 z-40 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                >
+                  ← Back to Gallery
+                </button>
+                <ElectroX />
+              </div>
+            ) : (
+              <WebsiteGallery onViewInternal={setViewingInternal} />
+            )
           ) : activeTab === 'fullweb' ? (
             <>
               <FullWebPreview />

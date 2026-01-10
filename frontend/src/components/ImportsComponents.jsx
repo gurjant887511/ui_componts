@@ -169,7 +169,7 @@ export default function ImportsComponents({ importedComponents }) {
     if (selected.file && typeof selected.file === 'string') {
       const fileName = selected.file;
       return React.lazy(() =>
-        import(`../imports/${fileName}`)
+        import(/* @vite-ignore */ `../imports/${fileName}`)
           .then((mod) => ({ default: mod.default || mod }))
           .catch((err) => {
             setLoadError(`Failed to load ${fileName}: ${err.message || err}`);
