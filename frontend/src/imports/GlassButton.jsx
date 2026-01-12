@@ -1,29 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const GlassButton = styled.button`
-  // ...existing code stays the same...
-`;
-
-const Button = ({ 
-  children, 
-  size = 'medium', 
-  theme = 'light', 
-  color = null,
-  onClick,
-  ...props 
-}) => {
+const GlassButton = () => {
   return (
-    <GlassButton
-      size={size}
-      theme={theme}
-      color={color}
-      onClick={onClick}
-      {...props}
-    >
-      {children}
-    </GlassButton>
+    <button className="px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-white font-semibold hover:bg-white/20 transition-all">
+      Glass Button
+    </button>
   );
 };
 
-export default Button;
+export default GlassButton;

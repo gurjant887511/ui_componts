@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { GoogleLogin } from '@react-oauth/google';
+import OTPVerification from './OTPVerification';
 
 function SignupModal({ isOpen, onClose, onSignupSuccess }) {
   const [formData, setFormData] = useState({
@@ -9,6 +11,53 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showOTPVerification, setShowOTPVerification] = useState(false);
+  const [pendingUser, setPendingUser] = useState(null);
+
+  // Check if Google Client ID is properly configured
+  const hasValidGoogleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID && 
+    import.meta.env.VITE_GOOGLE_CLIENT_ID !== 'dummy-client-id-for-development';
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      setLoading(true);
+      setError('');
+      
+      // Send token to backend for verification
+      const response = await fetch('http://localhost:5000/api/auth/google-signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token: credentialResponse.credential,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // User needs to verify OTP and set password
+        setPendingUser({
+          email: data.email,
+          name: data.name,
+          userId: data.userId
+        });
+        setShowOTPVerification(true);
+      } else {
+        setError(data.message || 'Google signup failed');
+      }
+    } catch (err) {
+      console.error('Google signup error:', err);
+      setError('Google signup failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleError = () => {
+    setError('Google sign-up failed. Please try again.');
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,31 +84,81 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
     setLoading(true);
 
     try {
-      // API call here
-      console.log('Signup attempt:', {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
+      // Send signup request to backend
+      const response = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          confirmPassword: formData.confirmPassword,
+        }),
       });
-      // Simulate API call
-      setTimeout(() => {
-        setLoading(false);
-        alert('Signup successful!');
-        onSignupSuccess(formData.name, formData.email);
-        setFormData({
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Show OTP verification page
+        setPendingUser({
+          email: formData.email,
+          name: formData.name,
+          userId: data.userId
         });
-      }, 1000);
+        setShowOTPVerification(true);
+      } else {
+        setError(data.message || 'Signup failed');
+      }
     } catch (err) {
+      console.error('Signup error:', err);
       setError('Signup failed. Please try again.');
+    } finally {
       setLoading(false);
     }
   };
 
+  const handleOTPVerificationSuccess = (user) => {
+    setShowOTPVerification(false);
+    setPendingUser(null);
+    setFormData({
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    });
+    onSignupSuccess(user.name, user.email);
+    onClose();
+  };
+
   if (!isOpen) return null;
+
+  // Show OTP verification if in that step
+  if (showOTPVerification && pendingUser) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+          <OTPVerification 
+            email={pendingUser.email}
+            userId={pendingUser.userId}
+            onVerificationSuccess={handleOTPVerificationSuccess}
+          />
+          <div className="text-center p-4">
+            <button
+              onClick={() => {
+                setShowOTPVerification(false);
+                setPendingUser(null);
+              }}
+              className="text-gray-600 hover:text-gray-800 text-sm"
+            >
+              Back to Signup
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -168,6 +267,39 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
           >
             {loading ? 'Creating account...' : 'Sign Up'}
           </button>
+
+          {/* Divider */}
+          {hasValidGoogleClientId && (
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">Or continue with</span>
+              </div>
+            </div>
+          )}
+
+          {/* Google Login Button - Only show if valid Client ID is configured */}
+          {hasValidGoogleClientId ? (
+            <div className="w-full">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+                text="signup_with"
+                size="large"
+                width="100%"
+              />
+            </div>
+          ) : (
+            <div className="w-full p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-xs text-yellow-800 text-center">
+                <strong>Google Sign-up</strong> is not configured yet.
+                <br />
+                Set your Google Client ID in environment variables to enable it.
+              </p>
+            </div>
+          )}
 
           {/* Login Link */}
           <p className="text-center text-sm text-gray-600">

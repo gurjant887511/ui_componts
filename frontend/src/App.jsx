@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import ImportsComponents from './components/ImportsComponents';
+
 import Navbar from './components/Navbar';
 import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
+import CustomizeWeb from './components/CustomizeWeb';
 import WebsiteGallery from './components/WebsiteGallery';
+import ComponentsByCategory from './components/ComponentsByCategory';
 import StylishX from './components/StylishX';
 import Nexus from './components/Nexus';
 import Lumina from './components/Lumina';
 import RaiboWeb from './components/RaiboWeb';
-import ElectroX from './components/ElectroX';
+import MyWebsite from './components/MyWebsite';
+import DynamicWeb from './components/DynamicWeb';
+import ElectroTech from './components/ElectroTech';
+import About from './components/About';
+import HeroSection from './components/HeroSection';
+
+// import ElectroX from './components/ElectroX';
 import './styles/globals.css';
 import {
   SandpackProvider,
@@ -19,7 +27,7 @@ import {
 } from "@codesandbox/sandpack-react";
 import { atomDark } from "@codesandbox/sandpack-themes";
 import ComponentLivePreview from './components/LivePreview';
-import ComponentShowcase, { GlassCard, NeonButton, MorphIcon, FloatingTag, TimelineStepper } from './imports/StylishComponents';
+import ComponentShowcase from './imports/StylishComponents';
 
 // Import all card and button components
 import AllInOneShowcase from './imports/AllInOneShowcase';
@@ -28,8 +36,6 @@ import GlassButtonComp from './imports/GlassButton';
 import ButtonExamples from './imports/ButtonExamples';
 import CardExample from './imports/CardExample';
 import InteractiveCard from './imports/InteractiveCard';
-import StylishCard from './imports/StylishCard';
-import BigStylishCard from './imports/BigStylishCard';
 import StylishLoginCard from './imports/StylishLoginCard';
 import UsersCardList from './imports/UsersCardList';
 import TextHoverEffect from './imports/TextHoverEffect';
@@ -46,764 +52,11 @@ import CometCard from './imports/CometCard';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const COMPONENTS_LIST = [
-  { 
-    id: 'button-example', 
-    name: 'Button Examples', 
-    component: ButtonExamples,
-    code: `import React from 'react';
 
-export default function ButtonExamples() {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {/* Basic Buttons */}
-      <div>
-        <button className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all">
-          Primary Button
-        </button>
-        <button className="w-full px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all">
-          Success Button
-        </button>
-      </div>
-      
-      {/* Button Sizes */}
-      <div>
-        <button className="w-full px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg text-sm">
-          Small
-        </button>
-        <button className="w-full px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg">
-          Medium
-        </button>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'card-example', 
-    name: 'Card Example', 
-    component: CardExample,
-    code: `const cards = [
-  { title: 'Card One', content: 'Beautiful card with shadow effects.' },
-  { title: 'Card Two', content: 'Each card has its own unique styling.' },
-];
-
-<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-  {cards.map((card, idx) => (
-    <div key={idx} className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg p-6 hover:bg-white/20 transition-all">
-      <h3 className="text-xl font-bold mb-3">{card.title}</h3>
-      <p className="text-gray-300">{card.content}</p>
-      <button className="mt-4 w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all">
-        Learn More
-      </button>
-    </div>
-  ))}
-</div>`
-  },
-  { 
-    id: 'cybrglow', 
-    name: 'CyberGlow Card', 
-    component: CyberGlowInfoCard,
-    code: `// Cyber Glow Card with neon effects
-<div className="bg-black/50 border-2 border-cyan-500/50 rounded-lg p-6">
-  <h3 className="text-2xl font-bold text-cyan-400" style={{
-    textShadow: '0 0 10px #00d4ff, 0 0 20px #00d4ff'
-  }}>
-    Cyber Glow
-  </h3>
-  <p className="text-white/80 mt-3">Neon-inspired design</p>
-</div>`
-  },
-  { 
-    id: 'all-components', 
-    name: 'All Components', 
-    component: AllInOneShowcase,
-    code: `// Showcase all component types
-<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-  {/* Cards */}
-  <div className="bg-white/10 backdrop-blur-xl rounded-lg p-6">
-    Card Component
-  </div>
-  
-  {/* Tabs */}
-  <div className="bg-white/10 backdrop-blur-xl rounded-lg p-6">
-    <div className="flex gap-2">
-      <button className="px-4 py-2 bg-blue-600 rounded-lg">Tab 1</button>
-      <button className="px-4 py-2 bg-white/10 rounded-lg">Tab 2</button>
-    </div>
-  </div>
-  
-  {/* Accordion */}
-  <div className="bg-white/10 backdrop-blur-xl rounded-lg p-6">
-    Accordion Component
-  </div>
-  
-  {/* Avatars & Badges */}
-  <div className="bg-white/10 backdrop-blur-xl rounded-lg p-6">
-    Avatars & Badges
-  </div>
-</div>`
-  },
-  { 
-    id: 'interactive-card', 
-    name: 'Interactive Card', 
-    component: InteractiveCard,
-    code: `import React, { useState } from 'react';
-
-export default function InteractiveCard() {
-  const [activeCard, setActiveCard] = useState(0);
-  
-  const cards = [
-    { title: 'Interactive', content: 'Click to see interaction' },
-    { title: 'Dynamic', content: 'Cards respond to your clicks' },
-  ];
-
-  return (
-    <div>
-      <div className="flex gap-4 mb-8">
-        {cards.map((card, idx) => (
-          <button
-            key={idx}
-            onClick={() => setActiveCard(idx)}
-            className={activeCard === idx ? 'bg-white text-slate-900' : 'bg-white/10'}
-          >
-            {card.title}
-          </button>
-        ))}
-      </div>
-      <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg p-12">
-        <h2 className="text-3xl font-bold">{cards[activeCard].title}</h2>
-      </div>
-    </div>
-  );
-}`
-  },
-  { 
-    id: 'stylish-card', 
-    name: 'Stylish Card', 
-    component: StylishCard,
-    code: `// Gradient Card
-<div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl p-8 shadow-2xl hover:scale-105 transition-all">
-  <h3 className="text-2xl font-bold mb-3">Gradient Card</h3>
-  <p className="text-white/90 mb-4">Beautiful gradient background</p>
-  <button className="px-4 py-2 bg-white text-purple-600 font-semibold rounded-lg">
-    Explore
-  </button>
-</div>
-
-// Glass Effect Card
-<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-8">
-  <h3 className="text-2xl font-bold mb-3">Glass Effect</h3>
-  <p className="text-white/90 mb-4">Modern glassmorphism design</p>
-</div>`
-  },
-  { 
-    id: 'big-stylish', 
-    name: 'BigStylish Card', 
-    component: BigStylishCard,
-    code: `// Large Hero Card
-<div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-16 shadow-2xl">
-  <h2 className="text-5xl font-bold mb-4">Premium Features</h2>
-  <p className="text-xl text-white/90 mb-8">Experience advanced UI components</p>
-  <div className="flex gap-4">
-    <button className="px-8 py-3 bg-white text-purple-600 font-bold rounded-lg">
-      Get Started
-    </button>
-    <button className="px-8 py-3 border-2 border-white text-white font-bold rounded-lg">
-      Learn More
-    </button>
-  </div>
-</div>`
-  },
-  { 
-    id: 'login-card', 
-    name: 'StylishLogin Card', 
-    component: StylishLoginCard,
-    code: `import React, { useState } from 'react';
-
-export default function StylishLoginCard() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  return (
-    <div className="w-full max-w-md mx-auto">
-      <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8">
-        <h1 className="text-3xl font-bold text-center mb-8">Welcome Back</h1>
-        
-        <input type="email" placeholder="Email" 
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white mb-4" />
-        
-        <input type="password" placeholder="Password" 
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white mb-6" />
-        
-        <button className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-lg">
-          Sign In
-        </button>
-      </div>
-    </div>
-  );
-}`
-  },
-  { 
-    id: 'users-list', 
-    name: 'UsersCard List', 
-    component: UsersCardList,
-    code: `const users = [
-  { name: 'Sarah Johnson', role: 'Designer', avatar: '👩‍💼' },
-  { name: 'Mike Chen', role: 'Developer', avatar: '👨‍💻' },
-  { name: 'Emma Davis', role: 'Product Manager', avatar: '👩‍💼' },
-];
-
-<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-  {users.map((user, idx) => (
-    <div key={idx} className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg p-6">
-      <div className="flex items-center gap-4 mb-4">
-        <div className="text-4xl">{user.avatar}</div>
-        <div>
-          <h3 className="text-lg font-bold">{user.name}</h3>
-          <p className="text-gray-400 text-sm">{user.role}</p>
-        </div>
-      </div>
-      <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-        View Profile
-      </button>
-    </div>
-  ))}
-</div>`
-  },
-  { 
-    id: 'text-hover', 
-    name: 'TextHover Effect', 
-    component: TextHoverEffect,
-    code: `// Glow on Hover
-<p className="text-4xl font-bold hover:text-blue-400 hover:drop-shadow-lg transition-all cursor-pointer">
-  Hover over me
-</p>
-
-// Color Transition
-<p className="text-4xl font-bold text-white hover:text-purple-400 transition-all duration-300 cursor-pointer">
-  Smooth Color Change
-</p>
-
-// Underline Animation
-<p className="text-lg font-semibold relative inline-block group cursor-pointer">
-  Hover Text Effect
-  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
-</p>`
-  },
-  { 
-    id: 'neon-text', 
-    name: 'NeonGlow Text', 
-    component: NeonGlowText,
-    code: `// Neon Text with Glow Effect
-<h2 className="text-5xl font-black text-cyan-400" style={{
-  textShadow: '0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 30px #0099cc'
-}}>
-  NEON GLOW
-</h2>
-
-// Pink Neon
-<h2 className="text-5xl font-black text-pink-400" style={{
-  textShadow: '0 0 10px #ff006e, 0 0 20px #ff006e, 0 0 30px #d600a6'
-}}>
-  ELECTRIC
-</h2>`
-  },
-  { 
-    id: 'shimmer-text', 
-    name: 'Shimmer Text', 
-    component: ShimmerText,
-    code: `// Shimmer Text Animation
-<style>{
-  \`@keyframes shimmer {
-    0% { background-position: -1000px 0; }
-    100% { background-position: 1000px 0; }
-  }
-  .shimmer-text {
-    background: linear-gradient(90deg, #fff 0%, #60a5fa 50%, #fff 100%);
-    background-size: 1000px 100%;
-    animation: shimmer 3s infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }\`
-}</style>
-
-<div className="shimmer-text text-3xl font-bold">Shimmer Effect</div>`
-  },
-  { 
-    id: 'aurora-glass', 
-    name: 'Aurora Glass', 
-    component: AuroraGlass,
-    code: `// Aurora Glass Effect
-<div className="relative overflow-hidden rounded-2xl p-12">
-  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-20 blur-3xl"></div>
-  <div className="relative bg-white/10 backdrop-blur-2xl border border-white/30 rounded-xl p-8">
-    <h2 className="text-3xl font-bold mb-4">Aurora Glass</h2>
-    <p className="text-white/80">Beautiful glass effect with aurora background</p>
-  </div>
-</div>`
-  },
-  { 
-    id: 'user-card', 
-    name: 'Stylish User Card', 
-    component: StylishUserCard,
-    code: `// User Profile Card
-<div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8">
-  <div className="text-center mb-6">
-    <div className="text-7xl mb-4">👨‍💼</div>
-    <h2 className="text-2xl font-bold">Alex Johnson</h2>
-    <p className="text-blue-400 font-semibold">UI/UX Designer</p>
-  </div>
-  
-  <div className="grid grid-cols-3 gap-4 mb-8 py-6 border-y border-white/10">
-    <div className="text-center">
-      <div className="text-2xl font-bold text-blue-400">24</div>
-      <div className="text-xs text-white/60">Projects</div>
-    </div>
-  </div>
-  
-  <button className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-lg">
-    Follow
-  </button>
-</div>`
-  },
-  { 
-    id: 'signup-card', 
-    name: 'Signup Card', 
-    component: SignupCard,
-    code: `// Signup Form Card
-<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8">
-  <h1 className="text-3xl font-bold text-center mb-8">Create Account</h1>
-  
-  <input type="text" placeholder="Full Name" 
-    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white mb-4" />
-  
-  <input type="email" placeholder="Email" 
-    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white mb-4" />
-  
-  <input type="password" placeholder="Password" 
-    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white mb-6" />
-  
-  <button className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-lg">
-    Sign Up
-  </button>
-</div>`
-  },
-  { 
-    id: 'contact-card', 
-    name: 'Contact Card', 
-    component: ContactCard,
-    code: `// Contact Form Card
-<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8">
-  <h1 className="text-3xl font-bold text-center mb-8">Get In Touch</h1>
-  
-  <input type="text" placeholder="Your Name" 
-    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg mb-4" />
-  
-  <input type="email" placeholder="Email" 
-    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg mb-4" />
-  
-  <textarea placeholder="Message" rows="5"
-    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg mb-6"></textarea>
-  
-  <button className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-lg">
-    Send Message
-  </button>
-</div>`
-  },
-  { 
-    id: 'file-upload', 
-    name: 'FileUpload Card', 
-    component: FileUploadCard,
-    code: `// File Upload Card
-<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8">
-  <div className="border-2 border-dashed border-white/30 rounded-lg p-8 text-center cursor-pointer">
-    <div className="text-4xl mb-3">📁</div>
-    <p className="text-white/80 font-semibold mb-2">Drop your file here</p>
-    <p className="text-white/60 text-sm">or click to browse</p>
-  </div>
-  
-  <div className="bg-white/5 border border-white/10 rounded-lg p-4 mt-4">
-    <p className="text-sm text-white/60">Selected File</p>
-    <p className="font-semibold text-blue-400">document.pdf</p>
-  </div>
-</div>`
-  },
-  { 
-    id: 'forgot-pass', 
-    name: 'ForgotPassword Card', 
-    component: ForgotPasswordCard,
-    code: `// Forgot Password Form
-<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8">
-  <h1 className="text-3xl font-bold text-center mb-8">Forgot Password</h1>
-  
-  <input type="email" placeholder="Enter your email" 
-    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white mb-4" />
-  
-  <p className="text-sm text-white/60 mb-6">
-    We'll send you an email with instructions to reset your password.
-  </p>
-  
-  <button className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-lg">
-    Send Reset Link
-  </button>
-</div>`
-  },
-  { 
-    id: 'comet-card', 
-    name: 'Comet Card', 
-    component: CometCard,
-    code: `// Comet Animation Card
-<style>{
-  \`@keyframes comet {
-    0% { left: -100%; opacity: 1; }
-    100% { left: 100%; opacity: 0; }
-  }
-  .comet-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    animation: comet 2s infinite;
-  }\`
-}</style>
-
-<div className="comet-card bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg p-8">
-  <h3 className="text-2xl font-bold">Comet Effect</h3>
-  <p className="text-white/90">Beautiful animation across the card</p>
-</div>`
-  },
 ];
 
 // Components from seed.js (Backend)
-const SEED_COMPONENTS = [
-  { 
-    id: 'btn-examples', 
-    name: 'Button Examples', 
-    code: `function ButtonExample() {
-  return (
-    <div className="space-x-4">
-      <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-        Primary Button
-      </button>
-      <button className="px-4 py-2 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50">
-        Ghost Button
-      </button>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'card-ex', 
-    name: 'Card Example', 
-    code: `function CardExample() {
-  return (
-    <div className="p-6 bg-white rounded-xl shadow-lg">
-      <h3 className="text-lg font-semibold">Sample Card</h3>
-      <p className="text-sm text-gray-500">This is a sample card component</p>
-      <div className="mt-4">
-        <p>This is the card content</p>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'inter-card', 
-    name: 'Interactive Card', 
-    code: `function InteractiveCardExample() {
-  return (
-    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow hover:shadow-md transition">
-      <h2 className="text-xl font-semibold text-gray-800 mb-2">Card Title</h2>
-      <p className="text-gray-600 mb-4">
-        This is a simple card component built using Tailwind CSS.
-      </p>
-      <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-        Learn More
-      </button>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'sty-card', 
-    name: 'Stylish Card', 
-    code: `function StylishCard() {
-  return (
-    <div className="relative w-80 p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl hover:scale-[1.02] transition-all overflow-hidden group">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 opacity-0 group-hover:opacity-100 blur-xl transition duration-500"></div>
-      <div className="relative z-10">
-        <h3 className="text-2xl font-bold text-white mb-2">Stylish Card</h3>
-        <p className="text-gray-200 text-sm mb-4">Premium card design with glass effect</p>
-        <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold">
-          Explore
-        </button>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'big-card', 
-    name: 'BigStylishCard Card', 
-    code: `function BigStylishCard() {
-  return (
-    <div className="relative w-[420px] bg-gradient-to-br from-gray-900 via-blue-900 to-purple-800 text-white rounded-3xl overflow-hidden shadow-2xl hover:scale-[1.02] transition-all group">
-      <div className="h-56 w-full overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=900" alt="Banner" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-      </div>
-      <div className="relative p-6">
-        <h2 className="text-3xl font-bold mb-2">Modern Card</h2>
-        <p className="text-gray-200 text-sm mb-5">Beautiful large card with gradient</p>
-        <button className="px-5 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold">
-          Get Started
-        </button>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'login-card-seed', 
-    name: 'StylishLoginCard Card', 
-    code: `function StylishLoginCard() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900">
-      <div className="relative w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-8 text-white overflow-hidden group">
-        <div className="relative z-10 text-center mb-6">
-          <h2 className="text-3xl font-bold">Welcome Back 👋</h2>
-        </div>
-        <form className="relative z-10 space-y-5">
-          <input type="email" placeholder="you@example.com" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 transition" />
-          <input type="password" placeholder="••••••••" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 transition" />
-          <button className="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold">Login</button>
-        </form>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'users-seed', 
-    name: 'UsersCardList Card', 
-    code: `function UsersCardList() {
-  const users = [
-    { name: "Aarav Sharma", role: "Frontend Developer" },
-    { name: "Riya Patel", role: "UI/UX Designer" },
-    { name: "Karan Mehta", role: "Backend Engineer" },
-  ];
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 p-6">
-      <div className="relative w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-6 text-white">
-        <h2 className="text-2xl font-bold mb-6 text-center">Team Members</h2>
-        <div className="space-y-4">
-          {users.map((user, i) => (
-            <div key={i} className="flex items-center space-x-4 bg-white/10 border border-white/20 rounded-xl p-4">
-              <div className="text-3xl">👤</div>
-              <div><h3 className="font-semibold">{user.name}</h3><p className="text-gray-300 text-sm">{user.role}</p></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'text-hover-seed', 
-    name: 'TextHoverEffect Card', 
-    code: `function TextHoverEffect() {
-  return (
-    <div className="min-h-40 flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900">
-      <h1 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-all duration-500 ease-in-out hover:tracking-widest hover:scale-105 cursor-pointer">
-        Hover Me ✨
-      </h1>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'neon-seed', 
-    name: 'NeonGlowText Card', 
-    code: `function NeonGlowText() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-indigo-950 to-purple-900">
-      <h1 className="relative text-7xl font-extrabold text-white transition-all duration-500 ease-in-out cursor-pointer hover:scale-110">
-        <span className="absolute inset-0 blur-3xl opacity-40 bg-gradient-to-r from-cyan-400 to-pink-500 animate-pulse"></span>
-        <span className="relative z-10 bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]">
-          Neon Magic ⚡
-        </span>
-      </h1>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'shimmer-seed', 
-    name: 'ShimmerTextEffect Card', 
-    code: `function ShimmerTextEffect() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-slate-900 to-black">
-      <h1 className="relative text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-500 animate-shimmer bg-[length:200%_auto] transition-transform duration-500 hover:scale-110 cursor-pointer">
-        Shimmer Glow ✨
-      </h1>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'user-prof', 
-    name: 'Stylish User Card', 
-    code: `function StylishUserCard() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-800 p-6">
-      <div className="relative w-80 rounded-2xl p-6 bg-white/10 backdrop-blur-xl border border-white/20 overflow-hidden group">
-        <div className="flex justify-center">
-          <div className="text-6xl">👨‍💼</div>
-        </div>
-        <div className="text-center mt-4">
-          <h2 className="text-2xl font-bold text-white">Aarav Sharma</h2>
-          <p className="text-gray-300 text-sm">Frontend Developer</p>
-        </div>
-        <div className="mt-6 h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-        <p className="mt-3 text-sm text-gray-400 text-center">Designing pixels with passion ✨</p>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'aurora', 
-    name: 'Aurora Glass Card', 
-    code: `function AuroraGlassCard() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-black overflow-hidden relative">
-      <div className="absolute inset-0 bg-[conic-gradient(at_top_left,_#8b5cf6,_#ec4899,_#06b6d4)] opacity-20 blur-[120px]"></div>
-      <div className="relative z-10 w-[350px] h-[420px] rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_30px_rgba(168,85,247,0.3)] overflow-hidden group p-8 text-white text-center">
-        <div className="text-6xl mb-4">👩‍💼</div>
-        <h2 className="text-2xl font-bold">Sanya Kapoor</h2>
-        <p className="text-gray-300 text-sm">Creative UI Designer</p>
-        <p className="text-center text-gray-400 text-sm mt-5">Design isn't just what it looks like</p>
-        <button className="mt-8 px-6 py-2 rounded-full font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500">Explore ✨</button>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'signup-seed', 
-    name: 'StylishSignupCard', 
-    code: `function StylishSignupCard() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-violet-900 to-fuchsia-900 p-6">
-      <div className="relative w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-8 text-white overflow-hidden group">
-        <div className="relative z-10 text-center mb-6">
-          <h2 className="text-3xl font-bold">Create Account ✨</h2>
-          <p className="text-gray-300 mt-1">Join us and start building today</p>
-        </div>
-        <form className="relative z-10 space-y-5">
-          <input type="text" placeholder="John Doe" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 transition" />
-          <input type="email" placeholder="you@example.com" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 transition" />
-          <input type="password" placeholder="••••••••" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 transition" />
-          <button className="w-full py-3 bg-gradient-to-r from-pink-500 to-indigo-600 rounded-lg font-semibold">Sign Up</button>
-        </form>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'contact-seed', 
-    name: 'FuturisticContactCard', 
-    code: `function FuturisticContactCard() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-slate-900 to-purple-950 p-6">
-      <div className="relative w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-8 text-white overflow-hidden group">
-        <div className="relative z-10 text-center mb-6">
-          <h2 className="text-3xl font-bold">Connect With Us ⚡</h2>
-          <p className="text-gray-300 mt-2">Drop your message and we'll reach you soon</p>
-        </div>
-        <form className="relative z-10 space-y-5">
-          <input type="text" placeholder="John Doe" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 transition" />
-          <input type="email" placeholder="john@example.com" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 transition" />
-          <textarea rows="4" placeholder="Your message..." className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 transition resize-none"></textarea>
-          <button className="w-full py-3 bg-gradient-to-r from-fuchsia-500 to-cyan-400 rounded-lg font-semibold">Send Message</button>
-        </form>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'file-up', 
-    name: 'FileUploadCard', 
-    code: `function FileUploadCard() {
-  const [selectedFile, setSelectedFile] = React.useState(null);
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-emerald-900 to-teal-900 p-6">
-      <div className="relative w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-8 text-white overflow-hidden group">
-        <div className="relative z-10 text-center mb-6">
-          <h2 className="text-3xl font-bold">Upload File 📁</h2>
-          <p className="text-gray-300 mt-1">Drag & drop or select a file to upload</p>
-        </div>
-        <div className="relative z-10 space-y-4">
-          <div className="w-full px-4 py-10 border-2 border-dashed border-white/30 rounded-lg text-center">
-            <p className="text-gray-300">Drop your file here, or click to browse</p>
-            <input type="file" className="hidden" />
-          </div>
-          <button className="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg font-semibold">Upload File</button>
-        </div>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'forgot', 
-    name: 'ForgotPasswordCard', 
-    code: `function ForgotPasswordCard() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-emerald-900 to-teal-900 p-6">
-      <div className="relative w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-8 text-white overflow-hidden group">
-        <div className="relative z-10 text-center mb-6">
-          <h2 className="text-3xl font-bold">Forgot Password? 🔑</h2>
-          <p className="text-gray-300 mt-1">Enter your email to reset your password</p>
-        </div>
-        <form className="relative z-10 space-y-5">
-          <input type="email" placeholder="your.email@example.com" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 transition" />
-          <button className="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg font-semibold">Send Reset Link</button>
-        </form>
-      </div>
-    </div>
-  );
-}` 
-  },
-  { 
-    id: 'comet-seed', 
-    name: 'CometCard', 
-    code: `function CometCard() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 p-6">
-      <div className="relative w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-8 text-white overflow-hidden group">
-        <div className="relative z-10 text-center mb-6">
-          <h2 className="text-3xl font-bold">Comet Card 🚀</h2>
-          <p className="text-gray-300 mt-1">Discover the wonders of the cosmos</p>
-        </div>
-        <div className="relative z-10 space-y-4">
-          <div className="bg-white/5 rounded-lg p-4">
-            <h3 className="font-semibold mb-2">Halley's Comet</h3>
-            <p className="text-sm text-gray-400">Visible every 76 years, next in 2061</p>
-          </div>
-          <button className="w-full py-3 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg font-semibold">Explore More</button>
-        </div>
-      </div>
-    </div>
-  );
-}` 
-  },
-];
+
 
 // HTML Generator for iframe preview
 const generateHTML = (code) => {
@@ -821,7 +74,7 @@ const generateHTML = (code) => {
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"><\/script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: system-ui, -apple-system, sans-serif; }
+    body { font-family: system-ui, -apple-system, sans-serif; overflow-x: hidden; }
     html, body, #root { height: 100%; width: 100%; }
   </style>
 </head>
@@ -881,51 +134,375 @@ const generateHTML = (code) => {
 </html>`;
 };
 
-function ComponentsPreviewPage() {
-  const [selectedComponent, setSelectedComponent] = React.useState('btn-examples');
-  const [iframeKey, setIframeKey] = React.useState(0);
-  
-  const current = SEED_COMPONENTS.find(c => c.id === selectedComponent);
+function ComponentsPreviewPage({ isLoggedIn }) {
+  const [components, setComponents] = useState([]);
+  const [groupedComponents, setGroupedComponents] = useState({});
+  const [selectedId, setSelectedId] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [iframeKey, setIframeKey] = useState(0);
+  const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'cards', 'headers', 'footers'
+  const [codeMessage, setCodeMessage] = useState('');
+  const [importsMessage, setImportsMessage] = useState('');
+  const [requirementsMessage, setRequirementsMessage] = useState('');
+
+  // Card subcategories mapping
+  const CARD_SUBCATEGORIES = {
+    'Card Example': 'Basic Cards',
+    'Feature Card': 'Feature Cards',
+    'Info Card': 'Info Cards',
+    'Single Card': 'Single Cards',
+    'Product Card': 'Product Cards',
+    'Course Card': 'Course Cards',
+    'Recipe Card': 'Recipe Cards',
+    'Travel Card': 'Travel Cards',
+    'Game Card': 'Game Cards',
+    'Compact Stylish Card': 'Stylish Variants',
+    'Compact stylish Card': 'Stylish Variants',
+    'compactstylish Card': 'Stylish Variants',
+    'Stylish Card': 'Stylish Variants',
+    'stylish Card': 'Stylish Variants',
+    'StylishComponents': 'Stylish Variants',
+    'Premium Card': 'Premium Cards',
+    'Premium card': 'Premium Cards',
+    'Subscription Card': 'Subscription Cards',
+    'subscriptian Card': 'Subscription Cards',
+    'subscriptian card': 'Subscription Cards',
+    'Action Card': 'Action Cards',
+    'actioncard': 'Action Cards',
+    'action card': 'Action Cards',
+    'Ultimate Card': 'Ultimate Cards',
+    'ultimatecard': 'Ultimate Cards',
+    'ultimate card': 'Ultimate Cards',
+    'Pro Card': 'Pro Cards',
+    'procard': 'Pro Cards',
+    'pro card': 'Pro Cards',
+    'ProDeveloperCard': 'Pro Cards',
+    'prodevelopercard': 'Pro Cards',
+    'pro developer card': 'Pro Cards',
+    'Elite Card': 'Elite Cards',
+    'elitecard': 'Elite Cards',
+    'elite card': 'Elite Cards',
+    'Luxe Card': 'Luxury Cards',
+    'luxecard': 'Luxury Cards',
+    'luxe card': 'Luxury Cards',
+    'Cosmic Card': 'Cosmic Cards',
+    'cosmiccard': 'Cosmic Cards',
+    'cosmic card': 'Cosmic Cards',
+  };
+
+  useEffect(() => {
+    async function fetchComponents() {
+      try {
+        // Direct hardcoded API URL for development
+        const apiUrl = 'http://localhost:5000/api';
+        console.log('Fetching from:', `${apiUrl}/components`);
+        const res = await fetch(`${apiUrl}/components`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        console.log('Response:', res.status, res.statusText);
+        if (!res.ok) throw new Error(`Failed to fetch components: ${res.status} ${res.statusText}`);
+        const data = await res.json();
+        console.log('Fetched components:', data);
+        setComponents(data);
+        
+        // Group components by category and subcategory for cards
+        const grouped = data.reduce((acc, component) => {
+          let category = component.category || 'Headers';
+          
+          // If it's a card, use subcategory from mapping
+          if (category === 'Cards') {
+            // Normalize name variants (lowercase, remove spaces) so 'UltimateCard', 'ultimatecard', and 'Ultimate Card' all match
+            const rawName = component.name || '';
+            const normalized = rawName.toLowerCase().replace(/\s+/g, '');
+            const mapped = CARD_SUBCATEGORIES[rawName] || CARD_SUBCATEGORIES[rawName.toLowerCase()] || CARD_SUBCATEGORIES[rawName.replace(/\s+/g, '')] || CARD_SUBCATEGORIES[normalized];
+
+            if (mapped) {
+              category = mapped;
+            } else {
+              // Card without mapping stays in Cards (don't move to Headers)
+              category = 'Cards';
+            }
+          } else if (category === 'Footer') {
+            // Keep Footer as is
+            category = 'Footers';
+          } else if (category !== 'Cards' && category !== 'Footer') {
+            // All other non-card, non-footer categories go to Headers
+            category = 'Headers';
+          }
+          
+          if (!acc[category]) {
+            acc[category] = [];
+          }
+          acc[category].push(component);
+          return acc;
+        }, {});
+        
+        setGroupedComponents(grouped);
+        if (data.length > 0) {
+          setSelectedId(data[0]._id);
+        }
+      } catch (err) {
+        console.error('Error fetching components:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchComponents();
+  }, []);
+
+  const current = components.find(c => c._id === selectedId);
   const code = current?.code || '';
 
+  // Filter categories based on activeFilter
+  let displayedCategories = Object.keys(groupedComponents).sort();
+  let filteredGrouped = groupedComponents;
+
+  if (activeFilter === 'cards') {
+    // Show only card categories (exclude Headers and Footers)
+    displayedCategories = displayedCategories.filter(cat => cat !== 'Headers' && cat !== 'Footers');
+    filteredGrouped = {};
+    displayedCategories.forEach(cat => {
+      filteredGrouped[cat] = groupedComponents[cat];
+    });
+  } else if (activeFilter === 'headers') {
+    // Show only Headers category
+    displayedCategories = displayedCategories.filter(cat => cat === 'Headers');
+    filteredGrouped = {};
+    if (groupedComponents['Headers']) {
+      filteredGrouped['Headers'] = groupedComponents['Headers'];
+    }
+  } else if (activeFilter === 'footers') {
+    // Show only Footers category
+    displayedCategories = displayedCategories.filter(cat => cat === 'Footers');
+    filteredGrouped = {};
+    if (groupedComponents['Footers']) {
+      filteredGrouped['Footers'] = groupedComponents['Footers'];
+    }
+  }
+
+  if (loading) return <div className="w-full h-screen flex items-center justify-center text-white bg-slate-900">Loading components from seed.js (MongoDB)...</div>;
+  if (error) return <div className="w-full h-screen flex items-center justify-center text-red-400 bg-slate-900">Error: {error}</div>;
+  if (components.length === 0) return <div className="w-full h-screen flex items-center justify-center text-gray-400 bg-slate-900">No components found. Run: npm run seed</div>;
+
   return (
-    <div className="flex h-screen w-screen gap-0 overflow-hidden">
+    <div className="flex h-screen w-full gap-0 overflow-hidden">
       {/* Left Sidebar */}
-      <div className="w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white overflow-y-auto border-r border-white/10">
-        <div className="p-4 sticky top-0 bg-slate-900/95 backdrop-blur">
-          <h2 className="text-lg font-bold">Components</h2>
-          <p className="text-xs text-gray-400 mt-1">From Backend (seed.js)</p>
-        </div>
-        
-        <div className="p-3 space-y-2">
-          {SEED_COMPONENTS.map((comp) => (
+      <div className="w-80 bg-gradient-to-b from-slate-900 to-slate-800 text-white overflow-y-auto border-r border-white/10">
+        <div className="p-4 sticky top-0 bg-slate-900/95 backdrop-blur z-10 border-b border-white/10">
+          <h2 className="text-lg font-bold mb-4">Components</h2>
+          
+          {/* Filter Buttons */}
+          <div className="flex gap-2">
             <button
-              key={comp.id}
               onClick={() => {
-                setSelectedComponent(comp.id);
-                setIframeKey(prev => prev + 1);
+                setActiveFilter('all');
+                // Select first component
+                if (groupedComponents && Object.keys(groupedComponents).length > 0) {
+                  const firstCategory = Object.keys(groupedComponents).sort()[0];
+                  if (groupedComponents[firstCategory].length > 0) {
+                    setSelectedId(groupedComponents[firstCategory][0]._id);
+                    setIframeKey(prev => prev + 1);
+                  }
+                }
               }}
-              className={`w-full text-left px-4 py-3 rounded-lg transition-all text-sm font-medium ${
-                selectedComponent === comp.id
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white/5 hover:bg-white/10 text-gray-200'
+              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+                activeFilter === 'all'
+                  ? 'bg-purple-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
               }`}
             >
-              {comp.name}
+              All
             </button>
+            <button
+              onClick={() => {
+                setActiveFilter('cards');
+                // Select first card component
+                if (groupedComponents) {
+                  const cardCategories = Object.keys(groupedComponents).filter(cat => cat !== 'Headers' && cat !== 'Footers').sort();
+                  if (cardCategories.length > 0 && groupedComponents[cardCategories[0]].length > 0) {
+                    setSelectedId(groupedComponents[cardCategories[0]][0]._id);
+                    setIframeKey(prev => prev + 1);
+                  }
+                }
+              }}
+              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+                activeFilter === 'cards'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Cards
+            </button>
+            <button
+              onClick={() => {
+                setActiveFilter('headers');
+                // Select first header component
+                if (groupedComponents && groupedComponents['Headers'] && groupedComponents['Headers'].length > 0) {
+                  setSelectedId(groupedComponents['Headers'][0]._id);
+                  setIframeKey(prev => prev + 1);
+                }
+              }}
+              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+                activeFilter === 'headers'
+                  ? 'bg-cyan-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Headers
+            </button>
+            <button
+              onClick={() => {
+                setActiveFilter('footers');
+                // Select first footer component
+                if (groupedComponents && groupedComponents['Footers'] && groupedComponents['Footers'].length > 0) {
+                  setSelectedId(groupedComponents['Footers'][0]._id);
+                  setIframeKey(prev => prev + 1);
+                }
+              }}
+              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+                activeFilter === 'footers'
+                  ? 'bg-orange-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Footers
+            </button>
+          </div>
+        </div>
+        
+        <div className="p-3 space-y-6">
+          {displayedCategories.map((category) => (
+            <div key={category}>
+              <h3 className="text-xs font-bold text-purple-400 uppercase tracking-widest px-2 py-2 mb-2">
+                {category}
+              </h3>
+              <div className="space-y-1">
+                {filteredGrouped[category].map((comp) => (
+                  <button
+                    key={comp._id}
+                    onClick={() => {
+                      setSelectedId(comp._id);
+                      setIframeKey(prev => prev + 1);
+                    }}
+                    className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium ${
+                      selectedId === comp._id
+                        ? 'bg-blue-600 text-white shadow-lg'
+                        : 'bg-white/5 hover:bg-white/10 text-gray-200'
+                    }`}
+                  >
+                    {comp.name}
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Middle Code Area */}
       <div className="w-1/3 bg-gradient-to-b from-slate-950 to-slate-900 text-white border-r border-white/10 overflow-y-auto">
-        <div className="p-4 sticky top-0 bg-slate-950/95 backdrop-blur border-b border-white/10">
+        <div className="p-4 bg-slate-950/95 backdrop-blur border-b border-white/10">
           <h3 className="text-sm font-bold text-gray-300">Component Code</h3>
         </div>
         <div className="p-4">
-          <pre className="bg-black/50 border border-white/10 rounded-lg p-4 text-xs overflow-x-auto font-mono text-gray-300">
-            <code>{code}</code>
-          </pre>
+          {/* Code Section with Copy Button */}
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs text-gray-400 font-semibold">Full Code</span>
+              <button
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    setCodeMessage('❌ Please login first!');
+                    setTimeout(() => setCodeMessage(''), 2000);
+                    return;
+                  }
+                  navigator.clipboard.writeText(code).then(() => {
+                    setCodeMessage('Code Copied! ✓');
+                    setTimeout(() => setCodeMessage(''), 1600);
+                  });
+                }}
+                className="px-3 py-1 text-xs font-bold bg-green-600 text-white rounded-md hover:bg-green-700 transition-all flex items-center gap-1"
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Copy
+              </button>
+            </div>
+            <pre className="bg-black/50 border border-white/10 rounded-lg p-3 text-xs overflow-x-auto overflow-y-auto font-mono text-gray-300 max-h-96">
+              <code>{code}</code>
+            </pre>
+            {codeMessage && <div className={`text-xs mt-2 font-semibold ${codeMessage.includes('✓') ? 'text-green-400' : 'text-red-400'}`}>{codeMessage}</div>}
+          </div>
+
+          {/* Minimal Imports Section with Copy Button */}
+          <div className="mt-4 pt-4 border-t border-white/10">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-gray-400 text-xs font-semibold">Minimal imports</span>
+              <button
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    setImportsMessage('❌ Please login first!');
+                    setTimeout(() => setImportsMessage(''), 2000);
+                    return;
+                  }
+                  const importText = 'import { useState } from "react";';
+                  navigator.clipboard.writeText(importText).then(() => {
+                    setImportsMessage('Import Copied! ✓');
+                    setTimeout(() => setImportsMessage(''), 1600);
+                  });
+                }}
+                className="px-3 py-1 text-xs font-bold bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all flex items-center gap-1"
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Copy
+              </button>
+            </div>
+            <pre className="bg-[#0b1220] text-[13px] text-[#e6eef8] p-2 rounded overflow-x-auto m-0">
+              <code>import {'{ useState, useEffect  }'} from "react";</code>
+            </pre>
+            {importsMessage && <div className={`text-xs mt-2 font-semibold ${importsMessage.includes('✓') ? 'text-green-400' : 'text-red-400'}`}>{importsMessage}</div>}
+          </div>
+
+          {/* Requirements Section with Copy Button */}
+          <div className="mt-4 pt-4 border-t border-white/10">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-gray-400 text-xs font-semibold">Requirements note</span>
+              <button
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    setRequirementsMessage('❌ Please login first!');
+                    setTimeout(() => setRequirementsMessage(''), 2000);
+                    return;
+                  }
+                  const requirementsText = 'Requires:\n- React\n- Tailwind CSS';
+                  navigator.clipboard.writeText(requirementsText).then(() => {
+                    setRequirementsMessage('Requirements Copied! ✓');
+                    setTimeout(() => setRequirementsMessage(''), 1600);
+                  });
+                }}
+                className="px-3 py-1 text-xs font-bold bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-all flex items-center gap-1"
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Copy
+              </button>
+            </div>
+            <pre className="bg-[#0b1220] text-[13px] text-[#e6eef8] p-2 rounded overflow-x-auto m-0">
+              <code>Requires:
+  - React
+  - Tailwind CSS</code>
+            </pre>
+            {requirementsMessage && <div className={`text-xs mt-2 font-semibold ${requirementsMessage.includes('✓') ? 'text-green-400' : 'text-red-400'}`}>{requirementsMessage}</div>}
+          </div>
         </div>
       </div>
 
@@ -934,8 +511,8 @@ function ComponentsPreviewPage() {
         <div className="p-4 bg-white/95 backdrop-blur border-b border-gray-200">
           <h3 className="text-sm font-bold text-gray-700">Live Preview</h3>
         </div>
-        <div className="flex-1 p-4 overflow-hidden">
-          <div className="bg-white rounded-lg shadow-lg w-full h-full border border-gray-200 overflow-hidden">
+        <div className="flex-1 overflow-hidden">
+          <div className="bg-white rounded-lg shadow-lg w-full h-[850px] border border-gray-200 overflow-hidden">
             <iframe
               key={iframeKey}
               srcDoc={generateHTML(code)}
@@ -947,66 +524,6 @@ function ComponentsPreviewPage() {
               }}
               sandbox="allow-scripts allow-same-origin allow-modals"
             />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ImportComponentsPreviewPage() {
-  const [selectedComponent, setSelectedComponent] = React.useState('button-example');
-  
-  const current = COMPONENTS_LIST.find(c => c.id === selectedComponent);
-  const ComponentToShow = current?.component || AllInOneShowcase;
-  const code = current?.code || '';
-
-  return (
-    <div className="flex h-screen w-screen gap-0 overflow-hidden">
-      {/* Left Sidebar */}
-      <div className="w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white overflow-y-auto border-r border-white/10">
-        <div className="p-4 sticky top-0 bg-slate-900/95 backdrop-blur">
-          <h2 className="text-lg font-bold">Components</h2>
-          <p className="text-xs text-gray-400 mt-1">From Imports Folder</p>
-        </div>
-        
-        <div className="p-3 space-y-2">
-          {COMPONENTS_LIST.map((comp) => (
-            <button
-              key={comp.id}
-              onClick={() => setSelectedComponent(comp.id)}
-              className={`w-full text-left px-4 py-3 rounded-lg transition-all text-sm font-medium ${
-                selectedComponent === comp.id
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white/5 hover:bg-white/10 text-gray-200'
-              }`}
-            >
-              {comp.name}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Middle Code Area */}
-      <div className="w-1/3 bg-gradient-to-b from-slate-950 to-slate-900 text-white border-r border-white/10 overflow-y-auto">
-        <div className="p-4 sticky top-0 bg-slate-950/95 backdrop-blur border-b border-white/10">
-          <h3 className="text-sm font-bold text-gray-300">Component Code</h3>
-        </div>
-        <div className="p-4">
-          <pre className="bg-black/50 border border-white/10 rounded-lg p-4 text-xs overflow-x-auto font-mono text-gray-300">
-            <code>{code}</code>
-          </pre>
-        </div>
-      </div>
-
-      {/* Right Preview Area */}
-      <div className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex flex-col">
-        <div className="p-4 bg-white/95 backdrop-blur border-b border-gray-200">
-          <h3 className="text-sm font-bold text-gray-700">Preview</h3>
-        </div>
-        <div className="flex-1 p-4 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-lg p-8 h-full">
-            <ComponentToShow />
           </div>
         </div>
       </div>
@@ -1528,7 +1045,7 @@ function FullWebPreview() {
                   width: '100%',
                   height: '100%',
                   border: 'none',
-                  backgroundColor: '#f9fafb'
+                  backgroundColor: '#000000ff'
                 }}
                 sandbox="allow-scripts allow-same-origin allow-modals"
               />
@@ -1594,13 +1111,33 @@ const Main = styled.main`
       return `
         margin: 0;
         padding: 0;
+        margin-top: 80px;
         width: 100%;
         height: calc(100vh - 80px);
+      `;
+    }
+    // For home page, use full width
+    if (props.isHome) {
+      return `
+        margin: 0;
+        padding: 0;
+        margin-top: 80px;
+        width: 100%;
+      `;
+    }
+    // For about page, use full width
+    if (props.isAbout) {
+      return `
+        margin: 0;
+        padding: 0;
+        margin-top: 80px;
+        width: 100%;
       `;
     }
     // For other pages, use max-width container
     return `
       margin: 0 auto;
+      margin-top: 80px;
       padding: 2rem 1rem;
       max-width: 1200px;
     `;
@@ -1620,70 +1157,6 @@ const CodeBlock = styled.pre`
   padding: 1rem;
   border-radius: 4px;
   overflow-x: auto;
-`;
-
-const HeroSection = styled.div`
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-  border-radius: 20px;
-  padding: 4rem 2rem;
-  margin: 2rem 0;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(66, 153, 225, 0.1) 0%, transparent 50%);
-  }
-`;
-
-const HeroContent = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-`;
-
-const HeroTitle = styled.h1`
-  font-size: 3.5rem;
-  color: white;
-  margin-bottom: 1.5rem;
-  font-weight: bold;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  
-  span {
-    background: linear-gradient(90deg, #4299E1, #9F7AEA);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-`;
-
-const HeroDescription = styled.p`
-  font-size: 1.25rem;
-  color: #CBD5E0;
-  margin-bottom: 2rem;
-  line-height: 1.7;
-`;
-
-const HeroButton = styled.button`
-  background: linear-gradient(90deg, #4299E1, #9F7AEA);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 9999px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
-  }
 `;
 
 const Footer = styled.footer`
@@ -1743,7 +1216,6 @@ const FooterBottom = styled.div`
   margin: 0 auto;
   padding-top: 2rem;
   margin-top: 2rem;
-  border-top: 1px solid #2D3748;
   text-align: center;
   color: #718096;
 `;
@@ -1767,35 +1239,24 @@ function App() {
   const [viewingInternal, setViewingInternal] = useState(null);
 
   // sample imported components to preview in "imports" tab
-  const importedComponentsSample = [
-    {
-      name: "Glass Button",
-      code: `import React from 'react';
-import styled from 'styled-components';
-
-const GlassButton = styled.button\`
-  background: rgba(255,255,255,0.2);
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
-  font-size: 16px;
-  backdrop-filter: blur(5px);
-  transition: all 0.3s;
   
-  &:hover {
-    background: rgba(255,255,255,0.3);
-    transform: translateY(-2px);
-  }
-\`;
 
-export default function Button({children, onClick}) {
-  return <GlassButton onClick={onClick}>{children}</GlassButton>;
-}`
-    }
-  ];
-
+  // Initialize login state from localStorage on component mount
   useEffect(() => {
+    const storedUser = localStorage.getItem('userInfo');
+    const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
+    
+    if (storedIsLoggedIn === 'true' && storedUser) {
+      try {
+        setIsLoggedIn(true);
+        setUserInfo(JSON.parse(storedUser));
+      } catch (err) {
+        console.error('Error restoring user from localStorage:', err);
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('isLoggedIn');
+      }
+    }
+    
     fetchComponents();
   }, []);
 
@@ -1823,8 +1284,14 @@ export default function Button({children, onClick}) {
     }
   };
 
-  if (loading) return <LoadingState />;
+  // کیا components load ہوئے?
+console.log('Has components:', document.querySelectorAll('[class*="component"]').length > 0)
+
+// کیا activeTab ہے?
+window.location.href
   if (error) return <ErrorState error={error} onRetry={fetchComponents} />;
+  // Show loading only on initial load if we don't have components
+  if (loading && components.length === 0) return <LoadingState />;
   // don't block entire app when components list is empty;
   // show empty state only inside the "components" tab below
   // if (!components.length) return <EmptyState />;
@@ -1839,17 +1306,28 @@ export default function Button({children, onClick}) {
           onSignupClick={() => setIsSignupOpen(true)}
           isLoggedIn={isLoggedIn}
           onLogout={() => {
+            console.log('[LOGOUT] Starting logout process...');
             setIsLoggedIn(false);
             setUserInfo(null);
+            setActiveTab('home');
+            setLoading(false);
+            setError(null);
+            localStorage.removeItem('userInfo');
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('token');
+            console.log('[LOGOUT] Logout complete - redirected to home');
           }}
           userInfo={userInfo}
         />
         <LoginModal 
           isOpen={isLoginOpen} 
           onClose={() => setIsLoginOpen(false)}
-          onLoginSuccess={(email) => {
+          onLoginSuccess={(email) => {  // email parameter کو پورا user object مل رہا تھا
             setIsLoggedIn(true);
-            setUserInfo({ email });
+            const userDetails = { email };
+            setUserInfo(userDetails);
+            localStorage.setItem('userInfo', JSON.stringify(userDetails));
+            localStorage.setItem('isLoggedIn', 'true');
             setIsLoginOpen(false);
           }}
         />
@@ -1858,49 +1336,41 @@ export default function Button({children, onClick}) {
           onClose={() => setIsSignupOpen(false)}
           onSignupSuccess={(name, email) => {
             setIsLoggedIn(true);
-            setUserInfo({ name, email });
+            const userDetails = { name, email };
+            setUserInfo(userDetails);
+            localStorage.setItem('userInfo', JSON.stringify(userDetails));
+            localStorage.setItem('isLoggedIn', 'true');
             setIsSignupOpen(false);
           }}
         />
-        <Main isPreview={activeTab === 'components' || activeTab === 'imports'}>
+        <Main isPreview={activeTab === 'components' || activeTab === 'library' || activeTab === 'fullweb'} isHome={activeTab === 'home'} isAbout={activeTab === 'about'}>
           {activeTab === 'home' ? (
             <>
-              <HeroSection>
-                <HeroContent>
-                  <HeroTitle>
-                    Welcome to <span>UI Components</span>
-                  </HeroTitle>
-                  <HeroDescription>
-                    Discover our collection of beautiful, responsive, and reusable UI components.
-                    Build modern web applications with ease using our pre-designed components.
-                  </HeroDescription>
-                  <HeroButton onClick={() => setActiveTab('components')}>
-                    Explore Components
-                  </HeroButton>
-                </HeroContent>
-              </HeroSection>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                <FeatureCard
-                  icon="🎨"
-                  title="Modern Design"
-                  description="Beautifully crafted components with modern design principles"
-                />
-                <FeatureCard
-                  icon="📱"
-                  title="Responsive"
-                  description="Fully responsive components that work on all devices"
-                />
-                <FeatureCard
-                  icon="🚀"
-                  title="Easy to Use"
-                  description="Simple integration with copy-paste functionality"
-                />
+              {HeroSection && <HeroSection onExploreClick={() => setActiveTab('components')} onLearnMoreClick={() => setActiveTab('about')} />}
+              <div className="max-w-7xl mx-auto px-4 py-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <FeatureCard
+                    icon="🎨"
+                    title="Modern Design"
+                    description="Beautifully crafted components with modern design principles"
+                  />
+                  <FeatureCard
+                    icon="📱"
+                    title="Responsive"
+                    description="Fully responsive components that work on all devices"
+                  />
+                  <FeatureCard
+                    icon="🚀"
+                    title="Easy to Use"
+                    description="Simple integration with copy-paste functionality"
+                  />
+                </div>
               </div>
             </>
           ) : activeTab === 'components' ? (
-            <ComponentsPreviewPage />
-          ) : activeTab === 'imports' ? (
-            <ImportComponentsPreviewPage />
+            <ComponentsPreviewPage isLoggedIn={isLoggedIn} />
+          ) : activeTab === 'library' ? (
+            <ComponentsByCategory />
           ) : activeTab === 'web' ? (
             viewingInternal === 'stylishx' ? (
               <div className="relative">
@@ -1953,6 +1423,36 @@ export default function Button({children, onClick}) {
                 </button>
                 <ElectroX />
               </div>
+            ) : viewingInternal === 'mywebsite' ? (
+              <div className="relative">
+                <button
+                  onClick={() => setViewingInternal(null)}
+                  className="fixed top-20 left-4 z-40 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                >
+                  ← Back to Gallery
+                </button>
+                <MyWebsite />
+              </div>
+            ) : viewingInternal === 'dynamicweb' ? (
+              <div className="relative">
+                <button
+                  onClick={() => setViewingInternal(null)}
+                  className="fixed top-20 left-4 z-40 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition"
+                >
+                  ← Back to Gallery
+                </button>
+                <DynamicWeb />
+              </div>
+            ) : viewingInternal === 'electrotech' ? (
+              <div className="relative">
+                <button
+                  onClick={() => setViewingInternal(null)}
+                  className="fixed top-20 left-4 z-40 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                >
+                  ← Back to Gallery
+                </button>
+                <ElectroTech />
+              </div>
             ) : (
               <WebsiteGallery onViewInternal={setViewingInternal} />
             )
@@ -1960,6 +1460,10 @@ export default function Button({children, onClick}) {
             <>
               <FullWebPreview />
             </>
+          ) : activeTab === 'customizeweb' ? (
+            <CustomizeWeb />
+          ) : activeTab === 'about' ? (
+            <About />
           ) : null}
         </Main>
         <Footer>
@@ -1973,7 +1477,7 @@ export default function Button({children, onClick}) {
               </ul>
             </FooterColumn>
             <FooterColumn>
-              <h3>Components</h3>
+              <h3>Component</h3>
               <ul>
                 <li><a href="#">UI Kit</a></li>
                 <li><a href="#">Icons</a></li>
@@ -2048,3 +1552,5 @@ const FeatureCard = ({ icon, title, description }) => (
 );
 
 export default App;
+
+

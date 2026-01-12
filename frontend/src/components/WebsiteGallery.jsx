@@ -50,45 +50,33 @@ function WebsiteGallery({ onViewInternal }) {
       isInternal: true
     },
     {
-      id: 1,
-      name: 'Google',
-      url: 'https://www.google.com',
-      description: 'Search engine and more',
-      icon: '🔍',
-      thumbnail: 'https://via.placeholder.com/200x120?text=Google'
+      id: 1.2,
+      name: 'MyWebsite',
+      url: 'mywebsite',
+      description: 'Modern stylish website template',
+      icon: '🌐',
+      thumbnail: 'https://via.placeholder.com/200x120?text=MyWebsite',
+      isInternal: true
     },
     {
-      id: 2,
-      name: 'YouTube',
-      url: 'https://www.youtube.com',
-      description: 'Video sharing platform',
-      icon: '▶️',
-      thumbnail: 'https://via.placeholder.com/200x120?text=YouTube'
+      id: 1.3,
+      name: 'DynamicWeb',
+      url: 'dynamicweb',
+      description: 'Dynamic website with animations',
+      icon: '🎨',
+      thumbnail: 'https://via.placeholder.com/200x120?text=DynamicWeb',
+      isInternal: true
     },
     {
-      id: 3,
-      name: 'GitHub',
-      url: 'https://www.github.com',
-      description: 'Code repository platform',
+      id: 1.4,
+      name: 'ElectroTech',
+      url: 'electrotech',
+      description: 'Electronics & gadgets store',
       icon: '💻',
-      thumbnail: 'https://via.placeholder.com/200x120?text=GitHub'
+      thumbnail: 'https://via.placeholder.com/200x120?text=ElectroTech',
+      isInternal: true
     },
-    {
-      id: 4,
-      name: 'Stack Overflow',
-      url: 'https://stackoverflow.com',
-      description: 'Q&A for programmers',
-      icon: '❓',
-      thumbnail: 'https://via.placeholder.com/200x120?text=Stack+Overflow'
-    },
-    {
-      id: 5,
-      name: 'MDN Web Docs',
-      url: 'https://developer.mozilla.org',
-      description: 'Web development documentation',
-      icon: '📚',
-      thumbnail: 'https://via.placeholder.com/200x120?text=MDN'
-    },
+
   ];
 
   return (
@@ -100,7 +88,7 @@ function WebsiteGallery({ onViewInternal }) {
             Web Gallery
           </h1>
           <p className="text-gray-300 text-lg">
-            Explore amazing websites. Click on any website to visit it in a new tab.
+            Explore amazing websites. Click on any website card to open it in a new tab with full page preview.
           </p>
         </div>
 
@@ -111,11 +99,7 @@ function WebsiteGallery({ onViewInternal }) {
               key={website.id}
               className="group cursor-pointer"
               onClick={() => {
-                if (website.isInternal) {
-                  onViewInternal(website.url);
-                } else {
-                  window.open(website.url, '_blank');
-                }
+                window.open(`/preview/website/${website.url}`, '_blank');
               }}
             >
               <div className="bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-lg overflow-hidden hover:border-purple-500/50 transition-all duration-300 h-full flex flex-col hover:shadow-lg hover:shadow-purple-500/20">
@@ -145,11 +129,7 @@ function WebsiteGallery({ onViewInternal }) {
                     className="w-full py-2 px-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white rounded-lg font-medium text-sm transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/30"
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (website.isInternal) {
-                        onViewInternal(website.url);
-                      } else {
-                        window.open(website.url, '_blank');
-                      }
+                      window.open(`/preview/website/${website.url}`, '_blank');
                     }}
                   >
                     {website.isInternal ? 'View Website' : 'Visit Website'}

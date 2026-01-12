@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLoggedIn, onLogout, userInfo }) {
-  const [isComponentsOpen, setIsComponentsOpen] = useState(false);
-  const [isImportsOpen, setIsImportsOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-900 text-white">
+    <nav className="bg-gray-900 text-white fixed w-full top-0 z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
@@ -28,88 +26,29 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
               Home
             </button>
 
-            {/* Components Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => {
-                  setIsComponentsOpen(!isComponentsOpen);
-                  setActiveTab('components');
-                }}
-                className={`flex items-center space-x-2 px-4 py-2 rounded transition ${
-                  activeTab === 'components'
-                    ? 'bg-purple-600 text-white'
-                    : 'text-white hover:text-purple-400'
-                }`}
-              >
-                <span>Components</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
+            {/* Components Button - Simple */}
+            <button
+              onClick={() => setActiveTab('components')}
+              className={`px-4 py-2 rounded transition font-medium ${
+                activeTab === 'components'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:text-purple-400'
+              }`}
+            >
+              Components
+            </button>
 
-              {/* Components Dropdown Menu */}
-              {isComponentsOpen && (
-                <div className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 z-10">
-                  <div className="py-1">
-                    <button className="w-full text-left block px-4 py-2 hover:bg-gray-700">
-                      Buttons
-                    </button>
-                    <button className="w-full text-left block px-4 py-2 hover:bg-gray-700">
-                      Cards
-                    </button>
-                    <button className="w-full text-left block px-4 py-2 hover:bg-gray-700">
-                      Forms
-                    </button>
-                    <button className="w-full text-left block px-4 py-2 hover:bg-gray-700">
-                      Text Effects
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Imports Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => {
-                  setIsImportsOpen(!isImportsOpen);
-                  setActiveTab('imports');
-                }}
-                className={`flex items-center space-x-2 px-4 py-2 rounded transition ${
-                  activeTab === 'imports'
-                    ? 'bg-purple-600 text-white'
-                    : 'text-white hover:text-purple-400'
-                }`}
-              >
-                <span>ImportsComponts</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {/* Imports Dropdown Menu */}
-              {isImportsOpen && (
-                <div className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 z-10">
-                  <div className="py-1">
-                    <button className="w-full text-left block px-4 py-2 hover:bg-gray-700">
-                      Framer Motion
-                    </button>
-                    <button className="w-full text-left block px-4 py-2 hover:bg-gray-700">
-                      Lucide Icons
-                    </button>
-                    <button className="w-full text-left block px-4 py-2 hover:bg-gray-700">
-                      Tailwind CSS
-                    </button>
-                    <button className="w-full text-left block px-4 py-2 hover:bg-gray-700">
-                      Glass Button
-                    </button>
-                    <button className="w-full text-left block px-4 py-2 hover:bg-gray-700">
-                      Cyber Glow Card
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
+            {/* Components by Category */}
+            <button
+              onClick={() => setActiveTab('library')}
+              className={`px-4 py-2 rounded transition font-medium ${
+                activeTab === 'library'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:text-purple-400'
+              }`}
+            >
+              Library
+            </button>
 
             {/* WEB Button */}
             <button
@@ -133,6 +72,42 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
               }`}
             >
               Full Web
+            </button>
+
+            {/* CustomizeWeb Button */}
+            <button
+              onClick={() => setActiveTab('customizeweb')}
+              className={`px-4 py-2 rounded transition font-medium ${
+                activeTab === 'customizeweb'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:text-purple-400'
+              }`}
+            >
+              CustomizeWeb
+            </button>
+
+            {/* About Button */}
+            <button
+              onClick={() => setActiveTab('about')}
+              className={`px-4 py-2 rounded transition font-medium ${
+                activeTab === 'about'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:text-purple-400'
+              }`}
+            >
+              About
+            </button>
+
+            {/* Test Button */}
+            <button
+              onClick={() => setActiveTab('test')}
+              className={`px-4 py-2 rounded transition font-medium text-xs ${
+                activeTab === 'test'
+                  ? 'bg-red-600 text-white'
+                  : 'text-white hover:text-red-400'
+              }`}
+            >
+              🧪 Test API
             </button>
           </div>
 
