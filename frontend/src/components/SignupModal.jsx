@@ -37,13 +37,22 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
       const data = await response.json();
 
       if (response.ok) {
-        // User needs to verify OTP and set password
-        setPendingUser({
-          email: data.email,
-          name: data.name,
-          userId: data.userId
+        // Store token and user info in localStorage
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('userInfo', JSON.stringify(data.user));
+          localStorage.setItem('isLoggedIn', 'true');
+        }
+        
+        // Direct login - no OTP or password needed for Google signup
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
         });
-        setShowOTPVerification(true);
+        onSignupSuccess(data.name || data.user?.name, data.email || data.user?.email);
+        onClose();
       } else {
         setError(data.message || 'Google signup failed');
       }
@@ -105,7 +114,8 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
         setPendingUser({
           email: formData.email,
           name: formData.name,
-          userId: data.userId
+          userId: data.userId,
+          password: formData.password
         });
         setShowOTPVerification(true);
       } else {
@@ -142,6 +152,7 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
           <OTPVerification 
             email={pendingUser.email}
             userId={pendingUser.userId}
+            password={pendingUser.password}
             onVerificationSuccess={handleOTPVerificationSuccess}
           />
           <div className="text-center p-4">

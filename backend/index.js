@@ -371,7 +371,7 @@ app.post('/api/auth/google-signup', async (req, res) => {
     }
 
     // New user or unverified - generate OTP
-    const otp = generateOTP();
+    const otp = String(generateOTP()).trim();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
     if (user) {
@@ -416,41 +416,184 @@ app.post('/api/auth/google-signup', async (req, res) => {
   }
 });
 
+// Debug endpoint - check OTP for testing purposes (REMOVE IN PRODUCTION)
+app.get('/api/auth/debug-otp/:email', async (req, res) => {
+  try {
+    const { email } = req.params;
+    const normalizedEmail = email.toLowerCase().trim();
+    const user = await User.findOne({ email: normalizedEmail });
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const now = new Date();
+    const isExpired = now > user.otpExpiry;
+    const timeRemaining = isExpired ? 0 : Math.floor((user.otpExpiry - now) / 1000);
+
+    res.json({
+      email: user.email,
+      otp: user.otp,
+      otpExpiry: user.otpExpiry,
+      isVerified: user.isVerified,
+      currentTime: now,
+      isExpired: isExpired,
+      timeRemaining: timeRemaining + ' seconds'
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Test endpoint - clear user and resend OTP
+app.post('/api/auth/test-reset/:email', async (req, res) => {
+  try {
+    const { email } = req.params;
+    const normalizedEmail = email.toLowerCase().trim();
+    
+    // Delete the user
+    await User.deleteOne({ email: normalizedEmail });
+
+    res.json({ 
+      message: 'User deleted. Please sign up again.',
+      email: normalizedEmail
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Test endpoint - manually set OTP for testing
+app.post('/api/auth/test-set-otp/:email/:otp', async (req, res) => {
+  try {
+    const { email, otp } = req.params;
+    const normalizedEmail = email.toLowerCase().trim();
+    
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Set OTP to the provided value
+    user.otp = otp;
+    user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+    await user.save();
+
+    res.json({ 
+      message: 'OTP set for testing',
+      email: user.email,
+      otp: user.otp,
+      otpExpiry: user.otpExpiry
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Verify OTP endpoint
 app.post('/api/auth/verify-otp', async (req, res) => {
   try {
     const { email, otp, password } = req.body;
 
-    if (!email || !otp || !password) {
-      return res.status(400).json({ message: 'Email, OTP, and password are required' });
+    console.log(`\n[VERIFY-OTP] Received request with email: ${email}, otp: ${otp}, password: ${password ? '✓ PRESENT' : '✗ MISSING'}`);
+
+    if (!email || !otp) {
+      console.log('[VERIFY-OTP] Email or OTP missing');
+      return res.status(400).json({ message: 'Email and OTP are required' });
     }
 
+    // Normalize email
+    const normalizedEmail = email.toLowerCase().trim();
+    console.log(`[VERIFY-OTP] Normalized email: ${normalizedEmail}`);
+
     // Find user by email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
 
     if (!user) {
+      console.log(`[VERIFY-OTP] User not found for email: ${normalizedEmail}`);
       return res.status(404).json({ message: 'User not found' });
     }
 
+    console.log(`[VERIFY-OTP] User found: ${user.email}`);
+    console.log(`[VERIFY-OTP] User OTP in DB: "${user.otp}"`);
+    console.log(`[VERIFY-OTP] OTP provided: "${otp}"`);
+    console.log(`[VERIFY-OTP] OTP match: ${user.otp === otp}`);
+    console.log(`[VERIFY-OTP] OTP Expiry: ${user.otpExpiry}`);
+    console.log(`[VERIFY-OTP] Current Time: ${new Date()}`);
+    console.log(`[VERIFY-OTP] Is expired: ${new Date() > user.otpExpiry}`);
+
     // Check if OTP is valid and not expired
-    if (user.otp !== otp) {
-      return res.status(400).json({ message: 'Invalid OTP' });
+    if (!user.otp) {
+      console.log('[VERIFY-OTP] No OTP found in database');
+      return res.status(400).json({ message: 'No OTP found - please request a new one' });
+    }
+
+    // Compare OTP with strict type checking and trimming
+    const dbOTP = String(user.otp).trim();
+    const providedOTP = String(otp).trim();
+    
+    console.log(`[VERIFY-OTP] DB OTP Type: ${typeof user.otp}, Value: "${dbOTP}"`);
+    console.log(`[VERIFY-OTP] Provided OTP Type: ${typeof otp}, Value: "${providedOTP}"`);
+    console.log(`[VERIFY-OTP] String comparison result: ${dbOTP === providedOTP}`);
+    console.log(`[VERIFY-OTP] Character codes DB: ${dbOTP.split('').map(c => c.charCodeAt(0)).join(',')}`);
+    console.log(`[VERIFY-OTP] Character codes Provided: ${providedOTP.split('').map(c => c.charCodeAt(0)).join(',')}`);
+    
+    if (dbOTP !== providedOTP) {
+      console.log(`[VERIFY-OTP] ❌ OTP MISMATCH`);
+      console.log(`[VERIFY-OTP] Database: "${dbOTP}" (length: ${dbOTP.length})`);
+      console.log(`[VERIFY-OTP] Provided: "${providedOTP}" (length: ${providedOTP.length})`);
+      console.error(`[VERIFY-OTP] DETAILED DEBUG:`, {
+        db_first_3: dbOTP.substring(0, 3),
+        provided_first_3: providedOTP.substring(0, 3),
+        db_last_3: dbOTP.substring(3),
+        provided_last_3: providedOTP.substring(3),
+        exact_match: dbOTP === providedOTP,
+        trimmed_match: dbOTP.trim() === providedOTP.trim()
+      });
+      return res.status(400).json({ 
+        message: `Invalid OTP - Database has: ${dbOTP}, you provided: ${providedOTP}. Please try again.`
+      });
     }
 
     if (new Date() > user.otpExpiry) {
-      return res.status(400).json({ message: 'OTP has expired' });
+      console.log('[VERIFY-OTP] OTP expired');
+      return res.status(400).json({ message: 'OTP has expired - please request a new one' });
     }
 
-    // Hash password and save
-    const hashedPassword = await bcrypt.hash(password, 10);
-    user.password = hashedPassword;
+    // NOW save password after OTP verification is successful
+    if (password) {
+      try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        user.password = hashedPassword;
+        console.log(`[VERIFY-OTP] ✅ PASSWORD HASHED AND SAVED for ${normalizedEmail}`);
+      } catch (hashError) {
+        console.error('[VERIFY-OTP] Error hashing password:', hashError);
+        return res.status(500).json({ message: 'Error processing password' });
+      }
+    } else {
+      console.log(`[VERIFY-OTP] ⚠️  NO PASSWORD PROVIDED in request`);
+    }
+
+    // Mark user as verified and clear OTP, then save everything together
     user.isVerified = true;
     user.otp = null;
     user.otpExpiry = null;
-    await user.save();
+    
+    try {
+      await user.save();
+      console.log(`[VERIFY-OTP] ✅ User ${normalizedEmail} saved successfully`);
+      console.log(`[VERIFY-OTP] ✅ User marked as verified`);
+      console.log(`[VERIFY-OTP] ✅ OTP and otpExpiry cleared from database`);
+      if (password) {
+        console.log(`[VERIFY-OTP] ✅ Password saved to database`);
+      }
+    } catch (saveError) {
+      console.error('[VERIFY-OTP] Error saving user:', saveError);
+      return res.status(500).json({ message: 'Error saving verification', error: saveError.message });
+    }
 
     // Generate JWT token
-    const token = jwt.sign({ email, userId: user._id }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
+    const token = jwt.sign({ email: normalizedEmail, userId: user._id }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
 
     res.json({
       success: true,
@@ -463,9 +606,10 @@ app.post('/api/auth/verify-otp', async (req, res) => {
       message: 'Email verified successfully! You are now logged in.'
     });
   } catch (error) {
-    console.error('OTP verification error:', error);
+    console.error('[VERIFY-OTP] Error:', error.message);
+    console.error('[VERIFY-OTP] Stack:', error.stack);
     res.status(500).json({ 
-      message: 'Error verifying OTP',
+      message: 'Error verifying OTP: ' + error.message,
       error: error.message 
     });
   }
@@ -480,7 +624,8 @@ app.post('/api/auth/resend-otp', async (req, res) => {
       return res.status(400).json({ message: 'Email is required' });
     }
 
-    const user = await User.findOne({ email });
+    const normalizedEmail = email.toLowerCase().trim();
+    const user = await User.findOne({ email: normalizedEmail });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -491,7 +636,7 @@ app.post('/api/auth/resend-otp', async (req, res) => {
     }
 
     // Generate new OTP
-    const otp = generateOTP();
+    const otp = String(generateOTP()).trim();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
     user.otp = otp;
@@ -531,40 +676,53 @@ app.post('/api/auth/signup', async (req, res) => {
       return res.status(400).json({ message: 'Passwords do not match' });
     }
 
+    // Normalize email to lowercase
+    const normalizedEmail = email.toLowerCase().trim();
+
     // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({ message: 'Email already registered' });
     }
 
-    // Generate OTP
-    const otp = generateOTP();
+    // Generate OTP (ensure it's a clean string with no whitespace)
+    const otp = String(generateOTP()).trim();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
-    // Create new user (password will be stored after OTP verification)
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Create new user WITHOUT password - password will be stored only after OTP verification
     const user = new User({
       name,
-      email,
-      password: hashedPassword,
+      email: normalizedEmail,
+      password: null, // Do NOT save password yet
       otp,
       otpExpiry,
       isVerified: false
     });
 
+    console.log(`[SIGNUP] Creating user with:`);
+    console.log(`  - Name: ${user.name}`);
+    console.log(`  - Email: ${user.email}`);
+    console.log(`  - Password: ${user.password} (null = not saved yet)`);
+    console.log(`  - OTP: ${user.otp}`);
+    console.log(`  - isVerified: ${user.isVerified}`);
+
     await user.save();
 
+    console.log(`[SIGNUP] ✅ User saved to database (password NOT saved until OTP verification)`);
+
     // Send OTP to email
-    const emailSent = await sendOTPEmail(email, otp);
+    const emailSent = await sendOTPEmail(normalizedEmail, otp);
 
     if (!emailSent) {
       return res.status(500).json({ message: 'Failed to send OTP email' });
     }
 
+    console.log(`[SIGNUP] OTP generated and sent to ${normalizedEmail}. OTP: ${otp}`);
+
     res.json({
       success: true,
       message: 'OTP sent to your email',
-      email,
+      email: normalizedEmail,
       userId: user._id
     });
   } catch (error) {
@@ -585,7 +743,8 @@ app.post('/api/auth/login', async (req, res) => {
       return res.status(400).json({ message: 'Email and password are required' });
     }
 
-    const user = await User.findOne({ email });
+    const normalizedEmail = email.toLowerCase().trim();
+    const user = await User.findOne({ email: normalizedEmail });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });

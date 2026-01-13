@@ -5630,278 +5630,6 @@ function EliteCard() {
   `
   },
    {
-    name: "ProDeveloperCard",
-    category: "Cards",
-    code: `
-
-function ProDeveloperCard() {
-  const [isHovered, setIsHovered] = React.useState(false);
-
-  // Icon SVG
-  const CodeIcon = () => (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <polyline points="16 18 22 12 16 6" />
-      <polyline points="8 6 2 12 8 18" />
-    </svg>
-  );
-
-  const LightningIcon = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
-    </svg>
-  );
-
-  return (
-    <div style={{ 
-      padding: '0',
-      display: 'block'
-    }}>
-      <div 
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{ 
-          padding: '2px', 
-          background: isHovered 
-            ? 'linear-gradient(135deg, #06b6d4, #22d3ee, #67e8f9)' 
-            : 'linear-gradient(135deg, #0e7490, #0891b2, #06b6d4)',
-          borderRadius: '24px',
-          transition: 'all 0.4s ease',
-          transform: isHovered ? 'translateY(-12px) scale(1.03)' : 'translateY(0) scale(1)',
-          boxShadow: isHovered 
-            ? '0 25px 70px rgba(6, 182, 212, 0.5), 0 0 60px rgba(6, 182, 212, 0.3)' 
-            : '0 10px 40px rgba(6, 182, 212, 0.2)',
-          cursor: 'pointer',
-          maxWidth: '420px',
-          width: '100%'
-        }}
-      >
-        <div style={{ 
-          padding: '28px', 
-          background: 'linear-gradient(135deg, #0c1220, #0e1828)',
-          borderRadius: '22px',
-          position: 'relative',
-          overflow: 'hidden'
-        }}>
-          {/* Decorative glow */}
-          <div style={{
-            position: 'absolute',
-            top: '-50%',
-            right: '-50%',
-            width: '200px',
-            height: '200px',
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
-            borderRadius: '50%',
-            transition: 'all 0.4s',
-            opacity: isHovered ? 1 : 0.5
-          }}></div>
-
-          {/* Pro Badge */}
-          <div style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            padding: '6px 16px',
-            background: 'linear-gradient(135deg, #06b6d4, #22d3ee)',
-            borderRadius: '20px',
-            fontSize: '0.7rem',
-            fontWeight: 'bold',
-            color: '#0c1220',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            letterSpacing: '1px',
-            boxShadow: '0 4px 12px rgba(6, 182, 212, 0.4)'
-          }}>
-            <LightningIcon />
-            PRO
-          </div>
-
-          {/* Icon */}
-          <div style={{ 
-            width: '56px', 
-            height: '56px', 
-            background: 'linear-gradient(135deg, #06b6d4, #22d3ee)', 
-            borderRadius: '16px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            marginBottom: '16px',
-            color: '#0c1220',
-            boxShadow: '0 8px 24px rgba(6, 182, 212, 0.4)',
-            transition: 'all 0.3s',
-            transform: isHovered ? 'rotate(-10deg) scale(1.1)' : 'rotate(0deg) scale(1)'
-          }}>
-            <CodeIcon />
-          </div>
-
-          <h3 style={{ 
-            fontSize: '1.6rem', 
-            fontWeight: 'bold', 
-            background: 'linear-gradient(135deg, #06b6d4, #67e8f9)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            marginBottom: '8px',
-            letterSpacing: '0.5px'
-          }}>
-            Pro Developer
-          </h3>
-          
-          <p style={{ 
-            fontSize: '0.95rem', 
-            color: '#94a3b8',
-            marginBottom: '20px',
-            lineHeight: '1.6'
-          }}>
-            Supercharge your development workflow with advanced tools and unlimited resources
-          </p>
-          
-          {/* Content Box */}
-          <div style={{ 
-            marginBottom: '20px',
-            padding: '20px',
-            background: 'rgba(6, 182, 212, 0.08)',
-            borderRadius: '16px',
-            border: '1px solid rgba(6, 182, 212, 0.2)',
-            transition: 'all 0.3s',
-            boxShadow: isHovered ? '0 0 30px rgba(6, 182, 212, 0.1)' : 'none'
-          }}>
-            <div style={{
-              marginBottom: '16px',
-              paddingBottom: '12px',
-              borderBottom: '1px solid rgba(6, 182, 212, 0.2)'
-            }}>
-              <div style={{
-                fontSize: '0.75rem',
-                color: '#22d3ee',
-                fontWeight: 'bold',
-                letterSpacing: '1px',
-                marginBottom: '8px'
-              }}>
-                MONTHLY SUBSCRIPTION
-              </div>
-              <div style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                gap: '8px'
-              }}>
-                <span style={{
-                  fontSize: '2.2rem',
-                  fontWeight: 'bold',
-                  color: '#06b6d4',
-                  lineHeight: '1'
-                }}>$29</span>
-                <span style={{
-                  fontSize: '0.9rem',
-                  color: '#64748b'
-                }}>/mo</span>
-              </div>
-            </div>
-
-            {/* Features List */}
-            <div style={{ marginTop: '16px' }}>
-              {['Unlimited API Calls', 'Advanced Code Editor', 'Real-time Collaboration', 'Priority Deployment', 'Custom Integrations'].map((feature, i) => (
-                <div key={i} style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '12px', 
-                  marginBottom: '10px' 
-                }}>
-                  <div style={{ 
-                    width: '6px',
-                    height: '6px',
-                    background: '#06b6d4',
-                    borderRadius: '50%',
-                    boxShadow: '0 0 8px rgba(6, 182, 212, 0.6)'
-                  }}></div>
-                  <span style={{ color: '#cbd5e1', fontSize: '0.9rem' }}>{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Button */}
-          <button 
-            style={{ 
-              padding: '12px 28px', 
-              background: isHovered 
-                ? 'linear-gradient(135deg, #06b6d4, #22d3ee)' 
-                : 'linear-gradient(135deg, #0891b2, #06b6d4)',
-              color: '#ffffff', 
-              border: 'none', 
-              borderRadius: '12px', 
-              fontWeight: 'bold', 
-              cursor: 'pointer', 
-              transition: 'all 0.3s',
-              fontSize: '1rem',
-              boxShadow: '0 8px 20px rgba(6, 182, 212, 0.3)',
-              width: '100%',
-              letterSpacing: '0.5px'
-            }}
-          >
-            Start Building Now
-          </button>
-
-          <div style={{
-            marginTop: '12px',
-            textAlign: 'center',
-            fontSize: '0.8rem',
-            color: '#64748b'
-          }}>
-            7-day free trial • Cancel anytime
-          </div>
-
-          {/* Stats */}
-          <div style={{ 
-            marginTop: '20px', 
-            display: 'flex', 
-            justifyContent: 'space-around',
-            paddingTop: '20px',
-            borderTop: '1px solid rgba(6, 182, 212, 0.2)'
-          }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ 
-                fontSize: '1.5rem', 
-                fontWeight: 'bold', 
-                color: '#06b6d4',
-                marginBottom: '4px'
-              }}>
-                50K+
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Developers</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ 
-                fontSize: '1.5rem', 
-                fontWeight: 'bold', 
-                color: '#06b6d4',
-                marginBottom: '4px'
-              }}>
-                99.9%
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Uptime</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ 
-                fontSize: '1.5rem', 
-                fontWeight: 'bold', 
-                color: '#06b6d4',
-                marginBottom: '4px'
-              }}>
-                24/7
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Support</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-    
-  `
-  },
-   {
     name: "CreativeStudioCard",
     category: "Cards",
     code: `
@@ -9986,7 +9714,6 @@ function NeonCyberHeader() {
     category: "Header",
     code: `
 // import { useState, useEffect } from 'react';
-
 function NeonMatrixHeader() {
   const [scrollY, setScrollY] = useState(0);
   const [glitchActive, setGlitchActive] = useState(false);
@@ -10442,6 +10169,3988 @@ function NeonMatrixHeader() {
     </div>
   );
 }    
+  `
+  },
+  {
+    name: "CyberNeonCard",
+    category: "Cards",
+    code: `
+function CyberNeonCard() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 flex items-center justify-center p-8 overflow-hidden relative">
+      {/* Animated background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s' }}></div>
+        <div className="absolute bottom-10 left-10 w-80 h-80 bg-gradient-to-tl from-purple-500/20 to-pink-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '13s', animationDelay: '2s' }}></div>
+        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-full blur-3xl animate-ping" style={{ animationDuration: '9s' }}></div>
+      </div>
+
+      {/* Cyber Card - HOVER EFFECTS ENHANCED */}
+      <div className="relative w-96 max-w-md p-1 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-3xl shadow-2xl transition-all duration-700 ease-out hover:scale-110 hover:rotate-2 hover:shadow-cyan-500/50 hover:shadow-[0_0_80px_rgba(34,211,238,0.6)]">
+        {/* Neon glow border - STRONGER ON HOVER */}
+        <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-3xl blur-2xl opacity-40 transition-opacity duration-700 hover:opacity-100 animate-pulse" style={{ animationDuration: '3s' }}></div>
+
+        {/* Glass card body */}
+        <div className="relative h-full bg-slate-900/90 backdrop-blur-xl rounded-3xl p-8 overflow-hidden border-2 border-cyan-400/30 transition-all duration-700 hover:border-cyan-400/80 hover:bg-slate-800/90">
+          {/* Gradient overlay - ANIMATED ON HOVER */}
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 transition-all duration-700 hover:from-cyan-500/30 hover:to-purple-500/30"></div>
+
+          {/* Animated corner accent - EXPANDS ON HOVER */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cyan-400/40 to-blue-500/40 rounded-bl-full blur-xl transition-all duration-1000 hover:scale-[2.5] hover:opacity-80"></div>
+          <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tr from-purple-400/40 to-pink-500/40 rounded-tr-full blur-xl transition-all duration-1000 hover:scale-[2.5] hover:opacity-80"></div>
+
+          {/* SPINNING RINGS EFFECT ON HOVER */}
+          <div className="absolute inset-0 opacity-0 transition-opacity duration-700 hover:opacity-100">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-4 border-cyan-400/30 rounded-full animate-spin" style={{ animationDuration: '8s' }}></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border-4 border-purple-400/30 rounded-full animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }}></div>
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10">
+            {/* Status badge - GLOWS ON HOVER */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 backdrop-blur-md border border-cyan-400/30 mb-6 shadow-lg transition-all duration-500 hover:bg-cyan-500/30 hover:border-cyan-400/80 hover:shadow-cyan-400/60 hover:shadow-xl hover:scale-110">
+              <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" style={{ animationDuration: '2s' }}></div>
+              <span className="text-xs font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent tracking-widest uppercase">
+                Cyber Elite
+              </span>
+            </div>
+
+            {/* Title with glitch effect - SHAKES ON HOVER */}
+            <h2 className="text-5xl font-black mb-4 relative transition-all duration-300 hover:scale-105 hover:text-shadow-lg">
+              <span className="bg-gradient-to-r from-cyan-300 via-blue-200 to-purple-300 bg-clip-text text-transparent drop-shadow-lg transition-all duration-300 hover:from-cyan-200 hover:via-white hover:to-purple-200">
+                Neon Fusion
+              </span>
+              {/* Shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12 translate-x-full group-hover:translate-x-[-250%] transition-transform duration-1200 ease-in-out"></div>
+            </h2>
+
+            {/* Subtitle - FADES IN BRIGHTER */}
+            <p className="text-slate-300 text-base mb-10 leading-relaxed transition-all duration-500 hover:text-slate-100 hover:scale-105">
+              Experience the future of technology with cutting-edge cyberpunk aesthetics and limitless possibilities.
+            </p>
+
+            {/* Stats grid - FLIP & GLOW ON HOVER */}
+            <div className="grid grid-cols-3 gap-3 mb-8">
+              <div className="relative transition-all duration-500 hover:scale-125 hover:-rotate-6 hover:z-20">
+                <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur rounded-xl p-4 border border-cyan-400/20 transition-all duration-500 hover:border-cyan-400/80 hover:bg-cyan-500/30 hover:shadow-lg hover:shadow-cyan-400/50">
+                  <div className="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent transition-all duration-300 hover:scale-110">99%</div>
+                  <div className="text-xs text-slate-400 mt-1 transition-colors duration-300 hover:text-cyan-300">Speed</div>
+                </div>
+              </div>
+              <div className="relative transition-all duration-500 hover:scale-125 hover:rotate-0 hover:z-20">
+                <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur rounded-xl p-4 border border-blue-400/20 transition-all duration-500 hover:border-blue-400/80 hover:bg-blue-500/30 hover:shadow-lg hover:shadow-blue-400/50">
+                  <div className="text-2xl font-bold bg-gradient-to-br from-blue-300 to-blue-500 bg-clip-text text-transparent transition-all duration-300 hover:scale-110">24/7</div>
+                  <div className="text-xs text-slate-400 mt-1 transition-colors duration-300 hover:text-blue-300">Active</div>
+                </div>
+              </div>
+              <div className="relative transition-all duration-500 hover:scale-125 hover:rotate-6 hover:z-20">
+                <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur rounded-xl p-4 border border-purple-400/20 transition-all duration-500 hover:border-purple-400/80 hover:bg-purple-500/30 hover:shadow-lg hover:shadow-purple-400/50">
+                  <div className="text-2xl font-bold bg-gradient-to-br from-purple-300 to-purple-500 bg-clip-text text-transparent transition-all duration-300 hover:scale-110">A+</div>
+                  <div className="text-xs text-slate-400 mt-1 transition-colors duration-300 hover:text-purple-300">Grade</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Feature chips - BOUNCE ON HOVER */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              <span className="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 text-xs font-semibold backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-cyan-500/40 hover:border-cyan-400/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-400/50 cursor-pointer">
+                AI Powered
+              </span>
+              <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-blue-500/40 hover:border-blue-400/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-400/50 cursor-pointer">
+                Encrypted
+              </span>
+              <span className="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-300 text-xs font-semibold backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-purple-500/40 hover:border-purple-400/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-400/50 cursor-pointer">
+                Cloud Ready
+              </span>
+            </div>
+
+            {/* Action button - POWERFUL HOVER EFFECT */}
+            <button className="relative w-full py-5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:shadow-cyan-500/50 hover:shadow-[0_20px_60px_rgba(34,211,238,0.6)] hover:scale-105">
+              {/* Button background layers */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 transition-all duration-500 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500"></div>
+              
+              {/* Animated shine - ALWAYS MOVING ON HOVER */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/50 to-white/0 -translate-x-full transition-transform duration-700 hover:translate-x-full hover:duration-1000"></div>
+              
+              {/* Hover glow - INTENSE */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 opacity-0 blur-2xl transition-all duration-500 hover:opacity-100"></div>
+
+              {/* Button text - MOVES & SCALES */}
+              <span className="relative z-10 text-white font-bold text-lg tracking-wide flex items-center justify-center gap-3 uppercase transition-all duration-500 hover:scale-110 hover:tracking-widest">
+                Access Now
+                <svg className="w-6 h-6 transition-all duration-500 hover:rotate-90 hover:scale-125 hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </span>
+            </button>
+
+            {/* Price reveal - SLIDES UP & GLOWS */}
+            <div className="mt-6 text-center opacity-0 -translate-y-8 transition-all duration-700 hover:opacity-100 hover:translate-y-0">
+              <div className="inline-flex items-baseline gap-2 transition-all duration-500 hover:scale-110">
+                <span className="text-5xl font-black bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent transition-all duration-500 hover:from-cyan-200 hover:via-white hover:to-purple-200">
+                  $199
+                </span>
+                <span className="text-lg text-slate-400 transition-colors duration-300 hover:text-slate-200">/month</span>
+              </div>
+              <div className="text-xs text-slate-500 mt-2 tracking-wider uppercase transition-all duration-300 hover:text-cyan-300 hover:tracking-widest">Elite Access • Limited Slots</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+    
+  `
+  },
+  {
+    name: "DiamondPremiumCard",
+    category: "Cards",
+    code: `
+function DiamondPremiumCard() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-slate-950 to-violet-950 flex items-center justify-center p-8 overflow-hidden relative">
+      {/* Animated background orbs */}
+      <div className="absolute inset-0">
+        <div className="absolute top-16 left-20 w-96 h-96 bg-gradient-to-br from-emerald-500/20 to-teal-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '11s' }}></div>
+        <div className="absolute bottom-16 right-16 w-80 h-80 bg-gradient-to-tl from-violet-500/20 to-fuchsia-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '14s', animationDelay: '2.5s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-sky-500/10 to-emerald-500/10 rounded-full blur-3xl animate-ping" style={{ animationDuration: '10s' }}></div>
+      </div>
+
+      {/* Diamond Premium Card - SUPER HOVER EFFECTS */}
+      <div className="relative w-96 max-w-md p-1 bg-gradient-to-br from-emerald-400 via-teal-500 to-violet-600 rounded-3xl shadow-2xl transition-all duration-700 ease-out hover:scale-110 hover:-rotate-3 hover:shadow-emerald-500/60 hover:shadow-[0_0_100px_rgba(52,211,153,0.7)]">
+        {/* Outer glow - INTENSE ON HOVER */}
+        <div className="absolute -inset-3 bg-gradient-to-r from-emerald-400 via-teal-500 to-violet-600 rounded-3xl blur-2xl opacity-50 transition-opacity duration-700 hover:opacity-100 animate-pulse" style={{ animationDuration: '4s' }}></div>
+
+        {/* Main card body */}
+        <div className="relative h-full bg-slate-900/95 backdrop-blur-2xl rounded-3xl p-8 overflow-hidden border-2 border-emerald-400/30 transition-all duration-700 hover:border-emerald-400/90 hover:bg-slate-800/95">
+          {/* Gradient background overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-violet-500/10 transition-all duration-700 hover:from-emerald-500/30 hover:to-violet-500/30"></div>
+
+          {/* Corner decorative elements - EXPAND ON HOVER */}
+          <div className="absolute -top-8 -left-8 w-40 h-40 bg-gradient-to-br from-emerald-400/50 to-teal-500/50 rounded-full blur-2xl transition-all duration-1000 hover:scale-[2] hover:opacity-90"></div>
+          <div className="absolute -bottom-8 -right-8 w-36 h-36 bg-gradient-to-tr from-violet-400/50 to-fuchsia-500/50 rounded-full blur-2xl transition-all duration-1000 hover:scale-[2] hover:opacity-90"></div>
+
+          {/* ROTATING DIAMOND RINGS ON HOVER */}
+          <div className="absolute inset-0 opacity-0 transition-opacity duration-700 hover:opacity-100">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 border-4 border-emerald-400/40 rounded-full animate-spin" style={{ animationDuration: '10s' }}></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 border-4 border-violet-400/40 rounded-full animate-spin" style={{ animationDuration: '7s', animationDirection: 'reverse' }}></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border-2 border-teal-400/30 rounded-full animate-spin" style={{ animationDuration: '5s' }}></div>
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10">
+            {/* Premium badge - GLOWS & SCALES */}
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-500/10 backdrop-blur-md border border-emerald-400/30 mb-6 shadow-lg transition-all duration-500 hover:bg-emerald-500/30 hover:border-emerald-400/90 hover:shadow-emerald-400/70 hover:shadow-2xl hover:scale-110">
+              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 animate-pulse" style={{ animationDuration: '2s' }}></div>
+              <span className="text-sm font-bold bg-gradient-to-r from-emerald-200 to-teal-200 bg-clip-text text-transparent tracking-widest uppercase">
+                Diamond Elite
+              </span>
+            </div>
+
+            {/* Title - SHAKES & GLOWS */}
+            <h2 className="text-5xl font-black mb-4 relative transition-all duration-500 hover:scale-110 hover:tracking-wider">
+              <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-violet-300 bg-clip-text text-transparent drop-shadow-2xl transition-all duration-500 hover:from-emerald-200 hover:via-white hover:to-violet-200">
+                Crystal Nexus
+              </span>
+              {/* Moving shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -skew-x-12 translate-x-full transition-transform duration-1000 hover:translate-x-[-300%]"></div>
+            </h2>
+
+            {/* Description - BRIGHTENS */}
+            <p className="text-slate-300 text-base mb-10 leading-relaxed transition-all duration-500 hover:text-white hover:scale-105 hover:tracking-wide">
+              Unlock infinite potential with diamond-grade precision and world-class performance that transcends boundaries.
+            </p>
+
+            {/* Premium stats - FLIP & GLOW INDIVIDUALLY */}
+            <div className="grid grid-cols-3 gap-4 mb-8">
+              <div className="relative transition-all duration-500 hover:scale-125 hover:-rotate-12 hover:z-20">
+                <div className="bg-gradient-to-br from-emerald-500/15 to-teal-500/15 backdrop-blur rounded-2xl p-4 border border-emerald-400/30 transition-all duration-500 hover:border-emerald-400/90 hover:bg-emerald-500/35 hover:shadow-2xl hover:shadow-emerald-400/60">
+                  <div className="flex justify-center mb-2">
+                    <svg className="w-8 h-8 text-emerald-300 transition-all duration-500 hover:scale-125 hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                  </div>
+                  <div className="text-xs text-slate-400 text-center transition-colors duration-300 hover:text-emerald-300 font-semibold">Premium</div>
+                </div>
+              </div>
+              <div className="relative transition-all duration-500 hover:scale-125 hover:rotate-0 hover:z-20">
+                <div className="bg-gradient-to-br from-teal-500/15 to-sky-500/15 backdrop-blur rounded-2xl p-4 border border-teal-400/30 transition-all duration-500 hover:border-teal-400/90 hover:bg-teal-500/35 hover:shadow-2xl hover:shadow-teal-400/60">
+                  <div className="flex justify-center mb-2">
+                    <svg className="w-8 h-8 text-teal-300 transition-all duration-500 hover:scale-125 hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  </div>
+                  <div className="text-xs text-slate-400 text-center transition-colors duration-300 hover:text-teal-300 font-semibold">Lightning</div>
+                </div>
+              </div>
+              <div className="relative transition-all duration-500 hover:scale-125 hover:rotate-12 hover:z-20">
+                <div className="bg-gradient-to-br from-violet-500/15 to-fuchsia-500/15 backdrop-blur rounded-2xl p-4 border border-violet-400/30 transition-all duration-500 hover:border-violet-400/90 hover:bg-violet-500/35 hover:shadow-2xl hover:shadow-violet-400/60">
+                  <div className="flex justify-center mb-2">
+                    <svg className="w-8 h-8 text-violet-300 transition-all duration-500 hover:scale-125 hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                    </svg>
+                  </div>
+                  <div className="text-xs text-slate-400 text-center transition-colors duration-300 hover:text-violet-300 font-semibold">Certified</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Features list - SLIDES IN */}
+            <div className="space-y-3 mb-8">
+              <div className="flex items-center gap-3 transition-all duration-500 hover:translate-x-2 hover:scale-105">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                <span className="text-slate-300 text-sm transition-colors duration-300 hover:text-emerald-300">Quantum-Speed Processing</span>
+              </div>
+              <div className="flex items-center gap-3 transition-all duration-500 hover:translate-x-2 hover:scale-105">
+                <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+                <span className="text-slate-300 text-sm transition-colors duration-300 hover:text-teal-300">Military-Grade Encryption</span>
+              </div>
+              <div className="flex items-center gap-3 transition-all duration-500 hover:translate-x-2 hover:scale-105">
+                <div className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+                <span className="text-slate-300 text-sm transition-colors duration-300 hover:text-violet-300">24/7 Elite Support</span>
+              </div>
+            </div>
+
+            {/* Action button - MEGA HOVER */}
+            <button className="relative w-full py-5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:-translate-y-4 hover:shadow-emerald-500/60 hover:shadow-[0_25px_70px_rgba(52,211,153,0.7)] hover:scale-105">
+              {/* Button gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-500 to-violet-600 transition-all duration-500 hover:from-emerald-400 hover:via-teal-400 hover:to-violet-500"></div>
+              
+              {/* Animated shine wave */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/60 to-white/0 -translate-x-full transition-transform duration-700 hover:translate-x-full hover:duration-1000"></div>
+              
+              {/* Outer glow on hover */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-violet-500 opacity-0 blur-2xl transition-all duration-500 hover:opacity-100"></div>
+
+              {/* Button text */}
+              <span className="relative z-10 text-white font-bold text-lg tracking-wide flex items-center justify-center gap-3 uppercase transition-all duration-500 hover:scale-110 hover:tracking-widest">
+                Activate Diamond
+                <svg className="w-6 h-6 transition-all duration-500 hover:rotate-90 hover:scale-150 hover:translate-x-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </span>
+            </button>
+
+            {/* Price section - DRAMATIC REVEAL */}
+            <div className="mt-6 text-center opacity-0 -translate-y-10 transition-all duration-700 hover:opacity-100 hover:translate-y-0">
+              <div className="inline-flex items-baseline gap-2 transition-all duration-500 hover:scale-115">
+                <span className="text-6xl font-black bg-gradient-to-r from-emerald-300 via-teal-300 to-violet-300 bg-clip-text text-transparent transition-all duration-500 hover:from-emerald-200 hover:via-white hover:to-violet-200">
+                  $399
+                </span>
+                <span className="text-xl text-slate-400 transition-colors duration-300 hover:text-slate-100">/month</span>
+              </div>
+              <div className="text-xs text-slate-500 mt-3 tracking-widest uppercase transition-all duration-500 hover:text-emerald-300 hover:tracking-[0.3em] hover:scale-110">
+                Diamond Tier • Exclusive Access
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "FuturisticFooter",
+    category: "Footer",
+    code: `
+function FuturisticFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredSocial, setHoveredSocial] = useState(null);
+
+  return (
+    <div className="min-h-screen bg-black flex items-end relative overflow-hidden">
+      
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, #00ff88 0px, transparent 1px, transparent 50px, #00ff88 51px), repeating-linear-gradient(90deg, #00ff88 0px, transparent 1px, transparent 50px, #00ff88 51px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      {/* Gradient Orbs */}
+      <div className="absolute top-10 left-10 w-80 h-80 rounded-full opacity-10 blur-3xl bg-green-400"></div>
+      <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full opacity-10 blur-3xl bg-cyan-400"></div>
+      <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full opacity-10 blur-3xl bg-emerald-400"></div>
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Top Accent Line */}
+        <div className="h-px mb-20 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-70"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-50 blur-sm"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-20">
+            
+            {/* Brand Section */}
+            <div className="lg:col-span-1">
+              <div className="mb-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl font-black text-black">F</span>
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-black text-white tracking-tight">FUSION</h2>
+                    <p className="text-xs font-bold text-green-400 tracking-widest">TECH LABS</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                  Building next-generation digital solutions with cutting-edge technology and innovative design thinking.
+                </p>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="text-center p-4 bg-gray-900 border border-gray-800 rounded-lg">
+                  <div className="text-2xl font-black text-green-400 mb-1">250+</div>
+                  <div className="text-xs text-gray-500 font-semibold">Projects</div>
+                </div>
+                <div className="text-center p-4 bg-gray-900 border border-gray-800 rounded-lg">
+                  <div className="text-2xl font-black text-cyan-400 mb-1">98%</div>
+                  <div className="text-xs text-gray-500 font-semibold">Success</div>
+                </div>
+                <div className="text-center p-4 bg-gray-900 border border-gray-800 rounded-lg">
+                  <div className="text-2xl font-black text-emerald-400 mb-1">24/7</div>
+                  <div className="text-xs text-gray-500 font-semibold">Online</div>
+                </div>
+              </div>
+
+              {/* Social Links */}
+              <div className="flex gap-3">
+                {['Twitter', 'LinkedIn', 'GitHub', 'Dribbble'].map((platform) => (
+                  <a
+                    key={platform}
+                    href="#"
+                    className="w-10 h-10 flex items-center justify-center border border-gray-800 rounded-lg transition-all duration-300 hover:border-green-400 hover:bg-green-400 hover:bg-opacity-10"
+                    onMouseEnter={() => setHoveredSocial(platform)}
+                    onMouseLeave={() => setHoveredSocial(null)}
+                  >
+                    <span className="text-sm font-bold" style={{
+                      color: hoveredSocial === platform ? '#4ade80' : '#6b7280'
+                    }}>
+                      {platform[0]}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-12">
+              
+              {[
+                { 
+                  title: 'Products', 
+                  links: ['Dashboard', 'Analytics', 'Reports', 'Automation', 'Integration'] 
+                },
+                { 
+                  title: 'Resources', 
+                  links: ['Documentation', 'API Reference', 'Guides', 'Blog', 'Support'] 
+                },
+                { 
+                  title: 'Company', 
+                  links: ['About', 'Careers', 'Press', 'Contact', 'Legal'] 
+                },
+              ].map((section, idx) => (
+                <div key={idx}>
+                  <h4 className="text-sm font-black text-white mb-5 tracking-wide">
+                    {section.title}
+                  </h4>
+                  <ul className="space-y-3">
+                    {section.links.map((link) => (
+                      <li key={link}>
+                        <a
+                          href="#"
+                          className="text-sm transition-colors duration-300 inline-block"
+                          style={{
+                            color: hoveredLink === link ? '#4ade80' : '#9ca3af'
+                          }}
+                          onMouseEnter={() => setHoveredLink(link)}
+                          onMouseLeave={() => setHoveredLink(null)}
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+            </div>
+
+          </div>
+
+          {/* Newsletter Section */}
+          <div className="mb-20 p-8 bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-2xl">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                <h3 className="text-xl font-black text-white">Stay Updated</h3>
+              </div>
+              <p className="text-gray-400 text-sm mb-6">
+                Subscribe to our newsletter for the latest updates, insights, and exclusive content.
+              </p>
+              <div className="flex gap-3">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-3 bg-black border border-gray-800 rounded-lg text-sm text-white focus:outline-none focus:border-green-400 transition-colors duration-300"
+                />
+                <button className="px-6 py-3 bg-green-400 text-black font-bold text-sm rounded-lg hover:bg-green-300 transition-colors duration-300">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-gray-900 flex flex-col md:flex-row justify-between items-center gap-6">
+            
+            <div className="flex flex-col sm:flex-row items-center gap-6 text-sm text-gray-500">
+              <p>© 2025 Fusion Tech Labs. All rights reserved.</p>
+              <div className="flex gap-6">
+                {['Privacy', 'Terms', 'Cookies', 'Security'].map((item) => (
+                  <a 
+                    key={item}
+                    href="#" 
+                    className="transition-colors duration-300"
+                    style={{
+                      color: hoveredLink === item ? '#4ade80' : '#6b7280'
+                    }}
+                    onMouseEnter={() => setHoveredLink(item)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Status Badge */}
+            <div className="flex items-center gap-3 px-4 py-2 bg-gray-900 border border-gray-800 rounded-full">
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+              </div>
+              <span className="text-xs font-bold text-green-400">SYSTEMS OPERATIONAL</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Bottom Gradient Line */}
+        <div className="h-1 mt-8 bg-gradient-to-r from-transparent via-green-400 to-transparent"></div>
+
+      </footer>
+    </div>
+  );
+}
+
+    
+  `
+  },
+  {
+    name: "HyperFooter",
+    category: "Footer",
+    code: `
+function HyperFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const [emailFocus, setEmailFocus] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black flex items-end relative overflow-hidden">
+      
+      {/* Diagonal Lines Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, #f97316 35px, #f97316 36px), repeating-linear-gradient(-45deg, transparent, transparent 35px, #3b82f6 35px, #3b82f6 36px)',
+        }}></div>
+      </div>
+
+      {/* Glowing Circles */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl bg-orange-500"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl bg-blue-500"></div>
+      <div className="absolute top-1/3 right-1/3 w-64 h-64 rounded-full opacity-15 blur-3xl bg-purple-500"></div>
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Top Border with Dots */}
+        <div className="flex items-center justify-center gap-2 mb-16">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-orange-500"></div>
+          <div className="flex gap-2">
+            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+            <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+          </div>
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-blue-500"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-20">
+          
+          {/* Hero Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-24">
+            
+            {/* Left - Brand & Info */}
+            <div>
+              {/* Logo */}
+              <div className="mb-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="relative w-16 h-16">
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-blue-500 rounded-xl rotate-6"></div>
+                    <div className="absolute inset-0 bg-black rounded-xl flex items-center justify-center">
+                      <span className="text-3xl font-black bg-gradient-to-r from-orange-500 to-blue-500 bg-clip-text text-transparent">H</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h2 className="text-4xl font-black text-white mb-1">HYPERNOVA</h2>
+                    <p className="text-xs font-bold tracking-widest text-orange-500">DIGITAL AGENCY</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 leading-relaxed mb-8">
+                  We create stunning digital experiences that captivate audiences and drive results. 
+                  Your vision, our expertise, unlimited possibilities.
+                </p>
+              </div>
+
+              {/* Achievement Cards */}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {[
+                  { number: '500+', label: 'Happy Clients', color: 'orange' },
+                  { number: '1000+', label: 'Projects Done', color: 'blue' },
+                  { number: '50+', label: 'Team Members', color: 'purple' },
+                  { number: '15+', label: 'Years Experience', color: 'pink' },
+                ].map((item, i) => (
+                  <div 
+                    key={i}
+                    className="p-5 bg-slate-900 border rounded-xl transition-all duration-300 cursor-pointer"
+                    style={{
+                      borderColor: hoveredCard === i ? (
+                        item.color === 'orange' ? '#f97316' :
+                        item.color === 'blue' ? '#3b82f6' :
+                        item.color === 'purple' ? '#a855f7' : '#ec4899'
+                      ) : '#1e293b',
+                      transform: hoveredCard === i ? 'translateY(-4px)' : 'translateY(0)',
+                    }}
+                    onMouseEnter={() => setHoveredCard(i)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <div className="text-3xl font-black mb-2" style={{
+                      color: item.color === 'orange' ? '#f97316' :
+                             item.color === 'blue' ? '#3b82f6' :
+                             item.color === 'purple' ? '#a855f7' : '#ec4899'
+                    }}>
+                      {item.number}
+                    </div>
+                    <div className="text-xs font-semibold text-gray-500">{item.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Social Media */}
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { name: 'Facebook', icon: 'f', color: '#3b82f6' },
+                  { name: 'Twitter', icon: 'X', color: '#000000' },
+                  { name: 'Instagram', icon: 'IG', color: '#ec4899' },
+                  { name: 'LinkedIn', icon: 'in', color: '#0ea5e9' },
+                  { name: 'YouTube', icon: 'YT', color: '#ef4444' },
+                ].map((social) => (
+                  <a
+                    key={social.name}
+                    href="#"
+                    className="w-12 h-12 flex items-center justify-center border border-slate-700 rounded-lg font-black text-sm transition-all duration-300"
+                    style={{
+                      backgroundColor: hoveredLink === social.name ? social.color : 'transparent',
+                      borderColor: hoveredLink === social.name ? social.color : '#334155',
+                      color: hoveredLink === social.name ? '#ffffff' : '#64748b',
+                    }}
+                    onMouseEnter={() => setHoveredLink(social.name)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Right - Newsletter */}
+            <div className="relative">
+              <div className="sticky top-8">
+                <div className="p-8 bg-gradient-to-br from-slate-900 to-slate-950 border-2 border-slate-800 rounded-2xl">
+                  
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-blue-500 rounded-full mb-6">
+                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    <span className="text-xs font-black text-white tracking-wider">JOIN 10K+ SUBSCRIBERS</span>
+                  </div>
+
+                  <h3 className="text-3xl font-black text-white mb-3">
+                    Never Miss<br />An Update
+                  </h3>
+                  
+                  <p className="text-gray-400 mb-8 leading-relaxed">
+                    Get exclusive insights, tips, and updates delivered straight to your inbox every week.
+                  </p>
+
+                  {/* Email Form */}
+                  <div className="space-y-4 mb-6">
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Your Name"
+                        className="w-full px-5 py-4 bg-slate-950 border-2 rounded-xl text-white text-sm font-medium focus:outline-none transition-all duration-300"
+                        style={{
+                          borderColor: emailFocus ? '#f97316' : '#1e293b'
+                        }}
+                        onFocus={() => setEmailFocus(true)}
+                        onBlur={() => setEmailFocus(false)}
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="email"
+                        placeholder="your@email.com"
+                        className="w-full px-5 py-4 bg-slate-950 border-2 rounded-xl text-white text-sm font-medium focus:outline-none transition-all duration-300"
+                        style={{
+                          borderColor: emailFocus ? '#3b82f6' : '#1e293b'
+                        }}
+                        onFocus={() => setEmailFocus(true)}
+                        onBlur={() => setEmailFocus(false)}
+                      />
+                    </div>
+                    <button className="w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-blue-500 text-white font-black rounded-xl hover:scale-105 transition-transform duration-300">
+                      SUBSCRIBE NOW →
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-gray-600">
+                    🔒 We respect your privacy. Unsubscribe at any time.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Navigation Links */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16 pb-16 border-b border-slate-800">
+            
+            {[
+              { 
+                title: 'Services',
+                icon: '⚡',
+                links: ['Web Design', 'App Development', 'Branding', 'SEO Marketing', 'Consulting'] 
+              },
+              { 
+                title: 'Work',
+                icon: '🎨',
+                links: ['Portfolio', 'Case Studies', 'Testimonials', 'Clients', 'Awards'] 
+              },
+              { 
+                title: 'Resources',
+                icon: '📚',
+                links: ['Blog', 'Ebooks', 'Webinars', 'Tools', 'Templates'] 
+              },
+              { 
+                title: 'Company',
+                icon: '🏢',
+                links: ['About Us', 'Careers', 'Team', 'Contact', 'FAQ'] 
+              },
+            ].map((section, idx) => (
+              <div key={idx}>
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="text-xl">{section.icon}</span>
+                  <h4 className="text-sm font-black text-white tracking-wide">
+                    {section.title}
+                  </h4>
+                </div>
+                <ul className="space-y-3">
+                  {section.links.map((link) => (
+                    <li key={link}>
+                      <a
+                        href="#"
+                        className="text-sm font-medium transition-all duration-300 inline-flex items-center gap-2"
+                        style={{
+                          color: hoveredLink === link ? '#f97316' : '#94a3b8'
+                        }}
+                        onMouseEnter={() => setHoveredLink(link)}
+                        onMouseLeave={() => setHoveredLink(null)}
+                      >
+                        {hoveredLink === link && <span className="text-orange-500">→</span>}
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
+          </div>
+
+          {/* Bottom Footer */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <p className="text-sm text-gray-500 font-medium">
+                © 2025 HyperNova. Crafted with ❤️
+              </p>
+              <div className="flex gap-6 text-sm">
+                {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
+                  <a 
+                    key={item}
+                    href="#" 
+                    className="font-medium transition-colors duration-300"
+                    style={{
+                      color: hoveredLink === item ? '#3b82f6' : '#64748b'
+                    }}
+                    onMouseEnter={() => setHoveredLink(item)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Status Indicator */}
+            <div className="flex items-center gap-3 px-5 py-2 bg-slate-900 border border-slate-700 rounded-full">
+              <div className="relative">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="absolute inset-0 w-3 h-3 bg-green-500 rounded-full animate-ping opacity-75"></div>
+              </div>
+              <span className="text-xs font-bold text-green-500">ALL SYSTEMS ONLINE</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Bottom Gradient Bar */}
+        <div className="h-1.5 mt-10">
+          <div className="h-full bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500"></div>
+        </div>
+
+      </footer>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "CyberpunkFooter",
+    category: "Footer",
+    code: `
+function CyberpunkFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredBox, setHoveredBox] = useState(null);
+  const [emailActive, setEmailActive] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-black flex items-end relative overflow-hidden">
+      
+      {/* Hexagon Pattern Background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M30 0l25.98 15v30L30 60 4.02 45V15z" fill="none" stroke="%2300ffff" stroke-width="1"/%3E%3C/svg%3E")',
+          backgroundSize: '60px 60px'
+        }}></div>
+      </div>
+
+      {/* Neon Glow Spots */}
+      <div className="absolute top-0 left-0 w-96 h-96 rounded-full opacity-15 blur-3xl bg-cyan-500"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-15 blur-3xl bg-yellow-500"></div>
+      <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full opacity-10 blur-3xl bg-lime-500"></div>
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Neon Top Border */}
+        <div className="relative mb-20">
+          <div className="h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-sm"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-16">
+          
+          {/* Top Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-20">
+            
+            {/* Brand Column */}
+            <div className="lg:col-span-1">
+              
+              {/* Logo */}
+              <div className="mb-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="relative w-14 h-14 border-2 border-cyan-400" style={{
+                    clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)'
+                  }}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-yellow-400 opacity-20"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-2xl font-black text-cyan-400">N</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-black text-cyan-400 tracking-tighter" style={{
+                      textShadow: '0 0 20px rgba(34, 211, 238, 0.8)'
+                    }}>
+                      NEOTECH
+                    </h2>
+                    <p className="text-xs font-bold tracking-widest text-yellow-400">DIGITAL FUTURE</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 text-sm leading-relaxed mb-8 font-mono">
+                  &gt; Pioneering the digital revolution with cutting-edge technology and futuristic design solutions.
+                </p>
+              </div>
+
+              {/* Glitch Stats */}
+              <div className="space-y-3 mb-8">
+                {[
+                  { label: 'ACTIVE_USERS', value: '999K+', color: 'cyan' },
+                  { label: 'UPTIME_STATUS', value: '99.9%', color: 'yellow' },
+                  { label: 'RESPONSE_TIME', value: '<50ms', color: 'lime' },
+                ].map((stat, i) => (
+                  <div 
+                    key={i}
+                    className="flex items-center justify-between p-3 bg-gray-900 border-l-4 font-mono cursor-pointer transition-all duration-300"
+                    style={{
+                      borderLeftColor: hoveredBox === i ? 
+                        (stat.color === 'cyan' ? '#22d3ee' : stat.color === 'yellow' ? '#eab308' : '#84cc16') : 
+                        '#1f2937',
+                      backgroundColor: hoveredBox === i ? '#111827' : '#111827'
+                    }}
+                    onMouseEnter={() => setHoveredBox(i)}
+                    onMouseLeave={() => setHoveredBox(null)}
+                  >
+                    <span className="text-xs text-gray-500 font-bold">[{stat.label}]</span>
+                    <span className="text-sm font-black" style={{
+                      color: stat.color === 'cyan' ? '#22d3ee' : stat.color === 'yellow' ? '#eab308' : '#84cc16'
+                    }}>
+                      {stat.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Social Links */}
+              <div className="flex gap-2">
+                {['TW', 'FB', 'IG', 'LI', 'GH'].map((platform) => (
+                  <a
+                    key={platform}
+                    href="#"
+                    className="w-10 h-10 flex items-center justify-center border border-gray-800 font-black text-xs font-mono transition-all duration-300"
+                    style={{
+                      backgroundColor: hoveredLink === platform ? '#22d3ee' : 'transparent',
+                      borderColor: hoveredLink === platform ? '#22d3ee' : '#1f2937',
+                      color: hoveredLink === platform ? '#000000' : '#6b7280',
+                      boxShadow: hoveredLink === platform ? '0 0 20px rgba(34, 211, 238, 0.5)' : 'none'
+                    }}
+                    onMouseEnter={() => setHoveredLink(platform)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {platform}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Links Grid */}
+            <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-10">
+              
+              {[
+                {
+                  title: 'PRODUCTS',
+                  links: ['Dashboard', 'Analytics', 'Reports', 'Automation', 'Security']
+                },
+                {
+                  title: 'DEVELOPERS',
+                  links: ['API Docs', 'GitHub', 'SDK Tools', 'Plugins', 'CLI']
+                },
+                {
+                  title: 'SUPPORT',
+                  links: ['Help Center', 'Community', 'Contact', 'Status', 'Updates']
+                },
+              ].map((section, idx) => (
+                <div key={idx}>
+                  <h4 className="text-xs font-black text-cyan-400 mb-5 tracking-widest font-mono flex items-center gap-2">
+                    <span className="text-yellow-400">&gt;</span>
+                    {section.title}
+                  </h4>
+                  <ul className="space-y-3">
+                    {section.links.map((link) => (
+                      <li key={link}>
+                        <a
+                          href="#"
+                          className="text-sm font-medium font-mono transition-all duration-300 inline-block"
+                          style={{
+                            color: hoveredLink === link ? '#22d3ee' : '#6b7280',
+                            textShadow: hoveredLink === link ? '0 0 10px rgba(34, 211, 238, 0.8)' : 'none',
+                            transform: hoveredLink === link ? 'translateX(5px)' : 'translateX(0)'
+                          }}
+                          onMouseEnter={() => setHoveredLink(link)}
+                          onMouseLeave={() => setHoveredLink(null)}
+                        >
+                          {hoveredLink === link && '>> '}{link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+            </div>
+
+          </div>
+
+          {/* Terminal-Style Newsletter */}
+          <div className="mb-16">
+            <div className="relative bg-gray-950 border-2 border-gray-800 overflow-hidden"
+              style={{
+                borderColor: emailActive ? '#22d3ee' : '#1f2937'
+              }}
+            >
+              {/* Terminal Header */}
+              <div className="flex items-center gap-2 px-4 py-2 bg-gray-900 border-b border-gray-800">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <span className="text-xs font-mono text-gray-500 ml-2">newsletter.exe</span>
+              </div>
+
+              {/* Terminal Content */}
+              <div className="p-6 font-mono">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-cyan-400 text-sm font-bold">$</span>
+                  <span className="text-lime-400 text-sm">subscribe --to=weekly-updates</span>
+                </div>
+                
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+                  &gt; Access exclusive tech insights, product launches, and developer resources delivered to your inbox.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <input
+                    type="text"
+                    placeholder="user@domain.com"
+                    className="md:col-span-2 px-4 py-3 bg-black border-2 border-gray-800 text-cyan-400 text-sm font-mono focus:outline-none transition-all duration-300"
+                    style={{
+                      borderColor: emailActive ? '#22d3ee' : '#1f2937',
+                      boxShadow: emailActive ? '0 0 20px rgba(34, 211, 238, 0.3)' : 'none'
+                    }}
+                    onFocus={() => setEmailActive(true)}
+                    onBlur={() => setEmailActive(false)}
+                  />
+                  <button 
+                    className="px-6 py-3 bg-cyan-400 text-black font-black text-sm font-mono hover:bg-yellow-400 transition-all duration-300"
+                    style={{
+                      boxShadow: '0 0 20px rgba(34, 211, 238, 0.5)'
+                    }}
+                  >
+                    EXECUTE &gt;&gt;
+                  </button>
+                </div>
+
+                <p className="text-xs text-gray-600 mt-4 font-mono">&gt; Encrypted connection | Unsubscribe anytime</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Bottom */}
+          <div className="pt-8 border-t border-gray-900">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              
+              <div className="flex flex-col sm:flex-row items-center gap-6 font-mono">
+                <p className="text-xs text-gray-600">
+                  &copy; 2025 NEOTECH_LABS | ALL_RIGHTS_RESERVED
+                </p>
+                <div className="flex gap-6 text-xs">
+                  {['PRIVACY.md', 'TERMS.txt', 'LICENSE'].map((item) => (
+                    <a 
+                      key={item}
+                      href="#" 
+                      className="transition-all duration-300"
+                      style={{
+                        color: hoveredLink === item ? '#22d3ee' : '#6b7280',
+                        textShadow: hoveredLink === item ? '0 0 10px rgba(34, 211, 238, 0.8)' : 'none'
+                      }}
+                      onMouseEnter={() => setHoveredLink(item)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* System Status */}
+              <div className="flex items-center gap-3 px-4 py-2 bg-gray-900 border border-gray-800 font-mono">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
+                </div>
+                <span className="text-xs font-bold text-lime-400">[SYSTEM_ONLINE]</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* Bottom Neon Strip */}
+        <div className="relative mt-10">
+          <div className="h-1 bg-gradient-to-r from-cyan-400 via-yellow-400 to-lime-400"></div>
+          <div className="absolute inset-0 h-1 bg-gradient-to-r from-cyan-400 via-yellow-400 to-lime-400 blur-sm opacity-70"></div>
+        </div>
+
+      </footer>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "LuxuryFooter",
+    category: "Footer",
+    code: `
+function LuxuryFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const [hoveredSocial, setHoveredSocial] = useState(null);
+
+  return (
+    <div className="min-h-screen bg-zinc-950 flex items-end relative overflow-hidden">
+      
+      {/* Elegant Lines Background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(to right, #d4af37 1px, transparent 1px), linear-gradient(to bottom, #d4af37 1px, transparent 1px)',
+          backgroundSize: '80px 80px'
+        }}></div>
+      </div>
+
+      {/* Subtle Gold Glow */}
+      <div className="absolute top-0 left-1/3 w-96 h-96 rounded-full opacity-10 blur-3xl bg-yellow-600"></div>
+      <div className="absolute bottom-0 right-1/3 w-80 h-80 rounded-full opacity-10 blur-3xl bg-amber-600"></div>
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Elegant Top Border */}
+        <div className="flex items-center justify-center mb-16">
+          <div className="w-24 h-px bg-gradient-to-r from-transparent to-yellow-600"></div>
+          <div className="mx-4">
+            <div className="w-2 h-2 border-2 border-yellow-600 rotate-45"></div>
+          </div>
+          <div className="w-24 h-px bg-gradient-to-l from-transparent to-yellow-600"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-10 py-20">
+          
+          {/* Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
+            
+            {/* Brand Section */}
+            <div className="lg:col-span-4">
+              
+              {/* Luxury Logo */}
+              <div className="mb-10">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="relative w-16 h-16 border border-yellow-600 flex items-center justify-center">
+                    <div className="absolute inset-2 border border-yellow-600"></div>
+                    <span className="text-2xl font-serif italic text-yellow-600">L</span>
+                  </div>
+                  <div>
+                    <h2 className="text-4xl font-serif text-white mb-1 tracking-wide">
+                      LUMIÈRE
+                    </h2>
+                    <p className="text-xs tracking-widest text-yellow-600 font-light">PREMIUM EXPERIENCES</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 text-sm leading-loose">
+                  Crafting exceptional experiences with timeless elegance and unparalleled sophistication since 2010.
+                </p>
+              </div>
+
+              {/* Awards & Recognition */}
+              <div className="space-y-4 mb-10">
+                {[
+                  { title: 'Best Design Agency', year: '2024' },
+                  { title: 'Innovation Excellence', year: '2023' },
+                  { title: 'Client Satisfaction', year: '2022' },
+                ].map((award, i) => (
+                  <div 
+                    key={i}
+                    className="flex items-center justify-between py-3 border-b transition-all duration-300"
+                    style={{
+                      borderColor: hoveredCard === i ? '#d4af37' : '#27272a'
+                    }}
+                    onMouseEnter={() => setHoveredCard(i)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <span className="text-sm text-gray-300 font-light">{award.title}</span>
+                    <span className="text-xs text-yellow-600 font-semibold">{award.year}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Contact Info */}
+              <div className="space-y-3 text-sm text-gray-400">
+                <p className="flex items-center gap-3">
+                  <span className="text-yellow-600">◆</span>
+                  contact@lumiere.studio
+                </p>
+                <p className="flex items-center gap-3">
+                  <span className="text-yellow-600">◆</span>
+                  +1 (555) 123-4567
+                </p>
+                <p className="flex items-center gap-3">
+                  <span className="text-yellow-600">◆</span>
+                  New York, NY 10013
+                </p>
+              </div>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-12">
+              
+              {[
+                {
+                  title: 'Services',
+                  links: ['Branding', 'Web Design', 'Photography', 'Consulting', 'Strategy']
+                },
+                {
+                  title: 'Portfolio',
+                  links: ['Featured Work', 'Case Studies', 'Clients', 'Awards', 'Gallery']
+                },
+                {
+                  title: 'Studio',
+                  links: ['About Us', 'Our Team', 'Careers', 'Culture', 'Location']
+                },
+                {
+                  title: 'Resources',
+                  links: ['Blog', 'Insights', 'Events', 'Press', 'Contact']
+                },
+              ].map((section, idx) => (
+                <div key={idx}>
+                  <h4 className="text-sm font-light text-yellow-600 mb-6 tracking-wider">
+                    {section.title}
+                  </h4>
+                  <ul className="space-y-4">
+                    {section.links.map((link) => (
+                      <li key={link}>
+                        <a
+                          href="#"
+                          className="text-sm font-light transition-all duration-300 inline-block relative"
+                          style={{
+                            color: hoveredLink === link ? '#d4af37' : '#a1a1aa',
+                          }}
+                          onMouseEnter={() => setHoveredLink(link)}
+                          onMouseLeave={() => setHoveredLink(null)}
+                        >
+                          {link}
+                          <span 
+                            className="absolute bottom-0 left-0 h-px bg-yellow-600 transition-all duration-300"
+                            style={{
+                              width: hoveredLink === link ? '100%' : '0%'
+                            }}
+                          ></span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+            </div>
+
+          </div>
+
+          {/* Premium Newsletter */}
+          <div className="mb-20">
+            <div className="relative p-12 border border-yellow-600 bg-zinc-900 bg-opacity-50">
+              
+              {/* Corner Decorations */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-yellow-600"></div>
+              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-yellow-600"></div>
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-yellow-600"></div>
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-yellow-600"></div>
+
+              <div className="max-w-3xl mx-auto text-center">
+                <h3 className="text-3xl font-serif text-white mb-4">
+                  Join Our Exclusive Community
+                </h3>
+                <p className="text-gray-400 mb-8 leading-relaxed">
+                  Receive curated insights, exclusive invitations, and behind-the-scenes content from our studio.
+                </p>
+
+                <div className="flex gap-4 max-w-2xl mx-auto">
+                  <input
+                    type="email"
+                    placeholder="Your email address"
+                    className="flex-1 px-6 py-4 bg-black border border-zinc-700 text-white text-sm focus:outline-none focus:border-yellow-600 transition-all duration-300"
+                  />
+                  <button className="px-8 py-4 bg-yellow-600 text-black font-semibold text-sm hover:bg-yellow-500 transition-all duration-300">
+                    SUBSCRIBE
+                  </button>
+                </div>
+
+                <p className="text-xs text-gray-600 mt-6">
+                  We respect your privacy. Unsubscribe at any time.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Social Media */}
+          <div className="flex justify-center gap-6 mb-16">
+            {[
+              { name: 'Instagram', label: 'IG' },
+              { name: 'Facebook', label: 'FB' },
+              { name: 'Twitter', label: 'TW' },
+              { name: 'LinkedIn', label: 'LN' },
+              { name: 'Pinterest', label: 'PT' },
+            ].map((social) => (
+              <a
+                key={social.name}
+                href="#"
+                className="w-12 h-12 flex items-center justify-center border font-semibold text-xs transition-all duration-300"
+                style={{
+                  borderColor: hoveredSocial === social.name ? '#d4af37' : '#3f3f46',
+                  backgroundColor: hoveredSocial === social.name ? '#d4af37' : 'transparent',
+                  color: hoveredSocial === social.name ? '#000000' : '#71717a',
+                  transform: hoveredSocial === social.name ? 'translateY(-4px)' : 'translateY(0)'
+                }}
+                onMouseEnter={() => setHoveredSocial(social.name)}
+                onMouseLeave={() => setHoveredSocial(null)}
+              >
+                {social.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Bottom Section */}
+          <div className="pt-10 border-t border-zinc-800">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              
+              <div className="flex flex-col sm:flex-row items-center gap-8 text-sm text-gray-500">
+                <p>© 2025 Lumière Studio. All rights reserved.</p>
+                <div className="flex gap-8">
+                  {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
+                    <a 
+                      key={item}
+                      href="#" 
+                      className="font-light transition-colors duration-300"
+                      style={{
+                        color: hoveredLink === item ? '#d4af37' : '#71717a'
+                      }}
+                      onMouseEnter={() => setHoveredLink(item)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Certification Badge */}
+              <div className="flex items-center gap-3 px-5 py-2 border border-yellow-600">
+                <div className="w-2 h-2 bg-yellow-600 rotate-45"></div>
+                <span className="text-xs font-semibold text-yellow-600 tracking-wider">CERTIFIED EXCELLENCE</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* Elegant Bottom Border */}
+        <div className="h-px mt-12 bg-gradient-to-r from-transparent via-yellow-600 to-transparent"></div>
+
+      </footer>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "ProDeveloperCard",
+    category: "Cards",
+    code: `
+function ProDeveloperCard() {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  // Icon SVG
+  const CodeIcon = () => (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+  );
+
+  const LightningIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
+    </svg>
+  );
+
+  const SparkleIcon = () => (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0L14.59 8.41L23 11L14.59 13.59L12 22L9.41 13.59L1 11L9.41 8.41L12 0Z" />
+    </svg>
+  );
+
+  return (
+    <div style={{ 
+      padding: '0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #0a0e1a 0%, #1a1f35 100%)'
+    }}>
+      <div 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ 
+          padding: '3px', 
+          background: isHovered 
+            ? 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)' 
+            : 'linear-gradient(135deg, #0891b2, #6366f1, #06b6d4)',
+          borderRadius: '32px',
+          transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isHovered ? 'translateY(-16px) scale(1.02)' : 'translateY(0) scale(1)',
+          boxShadow: isHovered 
+            ? '0 35px 90px rgba(6, 182, 212, 0.6), 0 0 80px rgba(139, 92, 246, 0.4), 0 0 0 1px rgba(6, 182, 212, 0.3)' 
+            : '0 15px 50px rgba(6, 182, 212, 0.25)',
+          cursor: 'pointer',
+          maxWidth: '440px',
+          width: '100%',
+          position: 'relative'
+        }}
+      >
+        {/* Animated border glow */}
+        <div style={{
+          position: 'absolute',
+          inset: '-3px',
+          background: isHovered ? 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)' : 'transparent',
+          borderRadius: '32px',
+          opacity: isHovered ? 0.5 : 0,
+          filter: 'blur(20px)',
+          transition: 'opacity 0.5s',
+          zIndex: -1
+        }}></div>
+
+        <div style={{ 
+          padding: '32px', 
+          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+          borderRadius: '30px',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          {/* Background gradient orb */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '300px',
+            height: '300px',
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 70%)',
+            borderRadius: '50%',
+            transition: 'opacity 0.5s',
+            opacity: isHovered ? 1 : 0.5,
+            pointerEvents: 'none',
+            filter: 'blur(40px)'
+          }}></div>
+
+          {/* Background pattern */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%)',
+            opacity: 0.6
+          }}></div>
+
+          {/* Floating sparkle 1 */}
+          <div style={{
+            position: 'absolute',
+            top: '20%',
+            right: '10%',
+            color: '#06b6d4',
+            opacity: isHovered ? 0.6 : 0.3,
+            transition: 'all 0.5s ease',
+            transform: isHovered ? 'translateY(-5px) rotate(20deg)' : 'translateY(0)'
+          }}>
+            <SparkleIcon />
+          </div>
+
+          {/* Floating sparkle 2 */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            right: '25%',
+            color: '#8b5cf6',
+            opacity: isHovered ? 0.5 : 0.2,
+            transition: 'all 0.7s ease',
+            transform: isHovered ? 'translateY(-10px) rotate(40deg)' : 'translateY(0)'
+          }}>
+            <SparkleIcon />
+          </div>
+
+          {/* Floating sparkle 3 */}
+          <div style={{
+            position: 'absolute',
+            top: '80%',
+            right: '40%',
+            color: '#ec4899',
+            opacity: isHovered ? 0.4 : 0.2,
+            transition: 'all 0.9s ease',
+            transform: isHovered ? 'translateY(-15px) rotate(60deg)' : 'translateY(0)'
+          }}>
+            <SparkleIcon />
+          </div>
+
+          {/* Pro Badge */}
+          <div style={{
+            position: 'absolute',
+            top: '24px',
+            right: '24px',
+            padding: '8px 18px',
+            background: 'linear-gradient(135deg, #8b5cf6, #ec4899)',
+            borderRadius: '24px',
+            fontSize: '0.7rem',
+            fontWeight: 'bold',
+            color: '#ffffff',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            letterSpacing: '1.5px',
+            boxShadow: '0 6px 16px rgba(139, 92, 246, 0.5)',
+            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+            transition: 'transform 0.3s'
+          }}>
+            <LightningIcon />
+            PRO
+          </div>
+
+          {/* Icon */}
+          <div style={{ 
+            width: '72px', 
+            height: '72px', 
+            background: 'linear-gradient(135deg, #06b6d4, #8b5cf6)', 
+            borderRadius: '20px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            marginBottom: '20px',
+            color: '#ffffff',
+            boxShadow: '0 10px 30px rgba(6, 182, 212, 0.5), 0 0 60px rgba(139, 92, 246, 0.3)',
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            transform: isHovered ? 'rotate(-12deg) scale(1.15)' : 'rotate(0deg) scale(1)',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            <CodeIcon />
+            {/* Icon glow */}
+            <div style={{
+              position: 'absolute',
+              inset: '-4px',
+              background: 'linear-gradient(135deg, #06b6d4, #8b5cf6)',
+              borderRadius: '20px',
+              opacity: isHovered ? 0.5 : 0,
+              filter: 'blur(15px)',
+              transition: 'opacity 0.4s',
+              zIndex: -1
+            }}></div>
+          </div>
+
+          <h3 style={{ 
+            fontSize: '1.8rem', 
+            fontWeight: 'bold', 
+            background: 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            marginBottom: '10px',
+            letterSpacing: '0.5px',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            Pro Developer
+          </h3>
+          
+          <p style={{ 
+            fontSize: '0.95rem', 
+            color: '#94a3b8',
+            marginBottom: '24px',
+            lineHeight: '1.6',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            Supercharge your development workflow with advanced tools and unlimited resources
+          </p>
+          
+          {/* Content Box */}
+          <div style={{ 
+            marginBottom: '24px',
+            padding: '24px',
+            background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(139, 92, 246, 0.05))',
+            borderRadius: '20px',
+            border: '1px solid rgba(6, 182, 212, 0.25)',
+            transition: 'all 0.4s',
+            boxShadow: isHovered ? '0 0 40px rgba(6, 182, 212, 0.15), inset 0 0 40px rgba(139, 92, 246, 0.05)' : 'none',
+            backdropFilter: 'blur(10px)',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            <div style={{
+              marginBottom: '18px',
+              paddingBottom: '14px',
+              borderBottom: '1px solid rgba(6, 182, 212, 0.25)'
+            }}>
+              <div style={{
+                fontSize: '0.7rem',
+                color: '#8b5cf6',
+                fontWeight: 'bold',
+                letterSpacing: '1.5px',
+                marginBottom: '8px'
+              }}>
+                MONTHLY SUBSCRIPTION
+              </div>
+              <div style={{
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: '8px'
+              }}>
+                <span style={{
+                  fontSize: '2.5rem',
+                  fontWeight: 'bold',
+                  background: 'linear-gradient(135deg, #06b6d4, #8b5cf6)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  lineHeight: '1'
+                }}>$29</span>
+                <span style={{
+                  fontSize: '0.9rem',
+                  color: '#64748b'
+                }}>/mo</span>
+              </div>
+            </div>
+
+            {/* Features List */}
+            <div style={{ marginTop: '18px' }}>
+              {['Unlimited API Calls', 'Advanced Code Editor', 'Real-time Collaboration', 'Priority Deployment', 'Custom Integrations'].map((feature, i) => (
+                <div key={i} style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '12px', 
+                  marginBottom: '12px',
+                  opacity: isHovered ? 1 : 0.9,
+                  transform: isHovered ? 'translateX(4px)' : 'translateX(0)',
+                  transition: 'all 0.3s ease'
+                }}>
+                  <div style={{ 
+                    width: '8px',
+                    height: '8px',
+                    background: 'linear-gradient(135deg, #06b6d4, #8b5cf6)',
+                    borderRadius: '50%',
+                    boxShadow: '0 0 10px rgba(6, 182, 212, 0.8)',
+                    flexShrink: 0
+                  }}></div>
+                  <span style={{ color: '#e2e8f0', fontSize: '0.9rem' }}>{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Button */}
+          <button 
+            style={{ 
+              padding: '14px 32px', 
+              background: isHovered 
+                ? 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)' 
+                : 'linear-gradient(135deg, #0891b2, #6366f1)',
+              color: '#ffffff', 
+              border: 'none', 
+              borderRadius: '16px', 
+              fontWeight: 'bold', 
+              cursor: 'pointer', 
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              fontSize: '1.05rem',
+              boxShadow: isHovered 
+                ? '0 12px 30px rgba(139, 92, 246, 0.5), 0 0 40px rgba(6, 182, 212, 0.3)' 
+                : '0 8px 20px rgba(6, 182, 212, 0.3)',
+              width: '100%',
+              letterSpacing: '0.5px',
+              position: 'relative',
+              zIndex: 1,
+              overflow: 'hidden'
+            }}
+          >
+            <span style={{ position: 'relative', zIndex: 1 }}>Start Building Now</span>
+            {/* Button shimmer effect */}
+            <div style={{
+              position: 'absolute',
+              top: '-50%',
+              left: '-100%',
+              width: '200%',
+              height: '200%',
+              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+              transform: isHovered ? 'translateX(100%)' : 'translateX(0)',
+              transition: 'transform 0.6s'
+            }}></div>
+          </button>
+
+          <div style={{
+            marginTop: '14px',
+            textAlign: 'center',
+            fontSize: '0.8rem',
+            color: '#64748b',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            7-day free trial • Cancel anytime
+          </div>
+
+          {/* Stats */}
+          <div style={{ 
+            marginTop: '24px', 
+            display: 'flex', 
+            justifyContent: 'space-around',
+            paddingTop: '24px',
+            borderTop: '1px solid rgba(6, 182, 212, 0.25)',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            <div style={{ 
+              textAlign: 'center',
+              transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+              transition: 'all 0.3s ease'
+            }}>
+              <div style={{ 
+                fontSize: '1.6rem', 
+                fontWeight: 'bold', 
+                background: 'linear-gradient(135deg, #06b6d4, #8b5cf6)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '4px'
+              }}>
+                50K+
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Developers</div>
+            </div>
+            
+            <div style={{ 
+              textAlign: 'center',
+              transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+              transition: 'all 0.4s ease'
+            }}>
+              <div style={{ 
+                fontSize: '1.6rem', 
+                fontWeight: 'bold', 
+                background: 'linear-gradient(135deg, #06b6d4, #8b5cf6)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '4px'
+              }}>
+                99.9%
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Uptime</div>
+            </div>
+            
+            <div style={{ 
+              textAlign: 'center',
+              transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+              transition: 'all 0.5s ease'
+            }}>
+              <div style={{ 
+                fontSize: '1.6rem', 
+                fontWeight: 'bold', 
+                background: 'linear-gradient(135deg, #06b6d4, #8b5cf6)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '4px'
+              }}>
+                24/7
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "PremiumCard",
+    category: "Cards",
+    code: `
+function PremiumCard() {
+  const [isHovered, setIsHovered] = React.useState(false);
+  const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
+
+  const CrownIcon = () => (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l2 7 5-4-2 7h6l-5 4 2 7-8-5-8 5 2-7-5-4h6l-2-7 5 4z" />
+    </svg>
+  );
+
+  const SparkleIcon = ({ size = 16 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0l2 8 8 2-8 2-2 8-2-8-8-2 8-2z" />
+    </svg>
+  );
+
+  return (
+    <div style={{
+      padding: '0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #0a0a0f 0%, #1a0f2e 50%, #0a0a0f 100%)'
+    }}>
+      <div 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onMouseMove={handleMouseMove}
+        style={{ 
+          position: 'relative',
+          padding: '3px', 
+          background: isHovered 
+            ? 'linear-gradient(135deg, #f59e0b, #f97316, #ec4899, #8b5cf6)' 
+            : 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)',
+          borderRadius: '28px',
+          transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isHovered ? 'translateY(-16px) scale(1.02)' : 'translateY(0) scale(1)',
+          boxShadow: isHovered 
+            ? '0 30px 80px rgba(236, 72, 153, 0.6), 0 0 80px rgba(139, 92, 246, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.1)' 
+            : '0 15px 50px rgba(139, 92, 246, 0.3)',
+          cursor: 'pointer',
+          maxWidth: '440px',
+          width: '100%'
+        }}
+      >
+        <div style={{ 
+          padding: '40px', 
+          background: 'linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16162a 100%)',
+          borderRadius: '26px',
+          position: 'relative',
+          overflow: 'hidden',
+          backdropFilter: 'blur(20px)'
+        }}>
+          {/* Animated gradient orbs */}
+          <div style={{
+            position: 'absolute',
+            top: isHovered ? mousePosition.y - 100 : '10%',
+            left: isHovered ? mousePosition.x - 100 : '20%',
+            width: '200px',
+            height: '200px',
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%)',
+            borderRadius: '50%',
+            transition: 'all 0.3s ease',
+            filter: 'blur(40px)',
+            opacity: isHovered ? 1 : 0.6
+          }}></div>
+
+          <div style={{
+            position: 'absolute',
+            bottom: '20%',
+            right: '10%',
+            width: '150px',
+            height: '150px',
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)',
+            borderRadius: '50%',
+            filter: 'blur(40px)',
+            opacity: isHovered ? 0.6 : 1,
+            transition: 'opacity 0.3s ease'
+          }}></div>
+
+          {/* Premium Badge with sparkles */}
+          <div style={{
+            position: 'absolute',
+            top: '24px',
+            right: '24px',
+            padding: '8px 20px',
+            background: 'linear-gradient(135deg, #f59e0b, #f97316)',
+            borderRadius: '25px',
+            fontSize: '0.7rem',
+            fontWeight: 'bold',
+            color: '#0f0f1e',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            boxShadow: '0 6px 20px rgba(245, 158, 11, 0.5)',
+            letterSpacing: '1px',
+            transition: 'transform 0.3s ease',
+            transform: isHovered ? 'translateY(-3px)' : 'translateY(0)'
+          }}>
+            <div style={{ 
+              opacity: isHovered ? 1 : 0.5,
+              transition: 'opacity 0.3s ease'
+            }}>
+              <SparkleIcon size={14} />
+            </div>
+            PREMIUM
+            <div style={{ 
+              opacity: isHovered ? 1 : 0.5,
+              transition: 'opacity 0.3s ease 0.1s'
+            }}>
+              <SparkleIcon size={14} />
+            </div>
+          </div>
+
+          {/* Crown Icon with glow */}
+          <div style={{ 
+            width: '72px', 
+            height: '72px', 
+            background: 'linear-gradient(135deg, #f59e0b, #ec4899)', 
+            borderRadius: '20px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            marginBottom: '24px',
+            color: '#ffffff',
+            boxShadow: '0 10px 30px rgba(245, 158, 11, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2)',
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            transform: isHovered ? 'rotate(5deg) scale(1.15)' : 'rotate(0deg) scale(1)',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            <CrownIcon />
+          </div>
+
+          <h3 style={{ 
+            fontSize: '2rem', 
+            fontWeight: '800', 
+            background: 'linear-gradient(135deg, #f59e0b 0%, #ec4899 50%, #8b5cf6 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            marginBottom: '14px',
+            letterSpacing: '1px',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            Elite Membership
+          </h3>
+          
+          <p style={{ 
+            fontSize: '1rem', 
+            color: '#a1a1aa',
+            marginBottom: '32px',
+            lineHeight: '1.7',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            Experience luxury and excellence with our exclusive VIP features
+          </p>
+          
+          {/* Glassmorphic Price Box */}
+          <div style={{ 
+            marginBottom: '32px',
+            padding: '28px',
+            background: 'rgba(255, 255, 255, 0.03)',
+            borderRadius: '20px',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            transition: 'all 0.4s',
+            boxShadow: isHovered ? '0 0 40px rgba(236, 72, 153, 0.2)' : 'none',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              marginBottom: '20px'
+            }}>
+              <span style={{
+                fontSize: '3.5rem',
+                fontWeight: '900',
+                background: 'linear-gradient(135deg, #f59e0b, #ec4899)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                lineHeight: '1'
+              }}>$99</span>
+              <span style={{
+                fontSize: '1.1rem',
+                color: '#71717a',
+                marginLeft: '10px'
+              }}>/month</span>
+            </div>
+
+            {/* Enhanced Features */}
+            <div style={{ marginTop: '24px' }}>
+              {[
+                '∞ Unlimited Everything', 
+                '⚡ Lightning Fast Speed', 
+                '🛡️ Premium Security', 
+                '👑 VIP Support 24/7'
+              ].map((feature, i) => (
+                <div key={i} style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '14px', 
+                  marginBottom: '14px',
+                  transition: 'all 0.3s',
+                  transform: isHovered ? 'translateX(5px)' : 'translateX(0)'
+                }}>
+                  <div style={{ 
+                    width: '8px',
+                    height: '8px',
+                    background: 'linear-gradient(135deg, #f59e0b, #ec4899)',
+                    borderRadius: '50%',
+                    boxShadow: '0 0 10px rgba(236, 72, 153, 0.6)'
+                  }}></div>
+                  <span style={{ 
+                    color: '#e4e4e7', 
+                    fontSize: '0.95rem',
+                    fontWeight: '500'
+                  }}>{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Gradient Button */}
+          <button 
+            style={{ 
+              padding: '16px 36px', 
+              background: isHovered 
+                ? 'linear-gradient(135deg, #f59e0b, #f97316, #ec4899)' 
+                : 'linear-gradient(135deg, #ec4899, #8b5cf6)',
+              color: '#ffffff', 
+              border: 'none', 
+              borderRadius: '14px', 
+              fontWeight: 'bold', 
+              cursor: 'pointer', 
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              fontSize: '1.05rem',
+              boxShadow: isHovered 
+                ? '0 12px 30px rgba(236, 72, 153, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2)' 
+                : '0 10px 25px rgba(139, 92, 246, 0.4)',
+              width: '100%',
+              letterSpacing: '1px',
+              position: 'relative',
+              zIndex: 1,
+              transform: isHovered ? 'scale(1.02)' : 'scale(1)'
+            }}
+          >
+            Claim Your Spot →
+          </button>
+
+          {/* Premium Stats */}
+          <div style={{ 
+            marginTop: '32px', 
+            display: 'flex', 
+            justifyContent: 'space-around',
+            paddingTop: '28px',
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ 
+                fontSize: '1.75rem', 
+                fontWeight: '900', 
+                background: 'linear-gradient(135deg, #f59e0b, #ec4899)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '6px'
+              }}>
+                50K+
+              </div>
+              <div style={{ fontSize: '0.8rem', color: '#71717a', fontWeight: '500' }}>Elite Members</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ 
+                fontSize: '1.75rem', 
+                fontWeight: '900', 
+                background: 'linear-gradient(135deg, #f59e0b, #ec4899)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '6px'
+              }}>
+                5.0★
+              </div>
+              <div style={{ fontSize: '0.8rem', color: '#71717a', fontWeight: '500' }}>Perfect Score</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ 
+                fontSize: '1.75rem', 
+                fontWeight: '900', 
+                background: 'linear-gradient(135deg, #f59e0b, #ec4899)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '6px'
+              }}>
+                99.9%
+              </div>
+              <div style={{ fontSize: '0.8rem', color: '#71717a', fontWeight: '500' }}>Satisfaction</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "UltraPremiumCard",
+    category: "Cards",
+    code: `
+function UltraPremiumCard() {
+  return (
+    <div className="min-h-screen bg-black flex items-center justify-center p-8 overflow-hidden relative">
+      {/* Animated grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+      
+      {/* Glowing orbs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[120px] opacity-70 animate-pulse"></div>
+        <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-600 rounded-full mix-blend-screen filter blur-[120px] opacity-70 animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-600 rounded-full mix-blend-screen filter blur-[120px] opacity-50 animate-pulse"></div>
+      </div>
+
+      {/* Main Card Container */}
+      <div className="relative group">
+        {/* Rotating border effect */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-600 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-1000 animate-spin"></div>
+        
+        {/* Card */}
+        <div className="relative w-[420px] bg-gradient-to-br from-zinc-900 to-black backdrop-blur-2xl rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl transition-all duration-700 group-hover:scale-105 group-hover:-rotate-1">
+          
+          {/* Holographic overlay */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-transparent to-cyan-600/20"></div>
+            <div className="absolute inset-0 bg-gradient-to-tl from-pink-600/20 via-transparent to-purple-600/20"></div>
+          </div>
+
+          {/* Content */}
+          <div className="relative p-10 z-10">
+            
+            {/* Top Section - Logo & Status */}
+            <div className="flex items-start justify-between mb-8">
+              {/* Animated Logo */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-700"></div>
+                <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 via-purple-500 to-cyan-500 flex items-center justify-center transform transition-all duration-700 group-hover:rotate-180 group-hover:scale-110">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                  </svg>
+                </div>
+              </div>
+
+              {/* Status Badge */}
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-pink-600/20 to-purple-600/20 border border-pink-500/30 backdrop-blur-xl transition-all duration-500 group-hover:border-pink-500 group-hover:scale-110">
+                <div className="relative">
+                  <div className="w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse"></div>
+                  <div className="absolute inset-0 w-2.5 h-2.5 rounded-full bg-pink-500 animate-ping"></div>
+                </div>
+                <span className="text-xs font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 uppercase tracking-wider">Active</span>
+              </div>
+            </div>
+
+            {/* Card Title */}
+            <div className="mb-6">
+              <h1 className="text-6xl font-black mb-3 relative overflow-hidden">
+                <span className="relative inline-block bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-700 group-hover:from-pink-300 group-hover:via-purple-300 group-hover:to-cyan-300">
+                  NEXUS
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500 opacity-60"></div>
+                </span>
+              </h1>
+              <div className="flex items-center gap-2">
+                <div className="h-1 w-20 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full transition-all duration-700 group-hover:w-40"></div>
+                <p className="text-zinc-500 text-sm font-medium tracking-widest uppercase">Ultra Elite</p>
+              </div>
+            </div>
+
+            {/* Card Number Display */}
+            <div className="mb-8 relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-pink-600/0 via-purple-600/20 to-cyan-600/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div className="relative grid grid-cols-4 gap-4">
+                <div className="text-center transition-all duration-500 hover:scale-125 hover:-translate-y-2">
+                  <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 tracking-wider">4532</span>
+                </div>
+                <div className="text-center transition-all duration-500 hover:scale-125 hover:-translate-y-2">
+                  <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 tracking-wider">7891</span>
+                </div>
+                <div className="text-center transition-all duration-500 hover:scale-125 hover:-translate-y-2">
+                  <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 tracking-wider">2345</span>
+                </div>
+                <div className="text-center transition-all duration-500 hover:scale-125 hover:-translate-y-2">
+                  <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 tracking-wider">6789</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Features Grid */}
+            <div className="grid grid-cols-3 gap-3 mb-8">
+              {/* Feature 1 */}
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl opacity-0 hover:opacity-100 blur transition duration-500"></div>
+                <div className="relative bg-zinc-900 backdrop-blur-xl rounded-xl p-4 border border-zinc-800 transition-all duration-500 hover:border-transparent hover:scale-110 hover:-rotate-3">
+                  <div className="text-3xl mb-2 transition-transform duration-500 hover:scale-125 hover:rotate-12">⚡</div>
+                  <div className="text-xs font-semibold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">Instant</div>
+                </div>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl opacity-0 hover:opacity-100 blur transition duration-500"></div>
+                <div className="relative bg-zinc-900 backdrop-blur-xl rounded-xl p-4 border border-zinc-800 transition-all duration-500 hover:border-transparent hover:scale-110 hover:-rotate-3">
+                  <div className="text-3xl mb-2 transition-transform duration-500 hover:scale-125 hover:rotate-12">🔒</div>
+                  <div className="text-xs font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-500">Secure</div>
+                </div>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl opacity-0 hover:opacity-100 blur transition duration-500"></div>
+                <div className="relative bg-zinc-900 backdrop-blur-xl rounded-xl p-4 border border-zinc-800 transition-all duration-500 hover:border-transparent hover:scale-110 hover:-rotate-3">
+                  <div className="text-3xl mb-2 transition-transform duration-500 hover:scale-125 hover:rotate-12">∞</div>
+                  <div className="text-xs font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500">Unlimited</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Premium Perks */}
+            <div className="space-y-3 mb-8">
+              <div className="flex items-center gap-3 transition-all duration-500 hover:translate-x-3 hover:scale-105">
+                <div className="relative">
+                  <div className="w-2 h-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500"></div>
+                  <div className="absolute inset-0 w-2 h-2 rounded-full bg-pink-500 animate-ping opacity-75"></div>
+                </div>
+                <span className="text-sm text-zinc-400 transition-colors duration-300 hover:text-white">Priority Processing</span>
+                <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <svg className="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 transition-all duration-500 hover:translate-x-3 hover:scale-105">
+                <div className="relative">
+                  <div className="w-2 h-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500"></div>
+                  <div className="absolute inset-0 w-2 h-2 rounded-full bg-pink-500 animate-ping opacity-75"></div>
+                </div>
+                <span className="text-sm text-zinc-400 transition-colors duration-300 hover:text-white">Global Access</span>
+                <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <svg className="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 transition-all duration-500 hover:translate-x-3 hover:scale-105">
+                <div className="relative">
+                  <div className="w-2 h-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500"></div>
+                  <div className="absolute inset-0 w-2 h-2 rounded-full bg-pink-500 animate-ping opacity-75"></div>
+                </div>
+                <span className="text-sm text-zinc-400 transition-colors duration-300 hover:text-white">Concierge Support</span>
+                <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <svg className="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Button */}
+            <button className="relative w-full">
+              <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+              <div className="relative px-8 py-5 bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-600 rounded-2xl transition-all duration-500 hover:scale-105 hover:shadow-2xl overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 -translate-x-full hover:translate-x-full transition-transform duration-1000"></div>
+                <div className="relative flex items-center justify-center gap-3">
+                  <span className="text-white font-black text-xl tracking-wider uppercase">Activate Now</span>
+                  <svg className="w-6 h-6 text-white transition-transform duration-500 hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </button>
+
+            {/* Footer Info */}
+            <div className="mt-6 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200">
+              <div className="flex items-baseline gap-2">
+                <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">$599</span>
+                <span className="text-sm text-zinc-500">/month</span>
+              </div>
+              <div className="text-xs text-zinc-600 tracking-widest uppercase">Premium Tier</div>
+            </div>
+          </div>
+
+          {/* Bottom glow effect */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+    
+  `
+  },
+  {
+    name: "CyberpunkHeader2",
+    category: "Header",
+    code: `// import { useState, useEffect } from 'react';
+function CyberpunkHeader2() {
+  const [glitchActive, setGlitchActive] = useState(false);
+  const [scanLine, setScanLine] = useState(0);
+  const [particles, setParticles] = useState([]);
+  const [gridOffset, setGridOffset] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setScanLine(prev => (prev + 2) % 100);
+    }, 50);
+
+    const gridInterval = setInterval(() => {
+      setGridOffset(prev => (prev + 1) % 60);
+    }, 100);
+
+    const glitchInterval = setInterval(() => {
+      setGlitchActive(true);
+      setTimeout(() => setGlitchActive(false), 200);
+    }, 3000);
+
+    const newParticles = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      offset: Math.random() * 20,
+    }));
+    setParticles(newParticles);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(gridInterval);
+      clearInterval(glitchInterval);
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-pink-900 flex items-center justify-center p-8 relative overflow-hidden">
+      {/* Animated Background Grid */}
+      <div className="absolute inset-0 opacity-20">
+        <div 
+          className="w-full h-full transition-transform duration-100"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255, 0, 255, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.5) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+            transform: 'translateY(' + gridOffset + 'px)',
+          }}
+        />
+      </div>
+
+      {/* Scan Line Effect */}
+      <div 
+        className="absolute w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50 blur-sm transition-all duration-100"
+        style={{
+          top: scanLine + '%',
+          boxShadow: '0 0 20px rgba(0, 255, 255, 0.8)',
+        }}
+      />
+
+      {/* Floating Particles */}
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          className="absolute w-1 h-1 bg-pink-500 rounded-full transition-transform duration-1000"
+          style={{
+            left: particle.x + '%',
+            top: particle.y + '%',
+            boxShadow: '0 0 10px rgba(255, 0, 255, 0.8)',
+            transform: 'translateY(' + (Math.sin(Date.now() / 1000 + particle.offset) * 20) + 'px)',
+          }}
+        />
+      ))}
+
+      <div className="relative z-10 max-w-6xl w-full">
+        {/* Main Container with Glitch Border */}
+        <div 
+          className="relative p-12 border-4 transition-all duration-300"
+          style={{
+            borderColor: glitchActive ? 'rgb(255, 0, 255)' : 'rgb(0, 255, 255)',
+            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(30, 0, 30, 0.8))',
+            boxShadow: glitchActive 
+              ? '0 0 100px rgba(255, 0, 255, 0.6), inset 0 0 50px rgba(255, 0, 255, 0.2)' 
+              : '0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 30px rgba(0, 255, 255, 0.1)',
+            transform: glitchActive ? 'skew(-1deg, 0deg)' : 'none',
+          }}
+        >
+          {/* Accent Lines */}
+          <div className="absolute top-0 left-0 w-32 h-1 bg-gradient-to-r from-pink-500 to-transparent" 
+               style={{ boxShadow: '0 0 15px rgba(255, 0, 255, 0.8)' }} />
+          <div className="absolute bottom-0 right-0 w-32 h-1 bg-gradient-to-l from-cyan-500 to-transparent" 
+               style={{ boxShadow: '0 0 15px rgba(0, 255, 255, 0.8)' }} />
+
+          {/* Title Section */}
+          <div className="text-center mb-12">
+            <div className="relative inline-block">
+              <h1 
+                className="text-9xl font-black tracking-tighter mb-2 relative"
+                style={{
+                  background: 'linear-gradient(90deg, rgb(0, 255, 255), rgb(255, 0, 255), rgb(255, 255, 0))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: glitchActive ? 'blur(2px)' : 'drop-shadow(0 0 25px rgba(0, 255, 255, 0.8))',
+                  textShadow: glitchActive ? '5px 0 rgb(255, 0, 255), -5px 0 rgb(0, 255, 255)' : 'none',
+                }}
+              >
+                CYBER
+              </h1>
+              {glitchActive && (
+                <div className="absolute inset-0 text-9xl font-black tracking-tighter opacity-30"
+                     style={{
+                       color: 'rgb(255, 0, 255)',
+                       transform: 'translate(3px, -2px)',
+                     }}>
+                  CYBER
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="w-3 h-3 bg-pink-500 rounded-full animate-pulse" 
+                   style={{ boxShadow: '0 0 15px rgb(255, 0, 255)' }} />
+              <span 
+                className="text-3xl font-mono tracking-widest font-bold"
+                style={{
+                  color: 'rgb(0, 255, 255)',
+                  textShadow: '0 0 15px rgba(0, 255, 255, 0.8), 2px 2px 0 rgba(255, 0, 255, 0.3)',
+                }}
+              >
+                REVOLUTION 2077
+              </span>
+              <div className="w-3 h-3 bg-cyan-500 rounded-full animate-pulse" 
+                   style={{ boxShadow: '0 0 15px rgb(0, 255, 255)' }} />
+            </div>
+          </div>
+
+          {/* Feature Cards */}
+          <div className="grid grid-cols-3 gap-4 mb-10">
+            {[
+              { icon: '⚡', title: 'NEURAL LINK', value: 'ACTIVE', color: 'rgb(255, 255, 0)' },
+              { icon: '🔒', title: 'ENCRYPTION', value: '256-BIT', color: 'rgb(0, 255, 255)' },
+              { icon: '🚀', title: 'SPEED', value: 'QUANTUM', color: 'rgb(255, 0, 255)' },
+            ].map((item, i) => (
+              <div 
+                key={i}
+                className="p-6 border-2 relative overflow-hidden group transition-all duration-300"
+                style={{
+                  borderColor: item.color,
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                  boxShadow: '0 0 20px rgba(' + (item.color === 'rgb(255, 255, 0)' ? '255, 255, 0' : item.color === 'rgb(0, 255, 255)' ? '0, 255, 255' : '255, 0, 255') + ', 0.25)',
+                }}
+              >
+                <div className="text-4xl mb-2">{item.icon}</div>
+                <div className="text-xs font-mono mb-1" style={{ color: 'rgb(150, 150, 200)' }}>
+                  {item.title}
+                </div>
+                <div 
+                  className="text-2xl font-black"
+                  style={{
+                    color: item.color,
+                    textShadow: '0 0 10px ' + item.color,
+                  }}
+                >
+                  {item.value}
+                </div>
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: item.color === 'rgb(255, 255, 0)' 
+                      ? 'linear-gradient(135deg, rgba(255, 255, 0, 0.12), transparent)'
+                      : item.color === 'rgb(0, 255, 255)'
+                      ? 'linear-gradient(135deg, rgba(0, 255, 255, 0.12), transparent)'
+                      : 'linear-gradient(135deg, rgba(255, 0, 255, 0.12), transparent)',
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-lg mb-10 max-w-2xl mx-auto" style={{ color: 'rgb(180, 180, 220)' }}>
+            Enter the neon-lit future where technology transcends reality and digital dreams become tangible
+          </p>
+
+          {/* Action Buttons */}
+          <div className="flex justify-center gap-4">
+            <button 
+              className="px-10 py-4 font-black uppercase tracking-wider transition-all duration-300 relative group overflow-hidden"
+              style={{
+                background: 'linear-gradient(135deg, rgb(255, 0, 255), rgb(255, 0, 150))',
+                border: 'none',
+                color: 'white',
+                boxShadow: '0 0 40px rgba(255, 0, 255, 0.6)',
+              }}
+            >
+              <span className="relative z-10">JACK IN</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform -skew-x-12 group-hover:translate-x-full transition-all duration-700" />
+            </button>
+            <button 
+              className="px-10 py-4 font-black uppercase tracking-wider transition-all duration-300"
+              style={{
+                backgroundColor: 'transparent',
+                border: '3px solid rgb(0, 255, 255)',
+                color: 'rgb(0, 255, 255)',
+                boxShadow: '0 0 30px rgba(0, 255, 255, 0.4)',
+              }}
+            >
+              EXPLORE NET
+            </button>
+          </div>
+        </div>
+
+        {/* Bottom Accent */}
+        <div className="mt-6 text-center">
+          <div className="inline-flex items-center gap-2 px-6 py-2 border border-pink-500" 
+               style={{ 
+                 backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                 boxShadow: '0 0 20px rgba(255, 0, 255, 0.3)',
+               }}>
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            <span className="text-xs font-mono" style={{ color: 'rgb(0, 255, 0)' }}>
+              SYSTEM OPERATIONAL
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "MatrixHeader",
+    category: "Header",
+    code: `// import { useState, useEffect } from 'react';
+function MatrixHeader() {
+  const [ripples, setRipples] = useState([]);
+  const [matrixChars, setMatrixChars] = useState([]);
+  const [pulseActive, setPulseActive] = useState(false);
+  const [orbitAngle, setOrbitAngle] = useState(0);
+
+  useEffect(() => {
+    // Matrix rain effect
+    const chars = '01アイウエオカキクケコサシスセソタチツテト'.split('');
+    const columns = 30;
+    const matrixData = Array.from({ length: columns }, (_, i) => ({
+      id: i,
+      x: (i / columns) * 100,
+      char: chars[Math.floor(Math.random() * chars.length)],
+      speed: 2 + Math.random() * 4,
+      y: Math.random() * 100,
+    }));
+    setMatrixChars(matrixData);
+
+    // Orbit animation
+    const orbitInterval = setInterval(() => {
+      setOrbitAngle(prev => (prev + 2) % 360);
+    }, 50);
+
+    // Pulse effect
+    const pulseInterval = setInterval(() => {
+      setPulseActive(true);
+      setTimeout(() => setPulseActive(false), 500);
+    }, 4000);
+
+    return () => {
+      clearInterval(orbitInterval);
+      clearInterval(pulseInterval);
+    };
+  }, []);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    const newRipple = {
+      id: Date.now(),
+      x,
+      y,
+    };
+    
+    setRipples(prev => [...prev, newRipple]);
+    setTimeout(() => {
+      setRipples(prev => prev.filter(r => r.id !== newRipple.id));
+    }, 1000);
+  };
+
+  return (
+    <div 
+      className="min-h-screen bg-black flex items-center justify-center p-8 relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Matrix Rain Background */}
+      {matrixChars.map((char) => (
+        <div
+          key={char.id}
+          className="absolute text-green-500 font-mono text-xl opacity-40 transition-all duration-1000"
+          style={{
+            left: char.x + '%',
+            top: ((char.y + (Date.now() / 100) * char.speed) % 100) + '%',
+            textShadow: '0 0 10px rgb(0, 255, 0)',
+          }}
+        >
+          {char.char}
+        </div>
+      ))}
+
+      {/* Mouse Ripples */}
+      {ripples.map((ripple) => (
+        <div
+          key={ripple.id}
+          className="absolute rounded-full border-2 border-green-400 pointer-events-none transition-all duration-1000"
+          style={{
+            left: ripple.x + '%',
+            top: ripple.y + '%',
+            width: '0px',
+            height: '0px',
+            transform: 'translate(-50%, -50%) scale(20)',
+            opacity: 0,
+            boxShadow: '0 0 30px rgba(0, 255, 0, 0.5)',
+          }}
+        />
+      ))}
+
+      {/* Orbiting Particles */}
+      {[0, 120, 240].map((offset, i) => {
+        const angle = (orbitAngle + offset) * (Math.PI / 180);
+        const radius = 250;
+        const x = 50 + Math.cos(angle) * (radius / 10);
+        const y = 50 + Math.sin(angle) * (radius / 10);
+        
+        return (
+          <div
+            key={i}
+            className="absolute w-4 h-4 rounded-full transition-all duration-100"
+            style={{
+              left: x + '%',
+              top: y + '%',
+              background: i === 0 ? 'rgb(0, 255, 0)' : i === 1 ? 'rgb(0, 255, 255)' : 'rgb(255, 0, 255)',
+              boxShadow: '0 0 30px ' + (i === 0 ? 'rgb(0, 255, 0)' : i === 1 ? 'rgb(0, 255, 255)' : 'rgb(255, 0, 255)'),
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+        );
+      })}
+
+      <div className="relative z-10 max-w-7xl w-full">
+        {/* Main Container */}
+        <div className="relative">
+          {/* Hexagonal Border Effect */}
+          <div 
+            className="absolute inset-0 transition-all duration-500"
+            style={{
+              background: pulseActive 
+                ? 'linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 255, 255, 0.1))' 
+                : 'transparent',
+              border: '3px solid',
+              borderImage: 'linear-gradient(135deg, rgb(0, 255, 0), rgb(0, 255, 255), rgb(255, 0, 255)) 1',
+              boxShadow: pulseActive 
+                ? '0 0 80px rgba(0, 255, 0, 0.6), inset 0 0 60px rgba(0, 255, 0, 0.2)' 
+                : '0 0 40px rgba(0, 255, 0, 0.3)',
+              clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
+            }}
+          />
+
+          <div className="relative p-16 text-center">
+            {/* Corner Indicators */}
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="absolute w-12 h-12"
+                style={{
+                  top: i < 2 ? '20px' : 'auto',
+                  bottom: i >= 2 ? '20px' : 'auto',
+                  left: i % 2 === 0 ? '20px' : 'auto',
+                  right: i % 2 === 1 ? '20px' : 'auto',
+                }}
+              >
+                <div 
+                  className="w-full h-full border-4 transition-all duration-300"
+                  style={{
+                    borderColor: 'rgb(0, 255, 0)',
+                    borderTop: i < 2 ? '4px solid rgb(0, 255, 0)' : 'none',
+                    borderBottom: i >= 2 ? '4px solid rgb(0, 255, 0)' : 'none',
+                    borderLeft: i % 2 === 0 ? '4px solid rgb(0, 255, 0)' : 'none',
+                    borderRight: i % 2 === 1 ? '4px solid rgb(0, 255, 0)' : 'none',
+                    boxShadow: pulseActive ? '0 0 20px rgb(0, 255, 0)' : 'none',
+                  }}
+                />
+              </div>
+            ))}
+
+            {/* Title */}
+            <div className="mb-10">
+              <h1 
+                className="text-8xl font-black mb-4 tracking-wider transition-all duration-500"
+                style={{
+                  background: 'linear-gradient(135deg, rgb(0, 255, 0), rgb(0, 255, 255))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: pulseActive ? 'drop-shadow(0 0 40px rgba(0, 255, 0, 1))' : 'drop-shadow(0 0 20px rgba(0, 255, 0, 0.5))',
+                }}
+              >
+                MATRIX
+              </h1>
+              
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="h-px w-20 bg-gradient-to-r from-transparent to-green-500" 
+                     style={{ boxShadow: '0 0 10px rgb(0, 255, 0)' }} />
+                <span 
+                  className="text-2xl font-mono tracking-widest"
+                  style={{
+                    color: 'rgb(0, 255, 255)',
+                    textShadow: '0 0 15px rgb(0, 255, 255)',
+                  }}
+                >
+                  DIGITAL REALM
+                </span>
+                <div className="h-px w-20 bg-gradient-to-l from-transparent to-green-500" 
+                     style={{ boxShadow: '0 0 10px rgb(0, 255, 0)' }} />
+              </div>
+            </div>
+
+            {/* Data Panels */}
+            <div className="grid grid-cols-4 gap-4 mb-12 max-w-5xl mx-auto">
+              {[
+                { label: 'NODES', value: '9,847', color: 'rgb(0, 255, 0)', icon: '◉' },
+                { label: 'STREAMS', value: '∞', color: 'rgb(0, 255, 255)', icon: '◈' },
+                { label: 'PACKETS', value: '2.4TB', color: 'rgb(0, 255, 0)', icon: '◆' },
+                { label: 'LATENCY', value: '0.3ms', color: 'rgb(0, 255, 255)', icon: '◐' },
+              ].map((item, i) => (
+                <div 
+                  key={i}
+                  className="p-5 border-2 backdrop-blur-sm transition-all duration-300 relative overflow-hidden group"
+                  style={{
+                    borderColor: item.color,
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    boxShadow: pulseActive ? '0 0 25px ' + item.color : '0 0 10px ' + item.color + '40',
+                  }}
+                >
+                  <div className="absolute top-1 right-1 text-xs opacity-50" style={{ color: item.color }}>
+                    {item.icon}
+                  </div>
+                  <div className="text-xs font-mono mb-1" style={{ color: 'rgb(100, 200, 100)' }}>
+                    {item.label}
+                  </div>
+                  <div 
+                    className="text-3xl font-black"
+                    style={{
+                      color: item.color,
+                      textShadow: '0 0 15px ' + item.color,
+                    }}
+                  >
+                    {item.value}
+                  </div>
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      background: 'linear-gradient(135deg, ' + item.color.replace('rgb', 'rgba').replace(')', ', 0.1)') + ', transparent)',
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <p className="text-xl mb-10 max-w-3xl mx-auto leading-relaxed" style={{ color: 'rgb(150, 255, 150)' }}>
+              Decode the architecture of reality where consciousness meets computation in an infinite data stream
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex justify-center gap-6">
+              <button 
+                className="px-12 py-5 font-black uppercase tracking-widest transition-all duration-300 relative overflow-hidden group"
+                style={{
+                  background: 'rgba(0, 255, 0, 0.2)',
+                  border: '3px solid rgb(0, 255, 0)',
+                  color: 'rgb(0, 255, 0)',
+                  boxShadow: '0 0 30px rgba(0, 255, 0, 0.5)',
+                }}
+              >
+                <span className="relative z-10">CONNECT</span>
+                <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+              </button>
+              <button 
+                className="px-12 py-5 font-black uppercase tracking-widest transition-all duration-300"
+                style={{
+                  backgroundColor: 'transparent',
+                  border: '3px solid rgb(0, 255, 255)',
+                  color: 'rgb(0, 255, 255)',
+                  boxShadow: '0 0 30px rgba(0, 255, 255, 0.5)',
+                }}
+              >
+                DECODE
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Status Bar */}
+        <div className="mt-8 flex justify-center gap-6">
+          {['NEURAL', 'QUANTUM', 'CRYPTO'].map((status, i) => (
+            <div 
+              key={i}
+              className="flex items-center gap-2 px-4 py-2 border border-green-500"
+              style={{ 
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                boxShadow: '0 0 15px rgba(0, 255, 0, 0.3)',
+              }}
+            >
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" 
+                   style={{ boxShadow: '0 0 10px rgb(0, 255, 0)' }} />
+              <span className="text-xs font-mono" style={{ color: 'rgb(0, 255, 0)' }}>
+                {status}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "NeonHologramHeader",
+    category: "Header",
+    code: `// import { useState, useEffect } from 'react';
+function NeonHologramHeader() {
+  const [waves, setWaves] = useState([]);
+  const [particles, setParticles] = useState([]);
+  const [glowActive, setGlowActive] = useState(false);
+  const [rotationAngle, setRotationAngle] = useState(0);
+
+  useEffect(() => {
+    // Floating particles effect
+    const symbols = '◊◈◇◆★☆✦✧❖⬡⬢⬣'.split('');
+    const particleCount = 25;
+    const particleData = Array.from({ length: particleCount }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      symbol: symbols[Math.floor(Math.random() * symbols.length)],
+      speed: 1 + Math.random() * 2,
+      size: 0.5 + Math.random() * 1.5,
+    }));
+    setParticles(particleData);
+
+    // Rotation animation
+    const rotationInterval = setInterval(() => {
+      setRotationAngle(prev => (prev + 1) % 360);
+    }, 30);
+
+    // Glow pulse effect
+    const glowInterval = setInterval(() => {
+      setGlowActive(true);
+      setTimeout(() => setGlowActive(false), 600);
+    }, 3500);
+
+    return () => {
+      clearInterval(rotationInterval);
+      clearInterval(glowInterval);
+    };
+  }, []);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    const newWave = {
+      id: Date.now(),
+      x,
+      y,
+    };
+    
+    setWaves(prev => [...prev, newWave]);
+    setTimeout(() => {
+      setWaves(prev => prev.filter(w => w.id !== newWave.id));
+    }, 1200);
+  };
+
+  return (
+    <div 
+      className="min-h-screen bg-black flex items-center justify-center p-8 relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Floating Particles Background */}
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          className="absolute font-bold opacity-30 transition-all duration-1000"
+          style={{
+            left: particle.x + '%',
+            top: ((particle.y + (Date.now() / 150) * particle.speed) % 100) + '%',
+            fontSize: particle.size + 'rem',
+            color: particle.id % 3 === 0 ? 'rgb(255, 0, 150)' : particle.id % 3 === 1 ? 'rgb(150, 0, 255)' : 'rgb(0, 150, 255)',
+            textShadow: '0 0 20px currentColor',
+          }}
+        >
+          {particle.symbol}
+        </div>
+      ))}
+
+      {/* Mouse Wave Ripples */}
+      {waves.map((wave) => (
+        <div
+          key={wave.id}
+          className="absolute rounded-full pointer-events-none transition-all duration-1000"
+          style={{
+            left: wave.x + '%',
+            top: wave.y + '%',
+            width: '0px',
+            height: '0px',
+            transform: 'translate(-50%, -50%) scale(25)',
+            opacity: 0,
+            border: '2px solid rgb(255, 0, 150)',
+            boxShadow: '0 0 40px rgba(255, 0, 150, 0.6), 0 0 80px rgba(150, 0, 255, 0.4)',
+          }}
+        />
+      ))}
+
+      {/* Rotating Energy Rings */}
+      {[0, 60, 120, 180, 240, 300].map((offset, i) => {
+        const angle = (rotationAngle + offset) * (Math.PI / 180);
+        const radius = 300;
+        const x = 50 + Math.cos(angle) * (radius / 12);
+        const y = 50 + Math.sin(angle) * (radius / 12);
+        
+        return (
+          <div
+            key={i}
+            className="absolute w-3 h-3 rounded-full transition-all duration-100"
+            style={{
+              left: x + '%',
+              top: y + '%',
+              background: i % 2 === 0 ? 'rgb(255, 0, 150)' : 'rgb(150, 0, 255)',
+              boxShadow: '0 0 25px ' + (i % 2 === 0 ? 'rgb(255, 0, 150)' : 'rgb(150, 0, 255)'),
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+        );
+      })}
+
+      <div className="relative z-10 max-w-7xl w-full">
+        {/* Main Container */}
+        <div className="relative">
+          {/* Holographic Border Effect */}
+          <div 
+            className="absolute inset-0 transition-all duration-700"
+            style={{
+              background: glowActive 
+                ? 'linear-gradient(135deg, rgba(255, 0, 150, 0.15), rgba(150, 0, 255, 0.15))' 
+                : 'transparent',
+              border: '4px solid',
+              borderImage: 'linear-gradient(90deg, rgb(255, 0, 150), rgb(150, 0, 255), rgb(0, 150, 255), rgb(255, 0, 150)) 1',
+              boxShadow: glowActive 
+                ? '0 0 100px rgba(255, 0, 150, 0.7), inset 0 0 80px rgba(150, 0, 255, 0.3)' 
+                : '0 0 50px rgba(255, 0, 150, 0.4)',
+              clipPath: 'polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%)',
+            }}
+          />
+
+          <div className="relative p-20 text-center">
+            {/* Corner Brackets */}
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="absolute w-16 h-16"
+                style={{
+                  top: i < 2 ? '30px' : 'auto',
+                  bottom: i >= 2 ? '30px' : 'auto',
+                  left: i % 2 === 0 ? '30px' : 'auto',
+                  right: i % 2 === 1 ? '30px' : 'auto',
+                }}
+              >
+                <div 
+                  className="w-full h-full border-4 transition-all duration-500"
+                  style={{
+                    borderColor: 'transparent',
+                    borderTop: i < 2 ? '4px solid rgb(255, 0, 150)' : 'none',
+                    borderBottom: i >= 2 ? '4px solid rgb(255, 0, 150)' : 'none',
+                    borderLeft: i % 2 === 0 ? '4px solid rgb(255, 0, 150)' : 'none',
+                    borderRight: i % 2 === 1 ? '4px solid rgb(255, 0, 150)' : 'none',
+                    boxShadow: glowActive ? '0 0 30px rgb(255, 0, 150)' : '0 0 15px rgb(255, 0, 150)',
+                  }}
+                />
+              </div>
+            ))}
+
+            {/* Title Section */}
+            <div className="mb-12">
+              <h1 
+                className="text-9xl font-black mb-6 tracking-tight transition-all duration-700"
+                style={{
+                  background: 'linear-gradient(90deg, rgb(255, 0, 150), rgb(150, 0, 255), rgb(0, 150, 255))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: glowActive ? 'drop-shadow(0 0 50px rgba(255, 0, 150, 1))' : 'drop-shadow(0 0 25px rgba(255, 0, 150, 0.6))',
+                }}
+              >
+                HOLOGRAM
+              </h1>
+              
+              <div className="flex items-center justify-center gap-5 mb-8">
+                <div className="h-px w-24 bg-gradient-to-r from-transparent to-pink-500" 
+                     style={{ boxShadow: '0 0 15px rgb(255, 0, 150)' }} />
+                <span 
+                  className="text-3xl font-bold tracking-widest"
+                  style={{
+                    color: 'rgb(150, 0, 255)',
+                    textShadow: '0 0 20px rgb(150, 0, 255)',
+                  }}
+                >
+                  DIMENSION
+                </span>
+                <div className="h-px w-24 bg-gradient-to-l from-transparent to-purple-500" 
+                     style={{ boxShadow: '0 0 15px rgb(150, 0, 255)' }} />
+              </div>
+            </div>
+
+            {/* Metric Panels */}
+            <div className="grid grid-cols-3 gap-6 mb-14 max-w-4xl mx-auto">
+              {[
+                { label: 'DIMENSION', value: '∞D', color: 'rgb(255, 0, 150)', symbol: '◈' },
+                { label: 'FREQUENCY', value: '777Hz', color: 'rgb(150, 0, 255)', symbol: '◆' },
+                { label: 'RESONANCE', value: '99.9%', color: 'rgb(0, 150, 255)', symbol: '◊' },
+              ].map((item, i) => (
+                <div 
+                  key={i}
+                  className="p-8 border-2 backdrop-blur-sm transition-all duration-500 relative overflow-hidden group hover:scale-105"
+                  style={{
+                    borderColor: item.color,
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    boxShadow: glowActive ? '0 0 35px ' + item.color : '0 0 15px ' + item.color + '60',
+                    clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
+                  }}
+                >
+                  <div className="absolute top-2 right-2 text-2xl opacity-40" style={{ color: item.color }}>
+                    {item.symbol}
+                  </div>
+                  <div className="text-sm font-mono mb-2 uppercase tracking-wider" style={{ color: 'rgb(150, 150, 150)' }}>
+                    {item.label}
+                  </div>
+                  <div 
+                    className="text-4xl font-black"
+                    style={{
+                      color: item.color,
+                      textShadow: '0 0 20px ' + item.color,
+                    }}
+                  >
+                    {item.value}
+                  </div>
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background: 'radial-gradient(circle at center, ' + item.color.replace('rgb', 'rgba').replace(')', ', 0.15)') + ', transparent)',
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <p className="text-2xl mb-12 max-w-4xl mx-auto leading-relaxed" style={{ color: 'rgb(200, 150, 255)' }}>
+              Step beyond the veil into a realm where light bends reality and consciousness projects infinite possibilities
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex justify-center gap-8 mb-10">
+              <button 
+                className="px-14 py-6 font-black uppercase tracking-widest transition-all duration-500 relative overflow-hidden group hover:scale-110"
+                style={{
+                  background: 'rgba(255, 0, 150, 0.15)',
+                  border: '3px solid rgb(255, 0, 150)',
+                  color: 'rgb(255, 0, 150)',
+                  boxShadow: '0 0 40px rgba(255, 0, 150, 0.6)',
+                  clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
+                }}
+              >
+                <span className="relative z-10">ENTER REALM</span>
+                <div className="absolute inset-0 bg-pink-500 opacity-0 group-hover:opacity-30 transition-opacity duration-500" />
+              </button>
+              <button 
+                className="px-14 py-6 font-black uppercase tracking-widest transition-all duration-500 hover:scale-110"
+                style={{
+                  backgroundColor: 'transparent',
+                  border: '3px solid rgb(150, 0, 255)',
+                  color: 'rgb(150, 0, 255)',
+                  boxShadow: '0 0 40px rgba(150, 0, 255, 0.6)',
+                  clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
+                }}
+              >
+                DISCOVER
+              </button>
+            </div>
+
+            {/* Feature Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+              {[
+                { icon: '◉', label: 'PROJECTION', active: true },
+                { icon: '◈', label: 'REFRACTION', active: false },
+                { icon: '◆', label: 'SYNTHESIS', active: true },
+                { icon: '◊', label: 'QUANTUM', active: false },
+              ].map((feature, i) => (
+                <div 
+                  key={i}
+                  className="flex items-center gap-3 px-5 py-4 border transition-all duration-300"
+                  style={{ 
+                    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                    borderColor: feature.active ? 'rgb(255, 0, 150)' : 'rgb(100, 100, 100)',
+                    boxShadow: feature.active ? '0 0 20px rgba(255, 0, 150, 0.4)' : 'none',
+                  }}
+                >
+                  <div 
+                    className="text-xl font-bold"
+                    style={{ 
+                      color: feature.active ? 'rgb(255, 0, 150)' : 'rgb(100, 100, 100)',
+                      textShadow: feature.active ? '0 0 15px rgb(255, 0, 150)' : 'none',
+                    }}
+                  >
+                    {feature.icon}
+                  </div>
+                  <span 
+                    className="text-xs font-mono uppercase tracking-wider" 
+                    style={{ color: feature.active ? 'rgb(255, 0, 150)' : 'rgb(100, 100, 100)' }}
+                  >
+                    {feature.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Status Indicators */}
+        <div className="mt-10 flex justify-center gap-8">
+          {[
+            { label: 'PHASE', status: 'ACTIVE', color: 'rgb(255, 0, 150)' },
+            { label: 'SIGNAL', status: 'STABLE', color: 'rgb(150, 0, 255)' },
+            { label: 'STREAM', status: 'LIVE', color: 'rgb(0, 150, 255)' },
+          ].map((stat, i) => (
+            <div 
+              key={i}
+              className="flex items-center gap-3 px-6 py-3 border-2"
+              style={{ 
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                borderColor: stat.color,
+                boxShadow: '0 0 20px ' + stat.color + '40',
+              }}
+            >
+              <div 
+                className="w-2.5 h-2.5 rounded-full animate-pulse" 
+                style={{ 
+                  backgroundColor: stat.color,
+                  boxShadow: '0 0 15px ' + stat.color,
+                }} 
+              />
+              <div className="flex flex-col">
+                <span className="text-xs font-mono opacity-60" style={{ color: 'rgb(150, 150, 150)' }}>
+                  {stat.label}
+                </span>
+                <span className="text-sm font-bold" style={{ color: stat.color }}>
+                  {stat.status}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "NeonQuantumHeader",
+    category: "Header",
+    code: `// import { useState, useEffect } from 'react';
+function NeonQuantumHeader() {
+  const [sparks, setSparks] = useState([]);
+  const [dataStream, setDataStream] = useState([]);
+  const [energyActive, setEnergyActive] = useState(false);
+  const [spinAngle, setSpinAngle] = useState(0);
+
+  useEffect(() => {
+    // Data stream effect
+    const codes = '█▓▒░▀▄│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞'.split('');
+    const streamCount = 20;
+    const streamData = Array.from({ length: streamCount }, (_, i) => ({
+      id: i,
+      x: (i / streamCount) * 100,
+      y: Math.random() * 100,
+      code: codes[Math.floor(Math.random() * codes.length)],
+      speed: 1.5 + Math.random() * 3,
+      opacity: 0.3 + Math.random() * 0.5,
+    }));
+    setDataStream(streamData);
+
+    // Spin animation
+    const spinInterval = setInterval(() => {
+      setSpinAngle(prev => (prev + 1.5) % 360);
+    }, 40);
+
+    // Energy pulse effect
+    const energyInterval = setInterval(() => {
+      setEnergyActive(true);
+      setTimeout(() => setEnergyActive(false), 700);
+    }, 3000);
+
+    return () => {
+      clearInterval(spinInterval);
+      clearInterval(energyInterval);
+    };
+  }, []);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    const newSpark = {
+      id: Date.now(),
+      x,
+      y,
+    };
+    
+    setSparks(prev => [...prev, newSpark]);
+    setTimeout(() => {
+      setSparks(prev => prev.filter(s => s.id !== newSpark.id));
+    }, 800);
+  };
+
+  return (
+    <div 
+      className="min-h-screen bg-black flex items-center justify-center p-8 relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Data Stream Background */}
+      {dataStream.map((stream) => (
+        <div
+          key={stream.id}
+          className="absolute font-mono text-2xl transition-all duration-1000"
+          style={{
+            left: stream.x + '%',
+            top: ((stream.y + (Date.now() / 120) * stream.speed) % 100) + '%',
+            color: stream.id % 2 === 0 ? 'rgb(255, 100, 0)' : 'rgb(255, 200, 0)',
+            opacity: stream.opacity,
+            textShadow: '0 0 15px currentColor',
+          }}
+        >
+          {stream.code}
+        </div>
+      ))}
+
+      {/* Mouse Spark Effects */}
+      {sparks.map((spark) => (
+        <div
+          key={spark.id}
+          className="absolute pointer-events-none transition-all duration-800"
+          style={{
+            left: spark.x + '%',
+            top: spark.y + '%',
+            width: '0px',
+            height: '0px',
+            transform: 'translate(-50%, -50%) scale(15)',
+            opacity: 0,
+          }}
+        >
+          <div 
+            className="absolute inset-0 rounded-full"
+            style={{
+              border: '3px solid rgb(255, 100, 0)',
+              boxShadow: '0 0 50px rgba(255, 100, 0, 0.8), 0 0 100px rgba(255, 200, 0, 0.5)',
+            }}
+          />
+        </div>
+      ))}
+
+      {/* Spinning Quantum Dots */}
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((offset, i) => {
+        const angle = (spinAngle + offset) * (Math.PI / 180);
+        const radius = 280;
+        const x = 50 + Math.cos(angle) * (radius / 11);
+        const y = 50 + Math.sin(angle) * (radius / 11);
+        
+        return (
+          <div
+            key={i}
+            className="absolute w-2.5 h-2.5 transition-all duration-100"
+            style={{
+              left: x + '%',
+              top: y + '%',
+              background: i % 3 === 0 ? 'rgb(255, 100, 0)' : i % 3 === 1 ? 'rgb(255, 200, 0)' : 'rgb(255, 150, 0)',
+              boxShadow: '0 0 20px ' + (i % 3 === 0 ? 'rgb(255, 100, 0)' : i % 3 === 1 ? 'rgb(255, 200, 0)' : 'rgb(255, 150, 0)'),
+              transform: 'translate(-50%, -50%) rotate(' + spinAngle + 'deg)',
+              clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
+            }}
+          />
+        );
+      })}
+
+      <div className="relative z-10 max-w-7xl w-full">
+        {/* Main Container */}
+        <div className="relative">
+          {/* Quantum Field Border */}
+          <div 
+            className="absolute inset-0 transition-all duration-600"
+            style={{
+              background: energyActive 
+                ? 'linear-gradient(45deg, rgba(255, 100, 0, 0.12), rgba(255, 200, 0, 0.12))' 
+                : 'transparent',
+              border: '3px solid',
+              borderImage: 'linear-gradient(45deg, rgb(255, 100, 0), rgb(255, 200, 0), rgb(255, 150, 0), rgb(255, 100, 0)) 1',
+              boxShadow: energyActive 
+                ? '0 0 90px rgba(255, 100, 0, 0.8), inset 0 0 70px rgba(255, 200, 0, 0.25)' 
+                : '0 0 45px rgba(255, 100, 0, 0.45)',
+              clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)',
+            }}
+          />
+
+          <div className="relative p-20 text-center">
+            {/* Corner Energy Points */}
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="absolute w-20 h-20"
+                style={{
+                  top: i < 2 ? '25px' : 'auto',
+                  bottom: i >= 2 ? '25px' : 'auto',
+                  left: i % 2 === 0 ? '25px' : 'auto',
+                  right: i % 2 === 1 ? '25px' : 'auto',
+                }}
+              >
+                <div 
+                  className="w-full h-full transition-all duration-500"
+                  style={{
+                    background: 'transparent',
+                    border: '4px solid transparent',
+                    borderTop: i < 2 ? '4px solid rgb(255, 100, 0)' : 'none',
+                    borderBottom: i >= 2 ? '4px solid rgb(255, 200, 0)' : 'none',
+                    borderLeft: i % 2 === 0 ? '4px solid rgb(255, 100, 0)' : 'none',
+                    borderRight: i % 2 === 1 ? '4px solid rgb(255, 200, 0)' : 'none',
+                    boxShadow: energyActive ? '0 0 35px rgb(255, 150, 0)' : '0 0 18px rgb(255, 150, 0)',
+                    clipPath: 'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)',
+                  }}
+                />
+              </div>
+            ))}
+
+            {/* Title Section */}
+            <div className="mb-14">
+              <h1 
+                className="text-9xl font-black mb-7 tracking-wide transition-all duration-600"
+                style={{
+                  background: 'linear-gradient(180deg, rgb(255, 100, 0), rgb(255, 200, 0))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: energyActive ? 'drop-shadow(0 0 55px rgba(255, 150, 0, 1))' : 'drop-shadow(0 0 28px rgba(255, 150, 0, 0.7))',
+                }}
+              >
+                QUANTUM
+              </h1>
+              
+              <div className="flex items-center justify-center gap-6 mb-9">
+                <div className="h-0.5 w-28 bg-gradient-to-r from-transparent to-orange-500" 
+                     style={{ boxShadow: '0 0 12px rgb(255, 100, 0)' }} />
+                <span 
+                  className="text-3xl font-black tracking-widest"
+                  style={{
+                    color: 'rgb(255, 200, 0)',
+                    textShadow: '0 0 18px rgb(255, 200, 0)',
+                  }}
+                >
+                  CORE
+                </span>
+                <div className="h-0.5 w-28 bg-gradient-to-l from-transparent to-yellow-500" 
+                     style={{ boxShadow: '0 0 12px rgb(255, 200, 0)' }} />
+              </div>
+            </div>
+
+            {/* Energy Stats Grid */}
+            <div className="grid grid-cols-5 gap-5 mb-16 max-w-6xl mx-auto">
+              {[
+                { label: 'POWER', value: '∞W', color: 'rgb(255, 100, 0)', glyph: '▲' },
+                { label: 'CHARGE', value: '100%', color: 'rgb(255, 150, 0)', glyph: '▼' },
+                { label: 'FLUX', value: '7.7K', color: 'rgb(255, 200, 0)', glyph: '◆' },
+                { label: 'FIELD', value: 'STABLE', color: 'rgb(255, 150, 0)', glyph: '■' },
+                { label: 'SYNC', value: 'LOCKED', color: 'rgb(255, 100, 0)', glyph: '●' },
+              ].map((stat, i) => (
+                <div 
+                  key={i}
+                  className="p-6 border-2 backdrop-blur-sm transition-all duration-400 relative overflow-hidden group hover:scale-105"
+                  style={{
+                    borderColor: stat.color,
+                    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                    boxShadow: energyActive ? '0 0 30px ' + stat.color : '0 0 12px ' + stat.color + '50',
+                  }}
+                >
+                  <div className="absolute top-2 right-2 text-lg opacity-40" style={{ color: stat.color }}>
+                    {stat.glyph}
+                  </div>
+                  <div className="text-xs font-mono mb-2 uppercase tracking-wide" style={{ color: 'rgb(180, 180, 180)' }}>
+                    {stat.label}
+                  </div>
+                  <div 
+                    className="text-2xl font-black"
+                    style={{
+                      color: stat.color,
+                      textShadow: '0 0 18px ' + stat.color,
+                    }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+                    style={{
+                      background: 'linear-gradient(180deg, ' + stat.color.replace('rgb', 'rgba').replace(')', ', 0.12)') + ', transparent)',
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <p className="text-2xl mb-14 max-w-4xl mx-auto leading-relaxed" style={{ color: 'rgb(255, 200, 150)' }}>
+              Harness the infinite energy of quantum mechanics where particles dance between existence and pure potential
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex justify-center gap-7 mb-12">
+              <button 
+                className="px-16 py-6 font-black uppercase tracking-widest transition-all duration-500 relative overflow-hidden group hover:scale-110"
+                style={{
+                  background: 'rgba(255, 100, 0, 0.18)',
+                  border: '4px solid rgb(255, 100, 0)',
+                  color: 'rgb(255, 100, 0)',
+                  boxShadow: '0 0 45px rgba(255, 100, 0, 0.7)',
+                  clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)',
+                }}
+              >
+                <span className="relative z-10">ACTIVATE</span>
+                <div className="absolute inset-0 bg-orange-500 opacity-0 group-hover:opacity-25 transition-opacity duration-500" />
+              </button>
+              <button 
+                className="px-16 py-6 font-black uppercase tracking-widest transition-all duration-500 hover:scale-110"
+                style={{
+                  backgroundColor: 'transparent',
+                  border: '4px solid rgb(255, 200, 0)',
+                  color: 'rgb(255, 200, 0)',
+                  boxShadow: '0 0 45px rgba(255, 200, 0, 0.7)',
+                  clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)',
+                }}
+              >
+                EXPLORE
+              </button>
+            </div>
+
+            {/* System Modules */}
+            <div className="grid grid-cols-2 gap-5 max-w-3xl mx-auto">
+              {[
+                { title: 'ENTANGLEMENT', level: '█████████░', percent: '92%', color: 'rgb(255, 100, 0)' },
+                { title: 'SUPERPOSITION', level: '████████░░', percent: '87%', color: 'rgb(255, 200, 0)' },
+              ].map((module, i) => (
+                <div 
+                  key={i}
+                  className="p-7 border-2 transition-all duration-400 relative group"
+                  style={{ 
+                    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                    borderColor: module.color,
+                    boxShadow: '0 0 25px ' + module.color + '40',
+                  }}
+                >
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-sm font-mono uppercase tracking-wider" style={{ color: module.color }}>
+                      {module.title}
+                    </span>
+                    <span className="text-xs font-bold" style={{ color: module.color }}>
+                      {module.percent}
+                    </span>
+                  </div>
+                  <div 
+                    className="text-lg font-mono tracking-wider"
+                    style={{ 
+                      color: module.color,
+                      textShadow: '0 0 12px ' + module.color,
+                    }}
+                  >
+                    {module.level}
+                  </div>
+                  <div 
+                    className="absolute bottom-0 left-0 right-0 h-1 transition-all duration-400"
+                    style={{
+                      backgroundColor: module.color,
+                      boxShadow: '0 0 15px ' + module.color,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Status Monitor */}
+        <div className="mt-12 flex justify-center gap-10">
+          {[
+            { id: 'REACTOR', state: 'ONLINE', color: 'rgb(255, 100, 0)' },
+            { id: 'STABILIZER', state: 'ACTIVE', color: 'rgb(255, 150, 0)' },
+            { id: 'EMITTER', state: 'READY', color: 'rgb(255, 200, 0)' },
+          ].map((system, i) => (
+            <div 
+              key={i}
+              className="flex items-center gap-4 px-7 py-4 border-2"
+              style={{ 
+                backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                borderColor: system.color,
+                boxShadow: '0 0 22px ' + system.color + '50',
+              }}
+            >
+              <div 
+                className="w-3 h-3 animate-pulse" 
+                style={{ 
+                  backgroundColor: system.color,
+                  boxShadow: '0 0 18px ' + system.color,
+                  clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
+                }} 
+              />
+              <div className="flex flex-col">
+                <span className="text-xs font-mono opacity-70" style={{ color: 'rgb(180, 180, 180)' }}>
+                  {system.id}
+                </span>
+                <span className="text-sm font-bold tracking-wide" style={{ color: system.color }}>
+                  {system.state}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "NeonCyberpunkHeader",
+    category: "Header",
+    code: `function NeonCyberpunkHeader() {
+  const [glitchLines, setGlitchLines] = useState([]);
+  const [scanProgress, setScanProgress] = useState(0);
+  const [terminals, setTerminals] = useState([]);
+  const [electricArc, setElectricArc] = useState(false);
+
+  useEffect(() => {
+    // Terminal text animation
+    const terminalTexts = [
+      '> INITIALIZING NEURAL LINK...',
+      '> DECRYPTING DATA STREAM...',
+      '> SYNCING QUANTUM PROCESSOR...',
+      '> ACCESSING MAINFRAME...',
+      '> BYPASSING FIREWALL...',
+      '> CONNECTION ESTABLISHED...',
+    ];
+    
+    let currentIndex = 0;
+    const terminalInterval = setInterval(() => {
+      setTerminals(prev => {
+        const newTerminals = [...prev, terminalTexts[currentIndex]];
+        if (newTerminals.length > 4) newTerminals.shift();
+        return newTerminals;
+      });
+      currentIndex = (currentIndex + 1) % terminalTexts.length;
+    }, 2000);
+
+    // Scan line animation
+    const scanInterval = setInterval(() => {
+      setScanProgress(prev => (prev + 2) % 100);
+    }, 50);
+
+    // Electric arc pulse
+    const arcInterval = setInterval(() => {
+      setElectricArc(true);
+      setTimeout(() => setElectricArc(false), 400);
+    }, 5000);
+
+    // Glitch effect
+    const glitchInterval = setInterval(() => {
+      const newGlitch = {
+        id: Date.now(),
+        y: Math.random() * 100,
+        height: 2 + Math.random() * 8,
+      };
+      setGlitchLines(prev => [...prev, newGlitch]);
+      setTimeout(() => {
+        setGlitchLines(prev => prev.filter(g => g.id !== newGlitch.id));
+      }, 200);
+    }, 3000);
+
+    return () => {
+      clearInterval(terminalInterval);
+      clearInterval(scanInterval);
+      clearInterval(arcInterval);
+      clearInterval(glitchInterval);
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-8 relative overflow-hidden">
+      
+      {/* Grid Background */}
+      <div className="absolute inset-0 opacity-20">
+        <div 
+          className="w-full h-full"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(0, 255, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 255, 0.2) 1px, transparent 1px)',
+            backgroundSize: '80px 80px',
+          }}
+        />
+      </div>
+
+      {/* Scan Line */}
+      <div 
+        className="absolute left-0 right-0 h-1 transition-all duration-100 pointer-events-none"
+        style={{
+          top: scanProgress + '%',
+          background: 'linear-gradient(to bottom, transparent, rgb(0, 255, 255), transparent)',
+          boxShadow: '0 0 40px rgb(0, 255, 255)',
+        }}
+      />
+
+      {/* Glitch Lines */}
+      {glitchLines.map((glitch) => (
+        <div
+          key={glitch.id}
+          className="absolute left-0 right-0 pointer-events-none"
+          style={{
+            top: glitch.y + '%',
+            height: glitch.height + 'px',
+            background: 'rgba(255, 0, 255, 0.8)',
+            boxShadow: '0 0 20px rgba(255, 0, 255, 0.8)',
+          }}
+        />
+      ))}
+
+      {/* Top HUD Bar */}
+      <div className="absolute top-0 left-0 right-0 z-20">
+        <div 
+          className="flex justify-between items-center px-8 py-4"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent)',
+            borderBottom: '2px solid rgb(0, 255, 255)',
+            boxShadow: '0 0 30px rgba(0, 255, 255, 0.5)',
+          }}
+        >
+          <div className="flex items-center gap-4">
+            <div 
+              className="w-3 h-3 rounded-full animate-pulse"
+              style={{
+                backgroundColor: 'rgb(0, 255, 0)',
+                boxShadow: '0 0 15px rgb(0, 255, 0)',
+              }}
+            />
+            <span className="text-sm font-mono tracking-wider" style={{ color: 'rgb(0, 255, 255)' }}>
+              SYSTEM ONLINE
+            </span>
+          </div>
+          <div className="flex gap-6">
+            <span className="text-xs font-mono" style={{ color: 'rgb(150, 150, 150)' }}>
+              USER: GHOST_001
+            </span>
+            <span className="text-xs font-mono" style={{ color: 'rgb(150, 150, 150)' }}>
+              SECTOR: NEO-TOKYO
+            </span>
+            <span className="text-xs font-mono" style={{ color: 'rgb(0, 255, 255)' }}>
+              23:47:16
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Container */}
+      <div className="relative z-10 max-w-7xl w-full mt-20">
+        
+        {/* Left Side Panel */}
+        <div className="absolute left-0 top-0 bottom-0 w-80 hidden lg:block">
+          <div 
+            className="h-full border-2 p-6"
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              borderColor: 'rgb(255, 0, 255)',
+              boxShadow: '0 0 30px rgba(255, 0, 255, 0.3)',
+            }}
+          >
+            <div className="flex items-center gap-2 mb-6 pb-3 border-b border-purple-500">
+              <div className="text-lg" style={{ color: 'rgb(255, 0, 255)' }}>▶</div>
+              <span className="text-sm font-mono font-bold tracking-wider" style={{ color: 'rgb(255, 0, 255)' }}>
+                TERMINAL
+              </span>
+            </div>
+            
+            <div className="space-y-2">
+              {terminals.map((text, i) => (
+                <div 
+                  key={i}
+                  className="text-xs font-mono"
+                  style={{ 
+                    color: 'rgb(0, 255, 0)',
+                    textShadow: '0 0 10px rgb(0, 255, 0)',
+                  }}
+                >
+                  {text}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 space-y-4">
+              <div>
+                <div className="text-xs font-mono mb-1" style={{ color: 'rgb(150, 150, 150)' }}>
+                  CPU USAGE
+                </div>
+                <div 
+                  className="h-2 relative overflow-hidden"
+                  style={{
+                    backgroundColor: 'rgba(0, 255, 255, 0.2)',
+                    border: '1px solid rgb(0, 255, 255)',
+                  }}
+                >
+                  <div 
+                    className="h-full transition-all duration-1000"
+                    style={{
+                      width: '67%',
+                      backgroundColor: 'rgb(0, 255, 255)',
+                      boxShadow: '0 0 15px rgb(0, 255, 255)',
+                    }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="text-xs font-mono mb-1" style={{ color: 'rgb(150, 150, 150)' }}>
+                  MEMORY
+                </div>
+                <div 
+                  className="h-2 relative overflow-hidden"
+                  style={{
+                    backgroundColor: 'rgba(255, 0, 255, 0.2)',
+                    border: '1px solid rgb(255, 0, 255)',
+                  }}
+                >
+                  <div 
+                    className="h-full transition-all duration-1000"
+                    style={{
+                      width: '84%',
+                      backgroundColor: 'rgb(255, 0, 255)',
+                      boxShadow: '0 0 15px rgb(255, 0, 255)',
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Center Content */}
+        <div className="lg:pl-96 lg:pr-96">
+          <div className="text-center">
+            
+            {/* Main Title */}
+            <div className="mb-12 relative">
+              <div 
+                className="absolute inset-0 blur-xl opacity-50"
+                style={{
+                  background: 'linear-gradient(90deg, rgb(0, 255, 255), rgb(255, 0, 255))',
+                }}
+              />
+              <h1 
+                className="text-8xl font-black tracking-tight relative"
+                style={{
+                  color: 'white',
+                  textShadow: electricArc 
+                    ? '0 0 30px rgb(0, 255, 255), 0 0 60px rgb(255, 0, 255), 0 0 90px rgb(0, 255, 255)' 
+                    : '0 0 20px rgb(0, 255, 255), 0 0 40px rgb(255, 0, 255)',
+                  transition: 'text-shadow 0.3s',
+                }}
+              >
+                CYBERPUNK
+              </h1>
+              
+              {/* Glitch overlay */}
+              {electricArc && (
+                <>
+                  <h1 
+                    className="absolute inset-0 text-8xl font-black tracking-tight"
+                    style={{
+                      color: 'rgb(0, 255, 255)',
+                      opacity: 0.7,
+                      transform: 'translateX(-5px)',
+                    }}
+                  >
+                    CYBERPUNK
+                  </h1>
+                  <h1 
+                    className="absolute inset-0 text-8xl font-black tracking-tight"
+                    style={{
+                      color: 'rgb(255, 0, 255)',
+                      opacity: 0.7,
+                      transform: 'translateX(5px)',
+                    }}
+                  >
+                    CYBERPUNK
+                  </h1>
+                </>
+              )}
+
+              <div className="flex items-center justify-center gap-4 mt-6">
+                <div 
+                  className="h-px w-32"
+                  style={{
+                    background: 'linear-gradient(to right, transparent, rgb(0, 255, 255))',
+                    boxShadow: '0 0 10px rgb(0, 255, 255)',
+                  }}
+                />
+                <span 
+                  className="text-2xl font-mono font-bold tracking-widest"
+                  style={{
+                    color: 'rgb(255, 0, 255)',
+                    textShadow: '0 0 20px rgb(255, 0, 255)',
+                  }}
+                >
+                  2077
+                </span>
+                <div 
+                  className="h-px w-32"
+                  style={{
+                    background: 'linear-gradient(to left, transparent, rgb(255, 0, 255))',
+                    boxShadow: '0 0 10px rgb(255, 0, 255)',
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Description */}
+            <p 
+              className="text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
+              style={{
+                color: 'rgb(150, 200, 200)',
+              }}
+            >
+              Dive into the neon-soaked streets where technology blurs the line between humanity and machine. The future is now.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex justify-center gap-6 mb-16">
+              <button 
+                className="px-12 py-4 font-bold uppercase tracking-wider relative overflow-hidden group transition-all duration-300"
+                style={{
+                  backgroundColor: 'rgba(0, 255, 255, 0.2)',
+                  border: '2px solid rgb(0, 255, 255)',
+                  color: 'rgb(0, 255, 255)',
+                  boxShadow: '0 0 30px rgba(0, 255, 255, 0.5)',
+                  clipPath: 'polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%)',
+                }}
+              >
+                <span className="relative z-10">JACK IN</span>
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300"
+                  style={{ backgroundColor: 'rgb(0, 255, 255)' }}
+                />
+              </button>
+              <button 
+                className="px-12 py-4 font-bold uppercase tracking-wider transition-all duration-300"
+                style={{
+                  backgroundColor: 'transparent',
+                  border: '2px solid rgb(255, 0, 255)',
+                  color: 'rgb(255, 0, 255)',
+                  boxShadow: '0 0 30px rgba(255, 0, 255, 0.5)',
+                  clipPath: 'polygon(0% 0%, 95% 0%, 100% 100%, 5% 100%)',
+                }}
+              >
+                EXPLORE
+              </button>
+            </div>
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {[
+                { icon: '⚡', value: '2077', label: 'TERAFLOPS', color1: 'rgb(0, 255, 255)', color2: 'rgba(0, 255, 255, 0.2)' },
+                { icon: '🔒', value: 'AES-1024', label: 'ENCRYPTED', color1: 'rgb(255, 0, 255)', color2: 'rgba(255, 0, 255, 0.2)' },
+                { icon: '🌐', value: 'GLOBAL', label: 'NETWORK', color1: 'rgb(0, 255, 255)', color2: 'rgba(0, 255, 255, 0.2)' },
+              ].map((stat, i) => (
+                <div 
+                  key={i}
+                  className="p-8 border-2 transition-all duration-300 hover:scale-105 relative overflow-hidden group"
+                  style={{
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    borderColor: stat.color1,
+                    boxShadow: '0 0 25px ' + stat.color2,
+                    clipPath: 'polygon(0% 10%, 10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%)',
+                  }}
+                >
+                  <div className="text-4xl mb-3">{stat.icon}</div>
+                  <div 
+                    className="text-3xl font-black mb-2"
+                    style={{
+                      color: stat.color1,
+                      textShadow: '0 0 20px ' + stat.color1,
+                    }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div 
+                    className="text-xs font-mono uppercase tracking-widest"
+                    style={{ color: 'rgb(150, 150, 150)' }}
+                  >
+                    {stat.label}
+                  </div>
+                  <div 
+                    className="absolute top-0 right-0 w-20 h-20 opacity-10"
+                    style={{
+                      background: 'radial-gradient(circle, ' + stat.color1 + ', transparent)',
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side Panel */}
+        <div className="absolute right-0 top-0 bottom-0 w-80 hidden lg:block">
+          <div 
+            className="h-full border-2 p-6"
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              borderColor: 'rgb(0, 255, 255)',
+              boxShadow: '0 0 30px rgba(0, 255, 255, 0.3)',
+            }}
+          >
+            <div className="flex items-center gap-2 mb-6 pb-3 border-b border-cyan-500">
+              <div className="text-lg" style={{ color: 'rgb(0, 255, 255)' }}>◉</div>
+              <span className="text-sm font-mono font-bold tracking-wider" style={{ color: 'rgb(0, 255, 255)' }}>
+                STATUS
+              </span>
+            </div>
+
+            <div className="space-y-6">
+              {[
+                { label: 'NEURAL LINK', status: 'CONNECTED', active: true },
+                { label: 'FIREWALL', status: 'ACTIVE', active: true },
+                { label: 'ENCRYPTION', status: 'ENABLED', active: true },
+                { label: 'VPN TUNNEL', status: 'SECURED', active: true },
+                { label: 'BACKUP', status: 'SYNCED', active: false },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div 
+                      className="w-2 h-2 rounded-full"
+                      style={{
+                        backgroundColor: item.active ? 'rgb(0, 255, 0)' : 'rgb(100, 100, 100)',
+                        boxShadow: item.active ? '0 0 10px rgb(0, 255, 0)' : 'none',
+                      }}
+                    />
+                    <span className="text-xs font-mono" style={{ color: 'rgb(150, 150, 150)' }}>
+                      {item.label}
+                    </span>
+                  </div>
+                  <span 
+                    className="text-xs font-mono font-bold"
+                    style={{ 
+                      color: item.active ? 'rgb(0, 255, 0)' : 'rgb(100, 100, 100)',
+                    }}
+                  >
+                    {item.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 pt-6 border-t border-cyan-500">
+              <div className="text-xs font-mono mb-3" style={{ color: 'rgb(150, 150, 150)' }}>
+                NETWORK ACTIVITY
+              </div>
+              <div className="flex gap-1">
+                {[...Array(20)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 transition-all duration-300"
+                    style={{
+                      height: (20 + Math.random() * 40) + 'px',
+                      backgroundColor: i % 2 === 0 ? 'rgb(0, 255, 255)' : 'rgb(255, 0, 255)',
+                      opacity: 0.6,
+                      boxShadow: '0 0 5px currentColor',
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom HUD Bar */}
+      <div className="absolute bottom-0 left-0 right-0 z-20">
+        <div 
+          className="flex justify-between items-center px-8 py-3"
+          style={{
+            background: 'linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent)',
+            borderTop: '2px solid rgb(255, 0, 255)',
+            boxShadow: '0 0 30px rgba(255, 0, 255, 0.5)',
+          }}
+        >
+          <div className="flex gap-8">
+            {['PROTOCOL', 'DAEMON', 'MATRIX'].map((item, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <div 
+                  className="w-2 h-2 rounded-full animate-pulse"
+                  style={{
+                    backgroundColor: 'rgb(0, 255, 0)',
+                    boxShadow: '0 0 10px rgb(0, 255, 0)',
+                  }}
+                />
+                <span className="text-xs font-mono" style={{ color: 'rgb(0, 255, 255)' }}>
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
+          <span className="text-xs font-mono" style={{ color: 'rgb(150, 150, 150)' }}>
+            © 2077 NEUROLINK CORP. ALL RIGHTS RESERVED.
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
   `
   },
   {

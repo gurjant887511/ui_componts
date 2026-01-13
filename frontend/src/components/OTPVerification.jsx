@@ -167,9 +167,8 @@ const TimerText = styled.p`
   font-weight: 600;
 `;
 
-const OTPVerification = ({ email, userId, onVerificationSuccess }) => {
+const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => {
   const [otp, setOTP] = useState(['', '', '', '', '', '']);
-  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -218,51 +217,64 @@ const OTPVerification = ({ email, userId, onVerificationSuccess }) => {
 
     const otpValue = otp.join('');
 
+    console.log('handleVerifyOTP called with:', { email, otpValue, passwordProvided: !!password });
+
     if (otpValue.length !== 6) {
       setError('Please enter all 6 digits of the OTP');
-      return;
-    }
-
-    if (!password) {
-      setError('Please enter a password');
-      return;
-    }
-
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters');
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/verify-otp', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      
+      // Normalize email
+      const normalizedEmail = email.toLowerCase().trim();
+      
+      console.log('Verifying OTP:', {
+        email: normalizedEmail,
+        otp: otpValue,
+        apiUrl: `${apiUrl}/auth/verify-otp`
+      });
+      
+      const response = await fetch(`${apiUrl}/auth/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email,
+          email: normalizedEmail,
           otp: otpValue,
-          password,
+          password: password || '', // Send password to backend for hashing after OTP verification
         }),
       });
 
       const data = await response.json();
+      
+      console.log('OTP response:', { status: response.status, data, passwordSent: !!password });
 
       if (response.ok) {
         setSuccess('Email verified successfully!');
-        localStorage.setItem('userToken', data.token);
-        localStorage.setItem('userName', data.user.name);
-        localStorage.setItem('userEmail', data.user.email);
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          console.log('[OTP] Token saved to localStorage');
+        }
+        if (data.user) {
+          localStorage.setItem('userInfo', JSON.stringify(data.user));
+          console.log('[OTP] User info saved to localStorage', data.user);
+        }
 
         setTimeout(() => {
           if (onVerificationSuccess) {
+            console.log('[OTP] Calling onVerificationSuccess callback');
             onVerificationSuccess(data.user);
           }
         }, 1500);
       } else {
-        setError(data.message || 'OTP verification failed');
+        const errorMsg = data.message || 'OTP verification failed';
+        console.error('[OTP] Verification failed:', errorMsg, 'Status:', response.status);
+        setError(errorMsg);
       }
     } catch (err) {
       console.error('OTP verification error:', err);
@@ -277,7 +289,9 @@ const OTPVerification = ({ email, userId, onVerificationSuccess }) => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/resend-otp', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      
+      const response = await fetch(`${apiUrl}/auth/resend-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -338,19 +352,8 @@ const OTPVerification = ({ email, userId, onVerificationSuccess }) => {
             </OTPInputContainer>
           </FormGroup>
 
-          <FormGroup>
-            <Label>Create a Password</Label>
-            <PasswordInput
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password (min 6 characters)"
-              disabled={loading}
-            />
-          </FormGroup>
-
           <Button type="submit" disabled={loading || timeLeft === 0}>
-            {loading ? 'Verifying...' : 'Verify & Create Account'}
+            {loading ? 'Verifying...' : 'Verify Email'}
           </Button>
         </form>
 

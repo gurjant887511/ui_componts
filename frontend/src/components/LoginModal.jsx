@@ -11,19 +11,45 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }) {
     setLoading(true);
     setError('');
 
+    console.log('[LOGIN] Attempting login with email:', email);
+
     try {
-      // API call here
-      console.log('Login attempt:', { email, password });
-      // Simulate API call
-      setTimeout(() => {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      
+      const response = await fetch(`${apiUrl}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error('[LOGIN ERROR] Login failed with status', response.status, 'Message:', data.message);
+        setError(data.message || 'Login failed. Please try again.');
         setLoading(false);
-        alert('Login successful!');
-        onLoginSuccess(email);
-        setEmail('');
-        setPassword('');
-      }, 1000);
+        return;
+      }
+
+      // Store token in localStorage
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userInfo', JSON.stringify(data.user));
+        localStorage.setItem('isLoggedIn', 'true');
+      }
+
+      console.log('[LOGIN SUCCESS] User logged in:', data.user);
+      setLoading(false);
+      alert('Login successful!');
+      onLoginSuccess(data.user.email);
+      setEmail('');
+      setPassword('');
+      onClose();
     } catch (err) {
-      setError('Login failed. Please try again.');
+      console.error('Login error:', err);
+      setError('Login failed. Please check your credentials and try again.');
       setLoading(false);
     }
   };

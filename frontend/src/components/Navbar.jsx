@@ -5,7 +5,7 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
 
   return (
     <nav className="bg-gray-900 text-white fixed w-full top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
@@ -38,30 +38,6 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
               Components
             </button>
 
-            {/* Components by Category */}
-            <button
-              onClick={() => setActiveTab('library')}
-              className={`px-4 py-2 rounded transition font-medium ${
-                activeTab === 'library'
-                  ? 'bg-purple-600 text-white'
-                  : 'text-white hover:text-purple-400'
-              }`}
-            >
-              Library
-            </button>
-
-            {/* WEB Button */}
-            <button
-              onClick={() => setActiveTab('web')}
-              className={`px-4 py-2 rounded transition font-medium ${
-                activeTab === 'web'
-                  ? 'bg-purple-600 text-white'
-                  : 'text-white hover:text-purple-400'
-              }`}
-            >
-              WEB
-            </button>
-
             {/* Full Web Button */}
             <button
               onClick={() => setActiveTab('fullweb')}
@@ -72,18 +48,6 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
               }`}
             >
               Full Web
-            </button>
-
-            {/* CustomizeWeb Button */}
-            <button
-              onClick={() => setActiveTab('customizeweb')}
-              className={`px-4 py-2 rounded transition font-medium ${
-                activeTab === 'customizeweb'
-                  ? 'bg-purple-600 text-white'
-                  : 'text-white hover:text-purple-400'
-              }`}
-            >
-              CustomizeWeb
             </button>
 
             {/* About Button */}
@@ -98,17 +62,7 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
               About
             </button>
 
-            {/* Test Button */}
-            <button
-              onClick={() => setActiveTab('test')}
-              className={`px-4 py-2 rounded transition font-medium text-xs ${
-                activeTab === 'test'
-                  ? 'bg-red-600 text-white'
-                  : 'text-white hover:text-red-400'
-              }`}
-            >
-              🧪 Test API
-            </button>
+
           </div>
 
           {/* Auth Buttons */}
@@ -126,8 +80,12 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
                 </div>
                 <button
                   onClick={onLogout}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium"
+                  className="px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-medium flex items-center gap-1.5"
+                  title="Logout"
                 >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
                   Logout
                 </button>
               </>

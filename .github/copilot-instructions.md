@@ -2,58 +2,66 @@
 
 Short, actionable guidance for AI coding agents working on this repo.
 
-- **Big picture:** This is a two-part app: an Express/MongoDB backend and a Vite + React frontend. The backend exposes REST APIs for components, import-components, and websites (see [backend/index.js](backend/index.js#L1-L240)). The frontend is a component showcase/editor that fetches from `VITE_API_URL` (see [frontend/src/App.jsx](frontend/src/App.jsx#L1-L40)).
+## Big picture
+Two-part full-stack app: Express/MongoDB backend + Vite/React frontend for building and showcasing UI components. The backend provides REST APIs for components, import-components, websites, and **user authentication** (signup/login with email OTP verification). The frontend fetches from `VITE_API_URL` and displays a component gallery with live preview.
 
-- **Where to look first:**
-  - Backend entry & routes: [backend/index.js](backend/index.js#L1-L240)
-  - DB models: [backend/models](backend/models)
-  - Seeding scripts: [backend/seed.js](backend/seed.js#L1-L120) and package.json scripts in [backend/package.json](backend/package.json#L1-L50)
-  - Frontend entry: [frontend/src/main.jsx](frontend/src/main.jsx#L1-L40)
-  - App and component registry: [frontend/src/App.jsx](frontend/src/App.jsx#L1-L120)
-  - Component examples / imports: [frontend/src/imports](frontend/src/imports)
+**Key architectural pattern:** Component code is stored as strings in the database and rendered via iframe or live editors (Sandpack, react-live) in the frontend. User data (auth tokens, OTP) managed in MongoDB UserModel.
 
-- **Critical commands / workflows:**
-  - Start backend (dev):
+## Where to look first
+- **Backend entry & routes:** [backend/index.js](backend/index.js) (~745 lines; includes auth endpoints, OTP logic, and CORS config)
+- **DB models:** [backend/models](backend/models) — UserModel.js (new; tracks email, OTP, isVerified), ComponentModel.js, WebsiteModel.js, ImportComponentModel.js
+- **Seeding scripts:** [backend/seed.js](backend/seed.js) and package.json tasks (seed:all, seed:websites, seed:imports)
+- **Frontend entry:** [frontend/src/App.jsx](frontend/src/App.jsx) (~1490 lines; main gallery, component registry, live preview)
+- **Auth components:** [frontend/src/components/LoginModal.jsx](frontend/src/components/LoginModal.jsx), SignupModal.jsx, OTPVerification.jsx
 
-    cd backend
-    npm install
-    npm run dev
+## Critical commands / workflows
+- **Start full stack (one command):** `npm run dev` from root (uses concurrently to run backend + frontend)
+  - Backend dev: `cd backend && npm run dev` (nodemon on port 5000)
+  - Frontend dev: `cd frontend && npm run dev` (Vite on port 5173)
+- **Seed database:** `npm run seed` from root or `cd backend && npm run seed`
+  - Additional targets: `seed:all`, `seed:websites`, `seed:imports`
+- **Environment setup:** Copy `.env` to backend folder with MONGO_URI, PORT, EMAIL_USER, EMAIL_PASSWORD
 
-    - Uses `nodemon` (see [backend/package.json](backend/package.json#L1-L40)).
-  - Seed database (examples present in `seed.js`):
+## Important environment variables
+- **Backend (.env in backend/):**
+  - `MONGO_URI` (default: mongodb://127.0.0.1:27017/ui_componts)
+  - `PORT` (default: 5000)
+  - `EMAIL_USER`, `EMAIL_PASSWORD` (Gmail SMTP for OTP emails)
+  - `JWT_SECRET` (for token generation; if missing, auth will fail silently)
+- **Frontend (.env.local in frontend/):**
+  - `VITE_API_URL` (default: http://localhost:5000/api when not set)
 
-    cd backend
-    npm run seed
+## Authentication & OTP flow (recently added)
+1. User signs up with email via SignupModal → calls `/api/auth/signup`
+2. Backend generates 6-digit OTP, sends via Gmail SMTP, stores in UserModel (otp, otpExpiry)
+3. Frontend shows OTPVerification modal for user to enter OTP
+4. User submits OTP → calls `/api/auth/verify-otp`; backend validates expiry & OTP value
+5. On success, isVerified = true, JWT token issued; user redirected to dashboard
+6. **Debug endpoints (dev only):** `/api/auth/debug-otp/:email`, `/api/auth/test-set-otp/:email/:otp`, `/api/auth/test-reset/:email` for testing OTP without email
 
-    - Additional seed targets: `seed:all`, `seed:websites`, `seed:imports`.
-  - Start frontend (dev):
+## Project-specific conventions & patterns
+- **ESM modules:** All files use `"type": "module"` (import/export, no require)
+- **Component code strings:** Stored in DB as JSX strings; rendered in iframe with Babel transpilation or live editors
+  - Example: `const code = "export default function Button() { return <button>Click</button>; }"`
+  - When adding components, export default from `frontend/src/imports/*.jsx`, then register in `App.jsx` COMPONENTS_LIST
+- **API routes:** All under `/api/*` — `/api/components`, `/api/websites`, `/api/import-components`, `/api/auth/*`
+- **Styling:** Tailwind classes in JSX + styled-components; follow existing patterns when adding new pages
+- **User model fields:** email (unique, lowercase), password (optional, for future), googleId (for OAuth), otp, otpExpiry, isVerified
 
-    cd frontend
-    npm install
-    npm run dev
+## Integration points to be careful about
+- **DB schema ↔ seed data:** UserModel expects email/otp/otpExpiry fields; if altering schema, update seed scripts accordingly
+- **Component code strings:** Must be valid JSX with React in scope; iframe preview uses Babel.transform to transpile
+- **OTP email delivery:** Requires valid Gmail app-specific password in `.env` EMAIL_PASSWORD; test endpoints exist for dev
+- **CORS:** Backend allows development ports (5173–5176, localhost:3000). In production, restrict to actual domain.
 
-    - Frontend uses Vite (see [frontend/package.json](frontend/package.json#L1-L40)).
+## Common quick tasks
+- **Add new component to gallery:** Create file in `frontend/src/imports/MyComponent.jsx` (export default), then add to COMPONENTS_LIST in `App.jsx` with id/name/component/code
+- **Debug OTP flow:** Check backend logs for "OTP sent" or email delivery errors; use `/api/auth/debug-otp/:email` to see stored OTP (dev only)
+- **Test auth locally:** Use test endpoints in backend/index.js (lines ~420–490) to manually set/reset OTP without email
+- **Fix API calls not reaching backend:** Confirm backend running on 5000, frontend VITE_API_URL matches, and CORS origin is whitelisted
 
-- **Important environment variables / defaults:**
-  - Backend expects `MONGO_URI` (fallback: `mongodb://127.0.0.1:27017/ui_componts`) and `PORT` (fallback 5000). See the connection logic in [backend/index.js](backend/index.js#L1-L40).
-  - Frontend reads `VITE_API_URL`; App falls back to `http://localhost:5000/api` when not set (see [frontend/src/App.jsx](frontend/src/App.jsx#L1-L40)). Use `VITE_API_URL` for integration testing.
-
-- **Project-specific conventions & patterns:**
-  - ESM modules throughout (`"type": "module"` in package.json). Use import/export rather than require.
-  - Component code is often stored as runnable strings (see the `components` array in [backend/seed.js](backend/seed.js#L1-L120) and `COMPONENTS_LIST` in [frontend/src/App.jsx](frontend/src/App.jsx#L40-L120)). When adding new demo components, add source in `frontend/src/imports` and register in `App.jsx` if you want it shown in the gallery.
-  - API surface is simple REST endpoints under `/api/*` (e.g., `/api/components`, `/api/import-components`, `/api/websites`), so tests and mocks can hit those routes directly.
-  - Styling uses Tailwind classes in JSX and `styled-components` in some places — follow existing file patterns when adding styles.
-
-- **Integration points to be careful about:**
-  - DB models (backend/models) ↔ seed scripts: seed data expects fields matching Mongoose schemas.
-  - Frontend live-edit preview features (Sandpack, react-live) expect component code strings; ensure code string format is valid React (JSX) and includes React in scope when used.
-
-- **Common quick tasks examples:**
-  - Add a new importable component: add file to `frontend/src/imports`, export default, then include it in `COMPONENTS_LIST` in `App.jsx` (id/name/component/code pattern).
-  - Debug API calls: confirm backend running on port 5000 and that `VITE_API_URL` matches `http://localhost:5000/api`.
-
-- **When to ask the human:**
-  - If a change requires DB migrations or altering seed data shapes, confirm whether to update existing seeded documents.
-  - For adding major features that change the API shape, get approval before modifying public endpoints.
-
-If anything here is unclear or you'd like more specific examples (tests, PR checklist, or codegen rules), tell me which area to expand. 
+## When to ask the human
+- Before altering UserModel schema or adding new auth fields (affects existing seeded data)
+- Before changing public API endpoints (other services may depend on them)
+- If adding major features that require new DB collections or significant DB migrations
+- When uncertain about email/OTP configuration or Gmail setup
