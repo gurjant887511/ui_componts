@@ -5090,269 +5090,7 @@ function PremiumHeader() {
       </div>
     </div>
   );
-}
-
-
-
-    
-  `
-  },
-  {
-    name: "UltimateCard",
-    category: "Cards",
-    code: `
-function UltimateCard() {
-  const [isHovered, setIsHovered] = React.useState(false);
-
-  // Icon SVG
-  const StarIcon = () => (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  );
-
-  const FireIcon = () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2c1.5 3 4 5 6 8-1 3-3 5-6 7-3-2-5-4-6-7 2-3 4.5-5 6-8z" />
-      <path d="M12 12c0 2-1 3-2 4 1 0 2 0 2-1 0 1 1 1 2 1-1-1-2-2-2-4z" opacity="0.7"/>
-    </svg>
-  );
-
-  return (
-    <div style={{
-      padding: '0',
-      display: 'block'
-    }}>
-      <div 
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{ 
-          padding: '2px', 
-          background: isHovered 
-            ? 'linear-gradient(135deg, #8b5cf6, #a78bfa, #c4b5fd)' 
-            : 'linear-gradient(135deg, #6d28d9, #7c3aed, #8b5cf6)',
-          borderRadius: '24px',
-          transition: 'all 0.4s ease',
-          transform: isHovered ? 'translateY(-12px) scale(1.03)' : 'translateY(0) scale(1)',
-          boxShadow: isHovered 
-            ? '0 25px 70px rgba(139, 92, 246, 0.5), 0 0 60px rgba(139, 92, 246, 0.3)' 
-            : '0 10px 40px rgba(139, 92, 246, 0.2)',
-          cursor: 'pointer',
-          maxWidth: '420px',
-          width: '100%'
-        }}
-      >
-        <div style={{ 
-          padding: '36px', 
-          background: 'linear-gradient(135deg, #0f172a, #1e1b4b)',
-          borderRadius: '22px',
-          position: 'relative',
-          overflow: 'hidden'
-        }}>
-          {/* Decorative glow */}
-          <div style={{
-            position: 'absolute',
-            top: '-50%',
-            right: '-50%',
-            width: '200px',
-            height: '200px',
-            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
-            borderRadius: '50%',
-            transition: 'all 0.4s',
-            opacity: isHovered ? 1 : 0.5
-          }}></div>
-
-          {/* Popular Badge */}
-          <div style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            padding: '6px 16px',
-            background: 'linear-gradient(135deg, #8b5cf6, #a78bfa)',
-            borderRadius: '20px',
-            fontSize: '0.75rem',
-            fontWeight: 'bold',
-            color: '#0f172a',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            boxShadow: '0 4px 12px rgba(139, 92, 246, 0.4)'
-          }}>
-            <FireIcon />
-            POPULAR
-          </div>
-
-          {/* Icon */}
-          <div style={{ 
-            width: '64px', 
-            height: '64px', 
-            background: 'linear-gradient(135deg, #8b5cf6, #a78bfa)', 
-            borderRadius: '16px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            marginBottom: '20px',
-            color: '#0f172a',
-            boxShadow: '0 8px 24px rgba(139, 92, 246, 0.4)',
-            transition: 'all 0.3s',
-            transform: isHovered ? 'rotate(-5deg) scale(1.1)' : 'rotate(0deg) scale(1)'
-          }}>
-            <StarIcon />
-          </div>
-
-          <h3 style={{ 
-            fontSize: '1.75rem', 
-            fontWeight: 'bold', 
-            background: 'linear-gradient(135deg, #8b5cf6, #c4b5fd)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            marginBottom: '12px',
-            letterSpacing: '0.5px'
-          }}>
-            Ultimate Plan
-          </h3>
-          
-          <p style={{ 
-            fontSize: '0.95rem', 
-            color: '#94a3b8',
-            marginBottom: '28px',
-            lineHeight: '1.6'
-          }}>
-            Unlock unlimited potential with our most powerful features and priority support
-          </p>
-          
-          {/* Price Box */}
-          <div style={{ 
-            marginBottom: '28px',
-            padding: '24px',
-            background: 'rgba(139, 92, 246, 0.08)',
-            borderRadius: '16px',
-            border: '1px solid rgba(139, 92, 246, 0.2)',
-            transition: 'all 0.3s',
-            boxShadow: isHovered ? '0 0 30px rgba(139, 92, 246, 0.1)' : 'none'
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'baseline',
-              marginBottom: '16px'
-            }}>
-              <span style={{
-                fontSize: '3rem',
-                fontWeight: 'bold',
-                color: '#8b5cf6',
-                lineHeight: '1'
-              }}>$49</span>
-              <span style={{
-                fontSize: '1rem',
-                color: '#64748b',
-                marginLeft: '8px'
-              }}>/month</span>
-            </div>
-
-            {/* Features List */}
-            <div style={{ marginTop: '20px' }}>
-              {['Unlimited Projects', 'Advanced Analytics', 'Priority Support', '100GB Storage'].map((feature, i) => (
-                <div key={i} style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '12px', 
-                  marginBottom: '10px' 
-                }}>
-                  <div style={{ 
-                    width: '6px',
-                    height: '6px',
-                    background: '#8b5cf6',
-                    borderRadius: '50%'
-                  }}></div>
-                  <span style={{ color: '#cbd5e1', fontSize: '0.9rem' }}>{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Button */}
-          <button 
-            style={{ 
-              padding: '14px 32px', 
-              background: isHovered 
-                ? 'linear-gradient(135deg, #8b5cf6, #a78bfa)' 
-                : 'linear-gradient(135deg, #7c3aed, #8b5cf6)',
-              color: '#ffffff', 
-              border: 'none', 
-              borderRadius: '12px', 
-              fontWeight: 'bold', 
-              cursor: 'pointer', 
-              transition: 'all 0.3s',
-              fontSize: '1rem',
-              boxShadow: '0 8px 20px rgba(139, 92, 246, 0.3)',
-              width: '100%',
-              letterSpacing: '0.5px'
-            }}
-          >
-            Start Free Trial
-          </button>
-
-          {/* Stats */}
-          <div style={{ 
-            marginTop: '28px', 
-            display: 'flex', 
-            justifyContent: 'space-around',
-            paddingTop: '24px',
-            borderTop: '1px solid rgba(139, 92, 246, 0.2)'
-          }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ 
-                fontSize: '1.5rem', 
-                fontWeight: 'bold', 
-                color: '#8b5cf6',
-                marginBottom: '4px'
-              }}>
-                10K+
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Active Users</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ 
-                fontSize: '1.5rem', 
-                fontWeight: 'bold', 
-                color: '#8b5cf6',
-                marginBottom: '4px'
-              }}>
-                4.9★
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Rating</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ 
-                fontSize: '1.5rem', 
-                fontWeight: 'bold', 
-                color: '#8b5cf6',
-                marginBottom: '4px'
-              }}>
-                100%
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Uptime</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-
-    
-  `
-  },
-  {
-    name: "Header",
-    category: "Cards",
-    code: `
-
-
-
-
-    
+} 
   `
   },
   {
@@ -14154,11 +13892,1758 @@ function NeonQuantumHeader() {
   `
   },
   {
+    name: "MegaStylishFooter",
+    category: "Footer",
+    code: `
+function MegaStylishFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredSocial, setHoveredSocial] = useState(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [focusedInput, setFocusedInput] = useState(null);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
+
+  return (
+    <div 
+      className="min-h-screen bg-black flex items-end relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(rgba(139, 92, 246, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.3) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+        }}></div>
+      </div>
+
+      {/* Dynamic Gradient Orbs */}
+      <div 
+        className="absolute w-96 h-96 rounded-full opacity-30 blur-3xl transition-all duration-1000"
+        style={{
+          backgroundColor: '#8b5cf6',
+          left: mousePosition.x - 192 + 'px',
+          top: mousePosition.y - 192 + 'px',
+        }}
+      ></div>
+      <div className="absolute top-1/4 left-1/3 w-80 h-80 rounded-full opacity-25 blur-3xl bg-cyan-500 animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-80 h-80 rounded-full opacity-25 blur-3xl bg-pink-500 animate-pulse"></div>
+
+      {/* Floating Particles */}
+      {[...Array(20)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-1 h-1 bg-purple-500 rounded-full opacity-40 animate-bounce"
+          style={{
+            left: (i * 5) + '%',
+            top: (i * 3.5) + '%',
+            animationDuration: (5 + i * 0.3) + 's',
+            animationDelay: (i * 0.2) + 's'
+          }}
+        ></div>
+      ))}
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Animated Top Border */}
+        <div className="relative h-0.5 mb-20 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500 to-transparent animate-pulse"></div>
+          <div className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-cyan-500 to-purple-500 animate-pulse"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-16">
+          
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
+            
+            {/* Left Section - Brand & CTA */}
+            <div className="lg:col-span-5">
+              
+              {/* Premium Logo */}
+              <div className="mb-12">
+                <div className="relative inline-block group">
+                  <div className="absolute inset-0 bg-purple-600 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative px-8 py-4 bg-black rounded-2xl border border-purple-500">
+                    <div className="flex items-center gap-4">
+                      <div className="relative w-14 h-14">
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 rounded-xl animate-spin" style={{ animationDuration: '3s' }}></div>
+                        <div className="absolute inset-1 bg-black rounded-lg flex items-center justify-center">
+                          <span className="text-2xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">Ξ</span>
+                        </div>
+                      </div>
+                      <div>
+                        <h2 className="text-4xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">NEXUS</h2>
+                        <p className="text-xs font-bold tracking-widest text-purple-400">CREATIVE STUDIO</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 leading-relaxed mt-8 text-lg">
+                  Crafting tomorrow's digital experiences today. We blend creativity with technology to create unforgettable brand moments.
+                </p>
+              </div>
+
+              {/* Premium Stats Grid */}
+              <div className="relative mb-10">
+                <div className="absolute inset-0 bg-purple-600 rounded-3xl blur-xl opacity-20"></div>
+                <div className="relative grid grid-cols-2 gap-4 p-6 bg-slate-950 backdrop-blur-sm border border-slate-800 rounded-3xl">
+                  {[
+                    { value: '2.5K+', label: 'Projects Shipped', icon: '🚀', color: 'purple' },
+                    { value: '98%', label: 'Client Satisfaction', icon: '⭐', color: 'pink' },
+                    { value: '150+', label: 'Global Clients', icon: '🌍', color: 'cyan' },
+                    { value: '24/7', label: 'Support Available', icon: '💬', color: 'green' },
+                  ].map((stat, i) => (
+                    <div 
+                      key={i}
+                      className="relative p-4 bg-slate-900 border border-slate-700 rounded-2xl hover:border-purple-500 transition-all duration-300 cursor-pointer group overflow-hidden"
+                    >
+                      <div className="relative">
+                        <div className="text-2xl mb-2">{stat.icon}</div>
+                        <div className="text-3xl font-black mb-1" style={{
+                          color: stat.color === 'purple' ? '#a855f7' :
+                                 stat.color === 'pink' ? '#ec4899' :
+                                 stat.color === 'cyan' ? '#06b6d4' : '#10b981'
+                        }}>
+                          {stat.value}
+                        </div>
+                        <div className="text-xs font-semibold text-gray-500">{stat.label}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Premium Social Links */}
+              <div>
+                <p className="text-sm font-bold text-gray-400 mb-4 tracking-wider">CONNECT WITH US</p>
+                <div className="flex flex-wrap gap-3">
+                  {[
+                    { name: 'Discord', icon: '💬', color: '#5865F2' },
+                    { name: 'Twitter', icon: '𝕏', color: '#1DA1F2' },
+                    { name: 'Instagram', icon: '📷', color: '#E4405F' },
+                    { name: 'Dribbble', icon: '🏀', color: '#EA4C89' },
+                    { name: 'GitHub', icon: '⚡', color: '#6e5494' },
+                  ].map((social) => (
+                    <a
+                      key={social.name}
+                      href="#"
+                      className="relative group"
+                      onMouseEnter={() => setHoveredSocial(social.name)}
+                      onMouseLeave={() => setHoveredSocial(null)}
+                    >
+                      <div className="absolute inset-0 rounded-xl blur-md opacity-0 group-hover:opacity-75 transition-opacity duration-300" style={{ backgroundColor: social.color }}></div>
+                      <div className="relative w-14 h-14 flex items-center justify-center border-2 rounded-xl font-bold text-lg transition-all duration-300"
+                        style={{
+                          backgroundColor: hoveredSocial === social.name ? social.color : 'transparent',
+                          borderColor: hoveredSocial === social.name ? social.color : '#334155',
+                          color: hoveredSocial === social.name ? '#ffffff' : '#64748b',
+                          transform: hoveredSocial === social.name ? 'translateY(-4px) scale(1.1)' : 'translateY(0) scale(1)',
+                        }}
+                      >
+                        {social.icon}
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Middle Section - Navigation */}
+            <div className="lg:col-span-4">
+              <div className="grid grid-cols-2 gap-8">
+                {[
+                  { 
+                    title: 'Solutions',
+                    links: ['Web Design', 'Mobile Apps', 'UI/UX Design', 'Brand Identity', 'Digital Marketing'] 
+                  },
+                  { 
+                    title: 'Company',
+                    links: ['About', 'Careers', 'Blog', 'Press Kit', 'Contact'] 
+                  },
+                ].map((section, idx) => (
+                  <div key={idx}>
+                    <h4 className="text-sm font-black text-white tracking-widest mb-6 flex items-center gap-2">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                      {section.title}
+                    </h4>
+                    <ul className="space-y-4">
+                      {section.links.map((link) => (
+                        <li key={link}>
+                          <a
+                            href="#"
+                            className="group text-sm font-medium transition-all duration-300 flex items-center gap-2"
+                            style={{
+                              color: hoveredLink === link ? '#a78bfa' : '#94a3b8'
+                            }}
+                            onMouseEnter={() => setHoveredLink(link)}
+                            onMouseLeave={() => setHoveredLink(null)}
+                          >
+                            <span className="inline-block transition-transform duration-300" style={{
+                              transform: hoveredLink === link ? 'translateX(4px)' : 'translateX(0)'
+                            }}>→</span>
+                            {link}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Section - Newsletter */}
+            <div className="lg:col-span-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-purple-600 rounded-3xl blur-2xl opacity-30"></div>
+                <div className="relative p-8 bg-gradient-to-br from-slate-900 to-slate-950 border-2 border-purple-500 rounded-3xl">
+                  
+                  {/* Glowing Badge */}
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mb-6 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-white opacity-20 animate-pulse"></div>
+                    <div className="relative w-2 h-2 bg-white rounded-full"></div>
+                    <span className="relative text-xs font-black text-white tracking-wider">HOT 🔥</span>
+                  </div>
+
+                  <h3 className="text-2xl font-black text-white mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Stay in the Loop
+                  </h3>
+                  
+                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">
+                    Join 50K+ creatives getting weekly insights and exclusive resources.
+                  </p>
+
+                  {/* Premium Input */}
+                  <div className="space-y-3 mb-4">
+                    <div className="relative">
+                      <input
+                        type="email"
+                        placeholder="Enter your email"
+                        className="w-full px-5 py-4 bg-black border-2 rounded-2xl text-white text-sm font-medium focus:outline-none transition-all duration-300 backdrop-blur-sm"
+                        style={{
+                          borderColor: focusedInput === 'email' ? '#a78bfa' : '#1e293b',
+                          boxShadow: focusedInput === 'email' ? '0 0 20px rgba(167, 139, 250, 0.3)' : 'none'
+                        }}
+                        onFocus={() => setFocusedInput('email')}
+                        onBlur={() => setFocusedInput(null)}
+                      />
+                    </div>
+                    <button className="relative w-full px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black rounded-2xl overflow-hidden group">
+                      <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <span className="relative flex items-center justify-center gap-2">
+                        SUBSCRIBE
+                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                      </span>
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-gray-600 flex items-center gap-1">
+                    <span>🔐</span> Privacy first. Unsubscribe anytime.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Section */}
+          <div className="border-t border-slate-800 pt-10">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              
+              <div className="flex flex-col sm:flex-row items-center gap-6 text-sm">
+                <p className="text-gray-500 font-medium">
+                  © 2025 Nexus Studio. Designed with 💜
+                </p>
+                <div className="flex gap-6">
+                  {['Privacy', 'Terms', 'Cookies', 'Licenses'].map((item) => (
+                    <a 
+                      key={item}
+                      href="#" 
+                      className="font-medium transition-all duration-300"
+                      style={{
+                        color: hoveredLink === item ? '#a78bfa' : '#64748b',
+                        transform: hoveredLink === item ? 'translateY(-2px)' : 'translateY(0)'
+                      }}
+                      onMouseEnter={() => setHoveredLink(item)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Live Status Badge */}
+              <div className="flex items-center gap-3 px-5 py-3 bg-green-500 bg-opacity-10 border border-green-500 rounded-full backdrop-blur-sm">
+                <div className="relative">
+                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                  <div className="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+                </div>
+                <span className="text-xs font-black text-green-400 tracking-wider">LIVE & OPERATIONAL</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* Animated Bottom Bar */}
+        <div className="relative h-2 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse"></div>
+        </div>
+
+      </footer>
+    </div>
+  );
+}    
+  `
+  },
+  {
+    name: "CosmicFooter",
+    category: "Footer",
+    code: `
+function CosmicFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredService, setHoveredService] = useState(null);
+  const [inputFocus, setInputFocus] = useState(false);
+  const [hoveredBadge, setHoveredBadge] = useState(null);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-black flex items-end relative overflow-hidden">
+      
+      {/* Starfield Effect */}
+      <div className="absolute inset-0">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute bg-white rounded-full animate-pulse"
+            style={{
+              width: (Math.random() * 3) + 'px',
+              height: (Math.random() * 3) + 'px',
+              left: (i * 2.1) + '%',
+              top: ((i * 7) % 100) + '%',
+              opacity: Math.random() * 0.7,
+              animationDuration: (2 + Math.random() * 3) + 's',
+              animationDelay: (Math.random() * 2) + 's'
+            }}
+          ></div>
+        ))}
+      </div>
+
+      {/* Gradient Orbs */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-600 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-600 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-cyan-600 rounded-full blur-3xl opacity-15 animate-pulse" style={{ animationDelay: '2s' }}></div>
+
+      {/* Mesh Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, #6366f1 1px, transparent 1px)',
+          backgroundSize: '30px 30px',
+        }}></div>
+      </div>
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Top Divider */}
+        <div className="relative mb-16">
+          <div className="flex items-center justify-center gap-4 px-8">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent"></div>
+            <div className="flex items-center gap-3">
+              <div className="w-3 h-3 bg-indigo-500 rounded-full animate-pulse"></div>
+              <div className="w-3 h-3 bg-pink-500 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+              <div className="w-3 h-3 bg-cyan-500 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+            </div>
+            <div className="h-px flex-1 bg-gradient-to-l from-transparent via-pink-500 to-transparent"></div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 pb-16">
+          
+          {/* Main Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-20">
+            
+            {/* Left - Brand Section */}
+            <div className="lg:col-span-1">
+              
+              {/* Logo */}
+              <div className="mb-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="relative">
+                    <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-2xl rotate-6 animate-pulse"></div>
+                    <div className="absolute inset-0 w-20 h-20 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-2xl blur-xl opacity-50"></div>
+                    <div className="absolute inset-0 w-20 h-20 bg-black rounded-2xl flex items-center justify-center" style={{ transform: 'rotate(-6deg)' }}>
+                      <span className="text-3xl font-black bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">∞</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h2 className="text-5xl font-black bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">INFINITY</h2>
+                    <p className="text-xs font-bold tracking-widest text-indigo-400">TECH SOLUTIONS</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 leading-relaxed text-base mb-8">
+                  Building the future of digital innovation. We transform ideas into reality with cutting-edge technology and creative excellence.
+                </p>
+
+                {/* Trust Badges */}
+                <div className="flex flex-wrap gap-3">
+                  {[
+                    { icon: '🏆', text: 'Award Winner', color: 'yellow' },
+                    { icon: '🔒', text: 'Secure', color: 'green' },
+                    { icon: '⚡', text: 'Fast Delivery', color: 'blue' },
+                  ].map((badge, i) => (
+                    <div 
+                      key={i}
+                      className="flex items-center gap-2 px-4 py-2 border rounded-full transition-all duration-300 cursor-pointer"
+                      style={{
+                        borderColor: hoveredBadge === i ? 
+                          (badge.color === 'yellow' ? '#facc15' : badge.color === 'green' ? '#22c55e' : '#3b82f6') : '#1e293b',
+                        backgroundColor: hoveredBadge === i ? 'rgba(255,255,255,0.05)' : 'transparent',
+                        transform: hoveredBadge === i ? 'translateY(-2px)' : 'translateY(0)'
+                      }}
+                      onMouseEnter={() => setHoveredBadge(i)}
+                      onMouseLeave={() => setHoveredBadge(null)}
+                    >
+                      <span className="text-sm">{badge.icon}</span>
+                      <span className="text-xs font-semibold text-gray-400">{badge.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Contact Info */}
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-3 text-gray-400 hover:text-indigo-400 transition-colors duration-300 cursor-pointer">
+                  <div className="w-10 h-10 bg-slate-900 border border-slate-700 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">📧</span>
+                  </div>
+                  <span className="text-sm font-medium">hello@infinity.com</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-400 hover:text-pink-400 transition-colors duration-300 cursor-pointer">
+                  <div className="w-10 h-10 bg-slate-900 border border-slate-700 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">📞</span>
+                  </div>
+                  <span className="text-sm font-medium">+1 (555) 123-4567</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors duration-300 cursor-pointer">
+                  <div className="w-10 h-10 bg-slate-900 border border-slate-700 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">📍</span>
+                  </div>
+                  <span className="text-sm font-medium">123 Tech Street, Silicon Valley</span>
+                </div>
+              </div>
+
+              {/* Social Media */}
+              <div>
+                <p className="text-xs font-bold text-gray-500 mb-4 tracking-widest">FOLLOW US</p>
+                <div className="flex gap-3">
+                  {[
+                    { name: 'FB', color: '#1877f2' },
+                    { name: 'TW', color: '#1da1f2' },
+                    { name: 'IG', color: '#e4405f' },
+                    { name: 'LI', color: '#0a66c2' },
+                    { name: 'YT', color: '#ff0000' },
+                  ].map((social) => (
+                    <a
+                      key={social.name}
+                      href="#"
+                      className="w-12 h-12 border-2 rounded-xl flex items-center justify-center font-black text-xs transition-all duration-300"
+                      style={{
+                        borderColor: hoveredLink === social.name ? social.color : '#1e293b',
+                        backgroundColor: hoveredLink === social.name ? social.color : 'transparent',
+                        color: hoveredLink === social.name ? '#ffffff' : '#64748b',
+                        transform: hoveredLink === social.name ? 'translateY(-4px) rotate(5deg)' : 'translateY(0) rotate(0deg)',
+                      }}
+                      onMouseEnter={() => setHoveredLink(social.name)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                      {social.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Middle - Services Grid */}
+            <div className="lg:col-span-1">
+              <h3 className="text-sm font-black text-white tracking-widest mb-8 flex items-center gap-2">
+                <span className="w-8 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500"></span>
+                OUR SERVICES
+              </h3>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { icon: '💻', name: 'Web Dev', color: 'indigo' },
+                  { icon: '📱', name: 'Mobile', color: 'purple' },
+                  { icon: '🎨', name: 'Design', color: 'pink' },
+                  { icon: '🚀', name: 'Marketing', color: 'cyan' },
+                  { icon: '☁️', name: 'Cloud', color: 'blue' },
+                  { icon: '🔐', name: 'Security', color: 'green' },
+                ].map((service, i) => (
+                  <div 
+                    key={i}
+                    className="relative p-5 bg-slate-900 border rounded-2xl transition-all duration-300 cursor-pointer group overflow-hidden"
+                    style={{
+                      borderColor: hoveredService === i ? 
+                        (service.color === 'indigo' ? '#6366f1' : 
+                         service.color === 'purple' ? '#a855f7' : 
+                         service.color === 'pink' ? '#ec4899' : 
+                         service.color === 'cyan' ? '#06b6d4' : 
+                         service.color === 'blue' ? '#3b82f6' : '#22c55e') : '#1e293b',
+                      transform: hoveredService === i ? 'translateY(-4px)' : 'translateY(0)'
+                    }}
+                    onMouseEnter={() => setHoveredService(i)}
+                    onMouseLeave={() => setHoveredService(null)}
+                  >
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{
+                      backgroundColor: service.color === 'indigo' ? '#6366f1' : 
+                                       service.color === 'purple' ? '#a855f7' : 
+                                       service.color === 'pink' ? '#ec4899' : 
+                                       service.color === 'cyan' ? '#06b6d4' : 
+                                       service.color === 'blue' ? '#3b82f6' : '#22c55e'
+                    }}></div>
+                    <div className="relative text-center">
+                      <div className="text-3xl mb-2">{service.icon}</div>
+                      <div className="text-sm font-bold text-white">{service.name}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Quick Links */}
+              <div className="mt-10">
+                <h4 className="text-sm font-black text-white tracking-widest mb-6">QUICK LINKS</h4>
+                <div className="grid grid-cols-2 gap-y-3 gap-x-6">
+                  {['About Us', 'Portfolio', 'Pricing', 'Blog', 'Careers', 'Support', 'Partners', 'FAQ'].map((link) => (
+                    <a
+                      key={link}
+                      href="#"
+                      className="text-sm font-medium transition-all duration-300 flex items-center gap-2"
+                      style={{
+                        color: hoveredLink === link ? '#a78bfa' : '#94a3b8',
+                        paddingLeft: hoveredLink === link ? '8px' : '0'
+                      }}
+                      onMouseEnter={() => setHoveredLink(link)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                      <span style={{ opacity: hoveredLink === link ? 1 : 0 }}>→</span>
+                      {link}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right - Newsletter */}
+            <div className="lg:col-span-1">
+              <div className="sticky top-8">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 to-pink-600 rounded-3xl blur-2xl opacity-30"></div>
+                  <div className="relative p-8 bg-slate-950 border-2 border-indigo-500 rounded-3xl">
+                    
+                    {/* Premium Badge */}
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full mb-6">
+                      <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
+                      <span className="text-xs font-black text-white tracking-wider">EXCLUSIVE ACCESS</span>
+                    </div>
+
+                    <h3 className="text-3xl font-black mb-3 bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
+                      Join Our Newsletter
+                    </h3>
+                    
+                    <p className="text-gray-400 mb-6 leading-relaxed text-sm">
+                      Get the latest updates, exclusive deals, and insider tips delivered to your inbox weekly.
+                    </p>
+
+                    {/* Form */}
+                    <div className="space-y-3 mb-6">
+                      <input
+                        type="text"
+                        placeholder="Your Name"
+                        className="w-full px-5 py-4 bg-slate-900 border-2 rounded-xl text-white text-sm font-medium focus:outline-none transition-all duration-300"
+                        style={{
+                          borderColor: inputFocus ? '#6366f1' : '#1e293b'
+                        }}
+                        onFocus={() => setInputFocus(true)}
+                        onBlur={() => setInputFocus(false)}
+                      />
+                      <input
+                        type="email"
+                        placeholder="your.email@example.com"
+                        className="w-full px-5 py-4 bg-slate-900 border-2 rounded-xl text-white text-sm font-medium focus:outline-none transition-all duration-300"
+                        style={{
+                          borderColor: inputFocus ? '#a855f7' : '#1e293b'
+                        }}
+                        onFocus={() => setInputFocus(true)}
+                        onBlur={() => setInputFocus(false)}
+                      />
+                      <button className="w-full px-6 py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-black rounded-xl hover:scale-105 transition-transform duration-300 relative overflow-hidden group">
+                        <span className="relative z-10">SUBSCRIBE NOW →</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </button>
+                    </div>
+
+                    <p className="text-xs text-gray-600 flex items-center gap-2">
+                      <span>🔒</span> 
+                      <span>No spam. Unsubscribe anytime.</span>
+                    </p>
+
+                    {/* Stats */}
+                    <div className="mt-8 pt-6 border-t border-slate-800">
+                      <div className="flex items-center justify-between">
+                        <div className="text-center">
+                          <div className="text-2xl font-black text-indigo-400">25K+</div>
+                          <div className="text-xs text-gray-500 font-semibold">Subscribers</div>
+                        </div>
+                        <div className="w-px h-12 bg-slate-800"></div>
+                        <div className="text-center">
+                          <div className="text-2xl font-black text-purple-400">500+</div>
+                          <div className="text-xs text-gray-500 font-semibold">Resources</div>
+                        </div>
+                        <div className="w-px h-12 bg-slate-800"></div>
+                        <div className="text-center">
+                          <div className="text-2xl font-black text-pink-400">4.9★</div>
+                          <div className="text-xs text-gray-500 font-semibold">Rating</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="pt-10 border-t border-slate-800">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              
+              <div className="flex flex-col sm:flex-row items-center gap-6 text-sm">
+                <p className="text-gray-500 font-medium">
+                  © 2025 Infinity Tech. Made with 💖 in Silicon Valley
+                </p>
+                <div className="flex gap-6">
+                  {['Privacy', 'Terms', 'Legal', 'Cookies'].map((item) => (
+                    <a 
+                      key={item}
+                      href="#" 
+                      className="font-medium transition-colors duration-300"
+                      style={{
+                        color: hoveredLink === item ? '#a78bfa' : '#64748b'
+                      }}
+                      onMouseEnter={() => setHoveredLink(item)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Status Badge */}
+              <div className="flex items-center gap-3 px-5 py-3 bg-emerald-500 bg-opacity-10 border-2 border-emerald-500 rounded-full">
+                <div className="relative">
+                  <div className="w-3 h-3 bg-emerald-400 rounded-full"></div>
+                  <div className="absolute inset-0 w-3 h-3 bg-emerald-400 rounded-full animate-ping"></div>
+                </div>
+                <span className="text-xs font-black text-emerald-400 tracking-widest">SYSTEM ACTIVE</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* Bottom Gradient */}
+        <div className="h-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"></div>
+
+      </footer>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "NeonCyberFooter",
+    category: "Footer",
+    code: `function NeonCyberFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const [activeInput, setActiveInput] = useState(null);
+  const [hoveredIcon, setHoveredIcon] = useState(null);
+
+  return (
+    <div className="min-h-screen bg-black flex items-end relative overflow-hidden">
+      
+      {/* Neon Grid Lines */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(#00ffff 1px, transparent 1px), linear-gradient(90deg, #00ffff 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}></div>
+      </div>
+
+      {/* Glowing Scanlines */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 animate-pulse" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #ff00ff 2px, #ff00ff 4px)',
+          backgroundSize: '100% 4px',
+        }}></div>
+      </div>
+
+      {/* Neon Orbs */}
+      <div className="absolute top-20 left-20 w-80 h-80 bg-cyan-500 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+      <div className="absolute bottom-20 right-20 w-80 h-80 bg-pink-500 rounded-full blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 left-1/2 w-60 h-60 bg-yellow-500 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+
+      {/* Floating Particles */}
+      {[...Array(30)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full animate-bounce"
+          style={{
+            width: (2 + Math.random() * 2) + 'px',
+            height: (2 + Math.random() * 2) + 'px',
+            backgroundColor: i % 3 === 0 ? '#00ffff' : i % 3 === 1 ? '#ff00ff' : '#ffff00',
+            left: (i * 3.3) + '%',
+            top: ((i * 5.5) % 100) + '%',
+            opacity: 0.4,
+            animationDuration: (3 + Math.random() * 4) + 's',
+            animationDelay: (Math.random() * 2) + 's'
+          }}
+        ></div>
+      ))}
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Neon Top Border */}
+        <div className="relative mb-16">
+          <div className="h-1 bg-gradient-to-r from-cyan-500 via-pink-500 to-yellow-500"></div>
+          <div className="h-1 bg-gradient-to-r from-cyan-500 via-pink-500 to-yellow-500 blur-md"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="flex items-center gap-4 px-6 py-3 bg-black border-2 border-cyan-500 rounded-full">
+              <div className="w-3 h-3 bg-cyan-500 rounded-full animate-ping"></div>
+              <span className="text-xs font-black text-cyan-500 tracking-widest">CYBER ZONE</span>
+              <div className="w-3 h-3 bg-pink-500 rounded-full animate-ping"></div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 pb-12">
+          
+          {/* Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+            
+            {/* Left Section - Brand */}
+            <div className="lg:col-span-4">
+              
+              {/* Cyber Logo */}
+              <div className="mb-10">
+                <div className="relative inline-block mb-8">
+                  <div className="absolute inset-0 bg-cyan-500 blur-xl opacity-50 animate-pulse"></div>
+                  <div className="relative flex items-center gap-4 p-4 bg-black border-4 border-cyan-500 rounded-2xl">
+                    <div className="relative w-16 h-16">
+                      <div className="absolute inset-0 border-4 border-pink-500 rounded-lg animate-spin" style={{ animationDuration: '3s' }}></div>
+                      <div className="absolute inset-2 border-4 border-yellow-500 rounded-lg animate-spin" style={{ animationDuration: '2s', animationDirection: 'reverse' }}></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-3xl font-black text-cyan-500">⚡</span>
+                      </div>
+                    </div>
+                    <div>
+                      <h2 className="text-4xl font-black text-white tracking-wider">VOLT</h2>
+                      <p className="text-xs font-bold tracking-widest text-pink-500">DIGITAL LABS</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 leading-relaxed mb-8 text-base">
+                  Pushing the boundaries of digital innovation. We create electrifying experiences that power the future of technology.
+                </p>
+              </div>
+
+              {/* Cyber Stats */}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {[
+                  { value: '10K+', label: 'Users Active', color: 'cyan' },
+                  { value: '99.9%', label: 'Uptime', color: 'pink' },
+                  { value: '5ms', label: 'Response', color: 'yellow' },
+                  { value: '24/7', label: 'Support', color: 'green' },
+                ].map((stat, i) => (
+                  <div 
+                    key={i}
+                    className="relative p-4 bg-black rounded-xl transition-all duration-300 cursor-pointer group"
+                    style={{
+                      borderWidth: '2px',
+                      borderStyle: 'solid',
+                      borderColor: hoveredCard === i ? 
+                        (stat.color === 'cyan' ? '#00ffff' : 
+                         stat.color === 'pink' ? '#ff00ff' : 
+                         stat.color === 'yellow' ? '#ffff00' : '#00ff00') : '#1e293b',
+                      transform: hoveredCard === i ? 'translateY(-4px)' : 'translateY(0)'
+                    }}
+                    onMouseEnter={() => setHoveredCard(i)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl" style={{
+                      backgroundColor: stat.color === 'cyan' ? '#00ffff' : 
+                                       stat.color === 'pink' ? '#ff00ff' : 
+                                       stat.color === 'yellow' ? '#ffff00' : '#00ff00'
+                    }}></div>
+                    <div className="relative">
+                      <div className="text-3xl font-black mb-1" style={{ 
+                        color: stat.color === 'cyan' ? '#00ffff' : 
+                               stat.color === 'pink' ? '#ff00ff' : 
+                               stat.color === 'yellow' ? '#ffff00' : '#00ff00'
+                      }}>
+                        {stat.value}
+                      </div>
+                      <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{stat.label}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Neon Social */}
+              <div>
+                <p className="text-xs font-black text-gray-500 mb-4 tracking-widest">CONNECT</p>
+                <div className="flex gap-3">
+                  {[
+                    { name: 'Discord', icon: '💬', color: '#5865f2' },
+                    { name: 'Twitter', icon: '🐦', color: '#1da1f2' },
+                    { name: 'GitHub', icon: '⚡', color: '#ffffff' },
+                    { name: 'Telegram', icon: '✈️', color: '#0088cc' },
+                  ].map((social) => (
+                    <a
+                      key={social.name}
+                      href="#"
+                      className="w-14 h-14 border-2 rounded-lg flex items-center justify-center font-black text-xl transition-all duration-300 relative overflow-hidden group"
+                      style={{
+                        borderColor: hoveredIcon === social.name ? social.color : '#1e293b',
+                        backgroundColor: hoveredIcon === social.name ? social.color : 'transparent',
+                        transform: hoveredIcon === social.name ? 'scale(1.1) rotate(-5deg)' : 'scale(1) rotate(0deg)',
+                      }}
+                      onMouseEnter={() => setHoveredIcon(social.name)}
+                      onMouseLeave={() => setHoveredIcon(null)}
+                    >
+                      <div className="absolute inset-0 animate-pulse opacity-20" style={{ backgroundColor: social.color }}></div>
+                      <span className="relative">{social.icon}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Middle Section - Navigation */}
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-8">
+                
+                {/* Products Column */}
+                <div>
+                  <h4 className="text-sm font-black text-cyan-500 mb-6 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-cyan-500 rounded-full animate-ping"></span>
+                    PRODUCTS
+                  </h4>
+                  <ul className="space-y-4">
+                    {['AI Platform', 'Cloud Services', 'Dev Tools', 'Analytics', 'Security'].map((link) => (
+                      <li key={link}>
+                        <a
+                          href="#"
+                          className="text-sm font-medium transition-all duration-300 flex items-center gap-2 group"
+                          style={{
+                            color: hoveredLink === link ? '#00ffff' : '#94a3b8'
+                          }}
+                          onMouseEnter={() => setHoveredLink(link)}
+                          onMouseLeave={() => setHoveredLink(null)}
+                        >
+                          <span className="text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">▸</span>
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Company Column */}
+                <div>
+                  <h4 className="text-sm font-black text-pink-500 mb-6 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-pink-500 rounded-full animate-ping"></span>
+                    COMPANY
+                  </h4>
+                  <ul className="space-y-4">
+                    {['About', 'Careers', 'Blog', 'Press', 'Contact'].map((link) => (
+                      <li key={link}>
+                        <a
+                          href="#"
+                          className="text-sm font-medium transition-all duration-300 flex items-center gap-2 group"
+                          style={{
+                            color: hoveredLink === link ? '#ff00ff' : '#94a3b8'
+                          }}
+                          onMouseEnter={() => setHoveredLink(link)}
+                          onMouseLeave={() => setHoveredLink(null)}
+                        >
+                          <span className="text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">▸</span>
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+              </div>
+
+              {/* Featured Links */}
+              <div className="mt-10 p-6 bg-black border-2 border-yellow-500 rounded-2xl relative overflow-hidden">
+                <div className="absolute inset-0 bg-yellow-500 opacity-5 animate-pulse"></div>
+                <div className="relative">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-2xl">🔥</span>
+                    <h4 className="text-sm font-black text-yellow-500">HOT DEALS</h4>
+                  </div>
+                  <div className="space-y-3">
+                    {['50% Off Premium Plans', 'Free Trial - 30 Days', 'Enterprise Discount'].map((deal) => (
+                      <a
+                        key={deal}
+                        href="#"
+                        className="block text-sm font-medium transition-all duration-300"
+                        style={{
+                          color: hoveredLink === deal ? '#ffff00' : '#94a3b8'
+                        }}
+                        onMouseEnter={() => setHoveredLink(deal)}
+                        onMouseLeave={() => setHoveredLink(null)}
+                      >
+                        → {deal}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Section - Newsletter */}
+            <div className="lg:col-span-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-cyan-500 blur-2xl opacity-20 animate-pulse"></div>
+                <div className="relative p-6 bg-black border-2 border-cyan-500 rounded-2xl">
+                  
+                  {/* Glowing Header */}
+                  <div className="mb-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500 bg-opacity-20 border border-cyan-500 rounded-full mb-4">
+                      <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
+                      <span className="text-xs font-black text-cyan-500 tracking-wider">EXCLUSIVE</span>
+                    </div>
+                    <h3 className="text-2xl font-black text-white mb-2">
+                      Join the Grid
+                    </h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Get access to exclusive updates and digital resources.
+                    </p>
+                  </div>
+
+                  {/* Cyber Form */}
+                  <div className="space-y-3 mb-6">
+                    <input
+                      type="email"
+                      placeholder="email@cyber.net"
+                      className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white text-sm font-medium focus:outline-none transition-all duration-300"
+                      style={{
+                        borderColor: activeInput === 'email' ? '#00ffff' : '#1e293b'
+                      }}
+                      onFocus={() => setActiveInput('email')}
+                      onBlur={() => setActiveInput(null)}
+                    />
+                    <button className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-pink-500 text-black font-black rounded-lg hover:scale-105 transition-all duration-300 relative overflow-hidden group">
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        CONNECT
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </button>
+                  </div>
+
+                  {/* Cyber Stats */}
+                  <div className="pt-6 border-t border-gray-800">
+                    <div className="grid grid-cols-3 gap-2 text-center">
+                      <div>
+                        <div className="text-lg font-black text-cyan-500">20K</div>
+                        <div className="text-xs text-gray-600 font-semibold">Users</div>
+                      </div>
+                      <div>
+                        <div className="text-lg font-black text-pink-500">500+</div>
+                        <div className="text-xs text-gray-600 font-semibold">Tools</div>
+                      </div>
+                      <div>
+                        <div className="text-lg font-black text-yellow-500">5.0★</div>
+                        <div className="text-xs text-gray-600 font-semibold">Rated</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t-2 border-gray-900">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              
+              <div className="flex flex-col sm:flex-row items-center gap-6 text-sm">
+                <p className="text-gray-500 font-medium">
+                  © 2025 VOLT Labs. Powered by ⚡ Energy
+                </p>
+                <div className="flex gap-6">
+                  {['Terms', 'Privacy', 'Security', 'API'].map((item) => (
+                    <a 
+                      key={item}
+                      href="#" 
+                      className="font-medium transition-all duration-300"
+                      style={{
+                        color: hoveredLink === item ? '#00ffff' : '#64748b'
+                      }}
+                      onMouseEnter={() => setHoveredLink(item)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Live Indicator */}
+              <div className="flex items-center gap-3 px-5 py-2 bg-black border-2 border-green-500 rounded-full">
+                <div className="relative">
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <div className="absolute inset-0 w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
+                </div>
+                <span className="text-xs font-black text-green-500 tracking-wider">SYSTEM ONLINE</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* Neon Bottom Strip */}
+        <div className="relative h-2 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-pink-500 to-yellow-500 animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-pink-500 to-yellow-500 blur-md"></div>
+        </div>
+
+      </footer>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "NeonCyberCard",
+    category: "Cards",
+    code: `
+function NeonCyberCard() {
+  const [isHovered, setIsHovered] = React.useState(false);
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#0a0e27', 
+      padding: '48px 16px', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      <div 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ 
+          position: 'relative',
+          padding: '2px',
+          background: isHovered 
+            ? 'linear-gradient(135deg, #00ffff, #ff00ff, #00ffff)' 
+            : 'linear-gradient(135deg, rgba(0, 255, 255, 0.5), rgba(255, 0, 255, 0.5))',
+          borderRadius: '20px',
+          maxWidth: '420px',
+          width: '100%',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+          boxShadow: isHovered 
+            ? '0 0 60px rgba(0, 255, 255, 0.4), 0 0 100px rgba(255, 0, 255, 0.3)' 
+            : '0 10px 40px rgba(0, 0, 0, 0.5)',
+        }}
+      >
+        <div style={{
+          background: 'linear-gradient(135deg, #1a1f3a 0%, #0f1420 100%)',
+          borderRadius: '18px',
+          padding: '36px',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          {/* Decorative corner elements */}
+          <div style={{
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            width: '60px',
+            height: '60px',
+            borderTop: '3px solid #00ffff',
+            borderLeft: '3px solid #00ffff',
+            borderRadius: '18px 0 0 0',
+            opacity: isHovered ? 1 : 0.5,
+            transition: 'opacity 0.4s'
+          }} />
+          <div style={{
+            position: 'absolute',
+            bottom: '0',
+            right: '0',
+            width: '60px',
+            height: '60px',
+            borderBottom: '3px solid #ff00ff',
+            borderRight: '3px solid #ff00ff',
+            borderRadius: '0 0 18px 0',
+            opacity: isHovered ? 1 : 0.5,
+            transition: 'opacity 0.4s'
+          }} />
+
+          <div style={{
+            display: 'inline-block',
+            padding: '6px 16px',
+            background: 'linear-gradient(90deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2))',
+            borderRadius: '20px',
+            border: '1px solid rgba(0, 255, 255, 0.3)',
+            marginBottom: '20px'
+          }}>
+            <span style={{ 
+              fontSize: '0.75rem', 
+              color: '#00ffff',
+              fontWeight: 'bold',
+              textTransform: 'uppercase',
+              letterSpacing: '1.5px'
+            }}>
+              Premium
+            </span>
+          </div>
+
+          <h3 style={{ 
+            fontSize: '2rem', 
+            fontWeight: '800', 
+            background: 'linear-gradient(135deg, #00ffff, #ff00ff)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            marginBottom: '12px',
+            letterSpacing: '1px'
+          }}>
+            Cyber Card
+          </h3>
+          
+          <p style={{ 
+            fontSize: '0.95rem', 
+            color: 'rgba(255, 255, 255, 0.6)',
+            marginBottom: '28px',
+            lineHeight: '1.6'
+          }}>
+            Experience the future with cutting-edge neon aesthetics
+          </p>
+
+          {/* Stats section */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gap: '16px',
+            marginBottom: '28px'
+          }}>
+            {[
+              { label: 'Speed', value: '99%' },
+              { label: 'Power', value: '95%' },
+              { label: 'Style', value: '100%' }
+            ].map((stat, i) => (
+              <div key={i} style={{
+                textAlign: 'center',
+                padding: '12px',
+                background: 'rgba(0, 255, 255, 0.05)',
+                borderRadius: '12px',
+                border: '1px solid rgba(0, 255, 255, 0.2)',
+                opacity: isHovered ? 1 : 0.7,
+                transition: 'all 0.3s'
+              }}>
+                <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#00ffff', marginBottom: '4px' }}>
+                  {stat.value}
+                </div>
+                <div style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.5)', textTransform: 'uppercase' }}>
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <button 
+            style={{ 
+              width: '100%',
+              padding: '16px', 
+              background: isHovered 
+                ? 'linear-gradient(135deg, #00ffff, #00cccc)' 
+                : 'linear-gradient(135deg, rgba(0, 255, 255, 0.8), rgba(0, 204, 204, 0.8))',
+              color: '#0a0e27', 
+              border: 'none', 
+              borderRadius: '12px', 
+              fontWeight: 'bold', 
+              cursor: 'pointer', 
+              transition: 'all 0.3s',
+              fontSize: '1rem',
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+              boxShadow: isHovered 
+                ? '0 0 30px rgba(0, 255, 255, 0.6)' 
+                : '0 4px 20px rgba(0, 255, 255, 0.3)',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+          >
+            Activate Now
+          </button>
+
+          {/* Bottom accent line */}
+          <div style={{
+            marginTop: '24px',
+            height: '2px',
+            background: 'linear-gradient(90deg, transparent, #00ffff, #ff00ff, transparent)',
+            opacity: isHovered ? 1 : 0.3,
+            transition: 'opacity 0.4s'
+          }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "UltimateCard",
+    category: "Cards",
+    code: `
+// import React, { useState } from 'react';
+// import { Sparkles, TrendingUp, Award, Zap, Star, Crown } from 'lucide-react';
+export default function UltimateCard() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [rating, setRating] = useState(4.8);
+  const [particles, setParticles] = useState([]);
+
+  const createParticle = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const newParticle = {
+      id: Date.now(),
+      x,
+      y
+    };
+    
+    setParticles(prev => [...prev, newParticle]);
+    setTimeout(() => {
+      setParticles(prev => prev.filter(p => p.id !== newParticle.id));
+    }, 1000);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8 flex items-center justify-center relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute w-96 h-96 bg-purple-500/20 rounded-full blur-3xl top-10 left-10 animate-pulse" />
+        <div className="absolute w-96 h-96 bg-blue-500/20 rounded-full blur-3xl bottom-10 right-10 animate-pulse delay-700" />
+        <div className="absolute w-64 h-64 bg-pink-500/20 rounded-full blur-3xl top-1/2 left-1/2 animate-pulse delay-1000" />
+      </div>
+
+      <div className="relative w-full max-w-md">
+        <div 
+          className="relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-purple-500/20 transition-all duration-500 hover:shadow-purple-500/50"
+          style={{
+            transform: isHovered ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={createParticle}
+        >
+          {/* Glowing Border Effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-0 hover:opacity-20 transition-opacity duration-500 blur-xl" />
+          
+          {/* Premium Badge */}
+          <div className="absolute top-6 left-6 z-10">
+            <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-2 rounded-full shadow-lg animate-pulse">
+              <Crown size={18} className="text-white" />
+              <span className="text-white font-bold text-sm">PREMIUM</span>
+            </div>
+          </div>
+
+          {/* Image Section with Overlay */}
+          <div className="relative overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&h=600&fit=crop"
+              alt="Gradient Abstract"
+              className="w-full h-72 object-cover transition-transform duration-700"
+              style={{
+                transform: isHovered ? 'scale(1.15) rotate(2deg)' : 'scale(1) rotate(0deg)',
+              }}
+            />
+            
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
+            
+            {/* Floating Icons */}
+            <div className="absolute top-4 right-4 flex gap-2">
+              <div className="bg-white/20 backdrop-blur-md p-2 rounded-full animate-bounce">
+                <Sparkles size={20} className="text-yellow-400" />
+              </div>
+            </div>
+
+            {/* Rating Badge */}
+            <div className="absolute bottom-4 right-4 bg-white/10 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/20">
+              <div className="flex items-center gap-2">
+                <Star size={20} className="text-yellow-400 fill-yellow-400" />
+                <span className="text-white font-bold text-lg">{rating}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Content Section */}
+          <div className="p-8 relative">
+            {/* Title with Gradient */}
+            <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+              Ultimate Experience
+            </h2>
+            
+            {/* Subtitle */}
+            <p className="text-gray-300 mb-6 leading-relaxed">
+              Discover the next level of premium design with stunning visuals and interactive elements that bring your content to life.
+            </p>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/10 backdrop-blur-sm rounded-xl p-4 border border-purple-500/20 text-center transform transition-transform hover:scale-105">
+                <TrendingUp size={24} className="text-purple-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-white">98%</div>
+                <div className="text-xs text-gray-400">Growth</div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-pink-500/20 to-pink-600/10 backdrop-blur-sm rounded-xl p-4 border border-pink-500/20 text-center transform transition-transform hover:scale-105">
+                <Award size={24} className="text-pink-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-white">Top</div>
+                <div className="text-xs text-gray-400">Rated</div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 backdrop-blur-sm rounded-xl p-4 border border-blue-500/20 text-center transform transition-transform hover:scale-105">
+                <Zap size={24} className="text-blue-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-white">Fast</div>
+                <div className="text-xs text-gray-400">Speed</div>
+              </div>
+            </div>
+
+            {/* Action Button */}
+            <button className="w-full relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-100 group-hover:opacity-0 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative px-8 py-4 flex items-center justify-center gap-3">
+                <span className="text-white font-bold text-lg">Get Started Now</span>
+                <Sparkles size={20} className="text-white animate-spin" style={{ animationDuration: '3s' }} />
+              </div>
+            </button>
+
+            {/* Particles */}
+            {particles.map(particle => (
+              <div
+                key={particle.id}
+                className="absolute w-2 h-2 bg-purple-400 rounded-full animate-ping pointer-events-none"
+                style={{
+                  left: particle.x,
+                  top: particle.y,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Bottom Shine Effect */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 animate-pulse" />
+        </div>
+
+        {/* Glow Effect Behind Card */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 blur-3xl opacity-0 transition-opacity duration-500 -z-10"
+          style={{ opacity: isHovered ? 0.3 : 0 }}
+        />
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+  {
+    name: "UltimateCard",
+    category: "Cards",
+    code: `function UltimateCard() {
+  const [isHovered, setIsHovered] = React.useState(false);
+  const [animatedFeatures, setAnimatedFeatures] = React.useState([]);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimatedFeatures([0, 1, 2, 3, 4, 5]);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const CrownIcon = () => (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+    </svg>
+  );
+
+  const LightningIcon = () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+    </svg>
+  );
+
+  const CheckIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  );
+
+  const features = [
+    'Unlimited Everything',
+    'AI-Powered Analytics',
+    'VIP 24/7 Support',
+    'Unlimited Storage',
+    'Advanced Security',
+    'Custom Integrations'
+  ];
+
+  const stats = [
+    { value: '50K+', label: 'Elite Members' },
+    { value: '5.0★', label: 'Perfect Score' },
+    { value: '99.9%', label: 'SLA Uptime' }
+  ];
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 p-4">
+      <div 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="relative max-w-md w-full p-1 rounded-3xl cursor-pointer transition-all duration-500 ease-out bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 shadow-[0_12px_45px_rgba(29,78,216,0.3)] hover:from-blue-500 hover:via-blue-400 hover:to-blue-600 hover:shadow-[0_30px_80px_rgba(59,130,246,0.6)] hover:-translate-y-4 hover:scale-105"
+      >
+        <div className="absolute -inset-1 rounded-3xl -z-10 blur-xl transition-opacity duration-500 opacity-0 hover:opacity-50 bg-gradient-to-r from-blue-400 to-blue-600" />
+
+        <div className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-blue-900 rounded-3xl p-6 overflow-hidden">
+          
+          <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br from-blue-500/20 to-transparent transition-all duration-500 opacity-60 scale-100 hover:scale-150 hover:opacity-100" />
+          <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-gradient-to-br from-blue-700/15 to-transparent opacity-40" />
+
+          <div className="absolute top-6 right-6 flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-slate-950 text-xs font-bold shadow-lg shadow-blue-500/50 animate-bounce">
+            <LightningIcon />
+            ELITE
+          </div>
+
+          <div className="relative w-16 h-16 mb-4 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-slate-950 transition-all duration-300 shadow-[0_8px_24px_rgba(59,130,246,0.4)] hover:shadow-[0_12px_32px_rgba(59,130,246,0.6),0_0_40px_rgba(59,130,246,0.3)] hover:-rotate-12 hover:scale-110">
+            <div className="absolute -inset-2 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 blur-xl -z-10 transition-opacity duration-300 opacity-0 hover:opacity-60" />
+            <CrownIcon />
+          </div>
+
+          <h3 className="text-3xl font-black mb-3 tracking-wide bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 bg-clip-text text-transparent transition-all duration-300">
+            PLATINUM ELITE
+          </h3>
+          
+          <p className="text-blue-200 text-sm mb-6 leading-relaxed font-medium">
+            Experience unparalleled excellence with premium features, VIP support, and exclusive benefits
+          </p>
+          
+          <div className="relative mb-6 p-5 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-500/10 to-blue-700/5 border-2 border-blue-500/30 transition-all duration-300 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)]">
+            {isHovered && (
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent animate-pulse" />
+            )}
+
+            <div className="flex items-baseline mb-4">
+              <span className="text-5xl font-black bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+                $99
+              </span>
+              <span className="text-base text-slate-400 ml-2 font-semibold">/month</span>
+            </div>
+
+            <div className="space-y-2 mt-4">
+              {features.map((feature, i) => {
+                const delay = i * 100;
+                return (
+                  <div 
+                    key={i} 
+                    className="flex items-center gap-4 transition-all duration-500"
+                    style={{
+                      opacity: animatedFeatures.includes(i) ? 1 : 0,
+                      transform: animatedFeatures.includes(i) ? 'translateX(0)' : 'translateX(-10px)',
+                      transitionDelay: delay + 'ms'
+                    }}
+                  >
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-slate-950">
+                      <CheckIcon />
+                    </div>
+                    <span className="text-slate-200 text-sm font-medium">{feature}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <button className="relative w-full py-3 px-8 rounded-xl font-black text-base tracking-wide uppercase text-slate-950 overflow-hidden transition-all duration-300 bg-gradient-to-r from-blue-600 to-blue-700 shadow-[0_8px_20px_rgba(29,78,216,0.4)] hover:from-blue-400 hover:via-blue-500 hover:to-blue-600 hover:shadow-[0_12px_28px_rgba(59,130,246,0.5),0_0_30px_rgba(59,130,246,0.3)]">
+            <span className="relative z-10">Claim Elite Access</span>
+            <div 
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-500"
+              style={{
+                transform: isHovered ? 'translateX(100%)' : 'translateX(-100%)'
+              }}
+            />
+          </button>
+
+          <div className="mt-6 pt-5 border-t-2 border-blue-500/20 flex justify-around gap-4">
+            {stats.map((stat, i) => (
+              <div 
+                key={i} 
+                className="text-center flex-1 transition-transform duration-300 hover:-translate-y-1"
+              >
+                <div className="text-2xl font-black mb-1 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-slate-400 font-semibold uppercase tracking-wide">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "ThreeCards",
+    category: "Cards",
+    code: `
+function ThreeCards() {
+  const [hoveredCard, setHoveredCard] = React.useState(null);
+
+  const StarIcon = () => (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  );
+
+  const CrownIcon = () => (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+    </svg>
+  );
+
+  const RocketIcon = () => (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2c3 0 7 2 9 6-1 2-2 4-4 5l-1 9h-8l-1-9c-2-1-3-3-4-5 2-4 6-6 9-6zm0 2c-2 0-4 1-5 3 1 1 2 2 3 3l2 1 2-1c1-1 2-2 3-3-1-2-3-3-5-3z"/>
+    </svg>
+  );
+
+  const CheckIcon = () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  );
+
+  const cards = [
+    {
+      id: 1,
+      title: 'BASIC',
+      price: '$29',
+      badge: 'STARTER',
+      description: 'Perfect for individuals getting started',
+      icon: StarIcon,
+      features: ['5 Projects', 'Basic Analytics', 'Email Support', '10GB Storage'],
+      bgGradient: 'linear-gradient(to bottom right, rgb(147, 51, 234), rgb(88, 28, 135))',
+      hoverBgGradient: 'linear-gradient(to bottom right, rgb(168, 85, 247), rgb(126, 34, 206))',
+      glowColor: 'rgba(168,85,247,0.4)',
+      iconBg: 'linear-gradient(to bottom right, rgb(192, 132, 252), rgb(147, 51, 234))',
+      badgeBg: 'linear-gradient(to right, rgb(192, 132, 252), rgb(147, 51, 234))',
+      textGradient: 'linear-gradient(to right, rgb(192, 132, 252), rgb(147, 51, 234))',
+      textColor: 'rgb(216, 180, 254)',
+      checkBg: 'linear-gradient(to bottom right, rgb(192, 132, 252), rgb(147, 51, 234))',
+      buttonBg: 'linear-gradient(to right, rgb(192, 132, 252), rgb(147, 51, 234))'
+    },
+    {
+      id: 2,
+      title: 'PRO',
+      price: '$79',
+      badge: 'POPULAR',
+      description: 'Best for growing teams and businesses',
+      icon: CrownIcon,
+      features: ['50 Projects', 'Advanced Analytics', 'Priority Support', '100GB Storage', 'Custom Domains', 'API Access'],
+      bgGradient: 'linear-gradient(to bottom right, rgb(37, 99, 235), rgb(29, 78, 216))',
+      hoverBgGradient: 'linear-gradient(to bottom right, rgb(59, 130, 246), rgb(37, 99, 235))',
+      glowColor: 'rgba(59,130,246,0.5)',
+      iconBg: 'linear-gradient(to bottom right, rgb(96, 165, 250), rgb(59, 130, 246))',
+      badgeBg: 'linear-gradient(to right, rgb(96, 165, 250), rgb(59, 130, 246))',
+      textGradient: 'linear-gradient(to right, rgb(96, 165, 250), rgb(59, 130, 246))',
+      textColor: 'rgb(147, 197, 253)',
+      checkBg: 'linear-gradient(to bottom right, rgb(96, 165, 250), rgb(59, 130, 246))',
+      buttonBg: 'linear-gradient(to right, rgb(96, 165, 250), rgb(59, 130, 246))',
+      popular: true
+    },
+    {
+      id: 3,
+      title: 'ENTERPRISE',
+      price: '$199',
+      badge: 'ULTIMATE',
+      description: 'For large organizations with custom needs',
+      icon: RocketIcon,
+      features: ['Unlimited Projects', 'AI Analytics', 'VIP Support', 'Unlimited Storage', 'White Label', 'Dedicated Manager'],
+      bgGradient: 'linear-gradient(to bottom right, rgb(5, 150, 105), rgb(4, 120, 87))',
+      hoverBgGradient: 'linear-gradient(to bottom right, rgb(16, 185, 129), rgb(5, 150, 105))',
+      glowColor: 'rgba(16,185,129,0.4)',
+      iconBg: 'linear-gradient(to bottom right, rgb(52, 211, 153), rgb(16, 185, 129))',
+      badgeBg: 'linear-gradient(to right, rgb(52, 211, 153), rgb(16, 185, 129))',
+      textGradient: 'linear-gradient(to right, rgb(52, 211, 153), rgb(16, 185, 129))',
+      textColor: 'rgb(167, 243, 208)',
+      checkBg: 'linear-gradient(to bottom right, rgb(52, 211, 153), rgb(16, 185, 129))',
+      buttonBg: 'linear-gradient(to right, rgb(52, 211, 153), rgb(16, 185, 129))'
+    }
+  ];
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8">
+      <div className="flex flex-row gap-6 max-w-6xl w-full">
+        {cards.map((card) => {
+          const isHovered = hoveredCard === card.id;
+          const Icon = card.icon;
+          
+          return (
+            <div
+              key={card.id}
+              onMouseEnter={() => setHoveredCard(card.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className="relative p-1 rounded-2xl cursor-pointer transition-all duration-500"
+              style={{
+                background: isHovered ? card.hoverBgGradient : card.bgGradient,
+                transform: isHovered ? 'translateY(-12px) scale(1.05)' : 'translateY(0) scale(1)',
+                boxShadow: isHovered 
+                  ? '0 25px 60px ' + card.glowColor + ', 0 0 40px ' + card.glowColor
+                  : '0 10px 30px rgba(0,0,0,0.3)'
+              }}
+            >
+              {card.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full text-xs font-black text-slate-950 shadow-lg z-10">
+                  BEST VALUE
+                </div>
+              )}
+
+              <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-xl p-6 overflow-hidden h-full flex flex-col">
+                
+                <div 
+                  className="absolute -top-16 -right-16 w-40 h-40 rounded-full opacity-20 transition-all duration-500"
+                  style={{
+                    background: 'radial-gradient(circle, ' + card.glowColor + ', transparent)',
+                    transform: isHovered ? 'scale(1.5)' : 'scale(1)'
+                  }}
+                />
+
+                <div 
+                  className="absolute top-4 right-4 px-3 py-1 rounded-full text-slate-950 text-xs font-bold"
+                  style={{ background: card.badgeBg }}
+                >
+                  {card.badge}
+                </div>
+
+                <div 
+                  className="w-14 h-14 mb-4 rounded-xl flex items-center justify-center text-slate-950 transition-all duration-300"
+                  style={{
+                    background: card.iconBg,
+                    transform: isHovered ? 'rotate(-10deg) scale(1.1)' : 'rotate(0) scale(1)',
+                    boxShadow: isHovered ? '0 8px 20px ' + card.glowColor : 'none'
+                  }}
+                >
+                  <Icon />
+                </div>
+
+                <h3 
+                  className="text-2xl font-black mb-2 bg-clip-text text-transparent"
+                  style={{ backgroundImage: card.textGradient }}
+                >
+                  {card.title}
+                </h3>
+
+                <p 
+                  className="text-xs mb-4 leading-relaxed"
+                  style={{ color: card.textColor }}
+                >
+                  {card.description}
+                </p>
+
+                <div className="mb-5">
+                  <span 
+                    className="text-4xl font-black bg-clip-text text-transparent"
+                    style={{ backgroundImage: card.textGradient }}
+                  >
+                    {card.price}
+                  </span>
+                  <span className="text-sm text-slate-500 ml-1">/month</span>
+                </div>
+
+                <div className="space-y-2 mb-5 flex-grow">
+                  {card.features.map((feature, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <div 
+                        className="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-slate-950"
+                        style={{ background: card.checkBg }}
+                      >
+                        <CheckIcon />
+                      </div>
+                      <span className="text-slate-300 text-xs font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <button 
+                  className="w-full py-3 rounded-lg font-bold text-sm uppercase text-slate-950 transition-all duration-300"
+                  style={{
+                    background: card.buttonBg,
+                    boxShadow: isHovered ? '0 8px 20px ' + card.glowColor : 'none'
+                  }}
+                >
+                  Get Started
+                </button>
+
+                {card.popular && (
+                  <div className="mt-4 text-center">
+                    <span className="text-xs text-yellow-400 font-semibold">⭐ Most Popular Choice</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+  `
+  },
+  {
     name: "Header",
     category: "Cards",
     code: `
 
-    
+
   `
   },
 

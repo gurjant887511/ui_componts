@@ -174,6 +174,8 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
   const [success, setSuccess] = useState('');
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes
   const [canResend, setCanResend] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -212,6 +214,7 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
 
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
+    console.log('✅ Form submitted - handleVerifyOTP triggered');
     setError('');
     setSuccess('');
 
@@ -224,20 +227,45 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
       return;
     }
 
+    // If user didn't provide a password previously (e.g. Google signup), allow them to set one now
+    if ((!password || password.trim() === '') && newPassword) {
+      if (newPassword.length < 6) {
+        setError('Password must be at least 6 characters long');
+        setLoading(false);
+        return;
+      }
+      if (newPassword !== confirmNewPassword) {
+        setError('Passwords do not match');
+        setLoading(false);
+        return;
+      }
+    }
+
     setLoading(true);
+    // Use explicit backend URL (IPv4) to avoid host resolution issues in some environments
+    const apiUrl = 'http://127.0.0.1:7000/api';
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-      
       // Normalize email
       const normalizedEmail = email.toLowerCase().trim();
       
       console.log('Verifying OTP:', {
         email: normalizedEmail,
         otp: otpValue,
-        apiUrl: `${apiUrl}/auth/verify-otp`
+        apiUrl: `${apiUrl}/auth/verify-otp`,
+        passwordProvided: !!password
       });
       
+      console.log('Sending OTP verification request:', {
+        email: normalizedEmail,
+        otp: otpValue,
+        passwordProvided: !!password,
+        url: `${apiUrl}/auth/verify-otp`
+      });
+      
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
       const response = await fetch(`${apiUrl}/auth/verify-otp`, {
         method: 'POST',
         headers: {
@@ -246,11 +274,29 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
         body: JSON.stringify({
           email: normalizedEmail,
           otp: otpValue,
-          password: password || '', // Send password to backend for hashing after OTP verification
+          password: password && password.trim() !== '' ? password : (newPassword || ''), // send newPassword if provided
         }),
+        signal: controller.signal
       });
 
-      const data = await response.json();
+      clearTimeout(timeoutId);
+
+      console.log('Fetch response received:', { 
+        status: response.status, 
+        statusText: response.statusText,
+        contentType: response.headers.get('content-type')
+      });
+
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonErr) {
+        console.error('Failed to parse response as JSON:', jsonErr);
+        console.error('Response text:', await response.text());
+        setError('Invalid response from server. Please try again.');
+        setLoading(false);
+        return;
+      }
       
       console.log('OTP response:', { status: response.status, data, passwordSent: !!password });
 
@@ -278,7 +324,21 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
       }
     } catch (err) {
       console.error('OTP verification error:', err);
-      setError('Error verifying OTP. Please try again.');
+      let errorMessage = `Error verifying OTP: ${err.message}`;
+      
+      if (err.name === 'AbortError') {
+        errorMessage = 'Request timeout - Backend not responding. Please check if server is running.';
+      } else if (err.message.includes('fetch')) {
+        errorMessage = 'Network error - Failed to connect to server. Please check backend is running on port 7000.';
+      }
+      
+      console.error('Error details:', {
+        message: err.message,
+        name: err.name,
+        stack: err.stack,
+        apiUrl: `${apiUrl}/auth/verify-otp`
+      });
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -289,7 +349,8 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
     setError('');
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      // Use explicit backend URL (IPv4) to avoid host resolution issues in some environments
+      const apiUrl = 'http://127.0.0.1:7000/api';
       
       const response = await fetch(`${apiUrl}/auth/resend-otp`, {
         method: 'POST',
@@ -298,6 +359,8 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
         },
         body: JSON.stringify({ email }),
       });
+
+      console.log('Resend OTP response:', { status: response.status, statusText: response.statusText });
 
       const data = await response.json();
 
@@ -311,7 +374,7 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
       }
     } catch (err) {
       console.error('Resend OTP error:', err);
-      setError('Error resending OTP. Please try again.');
+      setError(`Error resending OTP: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -352,7 +415,29 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
             </OTPInputContainer>
           </FormGroup>
 
-          <Button type="submit" disabled={loading || timeLeft === 0}>
+          {/* If user didn't provide a password at signup (e.g. Google), allow them to set one now */}
+          {(!password || password.trim() === '') && (
+            <FormGroup>
+              <Label>Set a Password</Label>
+              <PasswordInput
+                type="password"
+                placeholder="Enter a new password (min 6 chars)"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                disabled={loading}
+              />
+              <div style={{ height: 8 }} />
+              <PasswordInput
+                type="password"
+                placeholder="Confirm new password"
+                value={confirmNewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                disabled={loading}
+              />
+            </FormGroup>
+          )}
+
+          <Button type="submit" disabled={loading}>
             {loading ? 'Verifying...' : 'Verify Email'}
           </Button>
         </form>

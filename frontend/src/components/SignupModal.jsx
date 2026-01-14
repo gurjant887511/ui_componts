@@ -24,7 +24,7 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
       setError('');
       
       // Send token to backend for verification
-      const response = await fetch('http://localhost:5000/api/auth/google-signup', {
+      const response = await fetch('http://localhost:7000/api/auth/google-signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,16 +43,27 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
           localStorage.setItem('userInfo', JSON.stringify(data.user));
           localStorage.setItem('isLoggedIn', 'true');
         }
-        
-        // Direct login - no OTP or password needed for Google signup
-        setFormData({
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-        });
-        onSignupSuccess(data.name || data.user?.name, data.email || data.user?.email);
-        onClose();
+
+        // If backend returned a token, user is logged in.
+        if (data.token) {
+          setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+          onSignupSuccess(data.name || data.user?.name, data.email || data.user?.email);
+          onClose();
+        } else if (data.message && data.message.toLowerCase().includes('otp')) {
+          // Backend sent an OTP (new or unverified Google signup) - show OTP modal
+          setPendingUser({
+            email: data.email || data.email,
+            name: data.name || data.name,
+            userId: data.userId,
+            password: ''
+          });
+          setShowOTPVerification(true);
+        } else {
+          // Fallback
+          setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+          onSignupSuccess(data.name || data.user?.name, data.email || data.user?.email);
+          onClose();
+        }
       } else {
         setError(data.message || 'Google signup failed');
       }
@@ -94,7 +105,7 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
 
     try {
       // Send signup request to backend
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
+      const response = await fetch('http://localhost:7000/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

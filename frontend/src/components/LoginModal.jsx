@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import OTPVerification from './OTPVerification';
 
 function LoginModal({ isOpen, onClose, onLoginSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showOTPVerification, setShowOTPVerification] = useState(false);
+  const [pendingUser, setPendingUser] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,8 +17,13 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }) {
     console.log('[LOGIN] Attempting login with email:', email);
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-      
+      // Prefer VITE_API_URL, but fall back to explicit IPv4 to avoid localhost resolution issues
+      let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:7000/api';
+      if (!apiUrl.includes('127.0.0.1')) {
+        // If VITE_API_URL uses localhost, prefer IPv4 to avoid IPv6/hostname resolution problems
+        apiUrl = apiUrl.replace('localhost', '127.0.0.1');
+      }
+
       const response = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: {
@@ -24,11 +32,19 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }) {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
+      let data = null;
+      try {
+        data = await response.json();
+      } catch (parseErr) {
+        console.error('[LOGIN] Failed to parse JSON response', parseErr);
+        setError('Server returned an unexpected response. Please try again.');
+        setLoading(false);
+        return;
+      }
 
       if (!response.ok) {
-        console.error('[LOGIN ERROR] Login failed with status', response.status, 'Message:', data.message);
-        setError(data.message || 'Login failed. Please try again.');
+        console.error('[LOGIN ERROR] Login failed with status', response.status, 'Message:', data?.message);
+        setError(data?.message || 'Login failed. Please try again.');
         setLoading(false);
         return;
       }
@@ -53,6 +69,8 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }) {
       setLoading(false);
     }
   };
+
+
 
   if (!isOpen) return null;
 
@@ -130,6 +148,8 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }) {
             {loading ? 'Logging in...' : 'Login'}
           </button>
 
+
+
           {/* Signup Link */}
           <p className="text-center text-sm text-gray-600">
             Don't have an account?{' '}
@@ -144,3 +164,4 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }) {
 }
 
 export default LoginModal;
+

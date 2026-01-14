@@ -52,11 +52,12 @@ export default function ComponentsByCategory() {
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filterMode, setFilterMode] = useState('all'); // 'all', 'cards', 'headers', 'footers'
+  const [fullScreenPreview, setFullScreenPreview] = useState(false);
 
   useEffect(() => {
     const fetchComponents = async () => {
       try {
-        const response = await fetch('http://localhost:5002/api/components');
+        const response = await fetch('http://localhost:7000/api/components');
         const data = await response.json();
 
         // Group components by category - keep original categories from DB
@@ -265,10 +266,69 @@ export default function ComponentsByCategory() {
                   
                   {/* Live Preview */}
                   <div>
-                    <div className="text-sm text-gray-400 font-semibold mb-4">Live Preview</div>
+                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem'}}>
+                      <div style={{fontSize: '0.875rem', color: '#9ca3af', fontWeight: '600'}}>Live Preview</div>
+                      <button
+                        onClick={() => setFullScreenPreview(true)}
+                        style={{
+                          padding: '0.75rem 1rem',
+                          backgroundColor: '#9333ea',
+                          color: 'white',
+                          fontSize: '0.875rem',
+                          fontWeight: '600',
+                          borderRadius: '0.5rem',
+                          border: 'none',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseOver={(e) => e.target.style.backgroundColor = '#7e22ce'}
+                        onMouseOut={(e) => e.target.style.backgroundColor = '#9333ea'}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                        </svg>
+                        Full Preview
+                      </button>
+                    </div>
                     <div className="bg-slate-950 rounded-lg overflow-hidden border border-gray-700 min-h-[400px]">
                       <ComponentLivePreview code={selectedComponent.code} />
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Full Screen Preview Modal */}
+        {fullScreenPreview && selectedComponent && (
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm">
+            <div className="w-full h-full flex flex-col">
+              {/* Header with close button */}
+              <div className="bg-gray-900/95 border-b border-gray-700 p-6 flex items-center justify-between">
+                <div className="flex-grow">
+                  <h2 className="text-2xl font-bold text-white">{selectedComponent.name}</h2>
+                  <p className="text-gray-400 text-sm mt-1">{selectedComponent.category} - Full Preview</p>
+                </div>
+                <button
+                  onClick={() => setFullScreenPreview(false)}
+                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                  title="Close full preview"
+                >
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Full Screen Preview Area */}
+              <div className="flex-grow overflow-auto bg-slate-950">
+                <div className="w-full h-full p-8">
+                  <div className="bg-slate-950 rounded-lg overflow-hidden border border-gray-700 h-full min-h-screen">
+                    <ComponentLivePreview code={selectedComponent.code} />
                   </div>
                 </div>
               </div>

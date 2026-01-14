@@ -10,6 +10,7 @@ import { Component } from './models/ComponentModel.js';
 import { Website } from './models/WebsiteModel.js';
 import { ImportComponent } from './models/ImportComponentModel.js';
 import { User } from './models/UserModel.js';
+import { PendingSignup } from './models/PendingSignupModel.js';
 
 dotenv.config();
 
@@ -47,6 +48,23 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// OPTIONS handler for CORS preflight (MUST be before routes)
+app.options('*', cors());
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', message: 'Backend is running', port: process.env.PORT || 7000 });
+});
+
+// Request logging middleware
+app.use((req, res, next) => {
+  if (req.path.includes('/api/')) {
+    console.log(`\n📨 [${new Date().toLocaleTimeString()}] ${req.method} ${req.path}`);
+    console.log(`   Headers:`, { origin: req.get('origin'), contentType: req.get('content-type') });
+  }
+  next();
+});
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ui_componts';
 
@@ -356,57 +374,36 @@ app.post('/api/auth/google-signup', async (req, res) => {
       return res.status(400).json({ message: 'Email and name are required from Google' });
     }
 
-    // Check if user already exists
-    let user = await User.findOne({ email });
-
-    if (user && user.isVerified) {
-      // User already verified, auto-login
-      const userToken = jwt.sign({ email, userId: user._id }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
-      return res.json({
-        success: true,
-        token: userToken,
-        user: { name: user.name, email: user.email, isVerified: user.isVerified },
-        message: 'Welcome back!'
-      });
-    }
-
-    // New user or unverified - generate OTP
+    // Prefer PendingSignup flow for Google signups: create/update a pending signup
+    // This keeps behavior consistent with email signups (passwords saved only after OTP)
     const otp = String(generateOTP()).trim();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
-    if (user) {
-      // Update existing unverified user
-      user.otp = otp;
-      user.otpExpiry = otpExpiry;
-      user.googleId = token;
-      await user.save();
+    // If a verified user exists, auto-login
+    let existingUser = await User.findOne({ email });
+    if (existingUser && existingUser.isVerified) {
+      const userToken = jwt.sign({ email, userId: existingUser._id }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
+      return res.json({ success: true, token: userToken, user: { name: existingUser.name, email: existingUser.email, isVerified: existingUser.isVerified }, message: 'Welcome back!' });
+    }
+
+    // Update or create a PendingSignup
+    let pending = await PendingSignup.findOne({ email });
+    if (pending) {
+      pending.name = name;
+      pending.googleId = token;
+      pending.otp = otp;
+      pending.otpExpiry = otpExpiry;
+      await pending.save();
     } else {
-      // Create new user
-      user = new User({
-        name,
-        email,
-        googleId: token,
-        otp,
-        otpExpiry,
-        isVerified: false
-      });
-      await user.save();
+      // Create pending signup without a passwordHash (user may set during verify)
+      pending = new PendingSignup({ name, email, googleId: token, otp, otpExpiry });
+      await pending.save();
     }
 
-    // Send OTP to email
     const emailSent = await sendOTPEmail(email, otp);
+    if (!emailSent) return res.status(500).json({ message: 'Failed to send OTP email' });
 
-    if (!emailSent) {
-      return res.status(500).json({ message: 'Failed to send OTP email' });
-    }
-
-    res.json({
-      success: true,
-      message: 'OTP sent to your email',
-      email,
-      name,
-      userId: user._id
-    });
+    res.json({ success: true, message: 'OTP sent to your email', email, name, pendingId: pending._id });
   } catch (error) {
     console.error('Google signup error:', error);
     res.status(500).json({ 
@@ -492,119 +489,99 @@ app.post('/api/auth/test-set-otp/:email/:otp', async (req, res) => {
 
 // Verify OTP endpoint
 app.post('/api/auth/verify-otp', async (req, res) => {
+  console.log('\n✅ [VERIFY-OTP] POST request received!');
+  console.log('   Body:', req.body);
+  
   try {
     const { email, otp, password } = req.body;
 
-    console.log(`\n[VERIFY-OTP] Received request with email: ${email}, otp: ${otp}, password: ${password ? '✓ PRESENT' : '✗ MISSING'}`);
+    console.log(`\n[VERIFY-OTP] Received request with email: ${email}, otp: ${otp}, passwordProvided: ${password ? `✓ (length: ${password.length})` : '✗'}`);
 
     if (!email || !otp) {
-      console.log('[VERIFY-OTP] Email or OTP missing');
       return res.status(400).json({ message: 'Email and OTP are required' });
     }
 
-    // Normalize email
     const normalizedEmail = email.toLowerCase().trim();
-    console.log(`[VERIFY-OTP] Normalized email: ${normalizedEmail}`);
 
-    // Find user by email
-    const user = await User.findOne({ email: normalizedEmail });
+    // First check pending signup
+    let pending = await PendingSignup.findOne({ email: normalizedEmail });
+    if (!pending) {
+      // Fallback: if no pending signup, check existing user and existing OTP flow
+      const user = await User.findOne({ email: normalizedEmail });
+      if (!user) {
+        return res.status(404).json({ message: 'No pending signup or user found for this email' });
+      }
 
-    if (!user) {
-      console.log(`[VERIFY-OTP] User not found for email: ${normalizedEmail}`);
-      return res.status(404).json({ message: 'User not found' });
+      // existing user flow (legacy) - compare otp stored on user
+      const dbOTP = String(user.otp || '').trim();
+      const providedOTP = String(otp).trim();
+      if (!dbOTP || dbOTP !== providedOTP) {
+        return res.status(400).json({ message: 'Invalid OTP' });
+      }
+      if (new Date() > user.otpExpiry) return res.status(400).json({ message: 'OTP has expired' });
+
+      // Save password if provided
+      if (password && password.trim() !== '') {
+        user.password = await bcrypt.hash(password, 10);
+      }
+      user.isVerified = true;
+      user.otp = null;
+      user.otpExpiry = null;
+      await user.save();
+
+      const token = jwt.sign({ email: normalizedEmail, userId: user._id }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
+      return res.json({ success: true, token, user: { name: user.name, email: user.email, isVerified: user.isVerified }, message: 'Email verified successfully' });
     }
 
-    console.log(`[VERIFY-OTP] User found: ${user.email}`);
-    console.log(`[VERIFY-OTP] User OTP in DB: "${user.otp}"`);
-    console.log(`[VERIFY-OTP] OTP provided: "${otp}"`);
-    console.log(`[VERIFY-OTP] OTP match: ${user.otp === otp}`);
-    console.log(`[VERIFY-OTP] OTP Expiry: ${user.otpExpiry}`);
-    console.log(`[VERIFY-OTP] Current Time: ${new Date()}`);
-    console.log(`[VERIFY-OTP] Is expired: ${new Date() > user.otpExpiry}`);
-
-    // Check if OTP is valid and not expired
-    if (!user.otp) {
-      console.log('[VERIFY-OTP] No OTP found in database');
-      return res.status(400).json({ message: 'No OTP found - please request a new one' });
-    }
-
-    // Compare OTP with strict type checking and trimming
-    const dbOTP = String(user.otp).trim();
+    // Validate OTP for pending signup
+    const dbOTP = String(pending.otp || '').trim();
     const providedOTP = String(otp).trim();
+    console.log(`[VERIFY-OTP] OTP Validation - DB: ${dbOTP}, Provided: ${providedOTP}, Match: ${dbOTP === providedOTP}`);
     
-    console.log(`[VERIFY-OTP] DB OTP Type: ${typeof user.otp}, Value: "${dbOTP}"`);
-    console.log(`[VERIFY-OTP] Provided OTP Type: ${typeof otp}, Value: "${providedOTP}"`);
-    console.log(`[VERIFY-OTP] String comparison result: ${dbOTP === providedOTP}`);
-    console.log(`[VERIFY-OTP] Character codes DB: ${dbOTP.split('').map(c => c.charCodeAt(0)).join(',')}`);
-    console.log(`[VERIFY-OTP] Character codes Provided: ${providedOTP.split('').map(c => c.charCodeAt(0)).join(',')}`);
-    
-    if (dbOTP !== providedOTP) {
-      console.log(`[VERIFY-OTP] ❌ OTP MISMATCH`);
-      console.log(`[VERIFY-OTP] Database: "${dbOTP}" (length: ${dbOTP.length})`);
-      console.log(`[VERIFY-OTP] Provided: "${providedOTP}" (length: ${providedOTP.length})`);
-      console.error(`[VERIFY-OTP] DETAILED DEBUG:`, {
-        db_first_3: dbOTP.substring(0, 3),
-        provided_first_3: providedOTP.substring(0, 3),
-        db_last_3: dbOTP.substring(3),
-        provided_last_3: providedOTP.substring(3),
-        exact_match: dbOTP === providedOTP,
-        trimmed_match: dbOTP.trim() === providedOTP.trim()
-      });
-      return res.status(400).json({ 
-        message: `Invalid OTP - Database has: ${dbOTP}, you provided: ${providedOTP}. Please try again.`
-      });
+    if (!dbOTP || dbOTP !== providedOTP) {
+      return res.status(400).json({ message: 'Invalid OTP - please try again' });
     }
-
-    if (new Date() > user.otpExpiry) {
-      console.log('[VERIFY-OTP] OTP expired');
+    if (new Date() > pending.otpExpiry) {
       return res.status(400).json({ message: 'OTP has expired - please request a new one' });
     }
 
-    // NOW save password after OTP verification is successful
-    if (password) {
+    // Create final user record using pending data
+    // Prefer a password supplied during verification; otherwise use pending.passwordHash
+    let finalPasswordHash = pending.passwordHash || null;
+    if (password && password.trim() !== '') {
       try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        user.password = hashedPassword;
-        console.log(`[VERIFY-OTP] ✅ PASSWORD HASHED AND SAVED for ${normalizedEmail}`);
-      } catch (hashError) {
-        console.error('[VERIFY-OTP] Error hashing password:', hashError);
+        finalPasswordHash = await bcrypt.hash(password, 10);
+        console.log('[VERIFY-OTP] Password re-hashed from verification:', { email: normalizedEmail, hashLength: finalPasswordHash.length });
+      } catch (hashErr) {
+        console.error('[VERIFY-OTP] Error hashing provided password:', hashErr);
         return res.status(500).json({ message: 'Error processing password' });
       }
-    } else {
-      console.log(`[VERIFY-OTP] ⚠️  NO PASSWORD PROVIDED in request`);
     }
 
-    // Mark user as verified and clear OTP, then save everything together
-    user.isVerified = true;
-    user.otp = null;
-    user.otpExpiry = null;
-    
-    try {
-      await user.save();
-      console.log(`[VERIFY-OTP] ✅ User ${normalizedEmail} saved successfully`);
-      console.log(`[VERIFY-OTP] ✅ User marked as verified`);
-      console.log(`[VERIFY-OTP] ✅ OTP and otpExpiry cleared from database`);
-      if (password) {
-        console.log(`[VERIFY-OTP] ✅ Password saved to database`);
-      }
-    } catch (saveError) {
-      console.error('[VERIFY-OTP] Error saving user:', saveError);
-      return res.status(500).json({ message: 'Error saving verification', error: saveError.message });
+    // Ensure password is set before creating user
+    if (!finalPasswordHash || finalPasswordHash.trim() === '') {
+      console.error('[VERIFY-OTP] CRITICAL: No password hash available for user:', normalizedEmail);
+      return res.status(400).json({ message: 'Password is required. Please provide a password to complete signup.' });
     }
 
-    // Generate JWT token
-    const token = jwt.sign({ email: normalizedEmail, userId: user._id }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
+    console.log('[VERIFY-OTP] Creating final user:', { email: normalizedEmail, hasPassword: !!finalPasswordHash, passwordHashLength: finalPasswordHash.length });
 
-    res.json({
-      success: true,
-      token,
-      user: {
-        name: user.name,
-        email: user.email,
-        isVerified: user.isVerified
-      },
-      message: 'Email verified successfully! You are now logged in.'
+    const newUser = new User({
+      name: pending.name || '',
+      email: pending.email,
+      password: finalPasswordHash,
+      isVerified: true
     });
+
+    await newUser.save();
+    console.log('[VERIFY-OTP] User successfully saved to database:', { email: normalizedEmail });
+    
+    // Remove pending signup
+    await PendingSignup.deleteOne({ _id: pending._id });
+
+    const token = jwt.sign({ email: newUser.email, userId: newUser._id }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
+
+    res.json({ success: true, token, user: { name: newUser.name, email: newUser.email, isVerified: newUser.isVerified }, message: 'Email verified successfully! You are now logged in.' });
   } catch (error) {
     console.error('[VERIFY-OTP] Error:', error.message);
     console.error('[VERIFY-OTP] Stack:', error.stack);
@@ -625,35 +602,35 @@ app.post('/api/auth/resend-otp', async (req, res) => {
     }
 
     const normalizedEmail = email.toLowerCase().trim();
+
+    // Prefer updating pending signup if present
+    const pending = await PendingSignup.findOne({ email: normalizedEmail });
+    if (pending) {
+      if (new Date() < pending.otpExpiry) {
+        // still valid OTP; we'll still generate a fresh one
+      }
+      const otp = String(generateOTP()).trim();
+      const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+      pending.otp = otp;
+      pending.otpExpiry = otpExpiry;
+      await pending.save();
+      const emailSent = await sendOTPEmail(normalizedEmail, otp);
+      if (!emailSent) return res.status(500).json({ message: 'Failed to send OTP email' });
+      return res.json({ success: true, message: 'OTP resent to your email' });
+    }
+
+    // Fallback: update existing user OTP if user exists and not verified
     const user = await User.findOne({ email: normalizedEmail });
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    if (user.isVerified) {
-      return res.status(400).json({ message: 'User is already verified' });
-    }
-
-    // Generate new OTP
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    if (user.isVerified) return res.status(400).json({ message: 'User is already verified' });
     const otp = String(generateOTP()).trim();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-
     user.otp = otp;
     user.otpExpiry = otpExpiry;
     await user.save();
-
-    // Send OTP to email
-    const emailSent = await sendOTPEmail(email, otp);
-
-    if (!emailSent) {
-      return res.status(500).json({ message: 'Failed to send OTP email' });
-    }
-
-    res.json({
-      success: true,
-      message: 'OTP resent to your email'
-    });
+    const emailSent = await sendOTPEmail(normalizedEmail, otp);
+    if (!emailSent) return res.status(500).json({ message: 'Failed to send OTP email' });
+    res.json({ success: true, message: 'OTP resent to your email' });
   } catch (error) {
     console.error('Resend OTP error:', error);
     res.status(500).json({ 
@@ -679,51 +656,57 @@ app.post('/api/auth/signup', async (req, res) => {
     // Normalize email to lowercase
     const normalizedEmail = email.toLowerCase().trim();
 
-    // Check if user already exists
+    // Check if a confirmed user already exists
     const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({ message: 'Email already registered' });
     }
 
-    // Generate OTP (ensure it's a clean string with no whitespace)
+    // Generate OTP and expiry
     const otp = String(generateOTP()).trim();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
-    // Create new user WITHOUT password - password will be stored only after OTP verification
-    const user = new User({
-      name,
-      email: normalizedEmail,
-      password: null, // Do NOT save password yet
-      otp,
-      otpExpiry,
-      isVerified: false
-    });
+    // Hash password and store in a PendingSignup document (do NOT create final User yet)
+    let hashedPassword = null;
+    try {
+      hashedPassword = await bcrypt.hash(password, 10);
+    } catch (hashErr) {
+      console.error('[SIGNUP] Error hashing password:', hashErr);
+      return res.status(500).json({ message: 'Error processing password' });
+    }
 
-    console.log(`[SIGNUP] Creating user with:`);
-    console.log(`  - Name: ${user.name}`);
-    console.log(`  - Email: ${user.email}`);
-    console.log(`  - Password: ${user.password} (null = not saved yet)`);
-    console.log(`  - OTP: ${user.otp}`);
-    console.log(`  - isVerified: ${user.isVerified}`);
+    // If a pending signup exists, update it; otherwise create new pending signup
+    let pending = await PendingSignup.findOne({ email: normalizedEmail });
+    if (pending) {
+      pending.name = name;
+      pending.passwordHash = hashedPassword;
+      pending.otp = otp;
+      pending.otpExpiry = otpExpiry;
+      await pending.save();
+    } else {
+      pending = new PendingSignup({
+        name,
+        email: normalizedEmail,
+        passwordHash: hashedPassword,
+        otp,
+        otpExpiry
+      });
+      await pending.save();
+    }
 
-    await user.save();
-
-    console.log(`[SIGNUP] ✅ User saved to database (password NOT saved until OTP verification)`);
+    console.log(`[SIGNUP] Pending signup created/updated for ${normalizedEmail}. OTP: ${otp}`);
 
     // Send OTP to email
     const emailSent = await sendOTPEmail(normalizedEmail, otp);
-
     if (!emailSent) {
       return res.status(500).json({ message: 'Failed to send OTP email' });
     }
-
-    console.log(`[SIGNUP] OTP generated and sent to ${normalizedEmail}. OTP: ${otp}`);
 
     res.json({
       success: true,
       message: 'OTP sent to your email',
       email: normalizedEmail,
-      userId: user._id
+      pendingId: pending._id
     });
   } catch (error) {
     console.error('Signup error:', error);
@@ -754,12 +737,35 @@ app.post('/api/auth/login', async (req, res) => {
       return res.status(400).json({ message: 'Please verify your email first' });
     }
 
+    // Defensive logging to help debug login issues
+    try {
+      console.log(`[LOGIN] Attempt for ${normalizedEmail} - isVerified: ${user.isVerified}, passwordPresent: ${!!user.password}`);
+      if (user.password) {
+        console.log(`[LOGIN] Stored password hash length: ${user.password.length}`);
+      } else {
+        console.warn(`[LOGIN] ⚠️ NO PASSWORD HASH FOUND for user: ${normalizedEmail}`);
+      }
+    } catch (logErr) {
+      console.warn('[LOGIN] Could not log password info:', logErr && logErr.message);
+    }
+
+    // Ensure password was actually set (should be saved during OTP verification)
+    if (!user.password || typeof user.password !== 'string' || user.password.trim() === '') {
+      console.error(`[LOGIN] BLOCKED: Password not set for ${normalizedEmail}. User needs to re-verify with valid password.`);
+      return res.status(400).json({ message: 'Password not set. Please verify your email to set a password.' });
+    }
+
     // Compare password
+    console.log(`[LOGIN] Comparing password for ${normalizedEmail}. Password length: ${password ? password.length : 0}, Hash length: ${user.password.length}`);
     const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log(`[LOGIN] Password comparison result: ${isPasswordValid}`);
 
     if (!isPasswordValid) {
+      console.log(`[LOGIN] ❌ Invalid password attempt for ${normalizedEmail}`);
       return res.status(401).json({ message: 'Invalid password' });
     }
+
+    console.log(`[LOGIN] ✅ Password valid for ${normalizedEmail}`);
 
     // Generate JWT token
     const token = jwt.sign({ email, userId: user._id }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
@@ -783,9 +789,48 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
+// Debug user info (dev only) - shows verification and password presence (DO NOT USE IN PRODUCTION)
+app.get('/api/auth/debug-user/:email', async (req, res) => {
+  try {
+    const { email } = req.params;
+    if (!email) return res.status(400).json({ message: 'Email required' });
+    const normalizedEmail = email.toLowerCase().trim();
+    // Return either pending signup info or existing user info
+    const pending = await PendingSignup.findOne({ email: normalizedEmail });
+    if (pending) {
+      return res.json({
+        type: 'pending',
+        email: pending.email,
+        name: pending.name,
+        passwordPresent: !!pending.passwordHash,
+        otp: pending.otp || null,
+        otpExpiry: pending.otpExpiry || null,
+      });
+    }
+
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    res.json({
+      type: 'user',
+      email: user.email,
+      isVerified: !!user.isVerified,
+      passwordPresent: !!user.password,
+      passwordHashPreview: user.password ? user.password.substring(0, 6) + '...' : null,
+      otp: user.otp || null,
+      otpExpiry: user.otpExpiry || null,
+    });
+  } catch (err) {
+    console.error('Debug user error:', err);
+    res.status(500).json({ message: 'Error fetching user', error: err.message });
+  }
+});
+
+const PORT = process.env.PORT || 7000;
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Listening on http://0.0.0.0:${PORT}`);
+  console.log(`✅ Accessible from http://localhost:${PORT}`);
 });
 
 server.on('error', (err) => {
