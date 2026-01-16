@@ -3,8 +3,7 @@ import dotenv from 'dotenv';
 import { Component } from './models/ComponentModel.js';
 import { Sparkles, Zap, Heart, Star, TrendingUp, Award, Crown, Flame, Check } from 'lucide-react';
 
-dotenv.config();
-
+ 
 const components = [
   {
     name: "Card Example",
@@ -606,8 +605,6 @@ const components = [
     </div>
   );
 }
-
-
   `
   },
 
@@ -615,13 +612,11 @@ const components = [
     name: "FuturisticFooter",
     category: "Footer",
     code: `
-
-
 function FuturisticFooter() {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [hoveredSocial, setHoveredSocial] = useState(null);
 
-  const products = ['Neural Core', 'Quantum Drive', 'Cyber Shield', 'Data Matrix', 'Cloud Nexus'];
+  const products = ['Neural Core', 'Quantum Drive', 'UINEX Shield', 'Data Matrix', 'Cloud Nexus'];
   const company = ['About Us', 'Careers', 'Press Kit', 'Partners', 'Contact'];
   const resources = ['Documentation', 'API Reference', 'Community', 'Support', 'Blog'];
   const socials = [
@@ -2234,7 +2229,7 @@ function DarkGreenFooter() {
                     <span className="text-2xl font-bold" style={{ color: 'rgb(74, 222, 128)' }}>✦</span>
                   </div>
                   <div>
-                    <h2 className="text-3xl font-bold" style={{ color: 'rgb(74, 222, 128)' }}>AURORA</h2>
+                    <h2 className="text-3xl font-bold" style={{ color: 'rgb(74, 222, 128)' }}>PIXNOVA</h2>
                     <p className="text-xs tracking-widest" style={{ color: 'rgb(134, 239, 172)', opacity: 0.8 }}>CREATIVE LAB</p>
                   </div>
                 </div>
@@ -2354,7 +2349,7 @@ function DarkGreenFooter() {
               
               <div className="flex items-center gap-8">
                 <p className="text-sm" style={{ color: 'rgb(187, 247, 208)', opacity: 0.7 }}>
-                  © 2025 Aurora Creative Lab
+                  © 2025 PIXNOVA Creative Lab
                 </p>
                 <div className="flex gap-6 text-sm">
                   <a 
@@ -2432,11 +2427,11 @@ function DarkGreenFooter() {
   `
   },
   {
-    name: "CyberTechFooter",
+    name: "UINEXTechFooter",
     category: "Footer",
     code: `
 
-function CyberTechFooter() {
+function UINEXTechFooter() {
   const [hoveredLink, setHoveredLink] = useState(null);
 
   return (
@@ -2744,10 +2739,10 @@ function CyberTechFooter() {
   `
   },
   {
-    name: "CyberTechFooterV2",
+    name: "UINEXTechFooterV2",
     category: "Footer",
     code: `
-function CyberTechFooterV2() {
+function UINEXTechFooterV2() {
   const [hoveredItem, setHoveredItem] = useState(null);
 
   return (
@@ -3014,10 +3009,10 @@ function CyberTechFooterV2() {
   `
   },
   {
-    name: "CyberTechFooterV3",
+    name: "UINEXTechFooterV3",
     category: "Footer",
     code: `
-function CyberTechFooterV3() {
+function UINEXTechFooterV3() {
   const [hoveredLink, setHoveredLink] = useState(null);
 
   return (
@@ -3824,17 +3819,17 @@ function PremiumFooter() {
   `
   },
   {
-    name: "CyberTechFooterV4",
+    name: "UINEXTechFooterV4",
     category: "Footer",
     code: `
 
-function CyberTechFooterV4() {
+function UINEXTechFooterV4() {
   const [hoveredLink, setHoveredLink] = useState(null);
 
   return (
     <div className="min-h-screen bg-black flex items-end relative overflow-hidden">
       
-      {/* Dot Matrix Background */}
+      {/* Dot UIZONBackground */}
       <div className="absolute inset-0 opacity-10">
         <div 
           className="absolute inset-0"
@@ -6088,11 +6083,11 @@ function HolographicHeader() {
   `
   },
    {
-    name: "NeonCyberHeader",
+    name: "NeonUINEXHeader",
     category: "Header",
     code: `
 
-function NeonCyberHeader() {
+function NeonUINEXHeader() {
   const [isActive, setIsActive] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -6326,7 +6321,7 @@ function NeonCyberHeader() {
                   letterSpacing: '-0.03em',
                 }}
               >
-                CYBER
+                UINEX
               </h1>
 
               <p 
@@ -8008,10 +8003,10 @@ function ModernPremiumHeader() {
   `
   },
   {
-    name: "CyberpunkNeonHeader",
+    name: "UINEXpunkNeonHeader",
     category: "Header",
     code: `
-function CyberpunkNeonHeader() {
+function UINEXpunkNeonHeader() {
   const [isActive, setIsActive] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -8158,7 +8153,7 @@ function CyberpunkNeonHeader() {
                   paintOrder: 'stroke fill',
                 }}
               >
-                CYBER
+                UINEX
               </h1>
 
               <div className="flex justify-center items-center gap-3 mb-4">
@@ -8199,7 +8194,7 @@ function CyberpunkNeonHeader() {
               color: isActive ? 'rgb(200, 200, 255)' : 'rgb(150, 150, 200)',
               textShadow: isActive ? '0 0 15px rgba(0, 255, 255, 0.3)' : 'none',
             }}>
-              Experience the bleeding edge of technology where neon dreams collide with digital reality in a cyberpunk paradise.
+              Experience the bleeding edge of technology where neon dreams collide with digital reality in a UINEXpunk paradise.
             </p>
 
             {/* CTA Buttons */}
@@ -8336,10 +8331,10 @@ function CyberpunkNeonHeader() {
   `
   },
   {
-    name: "CyberpunkHeader",
+    name: "UINEXpunkHeader",
     category: "Header",
     code: `
-function CyberpunkHeader() {
+function UINEXpunkHeader() {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -8358,7 +8353,7 @@ function CyberpunkHeader() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Matrix Rain Effect */}
+      {/* UIZONRain Effect */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         {[...Array(20)].map((_, i) => {
           const leftPosition = i * 5;
@@ -8955,11 +8950,11 @@ function ModernSleekHeader() {
   `
   },
   {
-    name: "NeonCyberHeader",
+    name: "NeonUINEXHeader",
     category: "Header",
     code: `
     // import { useState, useEffect } from 'react';
-function NeonCyberHeader() {
+function NeonUINEXHeader() {
   const [scrollY, setScrollY] = useState(0);
   const [glitchActive, setGlitchActive] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -9175,7 +9170,7 @@ function NeonCyberHeader() {
                   transform: mousePos.x !== 0 || mousePos.y !== 0 ? 'translate(' + mousePos.x + 'px, ' + mousePos.y + 'px)' : 'none',
                 }}
               >
-                CYBER
+                UINEX
               </h1>
               
               {/* Glitch Layers */}
@@ -9190,7 +9185,7 @@ function NeonCyberHeader() {
                       mixBlendMode: 'screen',
                     }}
                   >
-                    CYBER
+                    UINEX
                   </h1>
                   <h1 
                     className="absolute inset-0 text-9xl font-black tracking-tighter pointer-events-none"
@@ -9201,7 +9196,7 @@ function NeonCyberHeader() {
                       mixBlendMode: 'screen',
                     }}
                   >
-                    CYBER
+                    UINEX
                   </h1>
                 </>
               )}
@@ -9517,7 +9512,7 @@ function NeonMatrixHeader() {
         ></div>
       </div>
 
-      {/* Matrix Rain Effect Lines */}
+      {/* UIZONRain Effect Lines */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
         <div className="absolute h-full w-px bg-gradient-to-b from-transparent via-green-400 to-transparent left-1/4"></div>
         <div className="absolute h-full w-px bg-gradient-to-b from-transparent via-cyan-400 to-transparent left-1/2"></div>
@@ -9910,10 +9905,10 @@ function NeonMatrixHeader() {
   `
   },
   {
-    name: "CyberNeonCard",
+    name: "UINEXNeonCard",
     category: "Cards",
     code: `
-function CyberNeonCard() {
+function UINEXNeonCard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 flex items-center justify-center p-8 overflow-hidden relative">
       {/* Animated background elements */}
@@ -9923,7 +9918,7 @@ function CyberNeonCard() {
         <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-full blur-3xl animate-ping" style={{ animationDuration: '9s' }}></div>
       </div>
 
-      {/* Cyber Card - HOVER EFFECTS ENHANCED */}
+      {/* UINEX Card - HOVER EFFECTS ENHANCED */}
       <div className="relative w-96 max-w-md p-1 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-3xl shadow-2xl transition-all duration-700 ease-out hover:scale-110 hover:rotate-2 hover:shadow-cyan-500/50 hover:shadow-[0_0_80px_rgba(34,211,238,0.6)]">
         {/* Neon glow border - STRONGER ON HOVER */}
         <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-3xl blur-2xl opacity-40 transition-opacity duration-700 hover:opacity-100 animate-pulse" style={{ animationDuration: '3s' }}></div>
@@ -9949,7 +9944,7 @@ function CyberNeonCard() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 backdrop-blur-md border border-cyan-400/30 mb-6 shadow-lg transition-all duration-500 hover:bg-cyan-500/30 hover:border-cyan-400/80 hover:shadow-cyan-400/60 hover:shadow-xl hover:scale-110">
               <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" style={{ animationDuration: '2s' }}></div>
               <span className="text-xs font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent tracking-widest uppercase">
-                Cyber Elite
+                UINEX Elite
               </span>
             </div>
 
@@ -9964,7 +9959,7 @@ function CyberNeonCard() {
 
             {/* Subtitle - FADES IN BRIGHTER */}
             <p className="text-slate-300 text-base mb-10 leading-relaxed transition-all duration-500 hover:text-slate-100 hover:scale-105">
-              Experience the future of technology with cutting-edge cyberpunk aesthetics and limitless possibilities.
+              Experience the future of technology with cutting-edge UINEXpunk aesthetics and limitless possibilities.
             </p>
 
             {/* Stats grid - FLIP & GLOW ON HOVER */}
@@ -10688,10 +10683,10 @@ function HyperFooter() {
   `
   },
   {
-    name: "CyberpunkFooter",
+    name: "UINEXpunkFooter",
     category: "Footer",
     code: `
-function CyberpunkFooter() {
+function UINEXpunkFooter() {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [hoveredBox, setHoveredBox] = useState(null);
   const [emailActive, setEmailActive] = useState(false);
@@ -12157,10 +12152,10 @@ function UltraPremiumCard() {
   `
   },
   {
-    name: "CyberpunkHeader2",
+    name: "UINEXpunkHeader2",
     category: "Header",
     code: `// import { useState, useEffect } from 'react';
-function CyberpunkHeader2() {
+function UINEXpunkHeader2() {
   const [glitchActive, setGlitchActive] = useState(false);
   const [scanLine, setScanLine] = useState(0);
   const [particles, setParticles] = useState([]);
@@ -12264,7 +12259,7 @@ function CyberpunkHeader2() {
                   textShadow: glitchActive ? '5px 0 rgb(255, 0, 255), -5px 0 rgb(0, 255, 255)' : 'none',
                 }}
               >
-                CYBER
+                UINEX
               </h1>
               {glitchActive && (
                 <div className="absolute inset-0 text-9xl font-black tracking-tighter opacity-30"
@@ -12272,7 +12267,7 @@ function CyberpunkHeader2() {
                        color: 'rgb(255, 0, 255)',
                        transform: 'translate(3px, -2px)',
                      }}>
-                  CYBER
+                  UINEX
                 </div>
               )}
             </div>
@@ -12399,7 +12394,7 @@ function MatrixHeader() {
   const [orbitAngle, setOrbitAngle] = useState(0);
 
   useEffect(() => {
-    // Matrix rain effect
+    // UIZONrain effect
     const chars = '01アイウエオカキクケコサシスセソタチツテト'.split('');
     const columns = 30;
     const matrixData = Array.from({ length: columns }, (_, i) => ({
@@ -12450,7 +12445,7 @@ function MatrixHeader() {
       className="min-h-screen bg-black flex items-center justify-center p-8 relative overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Matrix Rain Background */}
+      {/* UIZONRain Background */}
       {matrixChars.map((char) => (
         <div
           key={char.id}
@@ -13400,9 +13395,9 @@ function NeonQuantumHeader() {
   `
   },
   {
-    name: "NeonCyberpunkHeader",
+    name: "NeonUINEXpunkHeader",
     category: "Header",
-    code: `function NeonCyberpunkHeader() {
+    code: `function NeonUINEXpunkHeader() {
   const [glitchLines, setGlitchLines] = useState([]);
   const [scanProgress, setScanProgress] = useState(0);
   const [terminals, setTerminals] = useState([]);
@@ -13639,7 +13634,7 @@ function NeonQuantumHeader() {
                   transition: 'text-shadow 0.3s',
                 }}
               >
-                CYBERPUNK
+                UINEXPUNK
               </h1>
               
               {/* Glitch overlay */}
@@ -13653,7 +13648,7 @@ function NeonQuantumHeader() {
                       transform: 'translateX(-5px)',
                     }}
                   >
-                    CYBERPUNK
+                    UINEXPUNK
                   </h1>
                   <h1 
                     className="absolute inset-0 text-8xl font-black tracking-tight"
@@ -13663,7 +13658,7 @@ function NeonQuantumHeader() {
                       transform: 'translateX(5px)',
                     }}
                   >
-                    CYBERPUNK
+                    UINEXPUNK
                   </h1>
                 </>
               )}
@@ -14572,9 +14567,9 @@ function CosmicFooter() {
   `
   },
   {
-    name: "NeonCyberFooter",
+    name: "NeonUINEXFooter",
     category: "Footer",
-    code: `function NeonCyberFooter() {
+    code: `function NeonUINEXFooter() {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [hoveredCard, setHoveredCard] = useState(null);
   const [activeInput, setActiveInput] = useState(null);
@@ -14631,7 +14626,7 @@ function CosmicFooter() {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="flex items-center gap-4 px-6 py-3 bg-black border-2 border-cyan-500 rounded-full">
               <div className="w-3 h-3 bg-cyan-500 rounded-full animate-ping"></div>
-              <span className="text-xs font-black text-cyan-500 tracking-widest">CYBER ZONE</span>
+              <span className="text-xs font-black text-cyan-500 tracking-widest">UINEX ZONE</span>
               <div className="w-3 h-3 bg-pink-500 rounded-full animate-ping"></div>
             </div>
           </div>
@@ -14645,7 +14640,7 @@ function CosmicFooter() {
             {/* Left Section - Brand */}
             <div className="lg:col-span-4">
               
-              {/* Cyber Logo */}
+              {/* UINEX Logo */}
               <div className="mb-10">
                 <div className="relative inline-block mb-8">
                   <div className="absolute inset-0 bg-cyan-500 blur-xl opacity-50 animate-pulse"></div>
@@ -14669,7 +14664,7 @@ function CosmicFooter() {
                 </p>
               </div>
 
-              {/* Cyber Stats */}
+              {/* UINEX Stats */}
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {[
                   { value: '10K+', label: 'Users Active', color: 'cyan' },
@@ -14847,11 +14842,11 @@ function CosmicFooter() {
                     </p>
                   </div>
 
-                  {/* Cyber Form */}
+                  {/* UINEX Form */}
                   <div className="space-y-3 mb-6">
                     <input
                       type="email"
-                      placeholder="email@cyber.net"
+                      placeholder="email@UINEX.net"
                       className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white text-sm font-medium focus:outline-none transition-all duration-300"
                       style={{
                         borderColor: activeInput === 'email' ? '#00ffff' : '#1e293b'
@@ -14868,7 +14863,7 @@ function CosmicFooter() {
                     </button>
                   </div>
 
-                  {/* Cyber Stats */}
+                  {/* UINEX Stats */}
                   <div className="pt-6 border-t border-gray-800">
                     <div className="grid grid-cols-3 gap-2 text-center">
                       <div>
@@ -14944,10 +14939,10 @@ function CosmicFooter() {
   `
   },
   {
-    name: "NeonCyberCard",
+    name: "NeonUINEXCard",
     category: "Cards",
     code: `
-function NeonCyberCard() {
+function NeonUINEXCard() {
   const [isHovered, setIsHovered] = React.useState(false);
   return (
     <div style={{ 
@@ -15041,7 +15036,7 @@ function NeonCyberCard() {
             marginBottom: '12px',
             letterSpacing: '1px'
           }}>
-            Cyber Card
+            UINEX Card
           </h3>
           
           <p style={{ 
@@ -15633,6 +15628,1571 @@ function ThreeCards() {
           );
         })}
       </div>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "UINEXpunkHeade3",
+    category: "Header",
+    code: `
+function UINEXpunkHeader3() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div 
+      className="min-h-screen bg-black flex items-center justify-center p-8 overflow-hidden relative"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Animated Scanlines */}
+      <div className="absolute inset-0">
+        <div 
+          className="w-full h-full opacity-20"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255, 20, 147, 0.4) 1px, rgba(255, 20, 147, 0.4) 2px)',
+            backgroundSize: '100% 4px',
+          }}
+        ></div>
+      </div>
+
+      {/* Glitch Bars */}
+      <div className="absolute inset-0">
+        {[...Array(8)].map((_, i) => {
+          const colors = ['rgb(255, 20, 147)', 'rgb(0, 255, 170)', 'rgb(255, 255, 0)'];
+          const color = colors[i % 3];
+          const height = 2 + (i % 3);
+          const top = (i * 12) % 100;
+          
+          return (
+            <div
+              key={i}
+              className="absolute w-full transition-all duration-1000"
+              style={{
+                top: top + '%',
+                height: height + 'px',
+                backgroundColor: color,
+                opacity: 0.1,
+                boxShadow: '0 0 40px ' + color,
+              }}
+            ></div>
+          );
+        })}
+      </div>
+
+      {/* Neon Particles */}
+      <div className="absolute inset-0">
+        {[...Array(20)].map((_, i) => {
+          const colors = ['rgb(255, 20, 147)', 'rgb(0, 255, 170)', 'rgb(138, 43, 226)'];
+          const color = colors[i % 3];
+          const left = (i * 5) % 100;
+          const top = (i * 11) % 100;
+          
+          return (
+            <div
+              key={i}
+              className="absolute w-1 h-1 rounded-full"
+              style={{
+                left: left + '%',
+                top: top + '%',
+                backgroundColor: color,
+                boxShadow: '0 0 15px ' + color,
+                opacity: 0.7,
+              }}
+            ></div>
+          );
+        })}
+      </div>
+
+      <div className="relative z-10 text-center max-w-6xl w-full">
+        {/* Main Container */}
+        <div 
+          className="relative p-16 border-4 transition-all duration-700"
+          style={{
+            borderColor: 'rgb(255, 20, 147)',
+            background: isHovered 
+              ? 'linear-gradient(135deg, rgba(255, 20, 147, 0.15), rgba(138, 43, 226, 0.15))' 
+              : 'rgba(0, 0, 0, 0.5)',
+            boxShadow: isHovered 
+              ? '0 0 100px rgba(255, 20, 147, 0.6), inset 0 0 100px rgba(255, 20, 147, 0.15)' 
+              : '0 0 50px rgba(255, 20, 147, 0.4)',
+            backdropFilter: 'blur(10px)',
+          }}
+        >
+          {/* Edge Accents */}
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="absolute w-20 h-20 transition-all duration-500"
+              style={{
+                top: i < 2 ? '-4px' : 'auto',
+                bottom: i >= 2 ? '-4px' : 'auto',
+                left: i % 2 === 0 ? '-4px' : 'auto',
+                right: i % 2 === 1 ? '-4px' : 'auto',
+                borderTop: i < 2 ? '6px solid rgb(0, 255, 170)' : 'none',
+                borderBottom: i >= 2 ? '6px solid rgb(0, 255, 170)' : 'none',
+                borderLeft: i % 2 === 0 ? '6px solid rgb(0, 255, 170)' : 'none',
+                borderRight: i % 2 === 1 ? '6px solid rgb(0, 255, 170)' : 'none',
+                boxShadow: isHovered ? '0 0 40px rgb(0, 255, 170)' : 'none',
+              }}
+            ></div>
+          ))}
+
+          {/* Main Title */}
+          <div className="relative mb-8">
+            <h1 
+              className="text-9xl font-black mb-4 tracking-tighter transition-all duration-500"
+              style={{
+                background: 'linear-gradient(90deg, rgb(255, 20, 147), rgb(138, 43, 226), rgb(0, 255, 170))',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                filter: isHovered ? 'drop-shadow(0 0 40px rgb(255, 20, 147))' : 'drop-shadow(0 0 15px rgb(255, 20, 147))',
+              }}
+            >
+              NEON CITY
+            </h1>
+            
+            {/* Tagline */}
+            <div className="flex justify-center items-center gap-6 mb-8">
+              <div className="h-1 w-32" style={{ 
+                background: 'linear-gradient(to right, transparent, rgb(255, 20, 147))',
+                boxShadow: '0 0 15px rgb(255, 20, 147)',
+              }}></div>
+              <span 
+                className="text-3xl font-mono tracking-widest font-bold"
+                style={{
+                  color: 'rgb(0, 255, 170)',
+                  textShadow: '0 0 30px rgb(0, 255, 170)',
+                }}
+              >
+                DIGITAL REALM
+              </span>
+              <div className="h-1 w-32" style={{ 
+                background: 'linear-gradient(to left, transparent, rgb(255, 20, 147))',
+                boxShadow: '0 0 15px rgb(255, 20, 147)',
+              }}></div>
+            </div>
+          </div>
+
+          {/* Status Cards */}
+          <div className="grid grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
+            {[
+              { value: 'ONLINE', label: 'STATUS', color: 'rgb(0, 255, 170)' },
+              { value: '2077', label: 'YEAR', color: 'rgb(255, 20, 147)' },
+              { value: 'MAX', label: 'POWER', color: 'rgb(138, 43, 226)' },
+            ].map((stat, i) => (
+              <div 
+                key={i}
+                className="p-8 border-4 backdrop-blur-md transition-all duration-500"
+                style={{
+                  borderColor: stat.color,
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  boxShadow: isHovered ? '0 0 40px ' + stat.color : '0 0 15px ' + stat.color,
+                }}
+              >
+                <div 
+                  className="text-5xl font-black mb-3"
+                  style={{
+                    color: stat.color,
+                    textShadow: '0 0 20px ' + stat.color,
+                  }}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-sm font-mono tracking-widest" style={{ color: 'rgb(180, 180, 220)' }}>
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-2xl mb-12 max-w-3xl mx-auto leading-relaxed font-light" style={{ 
+            color: 'rgb(220, 220, 255)',
+            textShadow: '0 0 10px rgba(220, 220, 255, 0.5)',
+          }}>
+            Welcome to the future where dreams are coded and reality is just another simulation
+          </p>
+
+          <div className="flex justify-center gap-8">
+            <button 
+              className="px-14 py-6 font-black uppercase tracking-widest transition-all duration-300 text-lg"
+              style={{
+                backgroundColor: 'rgba(255, 20, 147, 0.3)',
+                border: '4px solid rgb(255, 20, 147)',
+                color: 'rgb(255, 20, 147)',
+                boxShadow: '0 0 40px rgba(255, 20, 147, 0.6)',
+              }}
+            >
+              ENTER
+            </button>
+            <button 
+              className="px-14 py-6 font-black uppercase tracking-widest transition-all duration-300 text-lg"
+              style={{
+                backgroundColor: 'transparent',
+                border: '4px solid rgb(0, 255, 170)',
+                color: 'rgb(0, 255, 170)',
+                boxShadow: '0 0 40px rgba(0, 255, 170, 0.6)',
+              }}
+            >
+              EXPLORE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "UltraDarkGreenFooter",
+    category: "Footer",
+    code: `function UltraDarkGreenFooter() {
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div 
+      className="min-h-screen flex items-end relative overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #000000 0%, #0a0f0a 25%, #050a05 50%, #0d120d 75%, #0a100a 100%)',
+      }}
+      onMouseMove={handleMouseMove}
+    >
+      
+      {/* Animated Gradient Orbs - More Intense */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div 
+          className="absolute w-[600px] h-[600px] rounded-full opacity-15 blur-3xl animate-pulse"
+          style={{
+            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.8) 0%, transparent 70%)',
+            top: '5%',
+            left: '15%',
+            animationDuration: '6s',
+          }}
+        ></div>
+        <div 
+          className="absolute w-[500px] h-[500px] rounded-full opacity-10 blur-3xl animate-pulse"
+          style={{
+            background: 'radial-gradient(circle, rgba(34, 197, 94, 0.9) 0%, transparent 70%)',
+            bottom: '10%',
+            right: '10%',
+            animationDuration: '8s',
+            animationDelay: '2s',
+          }}
+        ></div>
+        <div 
+          className="absolute w-[400px] h-[400px] rounded-full opacity-12 blur-3xl animate-pulse"
+          style={{
+            background: 'radial-gradient(circle, rgba(5, 150, 105, 0.7) 0%, transparent 70%)',
+            top: '40%',
+            left: '60%',
+            animationDuration: '7s',
+            animationDelay: '1s',
+          }}
+        ></div>
+      </div>
+
+      {/* Enhanced Floating Particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full opacity-40 animate-pulse"
+            style={{
+              width: (1 + Math.random() * 3) + 'px',
+              height: (1 + Math.random() * 3) + 'px',
+              background: i % 3 === 0 ? 'rgb(16, 185, 129)' : i % 3 === 1 ? 'rgb(34, 197, 94)' : 'rgb(5, 150, 105)',
+              top: Math.random() * 100 + '%',
+              left: Math.random() * 100 + '%',
+              animationDelay: Math.random() * 4 + 's',
+              animationDuration: (2 + Math.random() * 3) + 's',
+              boxShadow: '0 0 ${10 + Math.random() * 10}px rgba(16, 185, 129, 0.6)',
+            }}
+          ></div>
+        ))}
+      </div>
+
+      {/* Grid Pattern Overlay */}
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+        }}
+      ></div>
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Ultra Dark Glass Container */}
+        <div 
+          className="backdrop-blur-2xl border-t"
+          style={{
+            background: 'rgba(0, 0, 0, 0.85)',
+            borderColor: 'rgba(16, 185, 129, 0.3)',
+            boxShadow: '0 -12px 48px rgba(16, 185, 129, 0.15), 0 0 100px rgba(0, 0, 0, 0.5)',
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-8 py-20">
+            
+            {/* Top Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
+              
+              {/* Brand Card - Enhanced */}
+              <div 
+                className="lg:col-span-1 p-8 rounded-3xl backdrop-blur-xl transition-all duration-700"
+                style={{
+                  background: hoveredCard === 'brand' 
+                    ? 'rgba(0, 0, 0, 0.7)' 
+                    : 'rgba(0, 0, 0, 0.5)',
+                  border: hoveredCard === 'brand' 
+                    ? '2px solid rgba(16, 185, 129, 0.6)' 
+                    : '1px solid rgba(16, 185, 129, 0.25)',
+                  boxShadow: hoveredCard === 'brand'
+                    ? '0 12px 48px rgba(16, 185, 129, 0.3), inset 0 0 60px rgba(16, 185, 129, 0.05)'
+                    : '0 6px 24px rgba(0, 0, 0, 0.4)',
+                  transform: hoveredCard === 'brand' ? 'translateY(-8px) scale(1.02)' : 'translateY(0)',
+                }}
+                onMouseEnter={() => setHoveredCard('brand')}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div 
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center backdrop-blur-sm relative overflow-hidden"
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.6)',
+                      border: '2px solid rgba(16, 185, 129, 0.5)',
+                      boxShadow: '0 0 30px rgba(16, 185, 129, 0.4), inset 0 0 20px rgba(16, 185, 129, 0.1)',
+                    }}
+                  >
+                    <div 
+                      className="absolute inset-0 animate-pulse"
+                      style={{
+                        background: 'radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%)',
+                        animationDuration: '3s',
+                      }}
+                    ></div>
+                    <span className="text-3xl font-bold relative z-10" style={{ color: 'rgb(16, 185, 129)' }}>✦</span>
+                  </div>
+                  <div>
+                    <h2 className="text-4xl font-bold tracking-tight" style={{ 
+                      color: 'rgb(16, 185, 129)',
+                      textShadow: '0 0 20px rgba(16, 185, 129, 0.5)',
+                    }}>PIXNOVA</h2>
+                    <p className="text-xs tracking-[0.3em] font-semibold" style={{ 
+                      color: 'rgb(16, 185, 129)', 
+                      opacity: 0.6 
+                    }}>CREATIVE LAB</p>
+                  </div>
+                </div>
+                <p className="leading-relaxed mb-8 text-sm" style={{ color: 'rgb(16, 185, 129)', opacity: 0.7 }}>
+                  Pushing boundaries of design and technology to create unforgettable digital experiences that illuminate the future.
+                </p>
+                <div className="flex gap-3">
+                  {['✱', '◆', '●', '▲'].map((icon, i) => (
+                    <a
+                      key={i}
+                      href="#"
+                      className="w-12 h-12 rounded-xl flex items-center justify-center backdrop-blur-sm transition-all duration-500 hover:scale-125 hover:rotate-12"
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.6)',
+                        border: '1px solid rgba(16, 185, 129, 0.4)',
+                        boxShadow: '0 0 15px rgba(16, 185, 129, 0.2)',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = 'rgba(16, 185, 129, 0.8)';
+                        e.currentTarget.style.boxShadow = '0 0 25px rgba(16, 185, 129, 0.5)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                        e.currentTarget.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.2)';
+                      }}
+                    >
+                      <span className="text-lg" style={{ color: 'rgb(16, 185, 129)' }}>{icon}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Newsletter Card - Enhanced */}
+              <div 
+                className="lg:col-span-2 p-8 rounded-3xl backdrop-blur-xl transition-all duration-700"
+                style={{
+                  background: hoveredCard === 'newsletter' 
+                    ? 'rgba(0, 0, 0, 0.7)' 
+                    : 'rgba(0, 0, 0, 0.5)',
+                  border: hoveredCard === 'newsletter' 
+                    ? '2px solid rgba(16, 185, 129, 0.6)' 
+                    : '1px solid rgba(16, 185, 129, 0.25)',
+                  boxShadow: hoveredCard === 'newsletter'
+                    ? '0 12px 48px rgba(16, 185, 129, 0.3), inset 0 0 60px rgba(16, 185, 129, 0.05)'
+                    : '0 6px 24px rgba(0, 0, 0, 0.4)',
+                  transform: hoveredCard === 'newsletter' ? 'translateY(-8px) scale(1.02)' : 'translateY(0)',
+                }}
+                onMouseEnter={() => setHoveredCard('newsletter')}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <h3 className="text-3xl font-bold mb-4" style={{ 
+                  color: 'rgb(16, 185, 129)',
+                  textShadow: '0 0 15px rgba(16, 185, 129, 0.4)',
+                }}>Stay in the Loop</h3>
+                <p className="mb-8 text-sm" style={{ color: 'rgb(16, 185, 129)', opacity: 0.6 }}>
+                  Get exclusive updates, early access, and creative inspiration delivered to your inbox.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 px-6 py-5 rounded-2xl backdrop-blur-xl focus:outline-none transition-all duration-500"
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.6)',
+                      border: '1px solid rgba(16, 185, 129, 0.3)',
+                      color: 'rgb(16, 185, 129)',
+                      boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.5)',
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = 'rgba(16, 185, 129, 0.6)';
+                      e.target.style.boxShadow = '0 0 30px rgba(16, 185, 129, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.5)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                      e.target.style.boxShadow = 'inset 0 0 20px rgba(0, 0, 0, 0.5)';
+                    }}
+                  />
+                  <button 
+                    className="px-10 py-5 rounded-2xl font-bold transition-all duration-500 hover:scale-110 relative overflow-hidden group"
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.7)',
+                      border: '2px solid rgba(16, 185, 129, 0.6)',
+                      boxShadow: '0 6px 24px rgba(16, 185, 129, 0.4)',
+                      color: 'rgb(16, 185, 129)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(16, 185, 129, 0.15)';
+                      e.currentTarget.style.boxShadow = '0 8px 32px rgba(16, 185, 129, 0.6)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(0, 0, 0, 0.7)';
+                      e.currentTarget.style.boxShadow = '0 6px 24px rgba(16, 185, 129, 0.4)';
+                    }}
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Links Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+              
+              {[
+                { title: 'Product', links: ['Features', 'Pricing', 'Updates', 'Beta'] },
+                { title: 'Explore', links: ['Gallery', 'Showcase', 'Blog', 'Stories'] },
+                { title: 'Company', links: ['About', 'Team', 'Careers', 'Press'] },
+                { title: 'Support', links: ['Help', 'Contact', 'FAQ', 'Docs'] },
+              ].map((section, idx) => (
+                <div key={idx}>
+                  <h4 className="text-sm font-bold uppercase tracking-[0.2em] mb-6" style={{ 
+                    color: 'rgb(16, 185, 129)', 
+                    opacity: 0.8,
+                    textShadow: '0 0 10px rgba(16, 185, 129, 0.3)',
+                  }}>
+                    {section.title}
+                  </h4>
+                  <ul className="space-y-3">
+                    {section.links.map((link, i) => (
+                      <li key={i}>
+                        <a
+                          href="#"
+                          className="transition-all duration-300 inline-block hover:translate-x-2 relative group"
+                          style={{ 
+                            color: 'rgb(16, 185, 129)', 
+                            opacity: 0.5,
+                          }}
+                          onMouseEnter={(e) => {
+                            e.target.style.opacity = '1';
+                            e.target.style.textShadow = '0 0 10px rgba(16, 185, 129, 0.5)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.target.style.opacity = '0.5';
+                            e.target.style.textShadow = 'none';
+                          }}
+                        >
+                          <span className="relative">
+                            {link}
+                            <span 
+                              className="absolute bottom-0 left-0 w-0 h-px transition-all duration-300 group-hover:w-full"
+                              style={{ background: 'rgb(16, 185, 129)' }}
+                            ></span>
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+            </div>
+
+            {/* Enhanced Divider */}
+            <div 
+              className="h-px mb-12 relative"
+              style={{
+                background: 'linear-gradient(to right, transparent, rgba(16, 185, 129, 0.5), transparent)',
+                boxShadow: '0 0 10px rgba(16, 185, 129, 0.3)',
+              }}
+            ></div>
+
+            {/* Bottom Section */}
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              
+              <div className="flex items-center gap-8">
+                <p className="text-sm font-medium" style={{ color: 'rgb(16, 185, 129)', opacity: 0.5 }}>
+                  © 2025 PIXNOVA Creative Lab
+                </p>
+                <div className="flex gap-6 text-sm">
+                  {['Privacy', 'Terms', 'Cookies'].map((item, i) => (
+                    <a 
+                      key={i}
+                      href="#" 
+                      className="transition-all duration-300 relative group"
+                      style={{ color: 'rgb(16, 185, 129)', opacity: 0.5 }}
+                      onMouseEnter={(e) => {
+                        e.target.style.opacity = '1';
+                        e.target.style.textShadow = '0 0 10px rgba(16, 185, 129, 0.5)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.opacity = '0.5';
+                        e.target.style.textShadow = 'none';
+                      }}
+                    >
+                      {item}
+                      <span 
+                        className="absolute bottom-0 left-0 w-0 h-px transition-all duration-300 group-hover:w-full"
+                        style={{ background: 'rgb(16, 185, 129)' }}
+                      ></span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Enhanced Floating Badge */}
+              <div 
+                className="px-8 py-4 rounded-full backdrop-blur-xl flex items-center gap-4 transition-all duration-500 hover:scale-105"
+                style={{
+                  background: 'rgba(0, 0, 0, 0.7)',
+                  border: '2px solid rgba(16, 185, 129, 0.5)',
+                  boxShadow: '0 0 30px rgba(16, 185, 129, 0.3)',
+                }}
+              >
+                <div 
+                  className="w-10 h-10 rounded-full flex items-center justify-center animate-pulse"
+                  style={{
+                    background: 'rgba(16, 185, 129, 0.2)',
+                    border: '1px solid rgba(16, 185, 129, 0.4)',
+                    animationDuration: '2s',
+                  }}
+                >
+                  <span className="text-sm">🌟</span>
+                </div>
+                <div>
+                  <div className="text-sm font-bold" style={{ 
+                    color: 'rgb(16, 185, 129)',
+                    textShadow: '0 0 10px rgba(16, 185, 129, 0.4)',
+                  }}>Featured</div>
+                  <div className="text-xs" style={{ color: 'rgb(16, 185, 129)', opacity: 0.5 }}>Awwwards 2025</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        {/* Enhanced Bottom Glass Edge */}
+        <div 
+          className="h-1"
+          style={{
+            background: 'linear-gradient(to right, rgba(16, 185, 129, 0.3), rgba(16, 185, 129, 0.7), rgba(16, 185, 129, 0.3))',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 0 20px rgba(16, 185, 129, 0.5)',
+          }}
+        ></div>
+
+      </footer>
+    </div>
+  );
+}
+  `
+  },
+
+  {
+    name: "QuantumAdvancedCard",
+    category: "Cards",
+    code: `
+function QuantumAdvancedCard() {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePosition({ x, y });
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 flex items-center justify-center p-8 overflow-hidden relative">
+      
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        {/* Hexagon Pattern */}
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: 'radial-gradient(circle, #8b5cf6 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}></div>
+        
+        {/* Floating Orbs */}
+        <div className="absolute top-20 left-20 w-96 h-96 bg-purple-600 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-cyan-600 rounded-full blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-pink-600 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '3s' }}></div>
+      </div>
+
+      {/* Floating Particles */}
+      {[...Array(15)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full bg-purple-500 opacity-20 animate-bounce"
+          style={{
+            width: (2 + Math.random() * 4) + 'px',
+            height: (2 + Math.random() * 4) + 'px',
+            left: (i * 6.5) + '%',
+            top: ((i * 8) % 100) + '%',
+            animationDuration: (2 + Math.random() * 3) + 's',
+            animationDelay: (Math.random() * 2) + 's'
+          }}
+        ></div>
+      ))}
+
+      {/* Card Container */}
+      <div className="relative perspective-1000" style={{ perspective: '1000px' }}>
+        
+        <div 
+          className="relative w-[480px] h-[650px] transition-transform duration-700 preserve-3d cursor-pointer"
+          style={{
+            transformStyle: 'preserve-3d',
+            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+          }}
+          onClick={() => setIsFlipped(!isFlipped)}
+          onMouseMove={handleMouseMove}
+        >
+          
+          {/* Front Side */}
+          <div 
+            className="absolute inset-0 backface-hidden"
+            style={{ backfaceVisibility: 'hidden' }}
+          >
+            {/* Glowing Border Animation */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-3xl opacity-75 blur-xl animate-pulse"></div>
+            
+            {/* Main Card */}
+            <div className="relative w-full h-full bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 rounded-3xl overflow-hidden border border-purple-500 shadow-2xl">
+              
+              {/* Dynamic Gradient Overlay */}
+              <div 
+                className="absolute inset-0 opacity-30 transition-opacity duration-300 bg-purple-600 blur-3xl"
+                style={{
+                  left: mousePosition.x + '%',
+                  top: mousePosition.y + '%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '200px',
+                  height: '200px',
+                  borderRadius: '50%'
+                }}
+              ></div>
+
+              {/* Animated Scan Lines */}
+              <div className="absolute inset-0 opacity-10 animate-pulse" style={{
+                backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #a855f7 2px, #a855f7 4px)',
+                backgroundSize: '100% 4px',
+              }}></div>
+
+              {/* Content */}
+              <div className="relative p-8 h-full flex flex-col justify-between z-10">
+                
+                {/* Top Section */}
+                <div>
+                  {/* Header with Logo */}
+                  <div className="flex items-start justify-between mb-8">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-purple-600 blur-2xl opacity-50 animate-pulse"></div>
+                      <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 flex items-center justify-center animate-spin" style={{ animationDuration: '8s' }}>
+                        <div className="w-16 h-16 rounded-xl bg-slate-900 flex items-center justify-center">
+                          <span className="text-3xl font-black bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">Ω</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Chip Simulation */}
+                    <div className="relative w-16 h-12">
+                      <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg opacity-80"></div>
+                      <div className="absolute inset-1 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-md"></div>
+                      <div className="absolute inset-0 grid grid-cols-3 gap-0.5 p-2">
+                        {[...Array(9)].map((_, i) => (
+                          <div key={i} className="bg-yellow-600 rounded-sm"></div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Type Badge */}
+                  <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 mb-6">
+                    <div className="relative">
+                      <div className="w-3 h-3 bg-white rounded-full"></div>
+                      <div className="absolute inset-0 w-3 h-3 bg-white rounded-full animate-ping"></div>
+                    </div>
+                    <span className="text-xs font-black text-white tracking-widest">QUANTUM ELITE</span>
+                  </div>
+
+                  {/* Card Title */}
+                  <div className="mb-8">
+                    <h1 className="text-7xl font-black mb-2 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                      NEXUS
+                    </h1>
+                    <p className="text-purple-400 text-sm font-bold tracking-widest uppercase">Infinite Access Card</p>
+                  </div>
+
+                  {/* Card Number with Hover Effect */}
+                  <div className="mb-8 space-y-2">
+                    <div className="flex gap-4">
+                      {['5432', '9876', '5432', '1098'].map((num, i) => (
+                        <div key={i} className="group relative">
+                          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg opacity-0 group-hover:opacity-100 blur transition duration-300"></div>
+                          <div className="relative px-4 py-3 bg-slate-800 rounded-lg border border-purple-500 group-hover:border-transparent transition-all duration-300 group-hover:scale-110">
+                            <span className="text-xl font-bold text-white tracking-widest">{num}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-4 gap-3 mb-6">
+                    {[
+                      { icon: '⚡', value: '∞', label: 'Speed' },
+                      { icon: '🔒', value: '100%', label: 'Secure' },
+                      { icon: '🌍', value: '200+', label: 'Countries' },
+                      { icon: '💎', value: 'VIP', label: 'Status' },
+                    ].map((stat, i) => (
+                      <div key={i} className="relative group">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-xl opacity-0 group-hover:opacity-100 blur transition duration-300"></div>
+                        <div className="relative p-3 bg-slate-800 rounded-xl border border-slate-700 group-hover:border-transparent transition-all duration-300 text-center">
+                          <div className="text-2xl mb-1">{stat.icon}</div>
+                          <div className="text-xs font-black text-purple-400">{stat.value}</div>
+                          <div className="text-xs text-gray-500 font-semibold">{stat.label}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom Section */}
+                <div>
+                  {/* Expiry & CVV */}
+                  <div className="flex items-center justify-between mb-6 pb-6 border-b border-slate-800">
+                    <div>
+                      <p className="text-xs text-gray-500 font-semibold mb-1 uppercase tracking-wider">Valid Thru</p>
+                      <p className="text-lg font-bold text-white tracking-wider">12/28</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 font-semibold mb-1 uppercase tracking-wider">CVV</p>
+                      <p className="text-lg font-bold text-white tracking-wider">***</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs text-gray-500 font-semibold mb-1 uppercase tracking-wider">Card ID</p>
+                      <p className="text-lg font-bold text-white tracking-wider">#Q7845</p>
+                    </div>
+                  </div>
+
+                  {/* Cardholder Name */}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-gray-500 font-semibold mb-1 uppercase tracking-wider">Cardholder</p>
+                      <p className="text-2xl font-black text-white tracking-wide">JOHN MICHAEL DOE</p>
+                    </div>
+                    <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
+                      ✦
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Bottom Glow */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 animate-pulse"></div>
+            </div>
+          </div>
+
+          {/* Back Side */}
+          <div 
+            className="absolute inset-0 backface-hidden"
+            style={{ 
+              backfaceVisibility: 'hidden',
+              transform: 'rotateY(180deg)'
+            }}
+          >
+            {/* Glowing Border */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-3xl opacity-75 blur-xl animate-pulse"></div>
+            
+            {/* Back Card */}
+            <div className="relative w-full h-full bg-gradient-to-br from-slate-900 via-pink-900 to-slate-900 rounded-3xl overflow-hidden border border-pink-500 shadow-2xl">
+              
+              {/* Magnetic Strip */}
+              <div className="absolute top-16 left-0 right-0 h-16 bg-gradient-to-r from-slate-800 via-slate-950 to-slate-800"></div>
+              
+              {/* Content */}
+              <div className="relative p-8 h-full flex flex-col justify-between z-10">
+                
+                <div className="mt-32">
+                  {/* Signature Strip */}
+                  <div className="mb-8">
+                    <p className="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Authorized Signature</p>
+                    <div className="h-16 bg-slate-800 rounded-lg border border-slate-700 flex items-center px-4">
+                      <div className="w-full h-8 bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-30"></div>
+                    </div>
+                  </div>
+
+                  {/* Security Features */}
+                  <div className="grid grid-cols-2 gap-4 mb-8">
+                    <div className="p-4 bg-slate-800 rounded-xl border border-slate-700">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                          <span className="text-xl">🔐</span>
+                        </div>
+                        <div>
+                          <p className="text-xs font-black text-green-400 uppercase tracking-wider">Encrypted</p>
+                          <p className="text-xs text-gray-500">256-Bit SSL</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 bg-slate-800 rounded-xl border border-slate-700">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
+                          <span className="text-xl">🛡️</span>
+                        </div>
+                        <div>
+                          <p className="text-xs font-black text-blue-400 uppercase tracking-wider">Protected</p>
+                          <p className="text-xs text-gray-500">3D Secure</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* QR Code Simulation */}
+                  <div className="flex items-center gap-6">
+                    <div className="relative">
+                      <div className="w-24 h-24 bg-white rounded-lg p-2">
+                        <div className="w-full h-full grid grid-cols-6 gap-0.5">
+                          {[...Array(36)].map((_, i) => (
+                            <div 
+                              key={i} 
+                              className="rounded-sm"
+                              style={{
+                                backgroundColor: Math.random() > 0.5 ? '#000' : '#fff'
+                              }}
+                            ></div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Scan for Verification</p>
+                      <p className="text-sm text-purple-400 font-bold">Quantum Secure ID</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer Info */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-xs text-gray-500">
+                    <span>Customer Service: 1-800-QUANTUM</span>
+                    <span>24/7 Support</span>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs text-gray-600 mb-2">This card remains the property of Nexus Bank</p>
+                    <p className="text-xs font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">nexusbank.com</p>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Bottom Glow */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 animate-pulse"></div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Flip Indicator */}
+        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
+          <div className="flex items-center gap-2 px-4 py-2 bg-slate-900 border border-purple-500 rounded-full">
+            <span className="text-xs text-purple-400 font-bold uppercase tracking-wider">
+              Click to {isFlipped ? 'Front' : 'Back'}
+            </span>
+            <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Action Buttons */}
+      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex gap-4">
+        <button className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+          <div className="relative px-6 py-3 bg-slate-900 rounded-xl border border-purple-500 group-hover:border-transparent transition-all duration-300">
+            <span className="text-sm font-black text-white uppercase tracking-wider">Activate</span>
+          </div>
+        </button>
+        
+        <button className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+          <div className="relative px-6 py-3 bg-slate-900 rounded-xl border border-pink-500 group-hover:border-transparent transition-all duration-300">
+            <span className="text-sm font-black text-white uppercase tracking-wider">Manage</span>
+          </div>
+        </button>
+      </div>
+
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "UINEXHolographicCard",
+    category: "Cards",
+    code: `
+function UINEXHolographicCard() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateXValue = ((y - centerY) / centerY) * -15;
+    const rotateYValue = ((x - centerX) / centerX) * 15;
+    
+    setRotateX(rotateXValue);
+    setRotateY(rotateYValue);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setRotateX(0);
+    setRotateY(0);
+  };
+
+  return (
+    <div className="min-h-screen bg-black flex items-center justify-center p-8 overflow-hidden relative">
+      
+      {/* UINEX Grid Background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(#00ff00 1px, transparent 1px), linear-gradient(90deg, #00ff00 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+        }}></div>
+      </div>
+
+      {/* Glowing Orbs */}
+      <div className="absolute top-10 left-10 w-96 h-96 bg-green-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-blue-500 rounded-full blur-3xl opacity-15 animate-pulse" style={{ animationDelay: '2s' }}></div>
+
+      {/* Floating Lines */}
+      {[...Array(20)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute bg-green-500 opacity-10 animate-pulse"
+          style={{
+            width: '2px',
+            height: (20 + Math.random() * 40) + 'px',
+            left: (i * 5) + '%',
+            top: ((i * 7) % 100) + '%',
+            animationDuration: (1 + Math.random() * 2) + 's',
+            animationDelay: (Math.random() * 1) + 's'
+          }}
+        ></div>
+      ))}
+
+      {/* Card Container */}
+      <div className="relative" style={{ perspective: '1500px' }}>
+        
+        <div 
+          className="relative w-[450px] h-[280px] transition-all duration-500 ease-out cursor-pointer"
+          style={{
+            transform: 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(' + (isHovered ? '1.05' : '1') + ')',
+            transformStyle: 'preserve-3d'
+          }}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={handleMouseLeave}
+        >
+          
+          {/* Outer Glow */}
+          <div className="absolute -inset-2 bg-gradient-to-r from-green-500 via-cyan-500 to-blue-500 rounded-2xl opacity-60 blur-2xl animate-pulse"></div>
+          
+          {/* Main Card */}
+          <div className="relative w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-black rounded-2xl overflow-hidden border-2 border-green-500 shadow-2xl">
+            
+            {/* Holographic Shine Effect */}
+            <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-20 animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400 to-transparent opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+            </div>
+
+            {/* Scan Lines */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, #00ff00 3px, #00ff00 6px)',
+            }}></div>
+
+            {/* Content */}
+            <div className="relative p-6 h-full flex flex-col justify-between z-10">
+              
+              {/* Header */}
+              <div className="flex items-start justify-between">
+                
+                {/* Logo Section */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-green-500 blur-xl opacity-50 animate-pulse"></div>
+                  <div className="relative flex items-center gap-3">
+                    <div className="w-14 h-14 rounded-xl border-2 border-green-500 bg-black flex items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-cyan-500 opacity-20 animate-pulse"></div>
+                      <span className="relative text-2xl font-black text-green-400">⚡</span>
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-black text-green-400 tracking-wider">UINEX</h2>
+                      <p className="text-xs text-cyan-400 font-bold tracking-widest">UIZONCARD</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Status Indicator */}
+                <div className="flex items-center gap-2 px-3 py-1 bg-green-500 bg-opacity-20 border border-green-500 rounded-full">
+                  <div className="relative">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+                  </div>
+                  <span className="text-xs font-black text-green-400 uppercase">Active</span>
+                </div>
+              </div>
+
+              {/* Middle Section */}
+              <div>
+                {/* Chip */}
+                <div className="mb-6">
+                  <div className="relative inline-block">
+                    <div className="w-14 h-11 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-md relative overflow-hidden">
+                      <div className="absolute inset-0 grid grid-cols-3 gap-0.5 p-1.5">
+                        {[...Array(9)].map((_, i) => (
+                          <div key={i} className="bg-yellow-600 rounded-sm"></div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="absolute -inset-1 bg-yellow-500 blur-md opacity-50 animate-pulse"></div>
+                  </div>
+                </div>
+
+                {/* Card Number */}
+                <div className="flex gap-3 mb-4">
+                  {['8765', '4321', '9876', '5432'].map((num, i) => (
+                    <div 
+                      key={i} 
+                      className="group relative"
+                    >
+                      <div className="absolute -inset-0.5 bg-green-500 rounded opacity-0 group-hover:opacity-100 blur transition duration-300"></div>
+                      <div className="relative text-xl font-bold text-green-400 tracking-widest group-hover:text-cyan-400 transition-colors duration-300">
+                        {num}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Features Row */}
+                <div className="flex gap-2">
+                  {[
+                    { icon: '🔐', text: 'Encrypted' },
+                    { icon: '⚡', text: 'Instant' },
+                    { icon: '🌐', text: 'Global' },
+                  ].map((feature, i) => (
+                    <div 
+                      key={i}
+                      className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-900 border border-slate-700 rounded-lg hover:border-green-500 transition-all duration-300 group"
+                    >
+                      <span className="text-sm group-hover:scale-125 transition-transform duration-300">{feature.icon}</span>
+                      <span className="text-xs font-semibold text-gray-500 group-hover:text-green-400 transition-colors duration-300">{feature.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="flex items-end justify-between">
+                
+                {/* Cardholder Info */}
+                <div>
+                  <p className="text-xs text-gray-600 font-semibold mb-1 uppercase tracking-wider">Cardholder</p>
+                  <p className="text-lg font-black text-white tracking-wide">ALEX MATRIX</p>
+                </div>
+
+                {/* Expiry */}
+                <div className="text-right">
+                  <p className="text-xs text-gray-600 font-semibold mb-1 uppercase tracking-wider">Expires</p>
+                  <p className="text-lg font-bold text-green-400 tracking-wider">08/29</p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Corner Accents */}
+            <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-green-500 opacity-50"></div>
+            <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-cyan-500 opacity-50"></div>
+            <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-cyan-500 opacity-50"></div>
+            <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-green-500 opacity-50"></div>
+
+            {/* Bottom Glow Bar */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-cyan-500 to-blue-500 animate-pulse"></div>
+          </div>
+
+          {/* 3D Shadow Layer */}
+          <div 
+            className="absolute inset-0 bg-gradient-to-br from-green-900 to-cyan-900 rounded-2xl opacity-20 blur-xl"
+            style={{
+              transform: 'translateZ(-50px)',
+              zIndex: -1
+            }}
+          ></div>
+        </div>
+
+      </div>
+
+      {/* Info Cards Below */}
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex gap-4">
+        
+        {/* Balance Card */}
+        <div className="relative group">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-green-600 to-cyan-600 rounded-xl opacity-60 group-hover:opacity-100 blur transition duration-300"></div>
+          <div className="relative px-6 py-4 bg-black rounded-xl border border-green-500 group-hover:border-cyan-500 transition-all duration-300">
+            <p className="text-xs text-gray-500 font-semibold mb-1 uppercase">Balance</p>
+            <p className="text-2xl font-black text-green-400">$24,567</p>
+          </div>
+        </div>
+
+        {/* Limit Card */}
+        <div className="relative group">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl opacity-60 group-hover:opacity-100 blur transition duration-300"></div>
+          <div className="relative px-6 py-4 bg-black rounded-xl border border-cyan-500 group-hover:border-blue-500 transition-all duration-300">
+            <p className="text-xs text-gray-500 font-semibold mb-1 uppercase">Limit</p>
+            <p className="text-2xl font-black text-cyan-400">$50,000</p>
+          </div>
+        </div>
+
+        {/* Rewards Card */}
+        <div className="relative group">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl opacity-60 group-hover:opacity-100 blur transition duration-300"></div>
+          <div className="relative px-6 py-4 bg-black rounded-xl border border-blue-500 group-hover:border-purple-500 transition-all duration-300">
+            <p className="text-xs text-gray-500 font-semibold mb-1 uppercase">Points</p>
+            <p className="text-2xl font-black text-blue-400">12,450</p>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Action Buttons */}
+      <div className="absolute top-16 right-16 flex flex-col gap-3">
+        
+        <button className="relative group">
+          <div className="absolute -inset-0.5 bg-green-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+          <div className="relative px-5 py-3 bg-black border-2 border-green-500 rounded-lg group-hover:bg-green-500 transition-all duration-300">
+            <span className="text-sm font-black text-green-400 group-hover:text-black uppercase tracking-wider">Transfer</span>
+          </div>
+        </button>
+
+        <button className="relative group">
+          <div className="absolute -inset-0.5 bg-cyan-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+          <div className="relative px-5 py-3 bg-black border-2 border-cyan-500 rounded-lg group-hover:bg-cyan-500 transition-all duration-300">
+            <span className="text-sm font-black text-cyan-400 group-hover:text-black uppercase tracking-wider">Pay</span>
+          </div>
+        </button>
+
+        <button className="relative group">
+          <div className="absolute -inset-0.5 bg-blue-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+          <div className="relative px-5 py-3 bg-black border-2 border-blue-500 rounded-lg group-hover:bg-blue-500 transition-all duration-300">
+            <span className="text-sm font-black text-blue-400 group-hover:text-black uppercase tracking-wider">History</span>
+          </div>
+        </button>
+
+      </div>
+
+      {/* Tilt Instruction */}
+      <div className="absolute top-16 left-16">
+        <div className="px-4 py-2 bg-black border border-green-500 rounded-full">
+          <p className="text-xs text-green-400 font-bold uppercase tracking-wider flex items-center gap-2">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            Hover to Tilt
+          </p>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "UltraDarkPremiumCard",
+    category: "Cards",
+    code: `
+function UltraDarkPremiumCard() {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [hoveredStat, setHoveredStat] = useState(null);
+  const [cardTilt, setCardTilt] = useState({ x: 0, y: 0 });
+  const [glowPosition, setGlowPosition] = useState({ x: 50, y: 50 });
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = ((y - centerY) / centerY) * -8;
+    const tiltY = ((x - centerX) / centerX) * 8;
+    const glowX = (x / rect.width) * 100;
+    const glowY = (y / rect.height) * 100;
+    
+    setCardTilt({ x: tiltX, y: tiltY });
+    setGlowPosition({ x: glowX, y: glowY });
+  };
+
+  const resetTilt = () => {
+    setCardTilt({ x: 0, y: 0 });
+  };
+
+  return (
+    <div className="min-h-screen bg-black flex items-center justify-center p-8 overflow-hidden relative">
+      
+      {/* Dark Hexagon Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, #ffffff 0.5px, transparent 0.5px)',
+          backgroundSize: '25px 25px',
+        }}></div>
+      </div>
+
+      {/* Subtle Dark Orbs */}
+      <div className="absolute top-20 left-20 w-96 h-96 bg-red-950 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-orange-950 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-yellow-950 rounded-full blur-3xl opacity-15 animate-pulse" style={{ animationDelay: '4s' }}></div>
+
+      {/* Floating Particles */}
+      {[...Array(40)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute bg-white rounded-full opacity-10 animate-pulse"
+          style={{
+            width: (0.5 + Math.random() * 1.5) + 'px',
+            height: (0.5 + Math.random() * 1.5) + 'px',
+            left: (i * 2.5) + '%',
+            top: ((i * 4) % 100) + '%',
+            animationDuration: (3 + Math.random() * 4) + 's',
+            animationDelay: (Math.random() * 3) + 's'
+          }}
+        ></div>
+      ))}
+
+      {/* Main Container */}
+      <div className="relative">
+        
+        {/* Card Container */}
+        <div 
+          className="relative w-[520px] h-[320px] transition-transform duration-500 cursor-pointer"
+          style={{
+            transform: 'rotateX(' + cardTilt.x + 'deg) rotateY(' + cardTilt.y + 'deg) scale(' + (isFlipped ? '0.95' : '1') + ')',
+            transformStyle: 'preserve-3d',
+            perspective: '1500px'
+          }}
+          onClick={() => setIsFlipped(!isFlipped)}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={resetTilt}
+        >
+          
+          {/* Animated Border */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-red-900 via-orange-900 to-yellow-900 rounded-3xl opacity-60 blur-xl animate-pulse"></div>
+          
+          {/* Main Card */}
+          <div className="relative w-full h-full bg-gradient-to-br from-zinc-950 via-neutral-950 to-black rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl">
+            
+            {/* Dynamic Glow Effect */}
+            <div 
+              className="absolute w-64 h-64 bg-orange-600 rounded-full blur-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
+              style={{
+                left: glowPosition.x + '%',
+                top: glowPosition.y + '%',
+                transform: 'translate(-50%, -50%)'
+              }}
+            ></div>
+
+            {/* Noise Texture */}
+            <div className="absolute inset-0 opacity-5" style={{
+              backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="3" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E")',
+            }}></div>
+
+            {/* Scanline Effect */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #ffffff 2px, #ffffff 3px)',
+            }}></div>
+
+            {/* Content */}
+            <div className="relative p-8 h-full flex flex-col justify-between z-10">
+              
+              {/* Top Section */}
+              <div>
+                <div className="flex items-start justify-between mb-8">
+                  
+                  {/* Logo */}
+                  <div className="relative group">
+                    <div className="absolute -inset-2 bg-gradient-to-r from-red-900 to-orange-900 rounded-2xl opacity-0 group-hover:opacity-50 blur-xl transition-opacity duration-500"></div>
+                    <div className="relative w-20 h-20 bg-zinc-900 border border-zinc-800 rounded-2xl flex items-center justify-center overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-red-950 to-orange-950 opacity-50"></div>
+                      <div className="relative">
+                        <div className="absolute inset-0 blur-md">
+                          <span className="text-4xl">🔥</span>
+                        </div>
+                        <span className="relative text-4xl">🔥</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Status Badge */}
+                  <div className="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full group hover:border-orange-900 transition-colors duration-300">
+                    <div className="relative">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                      <div className="absolute inset-0 w-2 h-2 bg-orange-500 rounded-full animate-ping opacity-75"></div>
+                    </div>
+                    <span className="text-xs font-black text-zinc-400 uppercase tracking-widest group-hover:text-orange-500 transition-colors duration-300">Elite</span>
+                  </div>
+                </div>
+
+                {/* Brand Name */}
+                <div className="mb-8">
+                  <h1 className="text-6xl font-black text-white mb-2 tracking-tight">OBSIDIAN</h1>
+                  <div className="flex items-center gap-3">
+                    <div className="h-1 w-16 bg-gradient-to-r from-red-900 via-orange-900 to-yellow-900 rounded-full"></div>
+                    <p className="text-xs text-zinc-600 font-bold uppercase tracking-widest">Black Edition</p>
+                  </div>
+                </div>
+
+                {/* Chip */}
+                <div className="mb-6">
+                  <div className="relative inline-block group">
+                    <div className="absolute -inset-1 bg-yellow-600 blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+                    <div className="relative w-16 h-12 bg-gradient-to-br from-yellow-700 via-yellow-600 to-yellow-500 rounded-lg overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white to-transparent opacity-20"></div>
+                      <div className="absolute inset-0 grid grid-cols-3 gap-0.5 p-2">
+                        {[...Array(9)].map((_, i) => (
+                          <div key={i} className="bg-yellow-800 rounded-sm"></div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Number */}
+                <div className="flex gap-5 mb-6">
+                  {['9876', '5432', '1098', '7654'].map((num, i) => (
+                    <div key={i} className="group relative">
+                      <div className="absolute -inset-1 bg-orange-900 rounded-lg opacity-0 group-hover:opacity-50 blur transition-opacity duration-300"></div>
+                      <div className="relative text-2xl font-bold text-zinc-400 tracking-wider group-hover:text-white transition-colors duration-300">
+                        {num}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Section */}
+              <div>
+                <div className="flex items-end justify-between">
+                  <div>
+                    <p className="text-xs text-zinc-700 font-bold mb-1 uppercase tracking-wider">Cardholder</p>
+                    <p className="text-xl font-black text-white tracking-wide">MARCUS BLACKWELL</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-zinc-700 font-bold mb-1 uppercase tracking-wider">Expires</p>
+                    <p className="text-xl font-black text-zinc-400 tracking-wider">03/29</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Corner Decorations */}
+            <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-zinc-800 opacity-30"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-zinc-800 opacity-30"></div>
+
+            {/* Bottom Accent Line */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-900 via-orange-900 to-yellow-900 opacity-60"></div>
+          </div>
+        </div>
+
+        {/* Stats Cards Below */}
+        <div className="mt-10 grid grid-cols-4 gap-4">
+          
+          {[
+            { icon: '💰', value: '$89,420', label: 'Balance', color: 'red' },
+            { icon: '📊', value: '+24.5%', label: 'Growth', color: 'orange' },
+            { icon: '⚡', value: '156', label: 'Transactions', color: 'yellow' },
+            { icon: '🎯', value: '98.7%', label: 'Score', color: 'green' },
+          ].map((stat, i) => (
+            <div 
+              key={i}
+              className="relative group cursor-pointer"
+              onMouseEnter={() => setHoveredStat(i)}
+              onMouseLeave={() => setHoveredStat(null)}
+            >
+              <div 
+                className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-50 blur transition-opacity duration-300"
+                style={{
+                  backgroundColor: stat.color === 'red' ? '#7f1d1d' : 
+                                   stat.color === 'orange' ? '#7c2d12' : 
+                                   stat.color === 'yellow' ? '#713f12' : '#14532d'
+                }}
+              ></div>
+              <div className="relative p-5 bg-zinc-950 border border-zinc-900 rounded-xl group-hover:border-zinc-800 transition-all duration-300">
+                <div className="text-3xl mb-2 transition-transform duration-300" style={{
+                  transform: hoveredStat === i ? 'scale(1.2) rotate(5deg)' : 'scale(1) rotate(0deg)'
+                }}>
+                  {stat.icon}
+                </div>
+                <div className="text-2xl font-black text-white mb-1">{stat.value}</div>
+                <div className="text-xs text-zinc-600 font-bold uppercase tracking-wide">{stat.label}</div>
+              </div>
+            </div>
+          ))}
+
+        </div>
+
+        {/* Action Panel */}
+        <div className="mt-6 p-6 bg-zinc-950 border border-zinc-900 rounded-2xl">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-sm font-black text-white uppercase tracking-wider">Quick Actions</h3>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-xs text-zinc-600 font-bold">Secure Connection</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3">
+            
+            {[
+              { icon: '💸', label: 'Send', color: 'red' },
+              { icon: '📥', label: 'Receive', color: 'orange' },
+              { icon: '📈', label: 'Invest', color: 'yellow' },
+            ].map((action, i) => (
+              <button 
+                key={i}
+                className="relative group overflow-hidden"
+              >
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    backgroundColor: action.color === 'red' ? '#7f1d1d' : 
+                                     action.color === 'orange' ? '#7c2d12' : '#713f12'
+                  }}
+                ></div>
+                <div className="relative px-6 py-4 bg-zinc-900 border border-zinc-800 rounded-xl group-hover:border-transparent transition-all duration-300">
+                  <div className="text-2xl mb-2">{action.icon}</div>
+                  <span className="text-sm font-black text-zinc-400 group-hover:text-white transition-colors duration-300">{action.label}</span>
+                </div>
+              </button>
+            ))}
+
+          </div>
+        </div>
+
+        {/* Transaction History */}
+        <div className="mt-6 p-6 bg-zinc-950 border border-zinc-900 rounded-2xl">
+          <h3 className="text-sm font-black text-white uppercase tracking-wider mb-4">Recent Activity</h3>
+          
+          <div className="space-y-3">
+            {[
+              { name: 'Amazon Purchase', amount: '-$127.50', time: '2h ago', icon: '🛍️' },
+              { name: 'Salary Deposit', amount: '+$5,200', time: '1d ago', icon: '💼' },
+              { name: 'Netflix Subscription', amount: '-$15.99', time: '3d ago', icon: '🎬' },
+            ].map((transaction, i) => (
+              <div 
+                key={i}
+                className="flex items-center justify-between p-4 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-zinc-700 transition-colors duration-300 group cursor-pointer"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                    {transaction.icon}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-white mb-1">{transaction.name}</p>
+                    <p className="text-xs text-zinc-600 font-semibold">{transaction.time}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg font-black" style={{
+                    color: transaction.amount.startsWith('+') ? '#22c55e' : '#ef4444'
+                  }}>
+                    {transaction.amount}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+      {/* Flip Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div className="px-4 py-2 bg-zinc-950 border border-zinc-800 rounded-full">
+          <p className="text-xs text-zinc-600 font-bold uppercase tracking-wider flex items-center gap-2">
+            <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+            Click Card to Flip
+          </p>
+        </div>
+      </div>
+
     </div>
   );
 }

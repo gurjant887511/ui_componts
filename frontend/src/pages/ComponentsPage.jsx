@@ -88,7 +88,7 @@ function ComponentsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [iframeKey, setIframeKey] = useState(0);
-  const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'cards', 'headers', 'footers'
+  const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'cards', 'headers', 'footers', 'stylish', 'components'
   const [copyMessage, setCopyMessage] = useState('');
 
   // Card subcategories mapping
@@ -222,6 +222,20 @@ function ComponentsPage() {
     if (groupedComponents['Footers']) {
       filteredGrouped['Footers'] = groupedComponents['Footers'];
     }
+  } else if (activeFilter === 'stylish') {
+    // Show only Stylish Variants category
+    displayedCategories = displayedCategories.filter(cat => cat === 'Stylish Variants');
+    filteredGrouped = {};
+    if (groupedComponents['Stylish Variants']) {
+      filteredGrouped['Stylish Variants'] = groupedComponents['Stylish Variants'];
+    }
+  } else if (activeFilter === 'components') {
+    // Show all card-type components (all categories except Headers and Footers)
+    displayedCategories = displayedCategories.filter(cat => cat !== 'Headers' && cat !== 'Footers');
+    filteredGrouped = {};
+    displayedCategories.forEach(cat => {
+      filteredGrouped[cat] = groupedComponents[cat];
+    });
   }
 
   if (loading) return <div className="w-full h-screen flex items-center justify-center text-white bg-slate-900">Loading components from MongoDB...</div>;
@@ -235,11 +249,11 @@ function ComponentsPage() {
         <div className="p-4 sticky top-0 bg-slate-900/95 backdrop-blur z-10 border-b border-white/10">
           <h2 className="text-lg font-bold mb-4">Components</h2>
           
-          {/* Filter Buttons */}
-          <div className="flex gap-2">
+          {/* Filter Buttons - 3x2 Grid */}
+          <div className="grid grid-cols-3 gap-2">
             <button
               onClick={() => setActiveFilter('all')}
-              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
                 activeFilter === 'all'
                   ? 'bg-purple-600 text-white shadow-lg'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
@@ -248,8 +262,18 @@ function ComponentsPage() {
               All
             </button>
             <button
+              onClick={() => setActiveFilter('components')}
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
+                activeFilter === 'components'
+                  ? 'bg-green-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Components
+            </button>
+            <button
               onClick={() => setActiveFilter('cards')}
-              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
                 activeFilter === 'cards'
                   ? 'bg-blue-600 text-white shadow-lg'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
@@ -259,7 +283,7 @@ function ComponentsPage() {
             </button>
             <button
               onClick={() => setActiveFilter('headers')}
-              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
                 activeFilter === 'headers'
                   ? 'bg-cyan-600 text-white shadow-lg'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
@@ -269,13 +293,23 @@ function ComponentsPage() {
             </button>
             <button
               onClick={() => setActiveFilter('footers')}
-              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
                 activeFilter === 'footers'
                   ? 'bg-orange-600 text-white shadow-lg'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
               }`}
             >
               Footers
+            </button>
+            <button
+              onClick={() => setActiveFilter('stylish')}
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
+                activeFilter === 'stylish'
+                  ? 'bg-pink-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Stylish
             </button>
           </div>
         </div>
