@@ -17199,6 +17199,1010 @@ function UltraDarkPremiumCard() {
   `
   },
   {
+    name: "NexusFooter",
+    category: "Footer",
+    code: `function NexusFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredSocial, setHoveredSocial] = useState(null);
+  const [activeTab, setActiveTab] = useState('quick');
+  const [emailInput, setEmailInput] = useState('');
+  return (
+    <div className="min-h-screen bg-black flex items-end relative overflow-hidden">
+      
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      {/* Floating Gradient Orbs */}
+      <div className="absolute top-1/4 left-1/3 w-80 h-80 rounded-full opacity-30 blur-3xl bg-cyan-500 animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full opacity-25 blur-3xl bg-violet-500"></div>
+      <div className="absolute top-1/2 left-1/2 w-72 h-72 rounded-full opacity-20 blur-3xl bg-fuchsia-500"></div>
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Top Wave Divider */}
+        <div className="relative h-24 overflow-hidden">
+          <svg className="absolute bottom-0 w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,64 C240,96 480,32 720,64 C960,96 1200,32 1200,64 L1200,120 L0,120 Z" fill="url(#gradient1)" opacity="0.3"/>
+            <path d="M0,80 C320,48 640,112 960,80 C1120,64 1200,96 1200,96 L1200,120 L0,120 Z" fill="url(#gradient2)" opacity="0.5"/>
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#06b6d4" />
+                <stop offset="100%" stopColor="#8b5cf6" />
+              </linearGradient>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#8b5cf6" />
+                <stop offset="100%" stopColor="#ec4899" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-20">
+            
+            {/* Left Column - Brand & Contact */}
+            <div className="lg:col-span-1">
+              
+              {/* Logo Section */}
+              <div className="mb-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="relative w-14 h-14">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 via-violet-500 to-fuchsia-500 rounded-2xl animate-pulse"></div>
+                    <div className="absolute inset-1 bg-black rounded-xl flex items-center justify-center">
+                      <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-fuchsia-400 bg-clip-text text-transparent">N</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-black bg-gradient-to-r from-cyan-400 to-fuchsia-400 bg-clip-text text-transparent">NEXUS</h2>
+                    <p className="text-xs font-bold tracking-widest text-cyan-500">CREATIVE STUDIO</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                  Transforming ideas into digital masterpieces. We blend creativity with technology to build extraordinary experiences.
+                </p>
+              </div>
+
+              {/* Contact Info Cards */}
+              <div className="space-y-4">
+                {[
+                  { icon: '📧', label: 'Email', value: 'hello@nexus.studio' },
+                  { icon: '📱', label: 'Phone', value: '+1 (555) 123-4567' },
+                  { icon: '📍', label: 'Location', value: 'San Francisco, CA' }
+                ].map((item, i) => (
+                  <div 
+                    key={i}
+                    className="flex items-center gap-4 p-4 bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800 rounded-xl hover:border-cyan-500 transition-all duration-300 cursor-pointer group"
+                  >
+                    <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                    <div>
+                      <p className="text-xs text-gray-500 font-semibold">{item.label}</p>
+                      <p className="text-sm text-white font-medium">{item.value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Middle Column - Quick Links with Tabs */}
+            <div className="lg:col-span-1">
+              <h3 className="text-xl font-black text-white mb-6 flex items-center gap-2">
+                <span className="text-cyan-400">◆</span> EXPLORE
+              </h3>
+
+              {/* Tab Buttons */}
+              <div className="flex gap-2 mb-6">
+                {[
+                  { id: 'quick', label: 'Quick Links' },
+                  { id: 'resources', label: 'Resources' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className="px-5 py-2 text-xs font-bold rounded-lg transition-all duration-300"
+                    style={{
+                      backgroundColor: activeTab === tab.id ? '#06b6d4' : '#0f172a',
+                      color: activeTab === tab.id ? '#000' : '#64748b',
+                      transform: activeTab === tab.id ? 'translateY(-2px)' : 'translateY(0)'
+                    }}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Tab Content */}
+              <div className="space-y-3">
+                {activeTab === 'quick' ? (
+                  <>
+                    {['About Us', 'Our Work', 'Services', 'Pricing', 'Contact', 'Careers'].map((link) => (
+                      <a
+                        key={link}
+                        href="#"
+                        className="flex items-center justify-between p-3 rounded-lg transition-all duration-300 group"
+                        style={{
+                          backgroundColor: hoveredLink === link ? '#0f172a' : 'transparent',
+                          borderLeft: hoveredLink === link ? '3px solid #06b6d4' : '3px solid transparent'
+                        }}
+                        onMouseEnter={() => setHoveredLink(link)}
+                        onMouseLeave={() => setHoveredLink(null)}
+                      >
+                        <span className="text-sm font-semibold" style={{
+                          color: hoveredLink === link ? '#06b6d4' : '#94a3b8'
+                        }}>
+                          {link}
+                        </span>
+                        <span className="text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
+                      </a>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {['Blog & Articles', 'Design Resources', 'Free Templates', 'UI Kit', 'Documentation', 'API Reference'].map((link) => (
+                      <a
+                        key={link}
+                        href="#"
+                        className="flex items-center justify-between p-3 rounded-lg transition-all duration-300 group"
+                        style={{
+                          backgroundColor: hoveredLink === link ? '#0f172a' : 'transparent',
+                          borderLeft: hoveredLink === link ? '3px solid #8b5cf6' : '3px solid transparent'
+                        }}
+                        onMouseEnter={() => setHoveredLink(link)}
+                        onMouseLeave={() => setHoveredLink(null)}
+                      >
+                        <span className="text-sm font-semibold" style={{
+                          color: hoveredLink === link ? '#8b5cf6' : '#94a3b8'
+                        }}>
+                          {link}
+                        </span>
+                        <span className="text-violet-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
+                      </a>
+                    ))}
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* Right Column - Newsletter */}
+            <div className="lg:col-span-1">
+              <div className="relative p-8 rounded-2xl overflow-hidden">
+                {/* Gradient Border Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 via-violet-500 to-fuchsia-500 opacity-20 rounded-2xl"></div>
+                <div className="absolute inset-[2px] bg-black rounded-2xl"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-black text-green-500 tracking-wider">LIVE NOW</span>
+                  </div>
+
+                  <h3 className="text-2xl font-black text-white mb-3">
+                    Stay In The Loop 🚀
+                  </h3>
+                  
+                  <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Join 25,000+ creators getting weekly insights on design, development, and digital trends.
+                  </p>
+
+                  {/* Newsletter Form */}
+                  <div className="space-y-3 mb-6">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={emailInput}
+                      onChange={(e) => setEmailInput(e.target.value)}
+                      className="w-full px-4 py-3 bg-slate-900 border-2 border-slate-700 rounded-xl text-white text-sm font-medium focus:outline-none focus:border-cyan-500 transition-all duration-300"
+                    />
+                    <button className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-black text-sm rounded-xl hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300">
+                      SUBSCRIBE FREE →
+                    </button>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-800">
+                    {[
+                      { num: '25K+', label: 'Subscribers' },
+                      { num: '4.9★', label: 'Rating' },
+                      { num: '100%', label: 'Free' }
+                    ].map((stat, i) => (
+                      <div key={i} className="text-center">
+                        <div className="text-lg font-black bg-gradient-to-r from-cyan-400 to-fuchsia-400 bg-clip-text text-transparent">{stat.num}</div>
+                        <div className="text-xs text-gray-500 font-semibold">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Social Media Bar */}
+          <div className="mb-16 p-6 bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800 rounded-2xl">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <h4 className="text-sm font-black text-white mb-1">CONNECT WITH US</h4>
+                <p className="text-xs text-gray-500">Follow our journey across platforms</p>
+              </div>
+              
+              <div className="flex gap-3">
+                {[
+                  { name: 'Twitter', icon: '𝕏', color: '#000000', hoverColor: '#1da1f2' },
+                  { name: 'LinkedIn', icon: 'in', color: '#0077b5', hoverColor: '#00a0dc' },
+                  { name: 'GitHub', icon: 'GH', color: '#333333', hoverColor: '#666666' },
+                  { name: 'Dribbble', icon: 'Dr', color: '#ea4c89', hoverColor: '#f26798' },
+                  { name: 'Behance', icon: 'Be', color: '#1769ff', hoverColor: '#4285f4' }
+                ].map((social) => (
+                  <a
+                    key={social.name}
+                    href="#"
+                    className="w-12 h-12 flex items-center justify-center rounded-xl font-black text-xs border-2 transition-all duration-300"
+                    style={{
+                      backgroundColor: hoveredSocial === social.name ? social.hoverColor : 'transparent',
+                      borderColor: hoveredSocial === social.name ? social.hoverColor : '#1e293b',
+                      color: hoveredSocial === social.name ? '#ffffff' : '#64748b',
+                      transform: hoveredSocial === social.name ? 'translateY(-4px) rotate(5deg)' : 'translateY(0) rotate(0deg)'
+                    }}
+                    onMouseEnter={() => setHoveredSocial(social.name)}
+                    onMouseLeave={() => setHoveredSocial(null)}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Footer */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-slate-800">
+            
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <p className="text-sm text-gray-500 font-medium">
+                © 2025 Nexus Studio. All rights reserved.
+              </p>
+              <div className="flex gap-5 text-sm">
+                {['Privacy', 'Terms', 'Cookies', 'Sitemap'].map((item) => (
+                  <a 
+                    key={item}
+                    href="#" 
+                    className="font-semibold transition-all duration-300"
+                    style={{
+                      color: hoveredLink === item ? '#06b6d4' : '#64748b',
+                      textDecoration: hoveredLink === item ? 'underline' : 'none'
+                    }}
+                    onMouseEnter={() => setHoveredLink(item)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Back to Top Button */}
+            <button className="group flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full font-bold text-sm text-white hover:scale-105 transition-transform duration-300">
+              <span>Back to Top</span>
+              <span className="group-hover:-translate-y-1 transition-transform duration-300">↑</span>
+            </button>
+
+          </div>
+
+        </div>
+
+        {/* Bottom Animated Gradient */}
+        <div className="h-2 mt-8 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-violet-500 to-fuchsia-500 animate-pulse"></div>
+        </div>
+
+      </footer>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "QuantumFooter",
+    category: "Footer",
+    code: `
+function QuantumFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredStat, setHoveredStat] = useState(null);
+  const [activeService, setActiveService] = useState(null);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-black flex items-end relative overflow-hidden">
+      
+      {/* Hexagon Pattern Background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 40px, #a855f7 40px, #a855f7 41px), repeating-linear-gradient(60deg, transparent, transparent 40px, #6366f1 40px, #6366f1 41px), repeating-linear-gradient(120deg, transparent, transparent 40px, #ec4899 40px, #ec4899 41px)'
+        }}></div>
+      </div>
+
+      {/* Glowing Particles */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-25 blur-3xl bg-indigo-500"></div>
+      <div className="absolute bottom-1/3 right-1/3 w-80 h-80 rounded-full opacity-20 blur-3xl bg-pink-500"></div>
+      <div className="absolute top-1/2 left-1/2 w-72 h-72 rounded-full opacity-15 blur-3xl bg-purple-500"></div>
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Animated Top Border */}
+        <div className="flex items-center justify-center mb-12">
+          <div className="w-full max-w-7xl px-8">
+            <div className="flex items-center gap-4">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></div>
+                <div className="w-3 h-3 rounded-full bg-purple-500 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-3 h-3 rounded-full bg-pink-500 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+              </div>
+              <div className="h-px flex-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-pink-500 animate-pulse"></div>
+                <div className="w-3 h-3 rounded-full bg-purple-500 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-3 h-3 rounded-full bg-indigo-500 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-16">
+          
+          {/* Main Grid Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+            
+            {/* Brand Section - 4 columns */}
+            <div className="lg:col-span-4">
+              
+              {/* Logo with Animation */}
+              <div className="mb-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="relative w-16 h-16 group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0.5 bg-black rounded-2xl"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-3xl font-black bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Q</span>
+                    </div>
+                    <div className="absolute -inset-1 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
+                  </div>
+                  <div>
+                    <h2 className="text-4xl font-black text-white tracking-tight">QUANTUM</h2>
+                    <p className="text-xs font-bold tracking-widest bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">INNOVATIONS</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                  Pioneering the future of digital innovation. We create cutting-edge solutions that push the boundaries of what's possible.
+                </p>
+              </div>
+
+              {/* Awards & Recognition */}
+              <div className="space-y-3">
+                <h4 className="text-xs font-black text-white tracking-wider mb-4 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-gradient-to-b from-indigo-500 to-pink-500"></span>
+                  AWARDS & RECOGNITION
+                </h4>
+                {[
+                  { award: 'Best Digital Agency 2025', org: 'Webby Awards' },
+                  { award: 'Innovation Excellence', org: 'Tech Summit' },
+                  { award: 'Design of the Year', org: 'Awwwards' }
+                ].map((item, i) => (
+                  <div 
+                    key={i}
+                    className="flex items-start gap-3 p-3 bg-gradient-to-r from-slate-900/50 to-transparent border-l-2 border-indigo-500/50 hover:border-indigo-500 transition-all duration-300 cursor-pointer group"
+                  >
+                    <span className="text-xl group-hover:scale-110 transition-transform duration-300">🏆</span>
+                    <div>
+                      <p className="text-sm font-bold text-white">{item.award}</p>
+                      <p className="text-xs text-gray-500">{item.org}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Services Grid - 5 columns */}
+            <div className="lg:col-span-5">
+              <h3 className="text-xl font-black text-white mb-8 flex items-center gap-3">
+                <span className="text-2xl">⚡</span>
+                OUR SERVICES
+              </h3>
+
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { name: 'Web Design', icon: '🎨', color: '#6366f1', desc: 'Beautiful interfaces' },
+                  { name: 'Development', icon: '💻', color: '#8b5cf6', desc: 'Powerful solutions' },
+                  { name: 'Mobile Apps', icon: '📱', color: '#a855f7', desc: 'iOS & Android' },
+                  { name: 'Branding', icon: '✨', color: '#c026d3', desc: 'Unique identity' },
+                  { name: 'Marketing', icon: '📊', color: '#d946ef', desc: 'Growth strategy' },
+                  { name: 'Consulting', icon: '💡', color: '#ec4899', desc: 'Expert guidance' }
+                ].map((service, i) => (
+                  <div
+                    key={i}
+                    className="p-5 border-2 rounded-xl cursor-pointer transition-all duration-300 group"
+                    style={{
+                      borderColor: activeService === i ? service.color : '#1e293b',
+                      transform: activeService === i ? 'translateY(-4px)' : 'translateY(0)',
+                      backgroundColor: activeService === i ? service.color + '15' : 'rgba(15, 23, 42, 0.5)'
+                    }}
+                    onMouseEnter={() => setActiveService(i)}
+                    onMouseLeave={() => setActiveService(null)}
+                  >
+                    <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">{service.icon}</div>
+                    <h5 className="text-sm font-black text-white mb-1">{service.name}</h5>
+                    <p className="text-xs text-gray-500">{service.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact & CTA - 3 columns */}
+            <div className="lg:col-span-3">
+              
+              {/* Quick Contact */}
+              <div className="mb-8 p-6 bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-500/30 rounded-2xl backdrop-blur-sm">
+                <h4 className="text-sm font-black text-white mb-4">GET IN TOUCH</h4>
+                
+                <div className="space-y-3 mb-6">
+                  <a href="#" className="flex items-center gap-3 text-sm text-gray-400 hover:text-indigo-400 transition-colors duration-300">
+                    <span className="text-lg">📧</span>
+                    <span className="font-medium">info@quantum.io</span>
+                  </a>
+                  <a href="#" className="flex items-center gap-3 text-sm text-gray-400 hover:text-purple-400 transition-colors duration-300">
+                    <span className="text-lg">💬</span>
+                    <span className="font-medium">Live Chat</span>
+                  </a>
+                  <a href="#" className="flex items-center gap-3 text-sm text-gray-400 hover:text-pink-400 transition-colors duration-300">
+                    <span className="text-lg">📞</span>
+                    <span className="font-medium">+1 888 999 0000</span>
+                  </a>
+                </div>
+
+                <button className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 text-white text-sm font-black rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300">
+                  START A PROJECT →
+                </button>
+              </div>
+
+              {/* Newsletter Mini */}
+              <div className="p-5 bg-black/50 border border-slate-700 rounded-xl">
+                <h5 className="text-xs font-black text-white mb-3">NEWSLETTER</h5>
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white text-xs mb-3 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
+                />
+                <button className="w-full px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xs font-bold rounded-lg hover:opacity-90 transition-opacity duration-300">
+                  SUBSCRIBE
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Stats Banner */}
+          <div className="mb-16 p-8 bg-gradient-to-r from-indigo-900/40 via-purple-900/40 to-pink-900/40 border-2 border-indigo-500/20 rounded-2xl backdrop-blur-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { number: '850+', label: 'Projects Delivered', icon: '🚀' },
+                { number: '95%', label: 'Client Satisfaction', icon: '⭐' },
+                { number: '120+', label: 'Team Experts', icon: '👥' },
+                { number: '25+', label: 'Countries Served', icon: '🌍' }
+              ].map((stat, i) => (
+                <div
+                  key={i}
+                  className="text-center cursor-pointer group"
+                  onMouseEnter={() => setHoveredStat(i)}
+                  onMouseLeave={() => setHoveredStat(null)}
+                >
+                  <div className="text-3xl mb-2 group-hover:scale-125 transition-transform duration-300">{stat.icon}</div>
+                  <div 
+                    className="text-4xl font-black mb-2 transition-all duration-300"
+                    style={{
+                      background: hoveredStat === i 
+                        ? 'linear-gradient(to right, #6366f1, #ec4899)' 
+                        : 'linear-gradient(to right, #6366f1, #a855f7)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}
+                  >
+                    {stat.number}
+                  </div>
+                  <div className="text-xs font-semibold text-gray-400">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16 pb-16 border-b border-slate-800">
+            {[
+              { title: 'Company', links: ['About', 'Team', 'Careers', 'News'] },
+              { title: 'Solutions', links: ['Enterprise', 'Startups', 'Agencies', 'Ecommerce'] },
+              { title: 'Resources', links: ['Blog', 'Guides', 'Events', 'Support'] },
+              { title: 'Products', links: ['Platform', 'Analytics', 'Security', 'API'] },
+              { title: 'Legal', links: ['Privacy', 'Terms', 'License', 'Compliance'] }
+            ].map((section, idx) => (
+              <div key={idx}>
+                <h4 className="text-xs font-black text-white tracking-wider mb-5 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500"></span>
+                  {section.title.toUpperCase()}
+                </h4>
+                <ul className="space-y-3">
+                  {section.links.map((link) => (
+                    <li key={link}>
+                      <a
+                        href="#"
+                        className="text-sm font-medium transition-all duration-300 flex items-center gap-2 group"
+                        style={{
+                          color: hoveredLink === link ? '#a855f7' : '#94a3b8'
+                        }}
+                        onMouseEnter={() => setHoveredLink(link)}
+                        onMouseLeave={() => setHoveredLink(null)}
+                      >
+                        <span className="w-0 group-hover:w-2 h-px bg-purple-500 transition-all duration-300"></span>
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer Bottom */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            {/* Copyright & Links */}
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <p className="text-sm text-gray-500 font-medium flex items-center gap-2">
+                <span className="text-lg">©</span> 2025 Quantum Innovations
+              </p>
+              <div className="flex gap-6 text-sm">
+                {['Privacy Policy', 'Terms of Use', 'Cookie Settings'].map((item) => (
+                  <a 
+                    key={item}
+                    href="#" 
+                    className="font-semibold transition-all duration-300"
+                    style={{
+                      color: hoveredLink === item ? '#ec4899' : '#64748b',
+                      borderBottom: hoveredLink === item ? '2px solid #ec4899' : '2px solid transparent'
+                    }}
+                    onMouseEnter={() => setHoveredLink(item)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-bold text-gray-500">FOLLOW US:</span>
+              {[
+                { name: 'LinkedIn', icon: 'Li', color: '#0077b5' },
+                { name: 'Twitter', icon: '𝕏', color: '#000000' },
+                { name: 'Instagram', icon: 'Ig', color: '#e1306c' },
+                { name: 'Facebook', icon: 'Fb', color: '#1877f2' },
+                { name: 'YouTube', icon: 'Yt', color: '#ff0000' }
+              ].map((social) => (
+                <a
+                  key={social.name}
+                  href="#"
+                  className="w-10 h-10 flex items-center justify-center border-2 rounded-lg font-black text-xs transition-all duration-300"
+                  style={{
+                    borderColor: hoveredLink === social.name ? social.color : '#1e293b',
+                    backgroundColor: hoveredLink === social.name ? social.color : 'transparent',
+                    color: hoveredLink === social.name ? '#ffffff' : '#64748b',
+                    transform: hoveredLink === social.name ? 'translateY(-3px) rotate(-5deg)' : 'translateY(0) rotate(0deg)'
+                  }}
+                  onMouseEnter={() => setHoveredLink(social.name)}
+                  onMouseLeave={() => setHoveredLink(null)}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Animated Bottom Gradient */}
+        <div className="h-1 mt-10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 opacity-0 hover:opacity-100 transition-opacity duration-1000"></div>
+        </div>
+
+      </footer>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "VortexFooter",
+    category: "Footer",
+    code: `
+function VortexFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredFeature, setHoveredFeature] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [emailValue, setEmailValue] = useState('');
+  const [isEmailFocused, setIsEmailFocused] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-black flex items-end relative overflow-hidden">
+      
+      {/* Radial Grid Background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 2px 2px, #10b981 1px, transparent 0)',
+          backgroundSize: '40px 40px'
+        }}></div>
+      </div>
+
+      {/* Animated Gradient Orbs */}
+      <div className="absolute top-0 left-0 w-96 h-96 rounded-full opacity-20 blur-3xl bg-emerald-500 animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl bg-teal-500"></div>
+      <div className="absolute top-1/2 left-1/2 w-80 h-80 rounded-full opacity-15 blur-3xl bg-green-500"></div>
+
+      <footer className="relative z-10 w-full">
+        
+        {/* Glowing Top Border */}
+        <div className="relative h-1 mb-16">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500 to-transparent blur-md"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          
+          {/* Hero Section with CTA */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+            
+            {/* Left - Brand & Mission */}
+            <div>
+              {/* Logo Section */}
+              <div className="mb-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="relative w-14 h-14">
+                    <div className="absolute inset-0 bg-emerald-500 rounded-xl blur-md"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-xl"></div>
+                    <div className="absolute inset-0.5 bg-black rounded-lg flex items-center justify-center">
+                      <span className="text-2xl font-black bg-gradient-to-br from-emerald-400 to-teal-400 bg-clip-text text-transparent">V</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-black text-white tracking-tight">VORTEX</h2>
+                    <p className="text-xs font-bold tracking-widest text-emerald-400">TECH SOLUTIONS</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-400 text-base leading-relaxed mb-8">
+                  Empowering businesses with next-generation technology solutions. We turn complex challenges into elegant digital experiences.
+                </p>
+
+                {/* Mission Statement */}
+                <div className="p-6 bg-gradient-to-br from-emerald-900 bg-opacity-20 border-l-4 border-emerald-500 rounded-r-xl mb-8">
+                  <h4 className="text-sm font-black text-emerald-400 mb-2">OUR MISSION</h4>
+                  <p className="text-sm text-gray-400 leading-relaxed">
+                    To revolutionize the digital landscape by delivering innovative solutions that drive growth and success.
+                  </p>
+                </div>
+              </div>
+
+              {/* Key Features */}
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { title: '24/7 Support', icon: '🛟', color: '#10b981' },
+                  { title: 'Fast Delivery', icon: '⚡', color: '#14b8a6' },
+                  { title: 'Secure & Safe', icon: '🔒', color: '#059669' },
+                  { title: 'Best Quality', icon: '✓', color: '#0d9488' }
+                ].map((feature, i) => (
+                  <div
+                    key={i}
+                    className="p-4 border-2 rounded-xl cursor-pointer transition-all duration-300 group"
+                    style={{
+                      borderColor: hoveredFeature === i ? feature.color : '#1f2937',
+                      backgroundColor: hoveredFeature === i ? feature.color + '10' : 'transparent',
+                      transform: hoveredFeature === i ? 'translateY(-4px)' : 'translateY(0)'
+                    }}
+                    onMouseEnter={() => setHoveredFeature(i)}
+                    onMouseLeave={() => setHoveredFeature(null)}
+                  >
+                    <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
+                    <div className="text-sm font-bold text-white">{feature.title}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right - Newsletter & Contact */}
+            <div>
+              
+              {/* Premium Newsletter Box */}
+              <div className="relative p-8 rounded-2xl overflow-hidden mb-8">
+                {/* Animated Border */}
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 opacity-30"></div>
+                <div className="absolute inset-0.5 bg-gradient-to-br from-gray-900 to-black rounded-2xl"></div>
+                
+                <div className="relative z-10">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 bg-opacity-20 border border-emerald-500 rounded-full mb-6">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-black text-emerald-400 tracking-wider">EXCLUSIVE ACCESS</span>
+                  </div>
+
+                  <h3 className="text-3xl font-black text-white mb-3">
+                    Join Our Elite<br/>Community
+                  </h3>
+                  
+                  <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+                    Get exclusive industry insights, premium resources, and early access to our latest innovations.
+                  </p>
+
+                  {/* Email Input */}
+                  <div className="space-y-4 mb-6">
+                    <div className="relative">
+                      <input
+                        type="email"
+                        placeholder="Enter your email address"
+                        value={emailValue}
+                        onChange={(e) => setEmailValue(e.target.value)}
+                        onFocus={() => setIsEmailFocused(true)}
+                        onBlur={() => setIsEmailFocused(false)}
+                        className="w-full px-5 py-4 bg-black border-2 rounded-xl text-white text-sm font-medium focus:outline-none transition-all duration-300"
+                        style={{
+                          borderColor: isEmailFocused ? '#10b981' : '#374151'
+                        }}
+                      />
+                      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-emerald-500 opacity-50">
+                        📧
+                      </div>
+                    </div>
+                    
+                    <button className="w-full px-6 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-black font-black text-sm rounded-xl hover:scale-105 hover:shadow-xl hover:shadow-emerald-500 transition-all duration-300">
+                      GET STARTED NOW →
+                    </button>
+                  </div>
+
+                  {/* Trust Indicators */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+                    <div className="text-center">
+                      <div className="text-xl font-black text-emerald-400">50K+</div>
+                      <div className="text-xs text-gray-500">Subscribers</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xl font-black text-emerald-400">4.9★</div>
+                      <div className="text-xs text-gray-500">Rating</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xl font-black text-emerald-400">100%</div>
+                      <div className="text-xs text-gray-500">Privacy</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Contact */}
+              <div className="grid grid-cols-2 gap-4">
+                <a href="#" className="p-4 bg-gray-900 border border-gray-800 rounded-xl hover:border-emerald-500 transition-all duration-300 group">
+                  <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">💬</div>
+                  <div className="text-xs font-bold text-white">Live Chat</div>
+                  <div className="text-xs text-gray-500">24/7 Support</div>
+                </a>
+                <a href="#" className="p-4 bg-gray-900 border border-gray-800 rounded-xl hover:border-teal-500 transition-all duration-300 group">
+                  <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">📞</div>
+                  <div className="text-xs font-bold text-white">Call Us</div>
+                  <div className="text-xs text-gray-500">Quick Response</div>
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Links Section with Category Filter */}
+          <div className="mb-16">
+            
+            {/* Category Filter */}
+            <div className="flex items-center gap-4 mb-10 pb-6 border-b border-gray-800">
+              <span className="text-sm font-black text-gray-500">BROWSE:</span>
+              {['all', 'company', 'services', 'resources'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className="px-5 py-2 text-xs font-bold rounded-full transition-all duration-300"
+                  style={{
+                    backgroundColor: selectedCategory === cat ? '#10b981' : '#1f2937',
+                    color: selectedCategory === cat ? '#000' : '#9ca3af',
+                    transform: selectedCategory === cat ? 'translateY(-2px)' : 'translateY(0)'
+                  }}
+                >
+                  {cat.toUpperCase()}
+                </button>
+              ))}
+            </div>
+
+            {/* Links Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+              {[
+                {
+                  category: 'company',
+                  title: 'Company',
+                  icon: '🏢',
+                  links: ['About Us', 'Our Team', 'Careers', 'Press Kit', 'Contact']
+                },
+                {
+                  category: 'services',
+                  title: 'Services',
+                  icon: '⚙️',
+                  links: ['Web Development', 'Mobile Apps', 'Cloud Solutions', 'AI & ML', 'Consulting']
+                },
+                {
+                  category: 'resources',
+                  title: 'Resources',
+                  icon: '📚',
+                  links: ['Blog', 'Case Studies', 'Whitepapers', 'Webinars', 'Documentation']
+                },
+                {
+                  category: 'company',
+                  title: 'Legal',
+                  icon: '⚖️',
+                  links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'GDPR', 'Licenses']
+                }
+              ].filter(section => selectedCategory === 'all' || section.category === selectedCategory).map((section, idx) => (
+                <div key={idx}>
+                  <div className="flex items-center gap-2 mb-6">
+                    <span className="text-xl">{section.icon}</span>
+                    <h4 className="text-sm font-black text-white tracking-wide">{section.title}</h4>
+                  </div>
+                  <ul className="space-y-3">
+                    {section.links.map((link) => (
+                      <li key={link}>
+                        <a
+                          href="#"
+                          className="text-sm font-medium transition-all duration-300 flex items-center gap-2 group"
+                          style={{
+                            color: hoveredLink === link ? '#10b981' : '#9ca3af'
+                          }}
+                          onMouseEnter={() => setHoveredLink(link)}
+                          onMouseLeave={() => setHoveredLink(null)}
+                        >
+                          <span className="w-0 group-hover:w-2 h-0.5 bg-emerald-500 transition-all duration-300"></span>
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* Social Proof Section */}
+          <div className="mb-16 p-8 bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+              
+              {/* Trusted By */}
+              <div>
+                <h4 className="text-xs font-black text-gray-500 mb-4">TRUSTED BY</h4>
+                <div className="flex flex-wrap gap-3">
+                  {['Google', 'Meta', 'Amazon', 'Netflix'].map((company) => (
+                    <div key={company} className="px-4 py-2 bg-black border border-gray-700 rounded-lg text-xs font-bold text-gray-400 hover:text-emerald-400 hover:border-emerald-500 transition-all duration-300 cursor-pointer">
+                      {company}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Achievements */}
+              <div>
+                <h4 className="text-xs font-black text-gray-500 mb-4">ACHIEVEMENTS</h4>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🏆</span>
+                    <span className="text-xs text-gray-400">Best Startup 2025</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">⭐</span>
+                    <span className="text-xs text-gray-400">Top Rated Service</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Connect */}
+              <div>
+                <h4 className="text-xs font-black text-gray-500 mb-4">CONNECT WITH US</h4>
+                <div className="flex gap-3">
+                  {[
+                    { name: 'GitHub', icon: 'GH', color: '#333' },
+                    { name: 'Twitter', icon: '𝕏', color: '#1da1f2' },
+                    { name: 'LinkedIn', icon: 'in', color: '#0077b5' },
+                    { name: 'Discord', icon: 'Dc', color: '#5865f2' }
+                  ].map((social) => (
+                    <a
+                      key={social.name}
+                      href="#"
+                      className="w-10 h-10 flex items-center justify-center border-2 rounded-lg font-black text-xs transition-all duration-300"
+                      style={{
+                        borderColor: hoveredLink === social.name ? '#10b981' : '#374151',
+                        backgroundColor: hoveredLink === social.name ? '#10b981' : 'transparent',
+                        color: hoveredLink === social.name ? '#000' : '#9ca3af',
+                        transform: hoveredLink === social.name ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)'
+                      }}
+                      onMouseEnter={() => setHoveredLink(social.name)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Bottom Footer */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-gray-800">
+            
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <p className="text-sm text-gray-500 font-medium">
+                © 2025 Vortex Tech. Built with 💚 in Silicon Valley
+              </p>
+              <div className="flex gap-6 text-sm">
+                {['Sitemap', 'Accessibility', 'Security'].map((item) => (
+                  <a 
+                    key={item}
+                    href="#" 
+                    className="font-medium transition-all duration-300"
+                    style={{
+                      color: hoveredLink === item ? '#10b981' : '#6b7280'
+                    }}
+                    onMouseEnter={() => setHoveredLink(item)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Status Badge */}
+            <div className="flex items-center gap-3 px-5 py-2 bg-black border border-emerald-500 rounded-full">
+              <div className="relative">
+                <div className="w-2.5 h-2.5 bg-emerald-400 rounded-full"></div>
+                <div className="absolute inset-0 w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></div>
+              </div>
+              <span className="text-xs font-black text-emerald-400 tracking-wider">SYSTEMS OPERATIONAL</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Bottom Gradient Strip */}
+        <div className="h-1.5 mt-12 bg-gradient-to-r from-emerald-500 via-teal-500 to-green-500"></div>
+
+      </footer>
+    </div>
+  );
+}
+  `
+  },
+  {
     name: "Header",
     category: "Cards",
     code: `
