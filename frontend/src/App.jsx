@@ -27,27 +27,7 @@ import {
 } from "@codesandbox/sandpack-react";
 import { atomDark } from "@codesandbox/sandpack-themes";
 import ComponentLivePreview from './components/LivePreview';
-import ComponentShowcase from './imports/StylishComponents';
 
-// Import all card and button components
-import AllInOneShowcase from './imports/AllInOneShowcase';
-import CyberGlowInfoCard from './imports/CyberGlowInfoCard';
-import GlassButtonComp from './imports/GlassButton';
-import ButtonExamples from './imports/ButtonExamples';
-import CardExample from './imports/CardExample';
-import InteractiveCard from './imports/InteractiveCard';
-import StylishLoginCard from './imports/StylishLoginCard';
-import UsersCardList from './imports/UsersCardList';
-import TextHoverEffect from './imports/TextHoverEffect';
-import NeonGlowText from './imports/NeonGlowText';
-import ShimmerText from './imports/ShimmerText';
-import AuroraGlass from './imports/AuroraGlass';
-import StylishUserCard from './imports/StylishUserCard';
-import SignupCard from './imports/SignupCard';
-import ContactCard from './imports/ContactCard';
-import FileUploadCard from './imports/FileUploadCard';
-import ForgotPasswordCard from './imports/ForgotPasswordCard';
-import CometCard from './imports/CometCard';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:7000/api';
 
