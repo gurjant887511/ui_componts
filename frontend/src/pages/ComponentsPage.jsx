@@ -90,6 +90,7 @@ function ComponentsPage() {
   const [iframeKey, setIframeKey] = useState(0);
   const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'cards', 'headers', 'footers', 'stylish', 'components'
   const [copyMessage, setCopyMessage] = useState('');
+  const [expandedCategories, setExpandedCategories] = useState({}); // Track expanded/collapsed categories
 
   // Card subcategories mapping
   const CARD_SUBCATEGORIES = {
@@ -181,6 +182,14 @@ function ComponentsPage() {
         }, {});
         
         setGroupedComponents(grouped);
+        
+        // Initialize expandedCategories with all categories collapsed (false)
+        const initialExpandedState = {};
+        Object.keys(grouped).forEach(category => {
+          initialExpandedState[category] = false;
+        });
+        setExpandedCategories(initialExpandedState);
+        
         if (data.length > 0) {
           setSelectedId(data[0]._id);
         }
@@ -193,6 +202,15 @@ function ComponentsPage() {
     }
     fetchComponents();
   }, []);
+
+  // Reset expanded categories when filter changes
+  useEffect(() => {
+    const initialExpandedState = {};
+    Object.keys(groupedComponents).forEach(category => {
+      initialExpandedState[category] = false;
+    });
+    setExpandedCategories(initialExpandedState);
+  }, [activeFilter]);
 
   const current = components.find(c => c._id === selectedId);
   const code = current?.code || '';
@@ -242,6 +260,13 @@ function ComponentsPage() {
   if (error) return <div className="w-full h-screen flex items-center justify-center text-red-400 bg-slate-900">Error: {error}</div>;
   if (components.length === 0) return <div className="w-full h-screen flex items-center justify-center text-gray-400 bg-slate-900">No components found. Run: npm run seed</div>;
 
+  const toggleCategory = (category) => {
+    setExpandedCategories(prev => ({
+      ...prev,
+      [category]: !prev[category]
+    }));
+  };
+
   return (
     <div className="flex h-screen w-screen gap-0 overflow-hidden">
       {/* Left Sidebar */}
@@ -279,7 +304,7 @@ function ComponentsPage() {
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
               }`}
             >
-              Cards
+              Components
             </button>
             <button
               onClick={() => setActiveFilter('headers')}
@@ -314,30 +339,41 @@ function ComponentsPage() {
           </div>
         </div>
         
-        <div className="p-3 space-y-6">
+        <div className="p-3 space-y-2">
           {displayedCategories.map((category) => (
             <div key={category}>
-              <h3 className="text-xs font-bold text-purple-400 uppercase tracking-widest px-2 py-2 mb-2">
-                {category}
-              </h3>
-              <div className="space-y-1">
-                {filteredGrouped[category].map((comp) => (
-                  <button
-                    key={comp._id}
-                    onClick={() => {
-                      setSelectedId(comp._id);
-                      setIframeKey(prev => prev + 1);
-                    }}
-                    className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium ${
-                      selectedId === comp._id
-                        ? 'bg-blue-600 text-white shadow-lg'
-                        : 'bg-white/5 hover:bg-white/10 text-gray-200'
-                    }`}
-                  >
-                    {comp.name}
-                  </button>
-                ))}
-              </div>
+              {/* Category Header - Clickable to expand/collapse */}
+              <button
+                onClick={() => toggleCategory(category)}
+                className="w-full text-left px-3 py-3 mb-2 bg-gradient-to-r from-red-600/90 to-red-700/70 hover:from-red-600 hover:to-red-700 text-white font-bold text-xs uppercase tracking-widest rounded-lg transition-all flex items-center justify-between border border-red-500/50 hover:border-red-400 cursor-pointer shadow-md hover:shadow-lg active:scale-95"
+              >
+                <span>{category}</span>
+                <span className={`transition-transform ${expandedCategories[category] ? 'rotate-180' : ''}`}>
+                  ▼
+                </span>
+              </button>
+              
+              {/* Category Items - Show/Hide based on expanded state */}
+              {expandedCategories[category] && (
+                <div className="space-y-1 pl-2 mb-4">
+                  {filteredGrouped[category].map((comp) => (
+                    <button
+                      key={comp._id}
+                      onClick={() => {
+                        setSelectedId(comp._id);
+                        setIframeKey(prev => prev + 1);
+                      }}
+                      className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium ${
+                        selectedId === comp._id
+                          ? 'bg-blue-600 text-white shadow-lg'
+                          : 'bg-white/5 hover:bg-white/10 text-gray-200'
+                      }`}
+                    >
+                      {comp.name}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

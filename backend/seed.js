@@ -4380,6 +4380,8 @@ function NeonHoloFooter() {
   {
     name: "QuantumHeader",
     category: "Header",
+    subcategory: "Quantum Headers",
+    headerType: "Dynamic Header",
     code: `
 
 function QuantumHeader() {
@@ -4691,6 +4693,8 @@ function QuantumHeader() {
   {
     name: "PremiumHeader",
     category: "Header",
+    subcategory: "Premium Headers",
+    headerType: "Simple Header",
     code: `
 
 function PremiumHeader() {
@@ -7475,6 +7479,8 @@ function CompactStylishCard() {
   {
     name: "StylishHeader",
     category: "Header",
+    subcategory: "Modern Headers",
+    headerType: "Stylish Header",
     code: `
 function StylishHeader() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -7697,6 +7703,8 @@ function StylishHeader() {
   {
     name: "ModernPremiumHeader",
     category: "Header",
+    subcategory: "Premium Headers",
+    headerType: "Stylish Header",
     code: `
 function ModernPremiumHeader() {
   const [activeTab, setActiveTab] = useState(0);
@@ -8005,6 +8013,8 @@ function ModernPremiumHeader() {
   {
     name: "UINEXpunkNeonHeader",
     category: "Header",
+    subcategory: "UINEXpunk Headers",
+    headerType: "Animated Header",
     code: `
 function UINEXpunkNeonHeader() {
   const [isActive, setIsActive] = useState(false);
@@ -8333,6 +8343,8 @@ function UINEXpunkNeonHeader() {
   {
     name: "UINEXpunkHeader",
     category: "Header",
+    subcategory: "UINEXpunk Headers",
+    headerType: "Neumorphism Header",
     code: `
 function UINEXpunkHeader() {
   const [isHovered, setIsHovered] = useState(false);
@@ -8468,6 +8480,8 @@ function UINEXpunkHeader() {
   {
     name: "HolographicHeader",
     category: "Header",
+    subcategory: "Matrix & Holographic Headers",
+    headerType: "Transparent Header",
     code: `
 function HolographicHeader() {
   const [isHovered, setIsHovered] = useState(false);
@@ -8775,6 +8789,8 @@ function LuxeCard() {
   {
     name: "ModernSleekHeader",
     category: "Header",
+    subcategory: "Modern Headers",
+    headerType: "Stylish Header",
     code: `
 function ModernSleekHeader() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -8952,6 +8968,8 @@ function ModernSleekHeader() {
   {
     name: "NeonUINEXHeader",
     category: "Header",
+    subcategory: "Neon Headers",
+    headerType: "Gradient Header",
     code: `
     // import { useState, useEffect } from 'react';
 function NeonUINEXHeader() {
@@ -9445,6 +9463,8 @@ function NeonUINEXHeader() {
   {
     name: "NeonMatrixHeader",
     category: "Header",
+    subcategory: "Neon Headers",
+    headerType: "Animated Header",
     code: `
 // import { useState, useEffect } from 'react';
 function NeonMatrixHeader() {
@@ -12154,6 +12174,8 @@ function UltraPremiumCard() {
   {
     name: "UINEXpunkHeader2",
     category: "Header",
+    subcategory: "UINEXpunk Headers",
+    headerType: "Neumorphism Header",
     code: `// import { useState, useEffect } from 'react';
 function UINEXpunkHeader2() {
   const [glitchActive, setGlitchActive] = useState(false);
@@ -12386,6 +12408,8 @@ function UINEXpunkHeader2() {
   {
     name: "MatrixHeader",
     category: "Header",
+    subcategory: "Matrix & Holographic Headers",
+    headerType: "Fixed Header",
     code: `// import { useState, useEffect } from 'react';
 function MatrixHeader() {
   const [ripples, setRipples] = useState([]);
@@ -12679,6 +12703,8 @@ function MatrixHeader() {
   {
     name: "NeonHologramHeader",
     category: "Header",
+    subcategory: "Neon Headers",
+    headerType: "Glassmorphism Header",
     code: `// import { useState, useEffect } from 'react';
 function NeonHologramHeader() {
   const [waves, setWaves] = useState([]);
@@ -13029,6 +13055,8 @@ function NeonHologramHeader() {
   {
     name: "NeonQuantumHeader",
     category: "Header",
+    subcategory: "Quantum Headers",
+    headerType: "Dynamic Header",
     code: `// import { useState, useEffect } from 'react';
 function NeonQuantumHeader() {
   const [sparks, setSparks] = useState([]);
@@ -13397,6 +13425,8 @@ function NeonQuantumHeader() {
   {
     name: "NeonUINEXpunkHeader",
     category: "Header",
+    subcategory: "UINEXpunk Headers",
+    headerType: "Sticky Header",
     code: `function NeonUINEXpunkHeader() {
   const [glitchLines, setGlitchLines] = useState([]);
   const [scanProgress, setScanProgress] = useState(0);

@@ -12,8 +12,12 @@ const componentSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['Cards', 'Buttons', 'Headers'],
+    enum: ['Cards', 'Buttons', 'Header', 'Headers'],
     default: 'Cards'
+  },
+  subcategory: {
+    type: String,
+    default: 'General'
   }
 }, {
   timestamps: true

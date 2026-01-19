@@ -52,7 +52,22 @@ export default function ComponentsByCategory() {
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filterMode, setFilterMode] = useState('all'); // 'all', 'cards', 'headers', 'footers'
+  const [selectedHeaderType, setSelectedHeaderType] = useState('all'); // For header filtering
   const [fullScreenPreview, setFullScreenPreview] = useState(false);
+
+  // All available header types
+  const HEADER_TYPES = [
+    'Simple Header',
+    'Stylish Header',
+    'Dynamic Header',
+    'Animated Header',
+    'Sticky Header',
+    'Transparent Header',
+    'Fixed Header',
+    'Glassmorphism Header',
+    'Neumorphism Header',
+    'Gradient Header'
+  ];
 
   useEffect(() => {
     const fetchComponents = async () => {
@@ -60,14 +75,20 @@ export default function ComponentsByCategory() {
         const response = await fetch('http://localhost:7000/api/components');
         const data = await response.json();
 
-        // Group components by category - keep original categories from DB
+        // Group components by category and subcategory
         const grouped = data.reduce((acc, component) => {
           let category = component.category || 'Other';
+          let subcategory = component.subcategory || 'General';
           
           if (!acc[category]) {
-            acc[category] = [];
+            acc[category] = {};
           }
-          acc[category].push(component);
+          
+          if (!acc[category][subcategory]) {
+            acc[category][subcategory] = [];
+          }
+          
+          acc[category][subcategory].push(component);
           return acc;
         }, {});
 
@@ -78,8 +99,9 @@ export default function ComponentsByCategory() {
         const firstCategory = Object.keys(grouped)[0];
         if (firstCategory) {
           setSelectedCategory(firstCategory);
-          if (grouped[firstCategory] && grouped[firstCategory].length > 0) {
-            setSelectedComponent(grouped[firstCategory][0]);
+          const firstSubcategory = Object.keys(grouped[firstCategory])[0];
+          if (firstSubcategory && grouped[firstCategory][firstSubcategory].length > 0) {
+            setSelectedComponent(grouped[firstCategory][firstSubcategory][0]);
           }
         }
       } catch (error) {
@@ -173,9 +195,62 @@ export default function ComponentsByCategory() {
           </div>
         </div>
 
+        {/* Special View for Headers with Type Filtering */}
+        {filterMode === 'headers' && displayedCategories.includes('Header') && (
+          <div className="mb-8 space-y-6">
+            <div>
+              <h3 className="text-lg font-bold text-white mb-4">Filter Headers by Type</h3>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setSelectedHeaderType('all')}
+                  className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                    selectedHeaderType === 'all'
+                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/50'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  }`}
+                >
+                  All Headers
+                </button>
+                {HEADER_TYPES.map((headerType) => (
+                  <button
+                    key={headerType}
+                    onClick={() => setSelectedHeaderType(headerType)}
+                    className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                      selectedHeaderType === headerType
+                        ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    }`}
+                  >
+                    {headerType}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Categories Grid View */}
         <div className="space-y-12">
-          {displayedCategories.map((category) => (
+          {displayedCategories.map((category) => {
+            // Get components for this category
+            let categoryComps = components[category];
+            
+            // Special filtering for headers by headerType
+            if (category === 'Header' && selectedHeaderType !== 'all') {
+              const filteredSubcats = {};
+              Object.entries(categoryComps).forEach(([subcat, items]) => {
+                const filtered = items.filter(comp => comp.headerType === selectedHeaderType);
+                if (filtered.length > 0) {
+                  filteredSubcats[subcat] = filtered;
+                }
+              });
+              if (Object.keys(filteredSubcats).length === 0) {
+                return null;
+              }
+              categoryComps = filteredSubcats;
+            }
+
+            return (
             <div key={category} className="space-y-4">
               {/* Category Header */}
               <div className="flex items-center gap-4 pb-4 border-b-2 border-gradient-to-r from-purple-500 via-pink-500 to-transparent">
@@ -187,64 +262,82 @@ export default function ComponentsByCategory() {
                 <div className="flex-grow">
                   <h2 className="text-3xl font-bold text-white">{category}</h2>
                   <p className="text-gray-400 text-sm">
-                    {components[category].length} component{components[category].length !== 1 ? 's' : ''}
+                    {Object.values(categoryComps).reduce((sum, arr) => sum + arr.length, 0)} component{Object.values(categoryComps).reduce((sum, arr) => sum + arr.length, 0) !== 1 ? 's' : ''}
                   </p>
                 </div>
                 <div className="flex-shrink-0">
                   <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/50 text-purple-300 font-semibold text-lg">
-                    {components[category].length}
+                    {Object.values(categoryComps).reduce((sum, arr) => sum + arr.length, 0)}
                   </span>
                 </div>
               </div>
 
-              {/* Components Grid for This Category - With Inline Previews */}
-              <div className="space-y-6">
-                {components[category].map((comp) => (
-                  <div
-                    key={comp._id}
-                    className={`group rounded-lg transition-all duration-300 overflow-hidden ${
-                      selectedComponent?._id === comp._id
-                        ? 'bg-purple-600/30 border-purple-500 shadow-lg shadow-purple-500/20'
-                        : 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20'
-                    } border`}
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-                      {/* Component Button - Left Side */}
-                      <button
-                        onClick={() => {
-                          setSelectedCategory(category);
-                          setSelectedComponent(comp);
-                        }}
-                        className="text-left p-5 rounded-lg transition-all duration-300 bg-gray-800/50 hover:bg-gray-800 border border-gray-700 hover:border-purple-500"
-                      >
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex-grow">
-                            <h3 className="font-semibold text-white group-hover:text-purple-300 transition-colors">
-                              {comp.name}
-                            </h3>
-                            <p className="text-xs text-gray-500 mt-1">Component</p>
-                          </div>
-                          <svg className="w-5 h-5 text-gray-500 group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </div>
-                        <div className="pt-3 border-t border-gray-700/30">
-                          <span className="inline-block px-2 py-1 bg-purple-500/20 border border-purple-500/50 rounded text-xs text-purple-300 font-semibold">
-                            {category}
-                          </span>
-                        </div>
-                      </button>
+              {/* Subcategories */}
+              <div className="space-y-8">
+                {Object.entries(categoryComps).map(([subcategory, comps]) => (
+                  <div key={subcategory} className="pl-4">
+                    {/* Subcategory Header */}
+                    <h3 className="text-xl font-bold text-purple-300 mb-4 flex items-center gap-2">
+                      <div className="h-0.5 w-8 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+                      {subcategory}
+                      <span className="text-sm bg-purple-600/30 px-3 py-1 rounded-full ml-2">{comps.length}</span>
+                    </h3>
 
-                      {/* Live Preview - Right Side */}
-                      <div className="rounded-lg overflow-hidden border border-gray-700 bg-slate-950 min-h-[200px]">
-                        <ComponentLivePreview code={comp.code} />
-                      </div>
+                    {/* Components Grid for This Subcategory */}
+                    <div className="space-y-4">
+                      {comps.map((comp) => (
+                        <div
+                          key={comp._id}
+                          className={`group rounded-lg transition-all duration-300 overflow-hidden ${
+                            selectedComponent?._id === comp._id
+                              ? 'bg-purple-600/30 border-purple-500 shadow-lg shadow-purple-500/20'
+                              : 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20'
+                          } border`}
+                        >
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+                            {/* Component Button - Left Side */}
+                            <button
+                              onClick={() => {
+                                setSelectedCategory(category);
+                                setSelectedComponent(comp);
+                              }}
+                              className="text-left p-5 rounded-lg transition-all duration-300 bg-gray-800/50 hover:bg-gray-800 border border-gray-700 hover:border-purple-500"
+                            >
+                              <div className="flex items-start justify-between mb-3">
+                                <div className="flex-grow">
+                                  <h3 className="font-semibold text-white group-hover:text-purple-300 transition-colors">
+                                    {comp.name}
+                                  </h3>
+                                  <p className="text-xs text-gray-500 mt-1">Component</p>
+                                </div>
+                                <svg className="w-5 h-5 text-gray-500 group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                              </div>
+                              <div className="pt-3 border-t border-gray-700/30 space-y-2">
+                                <span className="inline-block px-2 py-1 bg-purple-500/20 border border-purple-500/50 rounded text-xs text-purple-300 font-semibold">
+                                  {category}
+                                </span>
+                                <span className="inline-block px-2 py-1 bg-pink-500/20 border border-pink-500/50 rounded text-xs text-pink-300 font-semibold ml-2">
+                                  {subcategory}
+                                </span>
+                              </div>
+                            </button>
+
+                            {/* Live Preview - Right Side */}
+                            <div className="rounded-lg overflow-hidden border border-gray-700 bg-slate-950 min-h-[200px]">
+                              <ComponentLivePreview code={comp.code} />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Selected Component Details */}
@@ -257,10 +350,20 @@ export default function ComponentsByCategory() {
                 <div className="flex items-start justify-between">
                   <div>
                     <h3 className="text-3xl font-bold text-white mb-3">{selectedComponent.name}</h3>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 flex-wrap">
                       <span className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/50 rounded-lg text-sm text-purple-300 font-semibold">
                         {selectedComponent.category}
                       </span>
+                      {selectedComponent.subcategory && (
+                        <span className="px-4 py-2 bg-gradient-to-r from-pink-500/20 to-rose-500/20 border border-pink-500/50 rounded-lg text-sm text-pink-300 font-semibold">
+                          {selectedComponent.subcategory}
+                        </span>
+                      )}
+                      {selectedComponent.headerType && (
+                        <span className="px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-lg text-sm text-cyan-300 font-semibold">
+                          {selectedComponent.headerType}
+                        </span>
+                      )}
                       <span className="text-gray-400 text-sm">Component Code & Preview</span>
                     </div>
                   </div>
@@ -323,7 +426,7 @@ export default function ComponentsByCategory() {
               <div className="bg-gray-900/95 border-b border-gray-700 p-6 flex items-center justify-between">
                 <div className="flex-grow">
                   <h2 className="text-2xl font-bold text-white">{selectedComponent.name}</h2>
-                  <p className="text-gray-400 text-sm mt-1">{selectedComponent.category} - Full Preview</p>
+                  <p className="text-gray-400 text-sm mt-1">{selectedComponent.category}{selectedComponent.subcategory && ` - ${selectedComponent.subcategory}`}{selectedComponent.headerType && ` - ${selectedComponent.headerType}`} - Full Preview</p>
                 </div>
                 <button
                   onClick={() => setFullScreenPreview(false)}
