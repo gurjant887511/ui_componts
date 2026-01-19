@@ -18537,16 +18537,7 @@ function NovaWalletCard() {
   );
 }
   `
-  },
-  {
-    name: "Header",
-    category: "Cards",
-    code: `
-
-
-  `
-  },
-
+  }
 ];
 
 // Use upsert: updates if exists by name, inserts if new
