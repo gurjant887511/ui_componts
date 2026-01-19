@@ -18203,6 +18203,312 @@ function VortexFooter() {
   `
   },
   {
+    name: "NovaWallet Card",
+    category: "Cards",
+    code: `
+function NovaWalletCard() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateXValue = ((y - centerY) / centerY) * -15;
+    const rotateYValue = ((x - centerX) / centerX) * 15;
+    
+    setRotateX(rotateXValue);
+    setRotateY(rotateYValue);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setRotateX(0);
+    setRotateY(0);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-black flex items-center justify-center p-8 overflow-hidden relative">
+      
+      {/* Hexagon Grid Background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, #8b5cf6 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}></div>
+      </div>
+
+      {/* Glowing Orbs */}
+      <div className="absolute top-20 left-20 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-pink-500 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+      <div className="absolute top-1/3 right-1/3 w-80 h-80 bg-fuchsia-500 rounded-full blur-3xl opacity-15 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+
+      {/* Floating Particles */}
+      {[...Array(25)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute bg-purple-500 rounded-full opacity-20 animate-pulse"
+          style={{
+            width: (3 + Math.random() * 6) + 'px',
+            height: (3 + Math.random() * 6) + 'px',
+            left: (Math.random() * 100) + '%',
+            top: (Math.random() * 100) + '%',
+            animationDuration: (2 + Math.random() * 3) + 's',
+            animationDelay: (Math.random() * 2) + 's'
+          }}
+        ></div>
+      ))}
+
+      {/* Card Container */}
+      <div className="relative" style={{ perspective: '1500px' }}>
+        
+        <div 
+          className="relative w-[450px] h-[280px] transition-all duration-500 ease-out cursor-pointer"
+          style={{
+            transform: 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(' + (isHovered ? '1.05' : '1') + ')',
+            transformStyle: 'preserve-3d'
+          }}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={handleMouseLeave}
+        >
+          
+          {/* Outer Glow */}
+          <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 rounded-2xl opacity-70 blur-2xl animate-pulse"></div>
+          
+          {/* Main Card */}
+          <div className="relative w-full h-full bg-gradient-to-br from-slate-900 via-purple-950 to-black rounded-2xl overflow-hidden border-2 border-purple-500 shadow-2xl">
+            
+            {/* Holographic Shine Effect */}
+            <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500">
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-purple-400 to-transparent opacity-30 animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-pink-400 to-transparent opacity-20 animate-pulse" style={{ animationDelay: '0.7s' }}></div>
+            </div>
+
+            {/* Scan Lines */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #a855f7 2px, #a855f7 4px)',
+            }}></div>
+
+            {/* Animated Circuit Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <svg className="w-full h-full">
+                <defs>
+                  <pattern id="circuit" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <path d="M10 10 L30 10 L30 30 M70 10 L90 10 L90 30 M10 70 L30 70 L30 90 M70 70 L90 70 L90 90" stroke="#a855f7" strokeWidth="1" fill="none"/>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#circuit)" />
+              </svg>
+            </div>
+
+            {/* Content */}
+            <div className="relative p-6 h-full flex flex-col justify-between z-10">
+              
+              {/* Header */}
+              <div className="flex items-start justify-between">
+                
+                {/* Logo Section */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-purple-500 blur-xl opacity-50 animate-pulse"></div>
+                  <div className="relative flex items-center gap-3">
+                    <div className="w-14 h-14 rounded-xl border-2 border-purple-500 bg-black flex items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 opacity-20 animate-pulse"></div>
+                      <span className="relative text-2xl font-black text-purple-400">💎</span>
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-black text-purple-400 tracking-wider">UINEX</h2>
+                      <p className="text-xs text-pink-400 font-bold tracking-widest">CYBERWALLET</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Security Level */}
+                <div className="flex flex-col items-end gap-1">
+                  <div className="flex items-center gap-2 px-3 py-1 bg-purple-500 bg-opacity-20 border border-purple-500 rounded-full">
+                    <div className="relative">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <div className="absolute inset-0 w-2 h-2 bg-purple-400 rounded-full animate-ping"></div>
+                    </div>
+                    <span className="text-xs font-black text-purple-400 uppercase">Premium</span>
+                  </div>
+                  <div className="flex gap-1 mt-1">
+                    <div className="w-1 h-3 bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0s' }}></div>
+                    <div className="w-1 h-3 bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="w-1 h-3 bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="w-1 h-3 bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+                    <div className="w-1 h-3 bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Middle Section */}
+              <div>
+                {/* Chip */}
+                <div className="mb-6">
+                  <div className="relative inline-block">
+                    <div className="w-14 h-11 bg-gradient-to-br from-purple-300 to-fuchsia-500 rounded-md relative overflow-hidden">
+                      <div className="absolute inset-0 grid grid-cols-3 gap-0.5 p-1.5">
+                        {[...Array(9)].map((_, i) => (
+                          <div key={i} className="bg-purple-700 rounded-sm"></div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="absolute -inset-1 bg-purple-500 blur-md opacity-50 animate-pulse"></div>
+                  </div>
+                </div>
+
+                {/* Wallet ID */}
+                <div className="flex gap-3 mb-4">
+                  {['CW', '5678', '1234', 'XR'].map((num, i) => (
+                    <div 
+                      key={i} 
+                      className="group relative"
+                    >
+                      <div className="absolute -inset-0.5 bg-purple-500 rounded opacity-0 group-hover:opacity-100 blur transition duration-300"></div>
+                      <div className="relative text-xl font-bold text-purple-400 tracking-widest group-hover:text-pink-400 transition-colors duration-300">
+                        {num}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Features Row */}
+                <div className="flex gap-2">
+                  {[
+                    { icon: '🛡️', text: 'Secure' },
+                    { icon: '🚀', text: 'Fast' },
+                    { icon: '💫', text: 'Smart' },
+                  ].map((feature, i) => (
+                    <div 
+                      key={i}
+                      className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-900 border border-slate-700 rounded-lg hover:border-purple-500 transition-all duration-300 group"
+                    >
+                      <span className="text-sm group-hover:scale-125 transition-transform duration-300">{feature.icon}</span>
+                      <span className="text-xs font-semibold text-gray-500 group-hover:text-purple-400 transition-colors duration-300">{feature.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="flex items-end justify-between">
+                
+                {/* Owner Info */}
+                <div>
+                  <p className="text-xs text-gray-600 font-semibold mb-1 uppercase tracking-wider">Owner</p>
+                  <p className="text-lg font-black text-white tracking-wide">CYBER NEXUS</p>
+                </div>
+
+                {/* Valid Until */}
+                <div className="text-right">
+                  <p className="text-xs text-gray-600 font-semibold mb-1 uppercase tracking-wider">Valid</p>
+                  <p className="text-lg font-bold text-purple-400 tracking-wider">∞</p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Corner Accents */}
+            <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-purple-500 opacity-50"></div>
+            <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-pink-500 opacity-50"></div>
+            <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-pink-500 opacity-50"></div>
+            <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-purple-500 opacity-50"></div>
+
+            {/* Bottom Glow Bar */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 animate-pulse"></div>
+          </div>
+
+          {/* 3D Shadow Layer */}
+          <div 
+            className="absolute inset-0 bg-gradient-to-br from-purple-900 to-pink-900 rounded-2xl opacity-20 blur-xl"
+            style={{
+              transform: 'translateZ(-50px)',
+              zIndex: -1
+            }}
+          ></div>
+        </div>
+
+      </div>
+
+      {/* Info Cards Below */}
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex gap-4">
+        
+        {/* Assets Card */}
+        <div className="relative group">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-xl opacity-60 group-hover:opacity-100 blur transition duration-300"></div>
+          <div className="relative px-6 py-4 bg-black rounded-xl border border-purple-500 group-hover:border-fuchsia-500 transition-all duration-300">
+            <p className="text-xs text-gray-500 font-semibold mb-1 uppercase">Assets</p>
+            <p className="text-2xl font-black text-purple-400">$89,432</p>
+          </div>
+        </div>
+
+        {/* Transactions Card */}
+        <div className="relative group">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-fuchsia-600 to-pink-600 rounded-xl opacity-60 group-hover:opacity-100 blur transition duration-300"></div>
+          <div className="relative px-6 py-4 bg-black rounded-xl border border-fuchsia-500 group-hover:border-pink-500 transition-all duration-300">
+            <p className="text-xs text-gray-500 font-semibold mb-1 uppercase">Tx Today</p>
+            <p className="text-2xl font-black text-fuchsia-400">127</p>
+          </div>
+        </div>
+
+        {/* NFTs Card */}
+        <div className="relative group">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-rose-600 rounded-xl opacity-60 group-hover:opacity-100 blur transition duration-300"></div>
+          <div className="relative px-6 py-4 bg-black rounded-xl border border-pink-500 group-hover:border-rose-500 transition-all duration-300">
+            <p className="text-xs text-gray-500 font-semibold mb-1 uppercase">NFTs</p>
+            <p className="text-2xl font-black text-pink-400">42</p>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Action Buttons */}
+      <div className="absolute top-16 right-16 flex flex-col gap-3">
+        
+        <button className="relative group">
+          <div className="absolute -inset-0.5 bg-purple-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+          <div className="relative px-5 py-3 bg-black border-2 border-purple-500 rounded-lg group-hover:bg-purple-500 transition-all duration-300">
+            <span className="text-sm font-black text-purple-400 group-hover:text-black uppercase tracking-wider">Send</span>
+          </div>
+        </button>
+
+        <button className="relative group">
+          <div className="absolute -inset-0.5 bg-fuchsia-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+          <div className="relative px-5 py-3 bg-black border-2 border-fuchsia-500 rounded-lg group-hover:bg-fuchsia-500 transition-all duration-300">
+            <span className="text-sm font-black text-fuchsia-400 group-hover:text-black uppercase tracking-wider">Receive</span>
+          </div>
+        </button>
+
+        <button className="relative group">
+          <div className="absolute -inset-0.5 bg-pink-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+          <div className="relative px-5 py-3 bg-black border-2 border-pink-500 rounded-lg group-hover:bg-pink-500 transition-all duration-300">
+            <span className="text-sm font-black text-pink-400 group-hover:text-black uppercase tracking-wider">Swap</span>
+          </div>
+        </button>
+
+      </div>
+
+      {/* Tilt Instruction */}
+      <div className="absolute top-16 left-16">
+        <div className="px-4 py-2 bg-black border border-purple-500 rounded-full">
+          <p className="text-xs text-purple-400 font-bold uppercase tracking-wider flex items-center gap-2">
+            <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></span>
+            Interactive 3D Card
+          </p>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+  `
+  },
+  {
     name: "Header",
     category: "Cards",
     code: `

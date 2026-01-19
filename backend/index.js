@@ -789,6 +789,59 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// Middleware to verify JWT token
+const verifyToken = (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+      return res.status(401).json({ message: 'No token provided' });
+    }
+    
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+    req.userId = decoded.userId;
+    req.email = decoded.email;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'Invalid token', error: error.message });
+  }
+};
+
+// Update user profile (name)
+app.put('/api/update-profile', verifyToken, async (req, res) => {
+  try {
+    const { name } = req.body;
+    
+    if (!name || name.trim() === '') {
+      return res.status(400).json({ message: 'Name is required' });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.userId,
+      { name: name.trim() },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ 
+      success: true, 
+      user: { 
+        name: user.name, 
+        email: user.email 
+      },
+      message: 'Profile updated successfully'
+    });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ 
+      message: 'Error updating profile',
+      error: error.message 
+    });
+  }
+});
+
 // Debug user info (dev only) - shows verification and password presence (DO NOT USE IN PRODUCTION)
 app.get('/api/auth/debug-user/:email', async (req, res) => {
   try {

@@ -1318,6 +1318,10 @@ window.location.href
             console.log('[LOGOUT] Logout complete - redirected to home');
           }}
           userInfo={userInfo}
+          onUpdateProfile={(updatedUser) => {
+            setUserInfo(updatedUser);
+            localStorage.setItem('userInfo', JSON.stringify(updatedUser));
+          }}
         />
         <LoginModal 
           isOpen={isLoginOpen} 

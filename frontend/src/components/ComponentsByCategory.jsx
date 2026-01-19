@@ -197,38 +197,50 @@ export default function ComponentsByCategory() {
                 </div>
               </div>
 
-              {/* Components Grid for This Category */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Components Grid for This Category - With Inline Previews */}
+              <div className="space-y-6">
                 {components[category].map((comp) => (
-                  <button
+                  <div
                     key={comp._id}
-                    onClick={() => {
-                      setSelectedCategory(category);
-                      setSelectedComponent(comp);
-                    }}
-                    className={`group text-left p-5 rounded-lg transition-all duration-300 ${
+                    className={`group rounded-lg transition-all duration-300 overflow-hidden ${
                       selectedComponent?._id === comp._id
                         ? 'bg-purple-600/30 border-purple-500 shadow-lg shadow-purple-500/20'
                         : 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20'
                     } border`}
                   >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex-grow">
-                        <h3 className="font-semibold text-white group-hover:text-purple-300 transition-colors">
-                          {comp.name}
-                        </h3>
-                        <p className="text-xs text-gray-500 mt-1">Component</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+                      {/* Component Button - Left Side */}
+                      <button
+                        onClick={() => {
+                          setSelectedCategory(category);
+                          setSelectedComponent(comp);
+                        }}
+                        className="text-left p-5 rounded-lg transition-all duration-300 bg-gray-800/50 hover:bg-gray-800 border border-gray-700 hover:border-purple-500"
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex-grow">
+                            <h3 className="font-semibold text-white group-hover:text-purple-300 transition-colors">
+                              {comp.name}
+                            </h3>
+                            <p className="text-xs text-gray-500 mt-1">Component</p>
+                          </div>
+                          <svg className="w-5 h-5 text-gray-500 group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                        <div className="pt-3 border-t border-gray-700/30">
+                          <span className="inline-block px-2 py-1 bg-purple-500/20 border border-purple-500/50 rounded text-xs text-purple-300 font-semibold">
+                            {category}
+                          </span>
+                        </div>
+                      </button>
+
+                      {/* Live Preview - Right Side */}
+                      <div className="rounded-lg overflow-hidden border border-gray-700 bg-slate-950 min-h-[200px]">
+                        <ComponentLivePreview code={comp.code} />
                       </div>
-                      <svg className="w-5 h-5 text-gray-500 group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
                     </div>
-                    <div className="pt-3 border-t border-gray-700/30">
-                      <span className="inline-block px-2 py-1 bg-purple-500/20 border border-purple-500/50 rounded text-xs text-purple-300 font-semibold">
-                        {category}
-                      </span>
-                    </div>
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
