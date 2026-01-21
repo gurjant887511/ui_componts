@@ -1,12 +1,12 @@
 import React from 'react';
-import HeroSection from '../../components/HeroSection';
+import DynamicHero from '../../components/DynamicHero';
 import Footer from '../../components/Footer';
 import StylishComponentsPreview from './StylishComponentsPreview';
 
 export default function HomeSection() {
   return (
     <div className="space-y-8">
-      <HeroSection />
+      <DynamicHero />
       <StylishComponentsPreview />
       <Footer />
     </div>

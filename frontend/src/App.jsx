@@ -16,17 +16,17 @@ import DynamicWeb from './components/DynamicWeb';
 import ElectroTech from './components/ElectroTech';
 import About from './components/About';
 import HeroSection from './components/HeroSection';
-
+import Home from './components/Home';
 // import ElectroX from './components/ElectroX';
 import './styles/globals.css';
-import {
-  SandpackProvider,
-  SandpackLayout,
-  SandpackPreview,
-  SandpackCodeEditor,
-} from "@codesandbox/sandpack-react";
-import { atomDark } from "@codesandbox/sandpack-themes";
-import ComponentLivePreview from './components/LivePreview';
+// import {
+//   SandpackProvider,
+//   SandpackLayout,
+//   SandpackPreview,
+//   SandpackCodeEditor,
+// } from "@codesandbox/sandpack-react";
+// import { atomDark } from "@codesandbox/sandpack-themes";
+// import ComponentLivePreview from './components/LivePreview';
 
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:7000/api';
@@ -1330,7 +1330,10 @@ window.location.href
         <Main isPreview={activeTab === 'components' || activeTab === 'library' || activeTab === 'fullweb'} isHome={activeTab === 'home'} isAbout={activeTab === 'about'}>
           {activeTab === 'home' ? (
             <>
-              {HeroSection && <HeroSection onExploreClick={() => setActiveTab('components')} onLearnMoreClick={() => setActiveTab('about')} />}
+
+<Home />
+
+              {/* {HeroSection && <HeroSection onExploreClick={() => setActiveTab('components')} onLearnMoreClick={() => setActiveTab('about')} />} */}
               <div className="max-w-7xl mx-auto px-4 py-16">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <FeatureCard

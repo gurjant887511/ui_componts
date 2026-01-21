@@ -1093,9 +1093,6 @@ function FuturisticFooter() {
     </div>
   );
 }
-
-
-
   `
   },
 
@@ -1103,11 +1100,9 @@ function FuturisticFooter() {
     name: "NeonWaveFooter",
     category: "Footer",
     code: `
-
 function NeonWaveFooter() {
   const [activeSection, setActiveSection] = useState(null);
   const [emailFocused, setEmailFocused] = useState(false);
-
   return (
     <div className="min-h-screen bg-black flex items-end relative overflow-hidden">
       
@@ -1230,7 +1225,7 @@ function NeonWaveFooter() {
                   textShadow: '0 0 40px rgba(139, 92, 246, 0.3)',
                 }}
               >
-                VELOCITY LABS
+                Velonix Lab
               </h2>
               
               <p className="text-xl mb-8" style={{ color: 'rgb(156, 163, 175)' }}>
@@ -1527,7 +1522,7 @@ function NeonWaveFooter() {
               {/* Copyright */}
               <div className="text-center">
                 <p className="text-sm mb-2" style={{ color: 'rgb(156, 163, 175)' }}>
-                  © 2025 Velocity Labs. All rights reserved.
+                  © 2025 Velonix Lab. All rights reserved.
                 </p>
                 <div className="flex gap-6 text-xs justify-center">
                   <a href="#" className="transition-colors duration-300 hover:text-purple-400" style={{ color: 'rgb(107, 114, 128)' }}>

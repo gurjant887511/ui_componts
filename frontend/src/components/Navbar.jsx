@@ -15,7 +15,16 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
-            <Link to="/" onClick={() => setActiveTab('home')} className="text-xl font-bold">UI Components</Link>
+            <Link 
+              to="/" 
+              onClick={() => setActiveTab('home')} 
+              className="relative text-2xl font-bold group"
+            >
+              <span className="relative z-10 bg-gradient-to-r from-cyan-300 via-purple-300 to-cyan-400 bg-clip-text text-transparent">
+                UI Components
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-500 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 rounded-lg"></span>
+            </Link>
           </div>
 
           {/* Navigation Links */}
