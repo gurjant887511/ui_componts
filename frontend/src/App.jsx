@@ -28,7 +28,6 @@ import './styles/globals.css';
 // import { atomDark } from "@codesandbox/sandpack-themes";
 // import ComponentLivePreview from './components/LivePreview';
 
-
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:7000/api';
 
 const COMPONENTS_LIST = [
