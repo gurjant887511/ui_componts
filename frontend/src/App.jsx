@@ -125,6 +125,7 @@ function ComponentsPreviewPage({ isLoggedIn }) {
   const [codeMessage, setCodeMessage] = useState('');
   const [importsMessage, setImportsMessage] = useState('');
   const [requirementsMessage, setRequirementsMessage] = useState('');
+  const [viewMode, setViewMode] = useState('both'); // 'code', 'preview', 'both'
 
   // Card subcategories mapping
   const CARD_SUBCATEGORIES = {
@@ -385,9 +386,41 @@ function ComponentsPreviewPage({ isLoggedIn }) {
       </div>
 
       {/* Middle Code Area */}
-      <div className="w-1/3 bg-gradient-to-b from-slate-950 to-slate-900 text-white border-r border-white/10 overflow-y-auto">
-        <div className="p-4 bg-slate-950/95 backdrop-blur border-b border-white/10">
+      <div className={`${viewMode === 'preview' ? 'hidden' : viewMode === 'code' ? 'flex-1' : 'w-1/3'} bg-gradient-to-b from-slate-950 to-slate-900 text-white border-r border-white/10 overflow-y-auto`}>
+        <div className="p-4 bg-slate-950/95 backdrop-blur border-b border-white/10 flex items-center justify-between">
           <h3 className="text-sm font-bold text-gray-300">Component Code</h3>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setViewMode('code')}
+              className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
+                viewMode === 'code'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
+              }`}
+            >
+              Code
+            </button>
+            <button
+              onClick={() => setViewMode('preview')}
+              className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
+                viewMode === 'preview'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
+              }`}
+            >
+              Preview
+            </button>
+            <button
+              onClick={() => setViewMode('both')}
+              className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
+                viewMode === 'both'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
+              }`}
+            >
+              Both
+            </button>
+          </div>
         </div>
         <div className="p-4">
           {/* Code Section with Copy Button */}
@@ -487,9 +520,41 @@ function ComponentsPreviewPage({ isLoggedIn }) {
       </div>
 
       {/* Right Preview Area */}
-      <div className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex flex-col">
-        <div className="p-4 bg-white/95 backdrop-blur border-b border-gray-200">
+      <div className={`${viewMode === 'code' ? 'hidden' : viewMode === 'preview' ? 'flex-1' : 'flex-1'} bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex flex-col`}>
+        <div className="p-4 bg-white/95 backdrop-blur border-b border-gray-200 flex items-center justify-between">
           <h3 className="text-sm font-bold text-gray-700">Live Preview</h3>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setViewMode('code')}
+              className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
+                viewMode === 'code'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
+              }`}
+            >
+              Code
+            </button>
+            <button
+              onClick={() => setViewMode('preview')}
+              className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
+                viewMode === 'preview'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
+              }`}
+            >
+              Preview
+            </button>
+            <button
+              onClick={() => setViewMode('both')}
+              className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
+                viewMode === 'both'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
+              }`}
+            >
+              Both
+            </button>
+          </div>
         </div>
         <div className="flex-1 overflow-hidden">
           <div className="bg-white rounded-lg shadow-lg w-full h-[850px] border border-gray-200 overflow-hidden">
