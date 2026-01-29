@@ -77,6 +77,17 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
               About
             </button>
 
+            {/* Template Button */}
+            <button
+              onClick={() => setActiveTab('template')}
+              className={`px-4 py-2 rounded transition font-medium ${
+                activeTab === 'template'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:text-purple-400'
+              }`}
+            >
+              Template
+            </button>
 
           </div>
 

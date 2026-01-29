@@ -18532,7 +18532,1254 @@ function NovaWalletCard() {
   );
 }
   `
-  }
+  },
+
+  {
+    name: "ExampleCard2",
+    category: "Cards",
+    code: `
+    function ExampleCard2() {
+  const [isHovered, setIsHovered] = React.useState(false);
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 
+      padding: '48px 16px', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center' 
+    }}>
+      <div 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ 
+          padding: '40px', 
+          background: 'rgba(255, 255, 255, 0.12)', 
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderRadius: '28px', 
+          border: '1px solid rgba(255, 255, 255, 0.25)',
+          boxShadow: isHovered 
+            ? '0 25px 70px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1) inset' 
+            : '0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05) inset',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isHovered ? 'translateY(-12px) scale(1.03)' : 'translateY(0) scale(1)',
+          cursor: 'pointer',
+          maxWidth: '420px',
+          width: '100%',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        {/* Animated gradient overlay */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%)',
+          opacity: isHovered ? 1 : 0,
+          transition: 'opacity 0.4s',
+          pointerEvents: 'none',
+          borderRadius: '28px'
+        }} />
+        
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <h3 style={{ 
+            fontSize: '1.75rem', 
+            fontWeight: '700', 
+            color: 'white',
+            marginBottom: '16px',
+            letterSpacing: '0.3px',
+            textShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+            transition: 'all 0.3s',
+            transform: isHovered ? 'translateX(4px)' : 'translateX(0)'
+          }}>
+            Sample Card
+          </h3>
+          
+          <p style={{ 
+            fontSize: '0.95rem', 
+            color: 'rgba(255, 255, 255, 0.8)',
+            marginBottom: '28px',
+            lineHeight: '1.6',
+            fontWeight: '400'
+          }}>
+            This is a sample card component with enhanced visual effects
+          </p>
+          
+          <div style={{ 
+            marginTop: '28px',
+            padding: '24px',
+            background: 'rgba(255, 255, 255, 0.08)',
+            borderRadius: '18px',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            transition: 'all 0.3s',
+            transform: isHovered ? 'scale(1.01)' : 'scale(1)'
+          }}>
+            <p style={{ 
+              color: 'rgba(255, 255, 255, 0.95)',
+              fontSize: '1.05rem',
+              lineHeight: '1.7',
+              fontWeight: '400'
+            }}>
+              This is the card content with enhanced glassmorphism effect and smooth animations
+            </p>
+          </div>
+          
+          <button 
+            style={{ 
+              marginTop: '28px', 
+              padding: '14px 32px', 
+              background: isHovered 
+                ? 'linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 100%)' 
+                : 'rgba(255, 255, 255, 0.95)',
+              color: '#667eea', 
+              border: 'none', 
+              borderRadius: '14px', 
+              fontWeight: '600', 
+              cursor: 'pointer', 
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              fontSize: '1rem',
+              boxShadow: isHovered 
+                ? '0 6px 20px rgba(0, 0, 0, 0.25)' 
+                : '0 4px 15px rgba(0, 0, 0, 0.15)',
+              width: '100%',
+              letterSpacing: '0.3px',
+              transform: isHovered ? 'translateY(-2px)' : 'translateY(0)'
+            }}
+          >
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+  `
+  },
+  {
+    name: "StylishCard",
+    category: "Cards",
+    code: `
+function StylishCard() {
+  const [isHovered, setIsHovered] = React.useState(false);
+  
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)', 
+      padding: '48px 16px', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center' 
+    }}>
+      <div 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ 
+          padding: '2px', 
+          background: isHovered 
+            ? 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' 
+            : 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+          borderRadius: '24px', 
+          transition: 'all 0.5s ease',
+          maxWidth: '420px',
+          width: '100%',
+          position: 'relative',
+          boxShadow: isHovered
+            ? '0 0 40px rgba(245, 87, 108, 0.6), 0 0 80px rgba(240, 147, 251, 0.4)'
+            : '0 0 30px rgba(79, 172, 254, 0.5), 0 0 60px rgba(0, 242, 254, 0.3)',
+        }}
+      >
+        <div style={{
+          background: '#1a1a2e',
+          borderRadius: '22px',
+          padding: '36px',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          {/* Animated background pattern */}
+          <div style={{
+            position: 'absolute',
+            top: '-50%',
+            right: '-50%',
+            width: '200%',
+            height: '200%',
+            background: 'radial-gradient(circle, rgba(79, 172, 254, 0.1) 0%, transparent 70%)',
+            opacity: isHovered ? 1 : 0.5,
+            transition: 'opacity 0.5s',
+            pointerEvents: 'none'
+          }} />
+          
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            {/* Icon/Badge */}
+            <div style={{
+              width: '56px',
+              height: '56px',
+              background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '24px',
+              boxShadow: '0 8px 24px rgba(79, 172, 254, 0.4)',
+              transition: 'all 0.4s',
+              transform: isHovered ? 'rotate(10deg) scale(1.1)' : 'rotate(0deg) scale(1)'
+            }}>
+              <div style={{
+                width: '24px',
+                height: '24px',
+                background: 'white',
+                borderRadius: '6px'
+              }} />
+            </div>
+            
+            <h3 style={{ 
+              fontSize: '1.875rem', 
+              fontWeight: '700', 
+              color: isHovered ? '#f5576c' : '#4facfe',
+              marginBottom: '12px',
+              letterSpacing: '-0.5px',
+              transition: 'all 0.5s'
+            }}>
+              Premium Card
+            </h3>
+            
+            <p style={{ 
+              fontSize: '0.95rem', 
+              color: 'rgba(255, 255, 255, 0.6)',
+              marginBottom: '28px',
+              lineHeight: '1.6',
+              fontWeight: '400'
+            }}>
+              Experience the next level of design with neon-inspired aesthetics
+            </p>
+            
+            {/* Stats or features */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '16px',
+              marginBottom: '28px'
+            }}>
+              <div style={{
+                padding: '20px',
+                background: 'rgba(79, 172, 254, 0.1)',
+                border: '1px solid rgba(79, 172, 254, 0.2)',
+                borderRadius: '14px',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+                cursor: 'pointer'
+              }}>
+                <div style={{
+                  fontSize: '1.75rem',
+                  fontWeight: '700',
+                  color: '#4facfe',
+                  marginBottom: '4px'
+                }}>99%</div>
+                <div style={{
+                  fontSize: '0.8rem',
+                  color: 'rgba(255, 255, 255, 0.5)',
+                  fontWeight: '500'
+                }}>Quality</div>
+              </div>
+              
+              <div style={{
+                padding: '20px',
+                background: 'rgba(0, 242, 254, 0.1)',
+                border: '1px solid rgba(0, 242, 254, 0.2)',
+                borderRadius: '14px',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+                transitionDelay: '0.05s',
+                cursor: 'pointer'
+              }}>
+                <div style={{
+                  fontSize: '1.75rem',
+                  fontWeight: '700',
+                  color: '#00f2fe',
+                  marginBottom: '4px'
+                }}>24/7</div>
+                <div style={{
+                  fontSize: '0.8rem',
+                  color: 'rgba(255, 255, 255, 0.5)',
+                  fontWeight: '500'
+                }}>Support</div>
+              </div>
+            </div>
+            
+            <div style={{ 
+              padding: '22px',
+              background: 'rgba(255, 255, 255, 0.03)',
+              borderRadius: '16px',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              marginBottom: '24px'
+            }}>
+              <p style={{ 
+                color: 'rgba(255, 255, 255, 0.7)',
+                fontSize: '0.95rem',
+                lineHeight: '1.7',
+                margin: 0
+              }}>
+                Unlock exclusive features with cutting-edge technology and stunning visual effects
+              </p>
+            </div>
+            
+            <button 
+              style={{ 
+                padding: '16px 32px', 
+                background: isHovered 
+                  ? 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' 
+                  : 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                color: 'white', 
+                border: 'none', 
+                borderRadius: '12px', 
+                fontWeight: '600', 
+                cursor: 'pointer', 
+                transition: 'all 0.4s',
+                fontSize: '1rem',
+                boxShadow: isHovered
+                  ? '0 8px 28px rgba(245, 87, 108, 0.5)'
+                  : '0 6px 24px rgba(79, 172, 254, 0.4)',
+                width: '100%',
+                letterSpacing: '0.5px',
+                transform: isHovered ? 'translateY(-3px)' : 'translateY(0)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+            >
+              <span style={{ position: 'relative', zIndex: 1 }}>Get Started</span>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: isHovered ? '0%' : '-100%',
+                width: '100%',
+                height: '100%',
+                background: 'rgba(255, 255, 255, 0.2)',
+                transition: 'left 0.5s',
+                pointerEvents: 'none'
+              }} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+  {
+    name: "FlipCard",
+    category: "Cards",
+    code: `
+function StylishFlipCard() {
+  const [isFlipped, setIsFlipped] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
+  
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #1e1e2e 0%, #2d1b4e 50%, #1a1a2e 100%)', 
+      padding: '48px 16px', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      perspective: '1500px',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      {/* Animated Background Elements */}
+      <div style={{
+        position: 'absolute',
+        width: '500px',
+        height: '500px',
+        background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+        borderRadius: '50%',
+        top: '10%',
+        left: '10%',
+        filter: 'blur(80px)',
+        opacity: isHovered ? 1 : 0.6,
+        transition: 'opacity 0.5s'
+      }} />
+      <div style={{
+        position: 'absolute',
+        width: '400px',
+        height: '400px',
+        background: 'radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 70%)',
+        borderRadius: '50%',
+        bottom: '10%',
+        right: '10%',
+        filter: 'blur(80px)',
+        opacity: isHovered ? 1 : 0.6,
+        transition: 'opacity 0.5s'
+      }} />
+      
+      <div 
+        onClick={() => setIsFlipped(!isFlipped)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ 
+          width: '100%',
+          maxWidth: '420px',
+          height: '560px',
+          position: 'relative',
+          transformStyle: 'preserve-3d',
+          transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+          cursor: 'pointer'
+        }}
+      >
+        {/* Front Side */}
+        <div style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          backfaceVisibility: 'hidden',
+          background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.95) 100%)',
+          borderRadius: '32px',
+          border: '1px solid rgba(139, 92, 246, 0.3)',
+          overflow: 'hidden',
+          boxShadow: isHovered && !isFlipped 
+            ? '0 40px 100px rgba(139, 92, 246, 0.4), 0 0 80px rgba(139, 92, 246, 0.2), 0 0 0 1px rgba(139, 92, 246, 0.3) inset'
+            : '0 25px 70px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(139, 92, 246, 0.2) inset',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+        }}>
+          {/* Gradient Overlay */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '300px',
+            background: 'linear-gradient(180deg, rgba(139, 92, 246, 0.15) 0%, transparent 100%)',
+            opacity: isHovered ? 1 : 0.7,
+            transition: 'opacity 0.4s'
+          }} />
+          
+          {/* Animated Circles */}
+          <div style={{
+            position: 'absolute',
+            top: '-100px',
+            right: '-100px',
+            width: '300px',
+            height: '300px',
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, transparent 70%)',
+            borderRadius: '50%',
+            filter: 'blur(40px)',
+            transition: 'all 0.5s',
+            transform: isHovered ? 'scale(1.3)' : 'scale(1)'
+          }} />
+          
+          <div style={{
+            position: 'relative',
+            padding: '48px',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            zIndex: 1
+          }}>
+            <div>
+              {/* Premium Badge */}
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%)',
+                border: '1px solid rgba(139, 92, 246, 0.4)',
+                borderRadius: '20px',
+                marginBottom: '32px',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)'
+              }}>
+                <div style={{
+                  width: '8px',
+                  height: '8px',
+                  background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
+                  borderRadius: '50%',
+                  boxShadow: '0 0 10px rgba(139, 92, 246, 0.8)'
+                }} />
+                <span style={{
+                  fontSize: '0.8rem',
+                  fontWeight: '700',
+                  background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase'
+                }}>Premium</span>
+              </div>
+              
+              {/* Icon */}
+              <div style={{
+                width: '90px',
+                height: '90px',
+                background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
+                borderRadius: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '32px',
+                boxShadow: '0 20px 50px rgba(139, 92, 246, 0.5)',
+                transition: 'all 0.4s',
+                transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)',
+                position: 'relative'
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  inset: '-2px',
+                  background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
+                  borderRadius: '24px',
+                  opacity: 0.5,
+                  filter: 'blur(20px)'
+                }} />
+                <div style={{
+                  fontSize: '2.5rem',
+                  position: 'relative',
+                  zIndex: 1
+                }}>💎</div>
+              </div>
+              
+              <h2 style={{
+                fontSize: '2.5rem',
+                fontWeight: '800',
+                background: 'linear-gradient(135deg, #ffffff 0%, #a78bfa 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '16px',
+                letterSpacing: '-1px',
+                lineHeight: '1.2'
+              }}>
+                Elite Card
+              </h2>
+              
+              <p style={{
+                fontSize: '1rem',
+                color: 'rgba(255, 255, 255, 0.6)',
+                lineHeight: '1.7',
+                marginBottom: '32px',
+                fontWeight: '400'
+              }}>
+                Experience luxury and exclusivity with premium features designed for the elite
+              </p>
+              
+              {/* Stats Grid */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '16px',
+                marginBottom: '24px'
+              }}>
+                <div style={{
+                  padding: '20px',
+                  background: 'rgba(139, 92, 246, 0.1)',
+                  border: '1px solid rgba(139, 92, 246, 0.3)',
+                  borderRadius: '16px',
+                  backdropFilter: 'blur(10px)',
+                  WebkitBackdropFilter: 'blur(10px)',
+                  transition: 'all 0.3s',
+                  transform: isHovered ? 'translateY(-4px)' : 'translateY(0)'
+                }}>
+                  <div style={{
+                    fontSize: '2rem',
+                    fontWeight: '800',
+                    background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    marginBottom: '4px'
+                  }}>5K+</div>
+                  <div style={{
+                    fontSize: '0.75rem',
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontWeight: '600',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}>Members</div>
+                </div>
+                
+                <div style={{
+                  padding: '20px',
+                  background: 'rgba(236, 72, 153, 0.1)',
+                  border: '1px solid rgba(236, 72, 153, 0.3)',
+                  borderRadius: '16px',
+                  backdropFilter: 'blur(10px)',
+                  WebkitBackdropFilter: 'blur(10px)',
+                  transition: 'all 0.3s',
+                  transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+                  transitionDelay: '0.05s'
+                }}>
+                  <div style={{
+                    fontSize: '2rem',
+                    fontWeight: '800',
+                    background: 'linear-gradient(135deg, #ec4899 0%, #f472b6 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    marginBottom: '4px'
+                  }}>100%</div>
+                  <div style={{
+                    fontSize: '0.75rem',
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontWeight: '600',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}>Exclusive</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* CTA Button */}
+            <div>
+              <div style={{
+                padding: '18px',
+                background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
+                borderRadius: '16px',
+                textAlign: 'center',
+                fontWeight: '700',
+                fontSize: '1rem',
+                color: 'white',
+                letterSpacing: '0.5px',
+                boxShadow: '0 10px 40px rgba(139, 92, 246, 0.4)',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateY(-2px)' : 'translateY(0)'
+              }}>
+                <span style={{ position: 'relative', zIndex: 1 }}>FLIP TO EXPLORE</span>
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: '-100%',
+                  width: '100%',
+                  height: '100%',
+                  background: 'rgba(255, 255, 255, 0.2)',
+                  transition: 'left 0.5s',
+                  left: isHovered ? '100%' : '-100%'
+                }} />
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Back Side */}
+        <div style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          backfaceVisibility: 'hidden',
+          background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.95) 100%)',
+          borderRadius: '32px',
+          border: '1px solid rgba(236, 72, 153, 0.3)',
+          transform: 'rotateY(180deg)',
+          overflow: 'hidden',
+          boxShadow: isHovered && isFlipped
+            ? '0 40px 100px rgba(236, 72, 153, 0.4), 0 0 80px rgba(236, 72, 153, 0.2), 0 0 0 1px rgba(236, 72, 153, 0.3) inset'
+            : '0 25px 70px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(236, 72, 153, 0.2) inset',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+        }}>
+          {/* Gradient Overlay */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '300px',
+            background: 'linear-gradient(180deg, rgba(236, 72, 153, 0.15) 0%, transparent 100%)',
+            opacity: isHovered ? 1 : 0.7,
+            transition: 'opacity 0.4s'
+          }} />
+          
+          {/* Animated Circles */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-100px',
+            left: '-100px',
+            width: '300px',
+            height: '300px',
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%)',
+            borderRadius: '50%',
+            filter: 'blur(40px)',
+            transition: 'all 0.5s',
+            transform: isHovered ? 'scale(1.3)' : 'scale(1)'
+          }} />
+          
+          <div style={{
+            position: 'relative',
+            padding: '48px',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            zIndex: 1
+          }}>
+            <div>
+              {/* Back Icon */}
+              <div style={{
+                width: '70px',
+                height: '70px',
+                background: 'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)',
+                borderRadius: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '28px',
+                boxShadow: '0 20px 50px rgba(236, 72, 153, 0.5)',
+                transition: 'all 0.4s',
+                transform: isHovered ? 'scale(1.1) rotate(-5deg)' : 'scale(1) rotate(0deg)'
+              }}>
+                <div style={{ fontSize: '2rem' }}>✨</div>
+              </div>
+              
+              <h2 style={{
+                fontSize: '2.2rem',
+                fontWeight: '800',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f472b6 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '16px',
+                letterSpacing: '-1px',
+                lineHeight: '1.2'
+              }}>
+                Premium Features
+              </h2>
+              
+              <p style={{
+                fontSize: '0.95rem',
+                color: 'rgba(255, 255, 255, 0.6)',
+                lineHeight: '1.7',
+                marginBottom: '32px'
+              }}>
+                Unlock unlimited possibilities with our exclusive membership benefits
+              </p>
+              
+              {/* Features - Feature 1 */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '16px',
+                background: 'rgba(139, 92, 246, 0.08)',
+                border: '1px solid rgba(139, 92, 246, 0.2)',
+                borderRadius: '14px',
+                marginBottom: '12px',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateX(8px)' : 'translateX(0)'
+              }}>
+                <div style={{
+                  fontSize: '1.5rem',
+                  width: '40px',
+                  textAlign: 'center'
+                }}>🚀</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    color: 'white',
+                    fontSize: '0.95rem',
+                    fontWeight: '700',
+                    marginBottom: '2px'
+                  }}>Lightning Fast</div>
+                  <div style={{
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontSize: '0.8rem'
+                  }}>Blazing speed performance</div>
+                </div>
+              </div>
+              
+              {/* Feature 2 */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '16px',
+                background: 'rgba(236, 72, 153, 0.08)',
+                border: '1px solid rgba(236, 72, 153, 0.2)',
+                borderRadius: '14px',
+                marginBottom: '12px',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateX(8px)' : 'translateX(0)'
+              }}>
+                <div style={{
+                  fontSize: '1.5rem',
+                  width: '40px',
+                  textAlign: 'center'
+                }}>🎯</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    color: 'white',
+                    fontSize: '0.95rem',
+                    fontWeight: '700',
+                    marginBottom: '2px'
+                  }}>Precision Design</div>
+                  <div style={{
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontSize: '0.8rem'
+                  }}>Pixel-perfect interface</div>
+                </div>
+              </div>
+              
+              {/* Feature 3 */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '16px',
+                background: 'rgba(139, 92, 246, 0.08)',
+                border: '1px solid rgba(139, 92, 246, 0.2)',
+                borderRadius: '14px',
+                marginBottom: '12px',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateX(8px)' : 'translateX(0)'
+              }}>
+                <div style={{
+                  fontSize: '1.5rem',
+                  width: '40px',
+                  textAlign: 'center'
+                }}>🔒</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    color: 'white',
+                    fontSize: '0.95rem',
+                    fontWeight: '700',
+                    marginBottom: '2px'
+                  }}>Secure Access</div>
+                  <div style={{
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontSize: '0.8rem'
+                  }}>Bank-level encryption</div>
+                </div>
+              </div>
+              
+              {/* Feature 4 */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '16px',
+                background: 'rgba(236, 72, 153, 0.08)',
+                border: '1px solid rgba(236, 72, 153, 0.2)',
+                borderRadius: '14px',
+                marginBottom: '12px',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateX(8px)' : 'translateX(0)'
+              }}>
+                <div style={{
+                  fontSize: '1.5rem',
+                  width: '40px',
+                  textAlign: 'center'
+                }}>💫</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    color: 'white',
+                    fontSize: '0.95rem',
+                    fontWeight: '700',
+                    marginBottom: '2px'
+                  }}>Premium Support</div>
+                  <div style={{
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontSize: '0.8rem'
+                  }}>24/7 dedicated team</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Action Buttons */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr auto',
+              gap: '12px'
+            }}>
+              <button style={{
+                padding: '18px',
+                background: 'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)',
+                border: 'none',
+                borderRadius: '14px',
+                color: 'white',
+                fontWeight: '700',
+                fontSize: '1rem',
+                cursor: 'pointer',
+                boxShadow: '0 10px 40px rgba(236, 72, 153, 0.4)',
+                transition: 'all 0.3s',
+                letterSpacing: '0.5px'
+              }}>
+                JOIN NOW
+              </button>
+              <div style={{
+                width: '60px',
+                height: '60px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.3rem',
+                cursor: 'pointer',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                transition: 'all 0.3s'
+              }}>
+                ↩️
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+
+{
+    name: "NeumorphismCard2",
+    category: "Cards",
+    code: `
+function NeumorphismCard2() {
+  const [isHovered, setIsHovered] = React.useState(false);
+  
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #e0e5ec 0%, #f5f7fa 100%)', 
+      padding: '48px 16px', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      position: 'relative'
+    }}>
+      <div 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ 
+          width: '100%',
+          maxWidth: '420px',
+          position: 'relative',
+          transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isHovered ? 'translateY(-8px)' : 'translateY(0)'
+        }}
+      >
+        {/* Main Card */}
+        <div style={{
+          background: '#e0e5ec',
+          borderRadius: '40px',
+          padding: '48px',
+          boxShadow: isHovered 
+            ? '20px 20px 60px #bebebe, -20px -20px 60px #ffffff, inset 2px 2px 5px rgba(255, 255, 255, 0.5)'
+            : '15px 15px 30px #bebebe, -15px -15px 30px #ffffff',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          {/* Decorative Circle */}
+          <div style={{
+            position: 'absolute',
+            top: '-80px',
+            right: '-80px',
+            width: '200px',
+            height: '200px',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            borderRadius: '50%',
+            opacity: 0.1,
+            transition: 'all 0.5s',
+            transform: isHovered ? 'scale(1.2)' : 'scale(1)'
+          }} />
+          
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            {/* Avatar/Icon */}
+            <div style={{
+              width: '100px',
+              height: '100px',
+              background: '#e0e5ec',
+              borderRadius: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '32px',
+              boxShadow: isHovered
+                ? 'inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff'
+                : 'inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff',
+              transition: 'all 0.4s',
+              transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+            }}>
+              <div style={{
+                width: '60px',
+                height: '60px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: '18px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2rem'
+              }}>
+                🎨
+              </div>
+            </div>
+            
+            {/* Title */}
+            <h2 style={{
+              fontSize: '2.5rem',
+              fontWeight: '800',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              marginBottom: '16px',
+              letterSpacing: '-1px',
+              lineHeight: '1.2'
+            }}>
+              Soft Design
+            </h2>
+            
+            <p style={{
+              fontSize: '1rem',
+              color: '#6b7280',
+              lineHeight: '1.7',
+              marginBottom: '32px',
+              fontWeight: '500'
+            }}>
+              Experience elegant neumorphism design with soft shadows and modern aesthetics
+            </p>
+            
+            {/* Stats Cards */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '20px',
+              marginBottom: '32px'
+            }}>
+              <div style={{
+                padding: '24px',
+                background: '#e0e5ec',
+                borderRadius: '24px',
+                boxShadow: '8px 8px 16px #bebebe, -8px -8px 16px #ffffff',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateY(-5px)' : 'translateY(0)'
+              }}>
+                <div style={{
+                  fontSize: '2rem',
+                  fontWeight: '800',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  marginBottom: '8px'
+                }}>256</div>
+                <div style={{
+                  fontSize: '0.8rem',
+                  color: '#9ca3af',
+                  fontWeight: '700',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>Projects</div>
+              </div>
+              
+              <div style={{
+                padding: '24px',
+                background: '#e0e5ec',
+                borderRadius: '24px',
+                boxShadow: '8px 8px 16px #bebebe, -8px -8px 16px #ffffff',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateY(-5px)' : 'translateY(0)',
+                transitionDelay: '0.05s'
+              }}>
+                <div style={{
+                  fontSize: '2rem',
+                  fontWeight: '800',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  marginBottom: '8px'
+                }}>98%</div>
+                <div style={{
+                  fontSize: '0.8rem',
+                  color: '#9ca3af',
+                  fontWeight: '700',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>Success</div>
+              </div>
+            </div>
+            
+            {/* Feature List */}
+            <div style={{
+              padding: '28px',
+              background: '#e0e5ec',
+              borderRadius: '28px',
+              boxShadow: 'inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff',
+              marginBottom: '32px'
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                marginBottom: '16px'
+              }}>
+                <div style={{
+                  width: '50px',
+                  height: '50px',
+                  background: '#e0e5ec',
+                  borderRadius: '15px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
+                  fontSize: '1.3rem'
+                }}>
+                  ⚡
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    color: '#374151',
+                    fontSize: '1rem',
+                    fontWeight: '700',
+                    marginBottom: '4px'
+                  }}>Fast Performance</div>
+                  <div style={{
+                    color: '#9ca3af',
+                    fontSize: '0.85rem',
+                    fontWeight: '500'
+                  }}>Lightning-fast loading speeds</div>
+                </div>
+              </div>
+              
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                marginBottom: '16px'
+              }}>
+                <div style={{
+                  width: '50px',
+                  height: '50px',
+                  background: '#e0e5ec',
+                  borderRadius: '15px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
+                  fontSize: '1.3rem'
+                }}>
+                  🎯
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    color: '#374151',
+                    fontSize: '1rem',
+                    fontWeight: '700',
+                    marginBottom: '4px'
+                  }}>Pixel Perfect</div>
+                  <div style={{
+                    color: '#9ca3af',
+                    fontSize: '0.85rem',
+                    fontWeight: '500'
+                  }}>Beautiful attention to detail</div>
+                </div>
+              </div>
+              
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px'
+              }}>
+                <div style={{
+                  width: '50px',
+                  height: '50px',
+                  background: '#e0e5ec',
+                  borderRadius: '15px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
+                  fontSize: '1.3rem'
+                }}>
+                  🔒
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    color: '#374151',
+                    fontSize: '1rem',
+                    fontWeight: '700',
+                    marginBottom: '4px'
+                  }}>Secure & Safe</div>
+                  <div style={{
+                    color: '#9ca3af',
+                    fontSize: '0.85rem',
+                    fontWeight: '500'
+                  }}>Enterprise-level security</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* CTA Button */}
+            <button style={{
+              width: '100%',
+              padding: '20px',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              border: 'none',
+              borderRadius: '20px',
+              color: 'white',
+              fontWeight: '700',
+              fontSize: '1.1rem',
+              cursor: 'pointer',
+              boxShadow: isHovered
+                ? '10px 10px 20px #bebebe, -10px -10px 20px #ffffff, 0 10px 40px rgba(102, 126, 234, 0.4)'
+                : '8px 8px 16px #bebebe, -8px -8px 16px #ffffff',
+              transition: 'all 0.3s',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              <span style={{ position: 'relative', zIndex: 1 }}>Get Started</span>
+            </button>
+            
+            {/* Social Links */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '16px',
+              marginTop: '32px'
+            }}>
+              {['💼', '🌐', '📧'].map((icon, index) => (
+                <div key={index} style={{
+                  width: '50px',
+                  height: '50px',
+                  background: '#e0e5ec',
+                  borderRadius: '15px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
+                  cursor: 'pointer',
+                  fontSize: '1.2rem',
+                  transition: 'all 0.3s',
+                  transform: isHovered ? 'translateY(-3px)' : 'translateY(0)'
+                }}>
+                  {icon}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+
+
+
 ];
 
 // Use upsert: updates if exists by name, inserts if new

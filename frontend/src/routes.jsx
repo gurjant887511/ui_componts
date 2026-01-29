@@ -6,6 +6,7 @@ import FormsPage from './pages/FormsPage';
 import TextEffectsPage from './pages/TextEffectsPage';
 import CyberGlowInfoCardPreview from './pages/imports/CyberGlowInfoCardPreview';
 import ComponentsPage from './pages/ComponentsPage';
+import About from './components/About';
 import StylishX from './components/StylishX';
 import Nexus from './components/Nexus';
 import Lumina from './components/Lumina';
@@ -20,6 +21,7 @@ function AppRoutes({ components }) {
   return (
     <Routes>
       <Route path="/" element={<ButtonsPage components={components} />} />
+      <Route path="/about" element={<About />} />
       <Route path="/components" element={<ComponentsPage components={components} />} />
       <Route
         path="/components/buttons"

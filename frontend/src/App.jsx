@@ -15,7 +15,8 @@ import MyWebsite from './components/MyWebsite';
 import DynamicWeb from './components/DynamicWeb';
 import ElectroTech from './components/ElectroTech';
 import About from './components/About';
-import HeroSection from './components/HeroSection';
+import Template from './template/Template';
+
 import Home from './components/Home';
 // import ElectroX from './components/ElectroX';
 import './styles/globals.css';
@@ -1326,11 +1327,11 @@ window.location.href
             setIsSignupOpen(false);
           }}
         />
-        <Main isPreview={activeTab === 'components' || activeTab === 'library' || activeTab === 'fullweb'} isHome={activeTab === 'home'} isAbout={activeTab === 'about'}>
+        <Main isPreview={activeTab === 'components' || activeTab === 'library' || activeTab === 'fullweb' || activeTab === 'template'} isHome={activeTab === 'home'} isAbout={activeTab === 'about'}>
           {activeTab === 'home' ? (
             <>
 
-<Home />
+<Home setActiveTab={setActiveTab} />
 
               {/* {HeroSection && <HeroSection onExploreClick={() => setActiveTab('components')} onLearnMoreClick={() => setActiveTab('about')} />} */}
               <div className="max-w-7xl mx-auto px-4 py-16">
@@ -1446,6 +1447,8 @@ window.location.href
             <>
               <FullWebPreview />
             </>
+          ) : activeTab === 'template' ? (
+            <Template />
           ) : activeTab === 'customizeweb' ? (
             <CustomizeWeb />
           ) : activeTab === 'about' ? (

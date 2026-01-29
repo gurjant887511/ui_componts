@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Rocket, Info, Infinity } from 'lucide-react';
 
-export default function DynamicHero() {
+export default function DynamicHero({ setActiveTab }) {
   const [particles, setParticles] = useState([]);
   const [scrollY, setScrollY] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
@@ -143,14 +143,14 @@ export default function DynamicHero() {
 
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeInUp animation-delay-400">
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 via-purple-500 to-purple-600 rounded-xl font-semibold text-base text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 bg-[length:200%_100%] hover:bg-[position:100%_0]">
+            <button onClick={() => setActiveTab('components')} className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 via-purple-500 to-purple-600 rounded-xl font-semibold text-base text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 bg-[length:200%_100%] hover:bg-[position:100%_0]">
               <span className="relative z-10 flex items-center gap-2">
                 <Rocket className="w-5 h-5" />
                 Explore Components
               </span>
             </button>
             
-            <button className="group px-8 py-4 rounded-xl font-semibold text-base text-purple-200 border-2 border-purple-400/40 backdrop-blur-sm hover:bg-purple-500/20 hover:border-purple-300/60 transition-all duration-300 hover:scale-105 flex items-center gap-2">
+            <button onClick={() => setActiveTab('about')} className="group px-8 py-4 rounded-xl font-semibold text-base text-purple-200 border-2 border-purple-400/40 backdrop-blur-sm hover:bg-purple-500/20 hover:border-purple-300/60 transition-all duration-300 hover:scale-105 flex items-center gap-2">
               <Info className="w-5 h-5" />
               Learn More
             </button>
