@@ -20907,6 +20907,1913 @@ function PricingSection2() {
   `
   },
  {
+    name: "PricingSection3",
+    category: "Pricing",
+    code: `
+function PricingSection3() {
+  const plans = [
+    {
+      name: 'Starter',
+      price: '₹999',
+      period: '/month',
+      features: ['5 Projects', '10GB Storage', 'Email Support', 'Basic Analytics'],
+      popular: false,
+      icon: '🚀'
+    },
+    {
+      name: 'Professional',
+      price: '₹2,499',
+      period: '/month',
+      features: ['Unlimited Projects', '100GB Storage', 'Priority Support', 'Advanced Analytics', 'Custom Domain'],
+      popular: true,
+      icon: '⭐'
+    },
+    {
+      name: 'Enterprise',
+      price: '₹4,999',
+      period: '/month',
+      features: ['Unlimited Everything', '1TB Storage', '24/7 Support', 'AI Features', 'Custom Integration', 'Dedicated Manager'],
+      popular: false,
+      icon: '👑'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-white mb-4">
+            Choose Your Plan
+          </h2>
+          <p className="text-xl text-gray-300">
+            Flexible pricing options designed for every stage of your journey
+          </p>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {plans.map((plan, idx) => (
+            <div
+              key={idx}
+              className="relative rounded-2xl bg-white bg-opacity-10 border border-white border-opacity-20 p-8 transition-all duration-300 hover:bg-opacity-15 hover:scale-105"
+              style={plan.popular ? {
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderWidth: '2px',
+                borderColor: 'rgba(255, 255, 255, 0.4)',
+                boxShadow: '0 25px 50px -12px rgba(168, 85, 247, 0.5)'
+              } : {}}
+            >
+              {/* Popular Badge */}
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+                    🔥 Best Value
+                  </span>
+                </div>
+              )}
+
+              {/* Icon */}
+              <div className="w-16 h-16 rounded-xl bg-purple-600 flex items-center justify-center text-3xl mb-6 shadow-lg">
+                {plan.icon}
+              </div>
+
+              {/* Plan Name */}
+              <h3 className="text-2xl font-bold text-white mb-2">
+                {plan.name}
+              </h3>
+
+              {/* Price */}
+              <div className="mb-8">
+                <span className="text-5xl font-bold text-white">
+                  {plan.price}
+                </span>
+                <span className="text-gray-300 text-lg">
+                  {plan.period}
+                </span>
+              </div>
+
+              {/* Features */}
+              <ul className="space-y-4 mb-8">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-start text-gray-200">
+                    <svg
+                      className="w-6 h-6 text-green-400 mr-3 flex-shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA Button */}
+              {plan.popular ? (
+                <button className="w-full py-4 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-lg transition-all duration-300">
+                  Get Started →
+                </button>
+              ) : (
+                <button className="w-full py-4 rounded-xl font-semibold bg-white bg-opacity-20 text-white hover:bg-opacity-30 border border-white border-opacity-30 transition-all duration-300">
+                  Get Started →
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Note */}
+        <div className="text-center mt-16">
+          <p className="text-gray-300 text-lg">
+            All plans include a 14-day free trial • No credit card required
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "PricingSection4",
+    category: "Pricing",
+    code: `
+function PricingSection4() {
+  const plans = [
+    {
+      name: 'Basic',
+      price: '₹799',
+      period: '/month',
+      features: ['3 Projects', '5GB Storage', 'Community Support', 'Basic Reports'],
+      popular: false,
+      icon: '💎',
+      buttonText: 'Start Free Trial'
+    },
+    {
+      name: 'Pro',
+      price: '₹1,999',
+      period: '/month',
+      features: ['50 Projects', '50GB Storage', 'Email & Chat Support', 'Advanced Reports', 'API Access', 'Team Collaboration'],
+      popular: true,
+      icon: '🚀',
+      buttonText: 'Get Started Now'
+    },
+    {
+      name: 'Ultimate',
+      price: '₹3,999',
+      period: '/month',
+      features: ['Unlimited Projects', '500GB Storage', 'Priority 24/7 Support', 'Custom Reports', 'Full API Access', 'Advanced Security', 'White Label'],
+      popular: false,
+      icon: '⚡',
+      buttonText: 'Contact Sales'
+    }
+  ];
+
+  return (
+    <div className="bg-gray-50 py-16 px-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <span className="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-medium inline-block mb-4">
+            PRICING PLANS
+          </span>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Pick Your Perfect Plan
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Start with a free trial. No credit card required. Cancel anytime.
+          </p>
+        </div>
+
+        {/* Pricing Cards Grid */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {plans.map((plan, idx) => (
+            <div key={idx} className="relative">
+              {/* Popular Badge */}
+              {plan.popular && (
+                <div className="absolute -top-3 left-0 right-0 flex justify-center z-10">
+                  <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold">
+                    MOST POPULAR
+                  </span>
+                </div>
+              )}
+
+              {/* Card */}
+              <div
+                className="bg-white rounded-3xl shadow-xl p-8 h-full flex flex-col border-4 transition-transform duration-300 hover:shadow-2xl"
+                style={plan.popular ? { borderColor: '#2563eb' } : { borderColor: 'transparent' }}
+              >
+                {/* Icon Circle */}
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-4xl mb-6 mx-auto">
+                  {plan.icon}
+                </div>
+
+                {/* Plan Name */}
+                <h3 className="text-2xl font-bold text-gray-900 text-center mb-4">
+                  {plan.name}
+                </h3>
+
+                {/* Price */}
+                <div className="text-center mb-8">
+                  <div className="flex items-center justify-center">
+                    <span className="text-5xl font-extrabold text-gray-900">
+                      {plan.price}
+                    </span>
+                  </div>
+                  <span className="text-gray-500 text-base">{plan.period}</span>
+                </div>
+
+                {/* Divider */}
+                <div className="border-t-2 border-gray-200 mb-8"></div>
+
+                {/* Features List */}
+                <ul className="space-y-4 mb-8 flex-grow">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-center text-gray-700">
+                      <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                        <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA Button */}
+                {plan.popular ? (
+                  <button className="w-full py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors duration-300 shadow-lg">
+                    {plan.buttonText}
+                  </button>
+                ) : (
+                  <button className="w-full py-4 bg-gray-100 text-gray-900 font-bold rounded-xl hover:bg-gray-200 transition-colors duration-300 border-2 border-gray-300">
+                    {plan.buttonText}
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Features Banner */}
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="grid md:grid-cols-4 gap-6 text-center">
+            <div>
+              <div className="text-3xl mb-2">✅</div>
+              <h4 className="font-bold text-gray-900 mb-1">14-Day Trial</h4>
+              <p className="text-sm text-gray-600">Test all features free</p>
+            </div>
+            <div>
+              <div className="text-3xl mb-2">💳</div>
+              <h4 className="font-bold text-gray-900 mb-1">No Credit Card</h4>
+              <p className="text-sm text-gray-600">Sign up instantly</p>
+            </div>
+            <div>
+              <div className="text-3xl mb-2">🔒</div>
+              <h4 className="font-bold text-gray-900 mb-1">Secure Payment</h4>
+              <p className="text-sm text-gray-600">Bank-level security</p>
+            </div>
+            <div>
+              <div className="text-3xl mb-2">🎯</div>
+              <h4 className="font-bold text-gray-900 mb-1">Cancel Anytime</h4>
+              <p className="text-sm text-gray-600">No questions asked</p>
+            </div>
+          </div>
+        </div>
+
+        {/* FAQ Link */}
+        <div className="text-center mt-8">
+          <p className="text-gray-600">
+            Have questions?{' '}
+            <a href="#faq" className="text-blue-600 font-semibold hover:underline">
+              Check our FAQ
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "PricingSection5",
+    category: "Pricing",
+    code: `
+function PricingSection5() {
+  const plans = [
+    {
+      name: 'Freelancer',
+      price: '₹599',
+      period: '/month',
+      description: 'Perfect for individual creators',
+      features: ['2 Active Projects', '3GB Storage', 'Email Support', 'Basic Dashboard', 'Mobile App Access'],
+      popular: false,
+      icon: '🎨',
+      badge: 'STARTER'
+    },
+    {
+      name: 'Business',
+      price: '₹1,799',
+      period: '/month',
+      description: 'Ideal for growing teams',
+      features: ['25 Active Projects', '75GB Storage', 'Live Chat Support', 'Premium Dashboard', 'Mobile + Desktop Apps', 'Team Management', 'Custom Branding'],
+      popular: true,
+      icon: '🏢',
+      badge: 'RECOMMENDED'
+    },
+    {
+      name: 'Corporation',
+      price: '₹4,499',
+      period: '/month',
+      description: 'For large organizations',
+      features: ['Unlimited Projects', 'Unlimited Storage', 'Dedicated Support Line', 'Enterprise Dashboard', 'All Platform Access', 'Advanced Team Tools', 'Priority Updates', 'SLA Guarantee'],
+      popular: false,
+      icon: '🏆',
+      badge: 'PREMIUM'
+    }
+  ];
+
+  return (
+    <div className="bg-gradient-to-b from-indigo-50 to-white py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-6xl font-black text-gray-900 mb-6">
+            Pricing That Scales
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+              With Your Business
+            </span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Choose a plan that fits your needs today and scales with you tomorrow
+          </p>
+        </div>
+
+        {/* Toggle (Optional - can be removed if not needed) */}
+        <div className="flex justify-center items-center gap-4 mb-12">
+          <span className="text-gray-700 font-medium">Monthly</span>
+          <button className="w-14 h-8 bg-indigo-600 rounded-full relative">
+            <div className="w-6 h-6 bg-white rounded-full absolute top-1 left-1"></div>
+          </button>
+          <span className="text-gray-400 font-medium">Yearly</span>
+          <span className="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full">
+            Save 20%
+          </span>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+          {plans.map((plan, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2"
+              style={{
+                boxShadow: plan.popular
+                  ? '0 20px 60px rgba(99, 102, 241, 0.3)'
+                  : '0 10px 30px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              {/* Card Header */}
+              <div
+                className="p-8 text-center"
+                style={{
+                  background: plan.popular
+                    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                    : 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'
+                }}
+              >
+                {/* Badge */}
+                <div className="mb-4">
+                  <span
+                    className="text-xs font-bold px-3 py-1 rounded-full"
+                    style={{
+                      backgroundColor: plan.popular ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.1)',
+                      color: plan.popular ? 'white' : '#4B5563'
+                    }}
+                  >
+                    {plan.badge}
+                  </span>
+                </div>
+
+                {/* Icon */}
+                <div className="text-6xl mb-4">{plan.icon}</div>
+
+                {/* Plan Name */}
+                <h3
+                  className="text-3xl font-bold mb-2"
+                  style={{ color: plan.popular ? 'white' : '#1F2937' }}
+                >
+                  {plan.name}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className="text-sm mb-6"
+                  style={{ color: plan.popular ? 'rgba(255,255,255,0.9)' : '#6B7280' }}
+                >
+                  {plan.description}
+                </p>
+
+                {/* Price */}
+                <div className="mb-6">
+                  <span
+                    className="text-5xl font-extrabold"
+                    style={{ color: plan.popular ? 'white' : '#1F2937' }}
+                  >
+                    {plan.price}
+                  </span>
+                  <span
+                    className="text-lg ml-2"
+                    style={{ color: plan.popular ? 'rgba(255,255,255,0.8)' : '#9CA3AF' }}
+                  >
+                    {plan.period}
+                  </span>
+                </div>
+
+                {/* CTA Button */}
+                {plan.popular ? (
+                  <button className="w-full py-3 bg-white text-indigo-600 font-bold rounded-lg hover:bg-gray-100 transition-colors duration-300">
+                    Start 14-Day Trial
+                  </button>
+                ) : (
+                  <button className="w-full py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors duration-300">
+                    Get Started
+                  </button>
+                )}
+              </div>
+
+              {/* Features List */}
+              <div className="p-8">
+                <ul className="space-y-4">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start">
+                      <span className="text-indigo-600 mr-3 mt-1 text-lg">▸</span>
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Trust Section */}
+        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-12 text-center text-white">
+          <h2 className="text-3xl font-bold mb-6">
+            Trusted by 10,000+ Companies Worldwide
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-8">
+            <div>
+              <div className="text-5xl font-bold mb-2">99.9%</div>
+              <p className="text-indigo-100">Uptime Guarantee</p>
+            </div>
+            <div>
+              <div className="text-5xl font-bold mb-2">24/7</div>
+              <p className="text-indigo-100">Customer Support</p>
+            </div>
+            <div>
+              <div className="text-5xl font-bold mb-2">30-Day</div>
+              <p className="text-indigo-100">Money Back Guarantee</p>
+            </div>
+          </div>
+          <button className="bg-white text-indigo-600 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-300">
+            Compare All Features →
+          </button>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="mt-16 text-center">
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            Still have questions?
+          </h3>
+          <p className="text-gray-600 mb-6">
+            Our team is here to help you choose the right plan
+          </p>
+          <div className="flex justify-center gap-4">
+            <button className="px-6 py-3 border-2 border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors duration-300">
+              Chat with Sales
+            </button>
+            <button className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors duration-300">
+              View All FAQs
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "PricingSection6",
+    category: "Pricing",
+    code: `
+function PricingSection6() {
+  const plans = [
+    {
+      name: 'Basic',
+      price: '₹899',
+      period: '/month',
+      description: 'Essential features for beginners',
+      features: ['3 Active Projects', '15GB Storage', 'Email Support', 'Basic Dashboard', 'Mobile App'],
+      popular: false,
+      icon: '💎',
+      buttonText: 'Start Free',
+      gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    },
+    {
+      name: 'Premium',
+      price: '₹2,199',
+      period: '/month',
+      description: 'Advanced tools for professionals',
+      features: ['Unlimited Projects', '100GB Storage', 'Priority Support', 'Advanced Analytics', 'All Integrations', 'Team Collaboration', 'Custom Domains'],
+      popular: true,
+      icon: '🚀',
+      buttonText: 'Get Premium',
+      gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+    },
+    {
+      name: 'Ultimate',
+      price: '₹4,799',
+      period: '/month',
+      description: 'Complete solution for enterprises',
+      features: ['Everything in Premium', '1TB Storage', 'Dedicated Support', 'White Label', 'Advanced Security', 'Custom Development', 'SLA Agreement', 'Training Sessions'],
+      popular: false,
+      icon: '⚡',
+      buttonText: 'Contact Us',
+      gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+    }
+  ];
+
+  return (
+    <div style={{ background: '#0a0a0a', minHeight: '100vh', padding: '100px 20px' }}>
+      <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: '70px' }}>
+          <span style={{ display: 'inline-block', background: 'rgba(255, 255, 255, 0.05)', padding: '10px 24px', borderRadius: '30px', color: '#a855f7', fontSize: '12px', fontWeight: '700', letterSpacing: '3px', marginBottom: '20px', border: '1px solid rgba(168, 85, 247, 0.2)' }}>
+            💰 PRICING PLANS
+          </span>
+          <h1 style={{ fontSize: '72px', fontWeight: '900', color: '#ffffff', marginBottom: '20px', lineHeight: '1.1' }}>
+            Find Your Perfect
+            <br />
+            <span style={{ background: 'linear-gradient(to right, #667eea, #f093fb, #fee140)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              Pricing Plan
+            </span>
+          </h1>
+          <p style={{ fontSize: '22px', color: '#7c7c7c', maxWidth: '650px', margin: '0 auto', lineHeight: '1.6' }}>
+            Start with a 30-day free trial. No credit card needed. Cancel anytime.
+          </p>
+        </div>
+
+        {/* Cards Container */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '35px', marginBottom: '80px' }}>
+          {plans.map((plan, idx) => (
+            <div
+              key={idx}
+              style={{
+                position: 'relative',
+                background: plan.popular ? 'linear-gradient(180deg, #1a1a1a 0%, #2d1b4e 100%)' : '#1a1a1a',
+                borderRadius: '30px',
+                padding: '45px 35px',
+                border: plan.popular ? '3px solid #a855f7' : '2px solid #2a2a2a',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-12px)';
+                if (plan.popular) {
+                  e.currentTarget.style.boxShadow = '0 30px 80px rgba(168, 85, 247, 0.5)';
+                } else {
+                  e.currentTarget.style.boxShadow = '0 30px 80px rgba(255, 255, 255, 0.1)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              {/* Popular Badge */}
+              {plan.popular && (
+                <div style={{ position: 'absolute', top: '-18px', left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(90deg, #a855f7, #ec4899)', padding: '10px 28px', borderRadius: '30px', boxShadow: '0 10px 40px rgba(168, 85, 247, 0.6)' }}>
+                  <span style={{ color: '#ffffff', fontSize: '13px', fontWeight: '800', letterSpacing: '1.5px' }}>
+                    ⭐ MOST POPULAR
+                  </span>
+                </div>
+              )}
+
+              {/* Top Section with Icon */}
+              <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+                <div style={{ width: '90px', height: '90px', background: plan.gradient, borderRadius: '20px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '45px', marginBottom: '25px', boxShadow: '0 15px 50px rgba(0, 0, 0, 0.4)' }}>
+                  {plan.icon}
+                </div>
+                <h3 style={{ fontSize: '32px', fontWeight: '800', color: '#ffffff', marginBottom: '12px', letterSpacing: '-0.5px' }}>
+                  {plan.name}
+                </h3>
+                <p style={{ color: '#8c8c8c', fontSize: '15px', lineHeight: '1.5' }}>
+                  {plan.description}
+                </p>
+              </div>
+
+              {/* Price Section */}
+              <div style={{ textAlign: 'center', marginBottom: '35px' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '60px', fontWeight: '900', color: '#ffffff', lineHeight: '1' }}>
+                    {plan.price}
+                  </span>
+                  <span style={{ fontSize: '18px', color: '#6b6b6b', marginLeft: '8px', marginBottom: '8px' }}>
+                    {plan.period}
+                  </span>
+                </div>
+              </div>
+
+              {/* Button */}
+              <button
+                style={{
+                  width: '100%',
+                  padding: '18px',
+                  background: plan.popular ? 'linear-gradient(90deg, #a855f7, #ec4899)' : 'transparent',
+                  border: plan.popular ? 'none' : '2px solid #3a3a3a',
+                  borderRadius: '15px',
+                  color: '#ffffff',
+                  fontSize: '17px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  marginBottom: '35px',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  if (plan.popular) {
+                    e.currentTarget.style.background = 'linear-gradient(90deg, #9333ea, #db2777)';
+                  } else {
+                    e.currentTarget.style.borderColor = '#6b6b6b';
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                  }
+                  e.currentTarget.style.transform = 'scale(1.02)';
+                }}
+                onMouseLeave={(e) => {
+                  if (plan.popular) {
+                    e.currentTarget.style.background = 'linear-gradient(90deg, #a855f7, #ec4899)';
+                  } else {
+                    e.currentTarget.style.borderColor = '#3a3a3a';
+                    e.currentTarget.style.background = 'transparent';
+                  }
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+              >
+                {plan.buttonText} →
+              </button>
+
+              {/* Features List */}
+              <div>
+                <h4 style={{ color: '#a3a3a3', fontSize: '13px', fontWeight: '700', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '1.5px' }}>
+                  What's Included:
+                </h4>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  {plan.features.map((feature, i) => (
+                    <li key={i} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '16px' }}>
+                      <span style={{ display: 'inline-block', width: '22px', height: '22px', background: 'linear-gradient(135deg, #10b981, #059669)', borderRadius: '50%', marginRight: '14px', flexShrink: 0, marginTop: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg style={{ width: '13px', height: '13px', color: '#ffffff' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                      <span style={{ color: '#d1d1d1', fontSize: '16px', lineHeight: '1.5' }}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust Indicators */}
+        <div style={{ background: 'linear-gradient(135deg, #1a1a1a, #2a1a3a)', borderRadius: '30px', padding: '60px 40px', border: '2px solid #2a2a2a' }}>
+          <h3 style={{ textAlign: 'center', color: '#ffffff', fontSize: '32px', fontWeight: '800', marginBottom: '50px' }}>
+            Why Choose Us?
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '40px' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '55px', marginBottom: '18px' }}>🎯</div>
+              <h4 style={{ color: '#ffffff', fontSize: '20px', fontWeight: '700', marginBottom: '10px' }}>
+                No Commitment
+              </h4>
+              <p style={{ color: '#8c8c8c', fontSize: '15px', lineHeight: '1.6' }}>
+                Start free and upgrade only when you're ready
+              </p>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '55px', marginBottom: '18px' }}>🔐</div>
+              <h4 style={{ color: '#ffffff', fontSize: '20px', fontWeight: '700', marginBottom: '10px' }}>
+                Bank-Level Security
+              </h4>
+              <p style={{ color: '#8c8c8c', fontSize: '15px', lineHeight: '1.6' }}>
+                Your data is protected with enterprise encryption
+              </p>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '55px', marginBottom: '18px' }}>💬</div>
+              <h4 style={{ color: '#ffffff', fontSize: '20px', fontWeight: '700', marginBottom: '10px' }}>
+                24/7 Support
+              </h4>
+              <p style={{ color: '#8c8c8c', fontSize: '15px', lineHeight: '1.6' }}>
+                Get help whenever you need it from our team
+              </p>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '55px', marginBottom: '18px' }}>⚡</div>
+              <h4 style={{ color: '#ffffff', fontSize: '20px', fontWeight: '700', marginBottom: '10px' }}>
+                Instant Setup
+              </h4>
+              <p style={{ color: '#8c8c8c', fontSize: '15px', lineHeight: '1.6' }}>
+                Get started in less than 2 minutes
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom CTA */}
+        <div style={{ textAlign: 'center', marginTop: '70px' }}>
+          <h3 style={{ color: '#ffffff', fontSize: '28px', fontWeight: '700', marginBottom: '16px' }}>
+            Still have questions?
+          </h3>
+          <p style={{ color: '#8c8c8c', fontSize: '18px', marginBottom: '30px' }}>
+            Our team is here to help you make the right choice
+          </p>
+          <button
+            style={{
+              padding: '18px 45px',
+              background: 'linear-gradient(90deg, #667eea, #764ba2)',
+              border: 'none',
+              borderRadius: '15px',
+              color: '#ffffff',
+              fontSize: '17px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              transition: 'transform 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 15px 50px rgba(102, 126, 234, 0.5)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            Schedule a Demo Call
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "PricingSection7",
+    category: "Pricing",
+    code: `
+function PricingSection7() {
+  const plans = [
+    {
+      name: 'Essential',
+      price: '₹799',
+      period: '/month',
+      description: 'Perfect for getting started',
+      features: [
+        '5 Active Projects',
+        '10GB Storage',
+        'Email Support',
+        'Basic Templates',
+        'Mobile Access'
+      ],
+      popular: false,
+      icon: '💫',
+      btnColor: '#3b82f6'
+    },
+    {
+      name: 'Professional',
+      price: '₹1,999',
+      period: '/month',
+      description: 'Best for professionals',
+      features: [
+        'Unlimited Projects',
+        '100GB Storage',
+        'Priority Support',
+        'Premium Templates',
+        'Advanced Analytics',
+        'Custom Branding',
+        'Team Collaboration'
+      ],
+      popular: true,
+      icon: '⚡',
+      btnColor: '#8b5cf6'
+    },
+    {
+      name: 'Enterprise',
+      price: '₹4,599',
+      period: '/month',
+      description: 'For large teams',
+      features: [
+        'Unlimited Everything',
+        '500GB Storage',
+        'Dedicated Support',
+        'Custom Templates',
+        'Advanced Security',
+        'API Access',
+        'White Label',
+        'SLA Guarantee'
+      ],
+      popular: false,
+      icon: '🚀',
+      btnColor: '#f59e0b'
+    }
+  ];
+
+  return (
+    <div style={{
+      background: 'linear-gradient(180deg, #0a0118 0%, #1a0b2e 50%, #16213e 100%)',
+      minHeight: '100vh',
+      padding: '100px 20px',
+      position: 'relative'
+    }}>
+      
+      {/* Decorative Elements */}
+      <div style={{
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        right: '0',
+        height: '300px',
+        background: 'radial-gradient(ellipse at top, rgba(139, 92, 246, 0.15), transparent)',
+        pointerEvents: 'none'
+      }}></div>
+
+      <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: '90px' }}>
+          <div style={{
+            display: 'inline-block',
+            background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))',
+            padding: '14px 32px',
+            borderRadius: '50px',
+            marginBottom: '30px',
+            border: '1px solid rgba(139, 92, 246, 0.4)'
+          }}>
+            <span style={{
+              color: '#c084fc',
+              fontSize: '14px',
+              fontWeight: '800',
+              letterSpacing: '3px',
+              textTransform: 'uppercase'
+            }}>
+              💎 Premium Pricing
+            </span>
+          </div>
+
+          <h1 style={{
+            fontSize: '76px',
+            fontWeight: '900',
+            color: '#ffffff',
+            marginBottom: '28px',
+            lineHeight: '1.1',
+            letterSpacing: '-2px'
+          }}>
+            Pricing That Fits
+            <br />
+            <span style={{
+              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              Your Ambitions
+            </span>
+          </h1>
+
+          <p style={{
+            fontSize: '22px',
+            color: '#94a3b8',
+            maxWidth: '750px',
+            margin: '0 auto 50px',
+            lineHeight: '1.7'
+          }}>
+            Start with a 30-day free trial. Upgrade or downgrade at any time. No hidden fees.
+          </p>
+
+          {/* Money Back Guarantee Badge */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '12px',
+            background: 'rgba(16, 185, 129, 0.1)',
+            border: '2px solid rgba(16, 185, 129, 0.3)',
+            padding: '12px 28px',
+            borderRadius: '50px'
+          }}>
+            <span style={{ fontSize: '24px' }}>✓</span>
+            <span style={{
+              color: '#34d399',
+              fontSize: '15px',
+              fontWeight: '700'
+            }}>
+              30-Day Money Back Guarantee
+            </span>
+          </div>
+        </div>
+
+        {/* Pricing Cards */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+          gap: '35px',
+          marginBottom: '90px'
+        }}>
+          {plans.map((plan, idx) => (
+            <div
+              key={idx}
+              style={{
+                background: plan.popular 
+                  ? 'linear-gradient(180deg, rgba(139, 92, 246, 0.15) 0%, rgba(30, 41, 59, 0.95) 100%)'
+                  : 'linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%)',
+                borderRadius: '28px',
+                padding: '50px 38px',
+                border: plan.popular ? '3px solid #8b5cf6' : '2px solid rgba(71, 85, 105, 0.5)',
+                position: 'relative',
+                transition: 'transform 0.4s ease, box-shadow 0.4s ease',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-12px)';
+                if (plan.popular) {
+                  e.currentTarget.style.boxShadow = '0 35px 70px rgba(139, 92, 246, 0.5)';
+                } else {
+                  e.currentTarget.style.boxShadow = '0 35px 70px rgba(0, 0, 0, 0.4)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              {/* Popular Ribbon */}
+              {plan.popular && (
+                <div style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '-6px',
+                  background: 'linear-gradient(135deg, #ec4899, #8b5cf6)',
+                  padding: '10px 24px',
+                  borderRadius: '8px 0 0 8px',
+                  boxShadow: '0 8px 24px rgba(139, 92, 246, 0.5)'
+                }}>
+                  <span style={{
+                    color: '#ffffff',
+                    fontSize: '13px',
+                    fontWeight: '800',
+                    letterSpacing: '1px'
+                  }}>
+                    ⭐ POPULAR
+                  </span>
+                </div>
+              )}
+
+              {/* Icon */}
+              <div style={{
+                width: '90px',
+                height: '90px',
+                background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3))',
+                borderRadius: '22px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '48px',
+                marginBottom: '28px',
+                border: '2px solid rgba(139, 92, 246, 0.4)'
+              }}>
+                {plan.icon}
+              </div>
+
+              {/* Plan Name */}
+              <h3 style={{
+                fontSize: '34px',
+                fontWeight: '800',
+                color: '#ffffff',
+                marginBottom: '12px',
+                letterSpacing: '-0.5px'
+              }}>
+                {plan.name}
+              </h3>
+
+              {/* Description */}
+              <p style={{
+                color: '#94a3b8',
+                fontSize: '16px',
+                marginBottom: '32px',
+                fontWeight: '500'
+              }}>
+                {plan.description}
+              </p>
+
+              {/* Price */}
+              <div style={{ marginBottom: '38px' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', marginBottom: '8px' }}>
+                  <span style={{
+                    fontSize: '68px',
+                    fontWeight: '900',
+                    color: '#ffffff',
+                    lineHeight: '1',
+                    letterSpacing: '-2px'
+                  }}>
+                    {plan.price}
+                  </span>
+                  <span style={{
+                    color: '#64748b',
+                    fontSize: '20px',
+                    fontWeight: '600',
+                    marginLeft: '10px'
+                  }}>
+                    {plan.period}
+                  </span>
+                </div>
+                <p style={{
+                  color: '#64748b',
+                  fontSize: '14px'
+                }}>
+                  Cancel anytime, no questions asked
+                </p>
+              </div>
+
+              {/* Button */}
+              <button
+                style={{
+                  width: '100%',
+                  padding: '20px',
+                  background: plan.popular ? 'linear-gradient(135deg, #8b5cf6, #ec4899)' : plan.btnColor,
+                  border: 'none',
+                  borderRadius: '14px',
+                  color: '#ffffff',
+                  fontSize: '18px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  marginBottom: '38px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.03)';
+                  e.currentTarget.style.boxShadow = '0 12px 32px rgba(139, 92, 246, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                Get Started Free →
+              </button>
+
+              {/* Divider */}
+              <div style={{
+                height: '2px',
+                background: 'linear-gradient(90deg, transparent, rgba(71, 85, 105, 0.5), transparent)',
+                marginBottom: '32px'
+              }}></div>
+
+              {/* Features */}
+              <div>
+                <h4 style={{
+                  color: '#cbd5e1',
+                  fontSize: '13px',
+                  fontWeight: '700',
+                  letterSpacing: '1.5px',
+                  textTransform: 'uppercase',
+                  marginBottom: '24px'
+                }}>
+                  Everything Included:
+                </h4>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  {plan.features.map((feature, i) => (
+                    <li key={i} style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      marginBottom: '16px',
+                      gap: '14px'
+                    }}>
+                      <div style={{
+                        minWidth: '22px',
+                        height: '22px',
+                        background: 'linear-gradient(135deg, #10b981, #059669)',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginTop: '2px'
+                      }}>
+                        <svg style={{ width: '13px', height: '13px', color: '#ffffff' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span style={{
+                        color: '#e2e8f0',
+                        fontSize: '16px',
+                        lineHeight: '1.6',
+                        fontWeight: '500'
+                      }}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust Badges */}
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8))',
+          borderRadius: '28px',
+          padding: '70px 50px',
+          border: '2px solid rgba(71, 85, 105, 0.3)',
+          marginBottom: '70px'
+        }}>
+          <h2 style={{
+            textAlign: 'center',
+            fontSize: '44px',
+            fontWeight: '800',
+            color: '#ffffff',
+            marginBottom: '60px',
+            letterSpacing: '-1px'
+          }}>
+            Why Thousands Choose Us
+          </h2>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '40px'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '56px', marginBottom: '20px' }}>🎯</div>
+              <h4 style={{
+                color: '#ffffff',
+                fontSize: '22px',
+                fontWeight: '700',
+                marginBottom: '12px'
+              }}>
+                No Contracts
+              </h4>
+              <p style={{
+                color: '#94a3b8',
+                fontSize: '16px',
+                lineHeight: '1.7'
+              }}>
+                Pay monthly with the freedom to cancel anytime. No long-term commitments.
+              </p>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '56px', marginBottom: '20px' }}>🔐</div>
+              <h4 style={{
+                color: '#ffffff',
+                fontSize: '22px',
+                fontWeight: '700',
+                marginBottom: '12px'
+              }}>
+                Bank-Grade Security
+              </h4>
+              <p style={{
+                color: '#94a3b8',
+                fontSize: '16px',
+                lineHeight: '1.7'
+              }}>
+                Your data is protected with 256-bit encryption and regular backups.
+              </p>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '56px', marginBottom: '20px' }}>⚡</div>
+              <h4 style={{
+                color: '#ffffff',
+                fontSize: '22px',
+                fontWeight: '700',
+                marginBottom: '12px'
+              }}>
+                Lightning Fast
+              </h4>
+              <p style={{
+                color: '#94a3b8',
+                fontSize: '16px',
+                lineHeight: '1.7'
+              }}>
+                Get up and running in under 60 seconds. No technical knowledge required.
+              </p>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '56px', marginBottom: '20px' }}>💬</div>
+              <h4 style={{
+                color: '#ffffff',
+                fontSize: '22px',
+                fontWeight: '700',
+                marginBottom: '12px'
+              }}>
+                24/7 Support
+              </h4>
+              <p style={{
+                color: '#94a3b8',
+                fontSize: '16px',
+                lineHeight: '1.7'
+              }}>
+                Our expert team is available around the clock to help you succeed.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Comparison Table Teaser */}
+        <div style={{
+          textAlign: 'center',
+          background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1))',
+          borderRadius: '28px',
+          padding: '60px 40px',
+          border: '2px solid rgba(139, 92, 246, 0.3)'
+        }}>
+          <h3 style={{
+            fontSize: '40px',
+            fontWeight: '800',
+            color: '#ffffff',
+            marginBottom: '22px',
+            letterSpacing: '-0.5px'
+          }}>
+            Need Help Choosing?
+          </h3>
+          <p style={{
+            fontSize: '20px',
+            color: '#cbd5e1',
+            marginBottom: '38px',
+            maxWidth: '650px',
+            margin: '0 auto 38px'
+          }}>
+            Compare all features side-by-side or talk to our sales team for personalized recommendations
+          </p>
+          <div style={{
+            display: 'flex',
+            gap: '20px',
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}>
+            <button
+              style={{
+                padding: '18px 38px',
+                background: 'linear-gradient(135deg, #8b5cf6, #ec4899)',
+                border: 'none',
+                borderRadius: '14px',
+                color: '#ffffff',
+                fontSize: '18px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            >
+              Compare All Features
+            </button>
+            <button
+              style={{
+                padding: '18px 38px',
+                background: 'transparent',
+                border: '2px solid rgba(139, 92, 246, 0.5)',
+                borderRadius: '14px',
+                color: '#ffffff',
+                fontSize: '18px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(139, 92, 246, 0.1)';
+                e.currentTarget.style.borderColor = '#8b5cf6';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.5)';
+              }}
+            >
+              Schedule a Demo
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "FeatureGrid",
+    category: "Feature",
+    code: `
+function FeatureGrid() {
+  const features = [
+    {
+      icon: '⚙️',
+      title: 'COMPILER ENGINE',
+      badge: 'RUST',
+      description: 'JIT compilation with aggressive tree-shaking and dead code elimination.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 font-mono text-sm">
+          <div className="flex gap-4 mb-4 border-b border-gray-800 pb-2">
+            <span className="text-gray-400">compiler.rs</span>
+            <span className="text-gray-600">tests.rs</span>
+          </div>
+          <div className="space-y-2 text-gray-500">
+            <div>1</div>
+            <div>2  <span className="text-purple-400">fn</span></div>
+            <div>3</div>
+            <div>4    <span className="text-gray-600">// Optimized logic</span></div>
+            <div>5</div>
+            <div>6  {'}'}</div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🔍',
+      title: 'VULNERABILITY SCAN',
+      badge: null,
+      description: 'Automated dependency auditing and static analysis in real-time.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-8 flex items-center justify-center">
+          <div className="relative">
+            <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-2xl"></div>
+            <div className="relative w-32 h-32 rounded-full border-2 border-gray-700 flex items-center justify-center">
+              <div className="w-24 h-24 rounded-full border border-gray-800 flex items-center justify-center">
+                <div className="text-4xl">⚡</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🌐',
+      title: 'EDGE FLEET',
+      badge: '120 NODES',
+      description: 'Manage global server distribution and latency routing protocols.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4">
+          <div className="text-right text-gray-600 text-xs mb-3">RACK_01</div>
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex items-center justify-between bg-black/40 rounded p-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <div className="h-2 w-32 bg-gray-800 rounded"></div>
+                </div>
+                <div className="w-4 h-4 border border-gray-700 rounded"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📊',
+      title: 'LIVE OBSERVABILITY',
+      badge: 'LIVE',
+      description: 'Real-time telemetry streams with microsecond-precision log aggregation.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4">
+          <div className="flex items-end justify-between h-32 mb-4">
+            <div className="bg-gray-700 rounded-t w-6 h-10"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-14"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-24"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-16"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-28"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-20"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-24"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-18"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-22"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-26"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-20"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-24"></div>
+          </div>
+          <div className="border-t border-gray-800 pt-3">
+            <div className="flex items-center justify-between text-xs mb-2">
+              <span className="text-gray-600">LOG_STREAM</span>
+              <span className="text-green-500 flex items-center gap-1">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                LIVE
+              </span>
+            </div>
+            <div className="space-y-1 font-mono text-xs text-gray-500">
+              <div>10:42:16 <span className="text-green-500">200</span> POST /auth/session</div>
+              <div>10:42:02 <span className="text-green-500">200</span> PUT /worker/job_88</div>
+              <div>10:42:03 <span className="text-green-500">200</span> GET /cdn/assets/img</div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '💾',
+      title: 'ELASTIC STORAGE',
+      badge: null,
+      description: 'Horizontally scalable database sharding with automatic failover protection.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4">
+          <div className="flex items-center justify-between text-xs text-gray-600 mb-4">
+            <span>STORAGE_POOL_01</span>
+            <div className="flex gap-1">
+              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-gray-700 rounded-full"></div>
+            </div>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span className="text-gray-500">/dev/sda1</span>
+                <span className="text-gray-600">84%</span>
+              </div>
+              <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full w-5/6"></div>
+              </div>
+              <div className="text-xs text-gray-700 mt-1">2.4TB / 3TB    0x8A12...F9</div>
+            </div>
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span className="text-gray-500">/dev/sda2</span>
+                <span className="text-gray-600">45%</span>
+              </div>
+              <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full w-2/5"></div>
+              </div>
+              <div className="text-xs text-gray-700 mt-1">1.3TB / 3TB    0x7B21...C2</div>
+            </div>
+            <div className="text-xs text-gray-700 pt-2 border-t border-gray-900">
+              + PROVISIONING_NEW_VOL...
+            </div>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-white mb-4">Platform Features</h2>
+          <p className="text-gray-500 text-lg">Enterprise-grade infrastructure at scale</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
+            <div 
+              key={idx}
+              className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-all"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gray-900 border border-gray-800 rounded-lg flex items-center justify-center text-xl">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-white font-bold text-sm tracking-wide">{feature.title}</h3>
+                </div>
+                {feature.badge && (
+                  <span className="bg-gray-800 text-gray-400 text-xs px-2 py-1 rounded font-mono">
+                    {feature.badge}
+                  </span>
+                )}
+              </div>
+
+              <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+                {feature.description}
+              </p>
+
+              <div className="mt-4">
+                {feature.preview}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "FeatureGrid2",
+    category: "Feature",
+    code: `
+function FeatureGrid2() {
+  const features = [
+    {
+      icon: '⚙️',
+      title: 'COMPILER ENGINE',
+      badge: 'RUST',
+      description: 'JIT compilation with aggressive tree-shaking and dead code elimination.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 font-mono text-sm transition-all group-hover:bg-black/60">
+          <div className="flex gap-4 mb-4 border-b border-gray-800 pb-2 group-hover:border-purple-500/30 transition-colors">
+            <span className="text-gray-400 group-hover:text-purple-400 transition-colors">compiler.rs</span>
+            <span className="text-gray-600">tests.rs</span>
+          </div>
+          <div className="space-y-2 text-gray-500">
+            <div>1</div>
+            <div>2  <span className="text-purple-400">fn</span></div>
+            <div>3</div>
+            <div>4    <span className="text-gray-600">// Optimized logic</span></div>
+            <div>5</div>
+            <div>6  {'}'}</div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🔍',
+      title: 'VULNERABILITY SCAN',
+      badge: null,
+      description: 'Automated dependency auditing and static analysis in real-time.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-8 flex items-center justify-center transition-all group-hover:bg-black/60">
+          <div className="relative">
+            <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-2xl group-hover:bg-purple-500/40 transition-all"></div>
+            <div className="relative w-32 h-32 rounded-full border-2 border-gray-700 flex items-center justify-center group-hover:border-purple-500/50 transition-all group-hover:scale-110">
+              <div className="w-24 h-24 rounded-full border border-gray-800 flex items-center justify-center group-hover:border-purple-500/30 transition-all">
+                <div className="text-4xl group-hover:scale-110 transition-transform">⚡</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🌐',
+      title: 'EDGE FLEET',
+      badge: '120 NODES',
+      description: 'Manage global server distribution and latency routing protocols.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60">
+          <div className="text-right text-gray-600 text-xs mb-3 group-hover:text-purple-400 transition-colors">RACK_01</div>
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex items-center justify-between bg-black/40 rounded p-3 group-hover:bg-black/60 transition-all">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all"></div>
+                  <div className="h-2 w-32 bg-gray-800 rounded group-hover:bg-purple-500/20 transition-all"></div>
+                </div>
+                <div className="w-4 h-4 border border-gray-700 rounded group-hover:border-purple-500/50 transition-colors"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📊',
+      title: 'LIVE OBSERVABILITY',
+      badge: 'LIVE',
+      description: 'Real-time telemetry streams with microsecond-precision log aggregation.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60">
+          <div className="flex items-end justify-between h-32 mb-4">
+            <div className="bg-gray-700 rounded-t w-6 h-10 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-14 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-24 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-16 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-28 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-20 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-24 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-18 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-22 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-26 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-20 group-hover:bg-purple-500 transition-all"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-24 group-hover:bg-purple-500 transition-all"></div>
+          </div>
+          <div className="border-t border-gray-800 pt-3 group-hover:border-purple-500/30 transition-colors">
+            <div className="flex items-center justify-between text-xs mb-2">
+              <span className="text-gray-600 group-hover:text-purple-400 transition-colors">LOG_STREAM</span>
+              <span className="text-green-500 flex items-center gap-1">
+                <div className="w-2 h-2 bg-green-500 rounded-full group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all"></div>
+                LIVE
+              </span>
+            </div>
+            <div className="space-y-1 font-mono text-xs text-gray-500">
+              <div className="group-hover:text-gray-400 transition-colors">10:42:16 <span className="text-green-500">200</span> POST /auth/session</div>
+              <div className="group-hover:text-gray-400 transition-colors">10:42:02 <span className="text-green-500">200</span> PUT /worker/job_88</div>
+              <div className="group-hover:text-gray-400 transition-colors">10:42:03 <span className="text-green-500">200</span> GET /cdn/assets/img</div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '💾',
+      title: 'ELASTIC STORAGE',
+      badge: null,
+      description: 'Horizontally scalable database sharding with automatic failover protection.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60">
+          <div className="flex items-center justify-between text-xs text-gray-600 mb-4">
+            <span className="group-hover:text-purple-400 transition-colors">STORAGE_POOL_01</span>
+            <div className="flex gap-1">
+              <div className="w-2 h-2 bg-orange-500 rounded-full group-hover:shadow-lg group-hover:shadow-orange-500/50 transition-all"></div>
+              <div className="w-2 h-2 bg-gray-700 rounded-full"></div>
+            </div>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span className="text-gray-500 group-hover:text-gray-400 transition-colors">/dev/sda1</span>
+                <span className="text-gray-600 group-hover:text-purple-400 transition-colors">84%</span>
+              </div>
+              <div className="h-2 bg-gray-800 rounded-full overflow-hidden group-hover:bg-gray-700 transition-colors">
+                <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full w-5/6 group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-all"></div>
+              </div>
+              <div className="text-xs text-gray-700 mt-1 group-hover:text-gray-600 transition-colors">2.4TB / 3TB    0x8A12...F9</div>
+            </div>
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span className="text-gray-500 group-hover:text-gray-400 transition-colors">/dev/sda2</span>
+                <span className="text-gray-600 group-hover:text-purple-400 transition-colors">45%</span>
+              </div>
+              <div className="h-2 bg-gray-800 rounded-full overflow-hidden group-hover:bg-gray-700 transition-colors">
+                <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full w-2/5 group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-all"></div>
+              </div>
+              <div className="text-xs text-gray-700 mt-1 group-hover:text-gray-600 transition-colors">1.3TB / 3TB    0x7B21...C2</div>
+            </div>
+            <div className="text-xs text-gray-700 pt-2 border-t border-gray-900 group-hover:text-gray-600 group-hover:border-purple-500/30 transition-all">
+              + PROVISIONING_NEW_VOL...
+            </div>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-white mb-4">Platform Features</h2>
+          <p className="text-gray-500 text-lg">Enterprise-grade infrastructure at scale</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
+            <div 
+              key={idx}
+              className="group bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl p-6 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2 transition-all duration-300"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gray-900 border border-gray-800 rounded-lg flex items-center justify-center text-xl group-hover:bg-purple-500/10 group-hover:border-purple-500/50 group-hover:scale-110 transition-all duration-300">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-white font-bold text-sm tracking-wide group-hover:text-purple-400 transition-colors">{feature.title}</h3>
+                </div>
+                {feature.badge && (
+                  <span className="bg-gray-800 text-gray-400 text-xs px-2 py-1 rounded font-mono group-hover:bg-purple-500/20 group-hover:text-purple-300 transition-all">
+                    {feature.badge}
+                  </span>
+                )}
+              </div>
+
+              <p className="text-gray-500 text-sm mb-6 leading-relaxed group-hover:text-gray-400 transition-colors">
+                {feature.description}
+              </p>
+
+              <div className="mt-4">
+                {feature.preview}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "FeatureGrid3",
+    category: "Feature",
+    code: `
+function FeatureGrid3() {
+  const features = [
+    {
+      icon: '⚙️',
+      title: 'COMPILER ENGINE',
+      badge: 'RUST',
+      description: 'JIT compilation with aggressive tree-shaking and dead code elimination.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 font-mono text-sm transition-all group-hover:bg-black/60 group-hover:border group-hover:border-purple-500/50">
+          <div className="flex gap-4 mb-4 border-b border-gray-800 pb-2 group-hover:border-purple-500/30 transition-colors">
+            <span className="text-gray-400 group-hover:text-purple-400 transition-colors">compiler.rs</span>
+            <span className="text-gray-600">tests.rs</span>
+          </div>
+          <div className="space-y-2 text-gray-500 group-hover:text-gray-400 transition-colors">
+            <div>1</div>
+            <div>2  <span className="text-purple-400 group-hover:text-purple-300">fn</span></div>
+            <div>3</div>
+            <div>4    <span className="text-gray-600 group-hover:text-gray-500">// Optimized logic</span></div>
+            <div>5</div>
+            <div>6  {'}'}</div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🔍',
+      title: 'VULNERABILITY SCAN',
+      badge: null,
+      description: 'Automated dependency auditing and static analysis in real-time.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-8 flex items-center justify-center transition-all group-hover:bg-black/60 group-hover:border group-hover:border-purple-500/50">
+          <div className="relative">
+            <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-2xl group-hover:bg-purple-500/50 transition-all duration-500"></div>
+            <div className="relative w-32 h-32 rounded-full border-2 border-gray-700 flex items-center justify-center group-hover:border-purple-500 transition-all group-hover:scale-110 duration-300">
+              <div className="w-24 h-24 rounded-full border border-gray-800 flex items-center justify-center group-hover:border-purple-500/50 transition-all">
+                <div className="text-4xl group-hover:scale-125 transition-transform duration-300">⚡</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🌐',
+      title: 'EDGE FLEET',
+      badge: '120 NODES',
+      description: 'Manage global server distribution and latency routing protocols.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-purple-500/50">
+          <div className="text-right text-gray-600 text-xs mb-3 group-hover:text-purple-400 transition-colors">RACK_01</div>
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex items-center justify-between bg-black/40 rounded p-3 group-hover:bg-purple-500/10 transition-all">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full group-hover:shadow-lg group-hover:shadow-green-500/80 group-hover:animate-pulse transition-all"></div>
+                  <div className="h-2 w-32 bg-gray-800 rounded group-hover:bg-gradient-to-r group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all"></div>
+                </div>
+                <div className="w-4 h-4 border border-gray-700 rounded group-hover:border-purple-500 group-hover:rotate-90 transition-all duration-300"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📊',
+      title: 'LIVE OBSERVABILITY',
+      badge: 'LIVE',
+      description: 'Real-time telemetry streams with microsecond-precision log aggregation.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-purple-500/50">
+          <div className="flex items-end justify-between h-32 mb-4 gap-1">
+            <div className="bg-gray-700 rounded-t w-6 h-10 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-14 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-75"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-24 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-100"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-16 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-150"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-28 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-200"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-20 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-75"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-24 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-100"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-18 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-150"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-22 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-200"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-26 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-75"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-20 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-100"></div>
+            <div className="bg-gray-700 rounded-t w-6 h-24 group-hover:bg-gradient-to-t group-hover:from-purple-600 group-hover:to-purple-400 transition-all duration-300 delay-150"></div>
+          </div>
+          <div className="border-t border-gray-800 pt-3 group-hover:border-purple-500/50 transition-colors">
+            <div className="flex items-center justify-between text-xs mb-2">
+              <span className="text-gray-600 group-hover:text-purple-400 transition-colors font-mono">LOG_STREAM</span>
+              <span className="text-green-500 flex items-center gap-1 group-hover:text-green-400">
+                <div className="w-2 h-2 bg-green-500 rounded-full group-hover:shadow-lg group-hover:shadow-green-500/80 group-hover:animate-pulse transition-all"></div>
+                LIVE
+              </span>
+            </div>
+            <div className="space-y-1 font-mono text-xs text-gray-500">
+              <div className="group-hover:text-gray-300 group-hover:bg-purple-500/5 group-hover:px-2 group-hover:py-1 group-hover:rounded transition-all">10:42:16 <span className="text-green-500 group-hover:text-green-400">200</span> POST /auth/session</div>
+              <div className="group-hover:text-gray-300 group-hover:bg-purple-500/5 group-hover:px-2 group-hover:py-1 group-hover:rounded transition-all">10:42:02 <span className="text-green-500 group-hover:text-green-400">200</span> PUT /worker/job_88</div>
+              <div className="group-hover:text-gray-300 group-hover:bg-purple-500/5 group-hover:px-2 group-hover:py-1 group-hover:rounded transition-all">10:42:03 <span className="text-green-500 group-hover:text-green-400">200</span> GET /cdn/assets/img</div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '💾',
+      title: 'ELASTIC STORAGE',
+      badge: null,
+      description: 'Horizontally scalable database sharding with automatic failover protection.',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-purple-500/50">
+          <div className="flex items-center justify-between text-xs text-gray-600 mb-4">
+            <span className="group-hover:text-purple-400 transition-colors font-mono">STORAGE_POOL_01</span>
+            <div className="flex gap-1">
+              <div className="w-2 h-2 bg-orange-500 rounded-full group-hover:shadow-lg group-hover:shadow-orange-500/80 group-hover:animate-pulse transition-all"></div>
+              <div className="w-2 h-2 bg-gray-700 rounded-full group-hover:bg-purple-500 transition-all"></div>
+            </div>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span className="text-gray-500 group-hover:text-gray-300 transition-colors font-mono">/dev/sda1</span>
+                <span className="text-gray-600 group-hover:text-purple-400 transition-colors font-bold">84%</span>
+              </div>
+              <div className="h-2 bg-gray-800 rounded-full overflow-hidden group-hover:bg-gray-700 transition-colors">
+                <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full w-5/6 group-hover:shadow-lg group-hover:shadow-purple-500/80 group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-500"></div>
+              </div>
+              <div className="text-xs text-gray-700 mt-1 group-hover:text-gray-500 transition-colors font-mono">2.4TB / 3TB    0x8A12...F9</div>
+            </div>
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span className="text-gray-500 group-hover:text-gray-300 transition-colors font-mono">/dev/sda2</span>
+                <span className="text-gray-600 group-hover:text-purple-400 transition-colors font-bold">45%</span>
+              </div>
+              <div className="h-2 bg-gray-800 rounded-full overflow-hidden group-hover:bg-gray-700 transition-colors">
+                <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full w-2/5 group-hover:shadow-lg group-hover:shadow-purple-500/80 group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-500"></div>
+              </div>
+              <div className="text-xs text-gray-700 mt-1 group-hover:text-gray-500 transition-colors font-mono">1.3TB / 3TB    0x7B21...C2</div>
+            </div>
+            <div className="text-xs text-gray-700 pt-2 border-t border-gray-900 group-hover:text-purple-400 group-hover:border-purple-500/30 transition-all font-mono">
+              + PROVISIONING_NEW_VOL...
+            </div>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-white mb-4">Platform Features</h2>
+          <p className="text-gray-500 text-lg">Enterprise-grade infrastructure at scale</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
+            <div 
+              key={idx}
+              className="group bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl p-6 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-2 transition-all duration-500 cursor-pointer"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gray-900 border border-gray-800 rounded-lg flex items-center justify-center text-xl group-hover:bg-gradient-to-br group-hover:from-purple-500/20 group-hover:to-pink-500/20 group-hover:border-purple-500 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-white font-bold text-sm tracking-wide group-hover:text-purple-400 transition-colors">{feature.title}</h3>
+                </div>
+                {feature.badge && (
+                  <span className="bg-gray-800 text-gray-400 text-xs px-2 py-1 rounded font-mono group-hover:bg-gradient-to-r group-hover:from-purple-500/30 group-hover:to-pink-500/30 group-hover:text-purple-200 group-hover:border group-hover:border-purple-500/50 transition-all">
+                    {feature.badge}
+                  </span>
+                )}
+              </div>
+
+              <p className="text-gray-500 text-sm mb-6 leading-relaxed group-hover:text-gray-400 transition-colors">
+                {feature.description}
+              </p>
+
+              <div className="mt-4">
+                {feature.preview}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
     name: "Header",
     category: "Cards",
     code: `
@@ -20943,3 +22850,4 @@ async function seedComponents() {
 
 // Run the seed function
 seedComponents();
+  
