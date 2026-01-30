@@ -20201,7 +20201,719 @@ function BasicDarkFooter() {
 `
   },
 
- 
+  {
+    name: "FuturisticPricing",
+    category: "Pricing",
+    code: `
+
+function FuturisticPricing() {
+  const [hoveredPlan, setHoveredPlan] = useState(null);
+  const [billingCycle, setBillingCycle] = useState('monthly');
+
+  const plans = [
+    {
+      name: 'Starter',
+      tagline: 'For Small Teams',
+      price: { monthly: 29, yearly: 290 },
+      color: 'cyan',
+      popular: false,
+      features: [
+        'Up to 10 team members',
+        '50 GB cloud storage',
+        'Basic analytics',
+        'Email support',
+        'API access',
+        'Mobile app'
+      ]
+    },
+    {
+      name: 'Professional',
+      tagline: 'Most Popular',
+      price: { monthly: 79, yearly: 790 },
+      color: 'green',
+      popular: true,
+      features: [
+        'Up to 50 team members',
+        '500 GB cloud storage',
+        'Advanced analytics',
+        'Priority support 24/7',
+        'Full API access',
+        'Mobile & desktop apps',
+        'Custom integrations',
+        'Advanced security'
+      ]
+    },
+    {
+      name: 'Enterprise',
+      tagline: 'For Large Organizations',
+      price: { monthly: 199, yearly: 1990 },
+      color: 'emerald',
+      popular: false,
+      features: [
+        'Unlimited team members',
+        'Unlimited storage',
+        'Enterprise analytics',
+        'Dedicated support',
+        'Full API access',
+        'All platforms',
+        'Custom integrations',
+        'Enterprise security',
+        'SLA guarantee',
+        'Custom training'
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-black relative overflow-hidden py-20">
+      
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, #00ff88 0px, transparent 1px, transparent 50px, #00ff88 51px), repeating-linear-gradient(90deg, #00ff88 0px, transparent 1px, transparent 50px, #00ff88 51px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      {/* Gradient Orbs */}
+      <div className="absolute top-20 left-10 w-96 h-96 rounded-full opacity-10 blur-3xl bg-green-400"></div>
+      <div className="absolute bottom-20 right-20 w-80 h-80 rounded-full opacity-10 blur-3xl bg-cyan-400"></div>
+      <div className="absolute top-1/2 right-1/4 w-64 h-64 rounded-full opacity-10 blur-3xl bg-emerald-400"></div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        
+        {/* Header Section */}
+        <div className="text-center mb-20">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+            <span className="text-xs font-bold text-green-400 tracking-widest">PRICING PLANS</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tight">
+            Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">Power</span>
+          </h1>
+          
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
+            Select the perfect plan for your needs. Upgrade, downgrade, or cancel anytime.
+          </p>
+
+          {/* Billing Toggle */}
+          <div className="inline-flex items-center gap-4 p-2 bg-gray-900 border border-gray-800 rounded-full">
+            <button
+              onClick={() => setBillingCycle('monthly')}
+              className="px-6 py-2 rounded-full text-sm font-bold transition-all duration-300"
+              style={{
+                backgroundColor: billingCycle === 'monthly' ? '#4ade80' : 'transparent',
+                color: billingCycle === 'monthly' ? '#000' : '#9ca3af'
+              }}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setBillingCycle('yearly')}
+              className="px-6 py-2 rounded-full text-sm font-bold transition-all duration-300"
+              style={{
+                backgroundColor: billingCycle === 'yearly' ? '#4ade80' : 'transparent',
+                color: billingCycle === 'yearly' ? '#000' : '#9ca3af'
+              }}
+            >
+              Yearly
+              <span className="ml-2 text-xs px-2 py-1 bg-green-400 bg-opacity-20 text-green-400 rounded-full">
+                Save 20%
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          {plans.map((plan) => {
+            const isHovered = hoveredPlan === plan.name;
+            
+            // Color configurations
+            const colorConfig = {
+              cyan: { main: '#22d3ee', text: '#22d3ee' },
+              green: { main: '#4ade80', text: '#4ade80' },
+              emerald: { main: '#34d399', text: '#34d399' }
+            };
+            
+            const currentColor = colorConfig[plan.color];
+            
+            return (
+              <div
+                key={plan.name}
+                className="relative p-8 bg-gradient-to-b from-gray-900 to-black border rounded-2xl transition-all duration-500"
+                style={{
+                  borderColor: plan.popular ? '#4ade80' : (isHovered ? currentColor.main : '#1f2937'),
+                  transform: plan.popular ? 'scale(1.05)' : 'scale(1)',
+                  boxShadow: plan.popular ? '0 25px 50px -12px rgba(74, 222, 128, 0.25)' : 'none'
+                }}
+                onMouseEnter={() => setHoveredPlan(plan.name)}
+                onMouseLeave={() => setHoveredPlan(null)}
+              >
+                
+                {/* Popular Badge */}
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <div className="px-4 py-1 bg-green-400 text-black text-xs font-black rounded-full">
+                      MOST POPULAR
+                    </div>
+                  </div>
+                )}
+
+                {/* Glow Effect */}
+                {isHovered && (
+                  <div 
+                    className="absolute -inset-1 opacity-20 blur-xl rounded-2xl -z-10"
+                    style={{ backgroundColor: currentColor.main }}
+                  ></div>
+                )}
+
+                {/* Plan Header */}
+                <div className="mb-8">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div 
+                      className="w-3 h-3 rounded-full"
+                      style={{ backgroundColor: currentColor.main }}
+                    ></div>
+                    <h3 className="text-2xl font-black text-white">{plan.name}</h3>
+                  </div>
+                  <p 
+                    className="text-sm font-semibold"
+                    style={{ color: currentColor.text }}
+                  >
+                    {plan.tagline}
+                  </p>
+                </div>
+
+                {/* Price */}
+                <div className="mb-8">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl font-black text-white">
+                      \${plan.price[billingCycle]}
+                    </span>
+                    <span className="text-gray-500 text-sm font-semibold">
+                      /{billingCycle === 'monthly' ? 'mo' : 'yr'}
+                    </span>
+                  </div>
+                  {billingCycle === 'yearly' && (
+                    <p className="text-xs text-gray-500 mt-2">
+                      \${(plan.price.yearly / 12).toFixed(0)}/month billed annually
+                    </p>
+                  )}
+                </div>
+
+                {/* CTA Button */}
+                <button
+                  className="w-full py-3 rounded-lg font-bold text-sm mb-8 transition-all duration-300"
+                  style={{
+                    backgroundColor: plan.popular ? '#4ade80' : 'transparent',
+                    color: plan.popular ? '#000' : currentColor.text,
+                    border: plan.popular ? '2px solid #4ade80' : '2px solid ' + currentColor.main
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!plan.popular) {
+                      e.target.style.backgroundColor = currentColor.main;
+                      e.target.style.color = '#000';
+                    } else {
+                      e.target.style.backgroundColor = '#22c55e';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!plan.popular) {
+                      e.target.style.backgroundColor = 'transparent';
+                      e.target.style.color = currentColor.text;
+                    } else {
+                      e.target.style.backgroundColor = '#4ade80';
+                    }
+                  }}
+                >
+                  Get Started
+                </button>
+
+                {/* Divider */}
+                <div className="h-px mb-8 bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+
+                {/* Features */}
+                <ul className="space-y-4">
+                  {plan.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <div 
+                        className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: currentColor.main }}
+                      >
+                        <Check className="w-3 h-3 text-black" strokeWidth={3} />
+                      </div>
+                      <span className="text-sm text-gray-300">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+              </div>
+            );
+          })}
+        </div>
+
+        {/* FAQ Section */}
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-black text-white mb-4">Frequently Asked Questions</h3>
+            <p className="text-gray-400">Everything you need to know about our pricing</p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { q: 'Can I change plans later?', a: 'Yes, you can upgrade or downgrade your plan at any time.' },
+              { q: 'What payment methods do you accept?', a: 'We accept all major credit cards, PayPal, and wire transfers for enterprise plans.' },
+              { q: 'Is there a free trial?', a: 'Yes, all plans come with a 14-day free trial. No credit card required.' },
+              { q: 'Do you offer refunds?', a: 'Yes, we offer a 30-day money-back guarantee on all plans.' }
+            ].map((faq, idx) => (
+              <div key={idx} className="p-6 bg-gray-900 border border-gray-800 rounded-xl">
+                <h4 className="text-white font-bold mb-2">{faq.q}</h4>
+                <p className="text-gray-400 text-sm">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-20 text-center p-12 bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-2xl">
+          <div className="max-w-2xl mx-auto">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
+              <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+            </div>
+            <h3 className="text-3xl font-black text-white mb-4">Need a Custom Solution?</h3>
+            <p className="text-gray-400 mb-8">
+              Contact our sales team for custom enterprise solutions tailored to your specific needs.
+            </p>
+            <button className="px-8 py-3 bg-green-400 text-black font-bold rounded-lg hover:bg-green-300 transition-colors duration-300">
+              Contact Sales
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Bottom Gradient Line */}
+      <div className="h-1 mt-20 bg-gradient-to-r from-transparent via-green-400 to-transparent"></div>
+
+    </div>
+  );
+}
+  `
+  },
+
+  // Hero Section Components
+  {
+    name: "Modern Hero Section",
+    category: "Hero Section",
+    code: `
+function ModernHeroSection() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-8">
+      <div className="max-w-4xl mx-auto text-center">
+        <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
+          Build Amazing <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Products</span>
+        </h1>
+        <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          Create stunning, responsive websites and applications with our powerful component library and design system.
+        </p>
+        <div className="flex gap-4 justify-center flex-wrap">
+          <button className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-lg hover:scale-105 transition-transform">
+            Get Started
+          </button>
+          <button className="px-8 py-4 border-2 border-purple-500 text-purple-400 font-bold rounded-lg hover:bg-purple-500/10 transition-all">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+    `
+  },
+
+  // Logo Cloud Components
+  {
+    name: "Logo Cloud Showcase",
+    category: "Logo Cloud",
+    code: `
+function LogoCloudShowcase() {
+  const logos = ['🚀', '💎', '⚡', '🌟', '🔥', '✨', '🎯', '💡'];
+  return (
+    <div className="bg-gradient-to-b from-slate-900 to-black py-20 px-8">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-3xl font-bold text-white mb-4">Trusted by Industry Leaders</h2>
+        <p className="text-gray-400 mb-12">Join thousands of companies using our platform</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {logos.map((logo, idx) => (
+            <div key={idx} className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-8 rounded-xl border border-purple-500/30 hover:scale-105 transition-transform">
+              <div className="text-5xl">{logo}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+    `
+  },
+
+  // Feature Components
+  {
+    name: "Feature Highlight",
+    category: "Feature",
+    code: `
+function FeatureHighlight() {
+  const features = [
+    { icon: '⚡', title: 'Lightning Fast', desc: 'Optimized performance' },
+    { icon: '🔒', title: 'Secure', desc: 'Enterprise-grade security' },
+    { icon: '📱', title: 'Responsive', desc: 'Works on all devices' }
+  ];
+  return (
+    <div className="bg-slate-900 py-20 px-8">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold text-white text-center mb-16">Why Choose Us?</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {features.map((feature, idx) => (
+            <div key={idx} className="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-xl border border-purple-500/20 hover:border-purple-500/50 transition-all">
+              <div className="text-4xl mb-4">{feature.icon}</div>
+              <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
+              <p className="text-gray-400">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+    `
+  },
+
+  // FAQ Components
+  {
+    name: "FAQ Section",
+    category: "FAQ",
+    code: `
+function FAQSection() {
+  const [openIdx, setOpenIdx] = React.useState(null);
+  const faqs = [
+    { q: 'What is included?', a: 'Everything you need to get started' },
+    { q: 'How do I get support?', a: '24/7 customer support available' },
+    { q: 'Can I cancel anytime?', a: 'Yes, cancel anytime with no penalties' }
+  ];
+  return (
+    <div className="bg-slate-900 py-20 px-8">
+      <div className="max-w-2xl mx-auto">
+        <h2 className="text-4xl font-bold text-white text-center mb-12">Frequently Asked Questions</h2>
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => (
+            <div key={idx} className="bg-slate-800 rounded-lg border border-purple-500/20">
+              <button
+                onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                className="w-full p-4 text-left font-bold text-white hover:bg-slate-700/50 transition-all"
+              >
+                {faq.q}
+              </button>
+              {openIdx === idx && (
+                <div className="p-4 border-t border-purple-500/20 text-gray-300">
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+    `
+  },
+
+  // Testimonial Components
+  {
+    name: "Testimonials",
+    category: "Testimonial",
+    code: `
+function Testimonials() {
+  const testimonials = [
+    { name: 'John Doe', role: 'CEO', text: 'Amazing product!' },
+    { name: 'Jane Smith', role: 'Designer', text: 'Best components ever' },
+    { name: 'Bob Wilson', role: 'Developer', text: 'Highly recommended' }
+  ];
+  return (
+    <div className="bg-slate-900 py-20 px-8">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold text-white text-center mb-16">What Our Users Say</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {testimonials.map((t, idx) => (
+            <div key={idx} className="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-xl border border-pink-500/20">
+              <p className="text-yellow-400 mb-4">⭐⭐⭐⭐⭐</p>
+              <p className="text-gray-300 mb-6">"{t.text}"</p>
+              <p className="font-bold text-white">{t.name}</p>
+              <p className="text-sm text-gray-400">{t.role}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+    `
+  },
+
+  // CTA (Call to Action) Components
+  {
+    name: "Call to Action",
+    category: "Call to Action",
+    code: `
+function CallToAction() {
+  return (
+    <div className="bg-gradient-to-r from-purple-900 to-pink-900 py-20 px-8">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-5xl font-bold text-white mb-6">Ready to Get Started?</h2>
+        <p className="text-xl text-gray-200 mb-10">
+          Join thousands of users transforming their digital presence today.
+        </p>
+        <div className="flex gap-4 justify-center flex-wrap">
+          <button className="px-10 py-4 bg-white text-purple-600 font-bold rounded-lg hover:scale-105 transition-transform">
+            Start Free Trial
+          </button>
+          <button className="px-10 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all">
+            Schedule Demo
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+    `
+  },
+
+ {
+    name: "PricingSection",
+    category: "Pricing",
+    code: `
+function PricingSection() {
+  const plans = [
+    { 
+      name: 'Starter', 
+      price: '₹999', 
+      period: '/month',
+      features: ['5 Projects', '10GB Storage', 'Email Support', 'Basic Analytics'],
+      popular: false,
+      icon: '🚀'
+    },
+    { 
+      name: 'Professional', 
+      price: '₹2,499', 
+      period: '/month',
+      features: ['Unlimited Projects', '100GB Storage', 'Priority Support', 'Advanced Analytics', 'Custom Domain'],
+      popular: true,
+      icon: '⭐'
+    },
+    { 
+      name: 'Enterprise', 
+      price: '₹4,999', 
+      period: '/month',
+      features: ['Unlimited Everything', '1TB Storage', '24/7 Support', 'AI Features', 'Custom Integration', 'Dedicated Manager'],
+      popular: false,
+      icon: '👑'
+    }
+  ];
+
+  return (
+    <div className="bg-slate-900 py-20 px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white mb-4">Simple, Transparent Pricing</h2>
+          <p className="text-gray-400 text-lg">Choose the perfect plan for your needs</p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {plans.map((plan, idx) => (
+            <div 
+              key={idx} 
+              className={
+                plan.popular 
+                  ? "relative bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-purple-500 shadow-lg shadow-purple-500/20 transition-all hover:scale-105" 
+                  : "relative bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/50 transition-all hover:scale-105"
+              }
+            >
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-bold px-4 py-1 rounded-full">
+                  Most Popular
+                </div>
+              )}
+              
+              <div className="text-5xl mb-4">{plan.icon}</div>
+              <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+              
+              <div className="flex items-baseline mb-6">
+                <span className="text-4xl font-bold text-white">{plan.price}</span>
+                <span className="text-gray-400 ml-2">{plan.period}</span>
+              </div>
+              
+              <ul className="space-y-3 mb-8">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-center text-gray-300">
+                    <svg className="w-5 h-5 text-purple-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              
+              <button 
+                className={
+                  plan.popular
+                    ? "w-full py-3 rounded-lg font-semibold transition-all bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:shadow-purple-500/50"
+                    : "w-full py-3 rounded-lg font-semibold transition-all bg-slate-700 text-white hover:bg-slate-600"
+                }
+              >
+                Get Started
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "PricingSection2",
+    category: "Pricing",
+    code: `
+function PricingSection2() {
+  const plans = [
+    { 
+      name: 'Basic', 
+      price: '₹799', 
+      period: '/month',
+      features: ['3 Projects', '5GB Storage', 'Community Support', 'Basic Templates'],
+      popular: false,
+      icon: '💎',
+      gradient: 'from-blue-600 to-cyan-600'
+    },
+    { 
+      name: 'Pro', 
+      price: '₹1,999', 
+      period: '/month',
+      features: ['25 Projects', '50GB Storage', 'Live Chat Support', 'Premium Templates', 'API Access', 'Team Collaboration'],
+      popular: true,
+      icon: '🔥',
+      gradient: 'from-purple-600 to-pink-600'
+    },
+    { 
+      name: 'Ultimate', 
+      price: '₹3,999', 
+      period: '/month',
+      features: ['Unlimited Projects', '500GB Storage', 'Phone Support', 'All Templates', 'Advanced API', 'White Label', 'Priority Queue'],
+      popular: false,
+      icon: '🚀',
+      gradient: 'from-orange-600 to-red-600'
+    }
+  ];
+
+  return (
+    <div className="bg-slate-900 py-20 px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="inline-block bg-purple-500/10 text-purple-400 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            PRICING PLANS
+          </span>
+          <h2 className="text-5xl font-bold text-white mb-4">Choose Your Plan</h2>
+          <p className="text-gray-400 text-lg">Flexible pricing for teams of all sizes</p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {plans.map((plan, idx) => (
+            <div 
+              key={idx} 
+              className={
+                plan.popular 
+                  ? "relative bg-slate-800 p-8 rounded-2xl border-2 border-purple-500 transition-all hover:-translate-y-2" 
+                  : "relative bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-purple-500/50 transition-all hover:-translate-y-2"
+              }
+            >
+              {plan.popular && (
+                <div className="absolute -top-5 left-0 right-0 flex justify-center">
+                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-6 py-2 rounded-full shadow-lg">
+                    ⭐ RECOMMENDED
+                  </span>
+                </div>
+              )}
+              
+              <div className="text-center mb-6">
+                <div className={
+                  "inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r " + plan.gradient + " text-3xl mb-4"
+                }>
+                  {plan.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+              </div>
+              
+              <div className="text-center mb-8 pb-8 border-b border-slate-700">
+                <div className="flex items-baseline justify-center">
+                  <span className="text-5xl font-bold text-white">{plan.price}</span>
+                  <span className="text-gray-400 ml-2">{plan.period}</span>
+                </div>
+              </div>
+              
+              <ul className="space-y-4 mb-8">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-start text-gray-300">
+                    <div className={
+                      "flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-r " + plan.gradient + " flex items-center justify-center mr-3 mt-0.5"
+                    }>
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              
+              <button 
+                className={
+                  plan.popular
+                    ? "w-full py-4 rounded-xl font-bold transition-all bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-xl hover:shadow-purple-500/50 hover:scale-105"
+                    : "w-full py-4 rounded-xl font-bold transition-all bg-slate-700 text-white hover:bg-slate-600 hover:scale-105"
+                }
+              >
+                Start Free Trial
+              </button>
+              
+              <p className="text-center text-gray-500 text-xs mt-4">No credit card required</p>
+            </div>
+          ))}
+        </div>
+        
+        <div className="text-center mt-12">
+          <p className="text-gray-400">Need a custom plan? <a href="#" className="text-purple-400 hover:text-purple-300 font-semibold">Contact Sales</a></p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "Header",
+    category: "Cards",
+    code: `
+
+
+  `
+  },
 
 
 ];

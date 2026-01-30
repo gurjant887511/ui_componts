@@ -121,7 +121,7 @@ function ComponentsPreviewPage({ isLoggedIn }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [iframeKey, setIframeKey] = useState(0);
-  const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'cards', 'headers', 'footers'
+  const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'cards', 'headers', 'footers', 'hero', 'logocloud', 'feature', 'pricing', 'faq', 'testimonial', 'cta'
   const [codeMessage, setCodeMessage] = useState('');
   const [importsMessage, setImportsMessage] = useState('');
   const [requirementsMessage, setRequirementsMessage] = useState('');
@@ -255,8 +255,8 @@ function ComponentsPreviewPage({ isLoggedIn }) {
               // Footer without mapping stays in Footers
               category = 'Footers';
             }
-          } else if (category === 'Header' || (category !== 'Cards' && category !== 'Footer')) {
-            // Apply header subcategory mapping for all headers
+          } else if (category === 'Header') {
+            // Apply header subcategory mapping for headers only
             const rawName = component.name || '';
             const normalized = rawName.toLowerCase().replace(/\s+/g, '');
             const mapped = HEADER_SUBCATEGORIES[rawName] || HEADER_SUBCATEGORIES[rawName.toLowerCase()] || HEADER_SUBCATEGORIES[rawName.replace(/\s+/g, '')] || HEADER_SUBCATEGORIES[normalized];
@@ -268,6 +268,7 @@ function ComponentsPreviewPage({ isLoggedIn }) {
               category = 'Headers';
             }
           }
+          // Keep all other categories (Hero Section, Logo Cloud, Feature, Pricing, FAQ, Testimonial, Call to Action) as-is
           
           if (!acc[category]) {
             acc[category] = [];
@@ -318,6 +319,48 @@ function ComponentsPreviewPage({ isLoggedIn }) {
     if (groupedComponents['Footers']) {
       filteredGrouped['Footers'] = groupedComponents['Footers'];
     }
+  } else if (activeFilter === 'hero') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Hero Section');
+    filteredGrouped = {};
+    if (groupedComponents['Hero Section']) {
+      filteredGrouped['Hero Section'] = groupedComponents['Hero Section'];
+    }
+  } else if (activeFilter === 'logocloud') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Logo Cloud');
+    filteredGrouped = {};
+    if (groupedComponents['Logo Cloud']) {
+      filteredGrouped['Logo Cloud'] = groupedComponents['Logo Cloud'];
+    }
+  } else if (activeFilter === 'feature') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Feature');
+    filteredGrouped = {};
+    if (groupedComponents['Feature']) {
+      filteredGrouped['Feature'] = groupedComponents['Feature'];
+    }
+  } else if (activeFilter === 'pricing') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Pricing');
+    filteredGrouped = {};
+    if (groupedComponents['Pricing']) {
+      filteredGrouped['Pricing'] = groupedComponents['Pricing'];
+    }
+  } else if (activeFilter === 'faq') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'FAQ');
+    filteredGrouped = {};
+    if (groupedComponents['FAQ']) {
+      filteredGrouped['FAQ'] = groupedComponents['FAQ'];
+    }
+  } else if (activeFilter === 'testimonial') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Testimonial');
+    filteredGrouped = {};
+    if (groupedComponents['Testimonial']) {
+      filteredGrouped['Testimonial'] = groupedComponents['Testimonial'];
+    }
+  } else if (activeFilter === 'cta') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Call to Action');
+    filteredGrouped = {};
+    if (groupedComponents['Call to Action']) {
+      filteredGrouped['Call to Action'] = groupedComponents['Call to Action'];
+    }
   }
 
   if (loading) return <div className="w-full h-screen flex items-center justify-center text-white bg-slate-900">Loading components from seed.js (MongoDB)...</div>;
@@ -331,8 +374,9 @@ function ComponentsPreviewPage({ isLoggedIn }) {
         <div className="p-4 sticky top-0 bg-slate-900/95 backdrop-blur z-10 border-b border-white/10">
           <h2 className="text-lg font-bold mb-4">Components</h2>
           
-          {/* Filter Buttons */}
-          <div className="flex gap-2">
+          {/* Filter Buttons - Scrollable */}
+          <div className="overflow-x-auto pb-2">
+            <div className="flex gap-2 flex-nowrap min-w-min">
             <button
               onClick={() => {
                 setActiveFilter('all');
@@ -345,7 +389,7 @@ function ComponentsPreviewPage({ isLoggedIn }) {
                   }
                 }
               }}
-              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
                 activeFilter === 'all'
                   ? 'bg-purple-600 text-white shadow-lg'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
@@ -356,7 +400,6 @@ function ComponentsPreviewPage({ isLoggedIn }) {
             <button
               onClick={() => {
                 setActiveFilter('cards');
-                // Select first card component
                 if (groupedComponents) {
                   const cardCategories = Object.keys(groupedComponents).filter(cat => cat !== 'Headers' && cat !== 'Footers').sort();
                   if (cardCategories.length > 0 && groupedComponents[cardCategories[0]].length > 0) {
@@ -365,7 +408,7 @@ function ComponentsPreviewPage({ isLoggedIn }) {
                   }
                 }
               }}
-              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
                 activeFilter === 'cards'
                   ? 'bg-blue-600 text-white shadow-lg'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
@@ -376,13 +419,12 @@ function ComponentsPreviewPage({ isLoggedIn }) {
             <button
               onClick={() => {
                 setActiveFilter('headers');
-                // Select first header component
                 if (groupedComponents && groupedComponents['Headers'] && groupedComponents['Headers'].length > 0) {
                   setSelectedId(groupedComponents['Headers'][0]._id);
                   setIframeKey(prev => prev + 1);
                 }
               }}
-              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
                 activeFilter === 'headers'
                   ? 'bg-cyan-600 text-white shadow-lg'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
@@ -393,13 +435,12 @@ function ComponentsPreviewPage({ isLoggedIn }) {
             <button
               onClick={() => {
                 setActiveFilter('footers');
-                // Select first footer component
                 if (groupedComponents && groupedComponents['Footers'] && groupedComponents['Footers'].length > 0) {
                   setSelectedId(groupedComponents['Footers'][0]._id);
                   setIframeKey(prev => prev + 1);
                 }
               }}
-              className={`flex-1 px-3 py-2 rounded-lg transition-all text-xs font-bold ${
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
                 activeFilter === 'footers'
                   ? 'bg-orange-600 text-white shadow-lg'
                   : 'bg-white/10 text-gray-300 hover:bg-white/20'
@@ -407,6 +448,119 @@ function ComponentsPreviewPage({ isLoggedIn }) {
             >
               Footers
             </button>
+            <button
+              onClick={() => {
+                setActiveFilter('hero');
+                if (groupedComponents && groupedComponents['Hero Section'] && groupedComponents['Hero Section'].length > 0) {
+                  setSelectedId(groupedComponents['Hero Section'][0]._id);
+                  setIframeKey(prev => prev + 1);
+                }
+              }}
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
+                activeFilter === 'hero'
+                  ? 'bg-red-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Hero
+            </button>
+            <button
+              onClick={() => {
+                setActiveFilter('logocloud');
+                if (groupedComponents && groupedComponents['Logo Cloud'] && groupedComponents['Logo Cloud'].length > 0) {
+                  setSelectedId(groupedComponents['Logo Cloud'][0]._id);
+                  setIframeKey(prev => prev + 1);
+                }
+              }}
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
+                activeFilter === 'logocloud'
+                  ? 'bg-indigo-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Logo Cloud
+            </button>
+            <button
+              onClick={() => {
+                setActiveFilter('feature');
+                if (groupedComponents && groupedComponents['Feature'] && groupedComponents['Feature'].length > 0) {
+                  setSelectedId(groupedComponents['Feature'][0]._id);
+                  setIframeKey(prev => prev + 1);
+                }
+              }}
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
+                activeFilter === 'feature'
+                  ? 'bg-teal-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Feature
+            </button>
+            <button
+              onClick={() => {
+                setActiveFilter('pricing');
+                if (groupedComponents && groupedComponents['Pricing'] && groupedComponents['Pricing'].length > 0) {
+                  setSelectedId(groupedComponents['Pricing'][0]._id);
+                  setIframeKey(prev => prev + 1);
+                }
+              }}
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
+                activeFilter === 'pricing'
+                  ? 'bg-green-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Pricing
+            </button>
+            <button
+              onClick={() => {
+                setActiveFilter('faq');
+                if (groupedComponents && groupedComponents['FAQ'] && groupedComponents['FAQ'].length > 0) {
+                  setSelectedId(groupedComponents['FAQ'][0]._id);
+                  setIframeKey(prev => prev + 1);
+                }
+              }}
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
+                activeFilter === 'faq'
+                  ? 'bg-yellow-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              FAQ
+            </button>
+            <button
+              onClick={() => {
+                setActiveFilter('testimonial');
+                if (groupedComponents && groupedComponents['Testimonial'] && groupedComponents['Testimonial'].length > 0) {
+                  setSelectedId(groupedComponents['Testimonial'][0]._id);
+                  setIframeKey(prev => prev + 1);
+                }
+              }}
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
+                activeFilter === 'testimonial'
+                  ? 'bg-pink-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              Testimonial
+            </button>
+            <button
+              onClick={() => {
+                setActiveFilter('cta');
+                if (groupedComponents && groupedComponents['Call to Action'] && groupedComponents['Call to Action'].length > 0) {
+                  setSelectedId(groupedComponents['Call to Action'][0]._id);
+                  setIframeKey(prev => prev + 1);
+                }
+              }}
+              className={`px-3 py-2 rounded-lg transition-all text-xs font-bold whitespace-nowrap ${
+                activeFilter === 'cta'
+                  ? 'bg-fuchsia-600 text-white shadow-lg'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              }`}
+            >
+              CTA
+            </button>
+            </div>
           </div>
         </div>
         

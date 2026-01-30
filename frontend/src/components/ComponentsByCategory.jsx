@@ -51,7 +51,7 @@ export default function ComponentsByCategory() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [filterMode, setFilterMode] = useState('all'); // 'all', 'cards', 'headers', 'footers'
+  const [filterMode, setFilterMode] = useState('all'); // 'all', 'cards', 'headers', 'footers', 'hero', 'logocloud', 'feature', 'pricing', 'faq', 'testimonial', 'cta'
   const [selectedHeaderType, setSelectedHeaderType] = useState('all'); // For header filtering
   const [fullScreenPreview, setFullScreenPreview] = useState(false);
 
@@ -122,6 +122,20 @@ export default function ComponentsByCategory() {
     displayedCategories = displayedCategories.filter(cat => cat === 'Header');
   } else if (filterMode === 'footers') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Footer');
+  } else if (filterMode === 'hero') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Hero Section');
+  } else if (filterMode === 'logocloud') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Logo Cloud');
+  } else if (filterMode === 'feature') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Feature');
+  } else if (filterMode === 'pricing') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Pricing');
+  } else if (filterMode === 'faq') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'FAQ');
+  } else if (filterMode === 'testimonial') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Testimonial');
+  } else if (filterMode === 'cta') {
+    displayedCategories = displayedCategories.filter(cat => cat === 'Call to Action');
   }
 
   if (loading) {
@@ -151,7 +165,8 @@ export default function ComponentsByCategory() {
           <p className="text-gray-400 text-lg mb-6">Browse and preview all MongoDB components by category</p>
           
           {/* Filter Buttons */}
-          <div className="flex gap-3 flex-wrap">
+          <div className="overflow-x-auto pb-2">
+            <div className="flex gap-3 flex-nowrap min-w-min">
             <button
               onClick={() => setFilterMode('all')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
@@ -192,8 +207,79 @@ export default function ComponentsByCategory() {
             >
               Footers
             </button>
+            <button
+              onClick={() => setFilterMode('hero')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                filterMode === 'hero'
+                  ? 'bg-red-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              Hero Section
+            </button>
+            <button
+              onClick={() => setFilterMode('logocloud')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                filterMode === 'logocloud'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              Logo Cloud
+            </button>
+            <button
+              onClick={() => setFilterMode('feature')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                filterMode === 'feature'
+                  ? 'bg-teal-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              Feature
+            </button>
+            <button
+              onClick={() => setFilterMode('pricing')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                filterMode === 'pricing'
+                  ? 'bg-green-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              Pricing
+            </button>
+            <button
+              onClick={() => setFilterMode('faq')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                filterMode === 'faq'
+                  ? 'bg-yellow-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              FAQ
+            </button>
+            <button
+              onClick={() => setFilterMode('testimonial')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                filterMode === 'testimonial'
+                  ? 'bg-pink-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              Testimonial
+            </button>
+            <button
+              onClick={() => setFilterMode('cta')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                filterMode === 'cta'
+                  ? 'bg-fuchsia-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              Call to Action
+            </button>
           </div>
-        </div>
+            </div>
+          </div>
 
         {/* Special View for Headers with Type Filtering */}
         {filterMode === 'headers' && displayedCategories.includes('Header') && (

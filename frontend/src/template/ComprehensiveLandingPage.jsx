@@ -191,7 +191,7 @@ export default function ComprehensiveLandingPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Logo Cloud / Stats Section */}
       <section className="py-20 px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
@@ -200,12 +200,15 @@ export default function ComprehensiveLandingPage() {
               { label: "Projects Completed", value: count.projects.toLocaleString(), icon: Target },
               { label: "Countries", value: count.countries, icon: Globe }
             ].map((stat, idx) => (
-              <div key={idx} className="text-center p-8 bg-slate-800/50 rounded-2xl border border-slate-700/50 backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300">
-                <stat.icon className="w-12 h-12 mx-auto mb-4 text-purple-400" />
+              <div key={idx} className="text-center p-8 bg-slate-800/50 rounded-2xl border border-slate-700/50 backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 group cursor-pointer hover:scale-105">
+                <stat.icon className="w-12 h-12 mx-auto mb-4 text-purple-400 group-hover:scale-110 transition-transform" />
                 <div className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
                   {stat.value}+
                 </div>
-                <div className="text-gray-400">{stat.label}</div>
+                <div className="text-gray-400 mb-4">{stat.label}</div>
+                <button className="px-4 py-2 bg-purple-500/20 hover:bg-purple-500/40 text-purple-300 rounded-lg text-sm font-semibold transition-all duration-300">
+                  Learn More
+                </button>
               </div>
             ))}
           </div>
@@ -248,12 +251,14 @@ export default function ComprehensiveLandingPage() {
                 <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
                 <p className="text-gray-400 leading-relaxed">{feature.desc}</p>
                 
-                <div className={`mt-6 flex items-center text-purple-400 transition-all duration-300 ${
-                  activeCard === idx ? 'translate-x-2 opacity-100' : 'translate-x-0 opacity-0'
+                <button className={`mt-6 px-5 py-2 rounded-lg font-semibold transition-all duration-300 flex items-center ${
+                  activeCard === idx 
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg' 
+                    : 'text-purple-400 hover:text-purple-300'
                 }`}>
-                  <span className="text-sm font-semibold">Learn More</span>
+                  <span className="text-sm">Learn More</span>
                   <ChevronRight className="w-4 h-4 ml-1" />
-                </div>
+                </button>
               </div>
             ))}
           </div>
@@ -280,7 +285,11 @@ export default function ComprehensiveLandingPage() {
               ))}
             </div>
             <div className="bg-slate-900/50 rounded-2xl p-8 border border-slate-700/50">
-              <p className="text-lg text-gray-300 leading-relaxed">{tabs[activeTab].content}</p>
+              <p className="text-lg text-gray-300 leading-relaxed mb-6">{tabs[activeTab].content}</p>
+              <button className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 inline-flex items-center">
+                Explore {tabs[activeTab].title}
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </button>
             </div>
           </div>
         </div>
@@ -312,7 +321,7 @@ export default function ComprehensiveLandingPage() {
                 </div>
                 <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
                 <p className="text-gray-400 mb-6">{service.desc}</p>
-                <button className="text-purple-400 font-semibold flex items-center group-hover:translate-x-2 transition-transform">
+                <button className="px-5 py-2 bg-purple-500/20 hover:bg-purple-500/40 text-purple-300 rounded-lg font-semibold flex items-center group-hover:translate-x-2 transition-all duration-300">
                   Explore <ChevronRight className="w-5 h-5 ml-1" />
                 </button>
               </div>
@@ -364,13 +373,22 @@ export default function ComprehensiveLandingPage() {
                   ))}
                 </ul>
                 
-                <button className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-xl hover:shadow-purple-500/50'
-                    : 'bg-slate-700 hover:bg-slate-600'
-                }`}>
-                  Get Started
-                </button>
+                <div className="space-y-3">
+                  <button className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${
+                    plan.popular
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-xl hover:shadow-purple-500/50'
+                      : 'bg-slate-700 hover:bg-slate-600'
+                  }`}>
+                    Get Started
+                  </button>
+                  <button className={`w-full py-3 rounded-xl font-semibold border transition-all duration-300 ${
+                    plan.popular
+                      ? 'border-purple-500/50 text-purple-300 hover:bg-purple-500/10'
+                      : 'border-slate-600 text-gray-300 hover:bg-slate-700/50'
+                  }`}>
+                    View Details
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -391,14 +409,14 @@ export default function ComprehensiveLandingPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, idx) => (
-              <div key={idx} className="p-8 bg-slate-800/50 rounded-2xl border border-slate-700/50 backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 hover:scale-105">
+              <div key={idx} className="p-8 bg-slate-800/50 rounded-2xl border border-slate-700/50 backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 hover:scale-105 group">
                 <div className="flex text-yellow-400 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 fill-current" />
                   ))}
                 </div>
                 <p className="text-gray-300 mb-6 leading-relaxed">"{testimonial.text}"</p>
-                <div className="flex items-center">
+                <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center font-bold mr-4">
                     {testimonial.avatar}
                   </div>
@@ -406,6 +424,17 @@ export default function ComprehensiveLandingPage() {
                     <div className="font-semibold">{testimonial.name}</div>
                     <div className="text-sm text-gray-400">{testimonial.role}</div>
                   </div>
+                </div>
+                <div className="flex gap-2 pt-4 border-t border-slate-700">
+                  <button className="flex-1 px-3 py-2 text-sm bg-purple-500/20 hover:bg-purple-500/40 text-purple-300 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-1">
+                    <Heart className="w-4 h-4" /> Like
+                  </button>
+                  <button className="flex-1 px-3 py-2 text-sm bg-blue-500/20 hover:bg-blue-500/40 text-blue-300 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-1">
+                    <MessageCircle className="w-4 h-4" /> Reply
+                  </button>
+                  <button className="flex-1 px-3 py-2 text-sm bg-green-500/20 hover:bg-green-500/40 text-green-300 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-1">
+                    <Share2 className="w-4 h-4" /> Share
+                  </button>
                 </div>
               </div>
             ))}
