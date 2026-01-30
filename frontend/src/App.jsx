@@ -172,6 +172,42 @@ function ComponentsPreviewPage({ isLoggedIn }) {
     'cosmic card': 'Cosmic Cards',
   };
 
+  const HEADER_SUBCATEGORIES = {
+    'Hero Header': 'Hero Headers',
+    'hero header': 'Hero Headers',
+    'Navigation Header': 'Navigation Headers',
+    'navigation header': 'Navigation Headers',
+    'Minimal Header': 'Minimal Headers',
+    'minimal header': 'Minimal Headers',
+    'Transparent Header': 'Transparent Headers',
+    'transparent header': 'Transparent Headers',
+    'Sticky Header': 'Sticky Headers',
+    'sticky header': 'Sticky Headers',
+    'Gradient Header': 'Gradient Headers',
+    'gradient header': 'Gradient Headers',
+    'Dark Header': 'Dark Headers',
+    'dark header': 'Dark Headers',
+    'Light Header': 'Light Headers',
+    'light header': 'Light Headers',
+  };
+
+  const FOOTER_SUBCATEGORIES = {
+    'Basic Footer': 'Basic Footers',
+    'basic footer': 'Basic Footers',
+    'Link Footer': 'Link Footers',
+    'link footer': 'Link Footers',
+    'Newsletter Footer': 'Newsletter Footers',
+    'newsletter footer': 'Newsletter Footers',
+    'Social Footer': 'Social Footers',
+    'social footer': 'Social Footers',
+    'Dark Footer': 'Dark Footers',
+    'dark footer': 'Dark Footers',
+    'Light Footer': 'Light Footers',
+    'light footer': 'Light Footers',
+    'Minimal Footer': 'Minimal Footers',
+    'minimal footer': 'Minimal Footers',
+  };
+
   useEffect(() => {
     async function fetchComponents() {
       try {
@@ -208,11 +244,29 @@ function ComponentsPreviewPage({ isLoggedIn }) {
               category = 'Cards';
             }
           } else if (category === 'Footer') {
-            // Keep Footer as is
-            category = 'Footers';
-          } else if (category !== 'Cards' && category !== 'Footer') {
-            // All other non-card, non-footer categories go to Headers
-            category = 'Headers';
+            // Apply footer subcategory mapping
+            const rawName = component.name || '';
+            const normalized = rawName.toLowerCase().replace(/\s+/g, '');
+            const mapped = FOOTER_SUBCATEGORIES[rawName] || FOOTER_SUBCATEGORIES[rawName.toLowerCase()] || FOOTER_SUBCATEGORIES[rawName.replace(/\s+/g, '')] || FOOTER_SUBCATEGORIES[normalized];
+
+            if (mapped) {
+              category = mapped;
+            } else {
+              // Footer without mapping stays in Footers
+              category = 'Footers';
+            }
+          } else if (category === 'Header' || (category !== 'Cards' && category !== 'Footer')) {
+            // Apply header subcategory mapping for all headers
+            const rawName = component.name || '';
+            const normalized = rawName.toLowerCase().replace(/\s+/g, '');
+            const mapped = HEADER_SUBCATEGORIES[rawName] || HEADER_SUBCATEGORIES[rawName.toLowerCase()] || HEADER_SUBCATEGORIES[rawName.replace(/\s+/g, '')] || HEADER_SUBCATEGORIES[normalized];
+
+            if (mapped) {
+              category = mapped;
+            } else {
+              // Header without mapping stays in Headers
+              category = 'Headers';
+            }
           }
           
           if (!acc[category]) {

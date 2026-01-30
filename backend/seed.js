@@ -19778,6 +19778,430 @@ function NeumorphismCard2() {
   `
   },
 
+  {
+    name: "ColorfulGradientCard",
+    category: "Cards",
+    code: `
+function ColorfulGradientCard() {
+  const [isHovered, setIsHovered] = React.useState(false);
+  
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%)', 
+      padding: '48px 16px', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      position: 'relative'
+    }}>
+      <div 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ 
+          width: '100%',
+          maxWidth: '420px',
+          position: 'relative',
+          transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isHovered ? 'translateY(-8px)' : 'translateY(0)'
+        }}
+      >
+        {/* Main Card */}
+        <div style={{
+          background: 'white',
+          borderRadius: '32px',
+          padding: '32px',
+          boxShadow: isHovered 
+            ? '0 35px 90px rgba(252, 182, 159, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.3)'
+            : '0 25px 60px rgba(252, 182, 159, 0.3)',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          {/* Decorative Background Shape */}
+          <div style={{
+            position: 'absolute',
+            top: '-50px',
+            right: '-50px',
+            width: '150px',
+            height: '150px',
+            background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+            borderRadius: '50%',
+            opacity: 0.3,
+            transition: 'all 0.5s',
+            transform: isHovered ? 'scale(1.3)' : 'scale(1)'
+          }} />
+          
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            {/* Icon Container */}
+            <div style={{
+              width: '80px',
+              height: '80px',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+              borderRadius: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '20px',
+              boxShadow: '0 15px 40px rgba(118, 75, 162, 0.3)',
+              transition: 'all 0.4s',
+              transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+              position: 'relative'
+            }}>
+              <div style={{
+                position: 'absolute',
+                inset: '-3px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+                borderRadius: '24px',
+                opacity: 0.4,
+                filter: 'blur(12px)',
+                zIndex: -1
+              }} />
+              <div style={{
+                fontSize: '2.5rem'
+              }}>
+                🎉
+              </div>
+            </div>
+            
+            {/* Title */}
+            <h2 style={{
+              fontSize: '2rem',
+              fontWeight: '900',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              marginBottom: '10px',
+              letterSpacing: '-1px',
+              lineHeight: '1.2'
+            }}>
+              Creative Studio
+            </h2>
+            
+            <p style={{
+              fontSize: '0.9rem',
+              color: '#6b7280',
+              lineHeight: '1.5',
+              marginBottom: '20px',
+              fontWeight: '500'
+            }}>
+              Transform your ideas into stunning reality with creative design
+            </p>
+            
+            {/* Stats Cards */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '12px',
+              marginBottom: '20px'
+            }}>
+              <div style={{
+                padding: '16px',
+                background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+                borderRadius: '18px',
+                boxShadow: '0 6px 20px rgba(252, 182, 159, 0.2)',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateY(-3px) scale(1.02)' : 'translateY(0) scale(1)'
+              }}>
+                <div style={{
+                  fontSize: '1.6rem',
+                  fontWeight: '900',
+                  color: '#ff6b6b',
+                  marginBottom: '4px'
+                }}>850</div>
+                <div style={{
+                  fontSize: '0.7rem',
+                  color: '#ff6b6b',
+                  fontWeight: '700',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px'
+                }}>Designs</div>
+              </div>
+              
+              <div style={{
+                padding: '16px',
+                background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+                borderRadius: '18px',
+                boxShadow: '0 6px 20px rgba(168, 237, 234, 0.2)',
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateY(-3px) scale(1.02)' : 'translateY(0) scale(1)',
+                transitionDelay: '0.05s'
+              }}>
+                <div style={{
+                  fontSize: '1.6rem',
+                  fontWeight: '900',
+                  color: '#4ecdc4',
+                  marginBottom: '4px'
+                }}>12K</div>
+                <div style={{
+                  fontSize: '0.7rem',
+                  color: '#4ecdc4',
+                  fontWeight: '700',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px'
+                }}>Clients</div>
+              </div>
+            </div>
+            
+            {/* Feature List - Compact Version */}
+            <div style={{
+              padding: '20px',
+              background: 'linear-gradient(135deg, #f5f7fa 0%, #fafbfc 100%)',
+              borderRadius: '20px',
+              marginBottom: '20px',
+              border: '2px solid #f0f0f0'
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '12px'
+              }}>
+                <div style={{
+                  width: '42px',
+                  height: '42px',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  borderRadius: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 6px 16px rgba(118, 75, 162, 0.2)',
+                  fontSize: '1.2rem'
+                }}>
+                  🎨
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    color: '#1f2937',
+                    fontSize: '0.9rem',
+                    fontWeight: '700',
+                    marginBottom: '2px'
+                  }}>Custom Design</div>
+                  <div style={{
+                    color: '#9ca3af',
+                    fontSize: '0.75rem',
+                    fontWeight: '500'
+                  }}>Tailored to your brand</div>
+                </div>
+              </div>
+              
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px'
+              }}>
+                <div style={{
+                  width: '42px',
+                  height: '42px',
+                  background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+                  borderRadius: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 6px 16px rgba(168, 237, 234, 0.2)',
+                  fontSize: '1.2rem'
+                }}>
+                  💎
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    color: '#1f2937',
+                    fontSize: '0.9rem',
+                    fontWeight: '700',
+                    marginBottom: '2px'
+                  }}>Premium Quality</div>
+                  <div style={{
+                    color: '#9ca3af',
+                    fontSize: '0.75rem',
+                    fontWeight: '500'
+                  }}>High-end craftsmanship</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* CTA Button */}
+            <button style={{
+              width: '100%',
+              padding: '16px',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+              border: 'none',
+              borderRadius: '18px',
+              color: 'white',
+              fontWeight: '800',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              boxShadow: isHovered
+                ? '0 15px 40px rgba(118, 75, 162, 0.4)'
+                : '0 12px 30px rgba(118, 75, 162, 0.3)',
+              transition: 'all 0.3s',
+              letterSpacing: '0.5px',
+              textTransform: 'uppercase',
+              position: 'relative',
+              overflow: 'hidden',
+              transform: isHovered ? 'translateY(-2px)' : 'translateY(0)'
+            }}>
+              <span style={{ position: 'relative', zIndex: 1 }}>Start Creating</span>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: isHovered ? '0%' : '-100%',
+                width: '100%',
+                height: '100%',
+                background: 'rgba(255, 255, 255, 0.2)',
+                transition: 'left 0.5s'
+              }} />
+            </button>
+            
+            {/* Social Links */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '12px',
+              marginTop: '20px'
+            }}>
+              {[
+                { icon: '🎭', bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
+                { icon: '🌈', bg: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)' },
+                { icon: '✨', bg: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)' }
+              ].map((item, index) => (
+                <div key={index} style={{
+                  width: '44px',
+                  height: '44px',
+                  background: item.bg,
+                  borderRadius: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 6px 16px rgba(0, 0, 0, 0.1)',
+                  cursor: 'pointer',
+                  fontSize: '1.1rem',
+                  transition: 'all 0.3s',
+                  transform: isHovered ? 'translateY(-4px) rotate(5deg)' : 'translateY(0) rotate(0deg)'
+                }}>
+                  {item.icon}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+
+  // Basic Footers
+  {
+    name: "Basic Dark Footer",
+    category: "Footer",
+    code: `
+function BasicDarkFooter() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+
+  return (
+    <footer className="bg-gray-900 text-gray-300">
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          
+          {/* Brand */}
+          <div className="md:col-span-1">
+            <h3 className="text-white text-xl font-bold mb-3">Company</h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Building better digital experiences for everyone.
+            </p>
+          </div>
+
+          {/* Links */}
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-sm">Product</h4>
+            <ul className="space-y-2">
+              {['Features', 'Pricing', 'Security', 'Updates'].map((link) => (
+                <li key={link}>
+                  <a
+                    href="#"
+                    className="text-sm transition-colors"
+                    style={{ color: hoveredLink === link ? '#fff' : '#9ca3af' }}
+                    onMouseEnter={() => setHoveredLink(link)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-sm">Company</h4>
+            <ul className="space-y-2">
+              {['About', 'Blog', 'Careers', 'Contact'].map((link) => (
+                <li key={link}>
+                  <a
+                    href="#"
+                    className="text-sm transition-colors"
+                    style={{ color: hoveredLink === link ? '#fff' : '#9ca3af' }}
+                    onMouseEnter={() => setHoveredLink(link)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-sm">Legal</h4>
+            <ul className="space-y-2">
+              {['Privacy', 'Terms', 'Cookies', 'Licenses'].map((link) => (
+                <li key={link}>
+                  <a
+                    href="#"
+                    className="text-sm transition-colors"
+                    style={{ color: hoveredLink === link ? '#fff' : '#9ca3af' }}
+                    onMouseEnter={() => setHoveredLink(link)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Bottom */}
+        <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-gray-500">© 2025 Company. All rights reserved.</p>
+          <div className="flex gap-6">
+            {['Twitter', 'LinkedIn', 'GitHub'].map((social) => (
+              <a
+                key={social}
+                href="#"
+                className="text-sm transition-colors"
+                style={{ color: hoveredLink === social ? '#fff' : '#6b7280' }}
+                onMouseEnter={() => setHoveredLink(social)}
+                onMouseLeave={() => setHoveredLink(null)}
+              >
+                {social}
+              </a>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  );
+}
+`
+  },
+
+ 
 
 
 ];
