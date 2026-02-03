@@ -113,29 +113,77 @@ export default function ComponentsByCategory() {
     fetchComponents();
   }, []);
 
+  // Reset selected component when filter mode changes
+  useEffect(() => {
+    setSelectedComponent(null);
+    setSelectedHeaderType('all');
+  }, [filterMode]);
+
   // Get filtered categories based on filterMode
   let displayedCategories = Object.keys(components).sort();
+  let filteredComponents = components;
   
   if (filterMode === 'cards') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Cards');
+    // Also filter components to only show Cards category
+    filteredComponents = {};
+    if (components['Cards']) {
+      filteredComponents['Cards'] = components['Cards'];
+    }
   } else if (filterMode === 'headers') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Header');
+    filteredComponents = {};
+    if (components['Header']) {
+      filteredComponents['Header'] = components['Header'];
+    }
   } else if (filterMode === 'footers') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Footer');
+    filteredComponents = {};
+    if (components['Footer']) {
+      filteredComponents['Footer'] = components['Footer'];
+    }
   } else if (filterMode === 'hero') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Hero Section');
+    filteredComponents = {};
+    if (components['Hero Section']) {
+      filteredComponents['Hero Section'] = components['Hero Section'];
+    }
   } else if (filterMode === 'logocloud') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Logo Cloud');
+    filteredComponents = {};
+    if (components['Logo Cloud']) {
+      filteredComponents['Logo Cloud'] = components['Logo Cloud'];
+    }
   } else if (filterMode === 'feature') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Feature');
+    filteredComponents = {};
+    if (components['Feature']) {
+      filteredComponents['Feature'] = components['Feature'];
+    }
   } else if (filterMode === 'pricing') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Pricing');
+    filteredComponents = {};
+    if (components['Pricing']) {
+      filteredComponents['Pricing'] = components['Pricing'];
+    }
   } else if (filterMode === 'faq') {
     displayedCategories = displayedCategories.filter(cat => cat === 'FAQ');
+    filteredComponents = {};
+    if (components['FAQ']) {
+      filteredComponents['FAQ'] = components['FAQ'];
+    }
   } else if (filterMode === 'testimonial') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Testimonial');
+    filteredComponents = {};
+    if (components['Testimonial']) {
+      filteredComponents['Testimonial'] = components['Testimonial'];
+    }
   } else if (filterMode === 'cta') {
     displayedCategories = displayedCategories.filter(cat => cat === 'Call to Action');
+    filteredComponents = {};
+    if (components['Call to Action']) {
+      filteredComponents['Call to Action'] = components['Call to Action'];
+    }
   }
 
   if (loading) {
@@ -319,7 +367,7 @@ export default function ComponentsByCategory() {
         <div className="space-y-12">
           {displayedCategories.map((category) => {
             // Get components for this category
-            let categoryComps = components[category];
+            let categoryComps = filteredComponents[category];
             
             // Special filtering for headers by headerType
             if (category === 'Header' && selectedHeaderType !== 'all') {

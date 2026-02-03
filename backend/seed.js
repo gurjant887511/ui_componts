@@ -22814,6 +22814,2701 @@ function FeatureGrid3() {
   `
   },
  {
+    name: "FAQSection",
+    category: "FAQ",
+    code: `
+function FAQSection() {
+  const [openIndex, setOpenIndex] = React.useState(null);
+
+  const faqs = [
+    {
+      question: "How does the free trial work?",
+      answer: "Our 14-day free trial gives you full access to all features without requiring a credit card. You can explore everything risk-free, and we'll send you a reminder before the trial ends. No automatic charges - you decide if you want to continue.",
+      icon: "🎯",
+      category: "Getting Started"
+    },
+    {
+      question: "Can I change my plan later?",
+      answer: "Absolutely! You can upgrade or downgrade your plan at any time from your account settings. Changes take effect immediately, and we'll prorate the charges accordingly. No penalties for switching plans.",
+      icon: "🔄",
+      category: "Billing"
+    },
+    {
+      question: "What payment methods do you accept?",
+      answer: "We accept all major credit cards (Visa, Mastercard, American Express), debit cards, and UPI payments. All transactions are secured with bank-level encryption. You can also pay annually for a 25% discount.",
+      icon: "💳",
+      category: "Billing"
+    },
+    {
+      question: "Is my data secure?",
+      answer: "Yes! We use 256-bit SSL encryption for all data transfers and store your information in secure, redundant servers. We're GDPR compliant and perform regular security audits. Your data is backed up daily and you can export it anytime.",
+      icon: "🔒",
+      category: "Security"
+    },
+    {
+      question: "Do you offer refunds?",
+      answer: "Yes, we offer a 30-day money-back guarantee on all plans. If you're not completely satisfied within the first 30 days, just contact our support team and we'll process a full refund - no questions asked.",
+      icon: "💰",
+      category: "Billing"
+    },
+    {
+      question: "Can I cancel anytime?",
+      answer: "Of course! There are no long-term contracts or cancellation fees. You can cancel your subscription anytime from your account dashboard. You'll continue to have access until the end of your billing period.",
+      icon: "✓",
+      category: "Getting Started"
+    },
+    {
+      question: "What kind of support do you provide?",
+      answer: "We offer email support for all plans, with response times under 24 hours. Professional and Enterprise plans get priority support with live chat and phone support. Plus, we have extensive documentation and video tutorials available 24/7.",
+      icon: "💬",
+      category: "Support"
+    },
+    {
+      question: "Can I use this for my team?",
+      answer: "Yes! All our paid plans support team collaboration. You can invite team members, assign roles and permissions, and work together in real-time. Enterprise plans include advanced team management features and dedicated account support.",
+      icon: "👥",
+      category: "Features"
+    }
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <div style={{
+      background: 'linear-gradient(180deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)',
+      minHeight: '100vh',
+      padding: '100px 20px'
+    }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <div style={{
+            display: 'inline-block',
+            background: 'rgba(168, 85, 247, 0.15)',
+            border: '2px solid rgba(168, 85, 247, 0.3)',
+            padding: '12px 28px',
+            borderRadius: '50px',
+            marginBottom: '24px'
+          }}>
+            <span style={{
+              color: '#c084fc',
+              fontSize: '14px',
+              fontWeight: '800',
+              letterSpacing: '2px'
+            }}>
+              ❓ FAQ
+            </span>
+          </div>
+
+          <h1 style={{
+            fontSize: '64px',
+            fontWeight: '900',
+            color: '#ffffff',
+            marginBottom: '20px',
+            lineHeight: '1.1',
+            letterSpacing: '-1px'
+          }}>
+            Frequently Asked
+            <br />
+            <span style={{
+              background: 'linear-gradient(135deg, #a855f7, #ec4899, #f59e0b)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              Questions
+            </span>
+          </h1>
+
+          <p style={{
+            fontSize: '20px',
+            color: '#94a3b8',
+            maxWidth: '600px',
+            margin: '0 auto'
+          }}>
+            Everything you need to know about our platform. Can't find your answer? Contact our support team.
+          </p>
+        </div>
+
+        {/* FAQ Grid */}
+        <div style={{
+          display: 'grid',
+          gap: '20px',
+          marginBottom: '60px'
+        }}>
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              style={{
+                background: openIndex === index 
+                  ? 'linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.15))'
+                  : 'rgba(30, 41, 59, 0.6)',
+                borderRadius: '20px',
+                border: openIndex === index 
+                  ? '2px solid rgba(168, 85, 247, 0.5)' 
+                  : '2px solid rgba(71, 85, 105, 0.3)',
+                overflow: 'hidden',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer'
+              }}
+              onClick={() => toggleFAQ(index)}
+              onMouseEnter={(e) => {
+                if (openIndex !== index) {
+                  e.currentTarget.style.background = 'rgba(30, 41, 59, 0.8)';
+                  e.currentTarget.style.borderColor = 'rgba(71, 85, 105, 0.5)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (openIndex !== index) {
+                  e.currentTarget.style.background = 'rgba(30, 41, 59, 0.6)';
+                  e.currentTarget.style.borderColor = 'rgba(71, 85, 105, 0.3)';
+                }
+              }}
+            >
+              {/* Question Header */}
+              <div style={{
+                padding: '28px 32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '20px'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: 1 }}>
+                  {/* Icon */}
+                  <div style={{
+                    width: '50px',
+                    height: '50px',
+                    background: 'linear-gradient(135deg, #8b5cf6, #ec4899)',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '24px',
+                    flexShrink: 0
+                  }}>
+                    {faq.icon}
+                  </div>
+
+                  {/* Question */}
+                  <div style={{ flex: 1 }}>
+                    <div style={{
+                      fontSize: '12px',
+                      color: '#a855f7',
+                      fontWeight: '700',
+                      marginBottom: '6px',
+                      letterSpacing: '1px',
+                      textTransform: 'uppercase'
+                    }}>
+                      {faq.category}
+                    </div>
+                    <h3 style={{
+                      fontSize: '20px',
+                      fontWeight: '700',
+                      color: '#ffffff',
+                      margin: 0,
+                      lineHeight: '1.4'
+                    }}>
+                      {faq.question}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Toggle Icon */}
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  background: openIndex === index 
+                    ? 'linear-gradient(135deg, #a855f7, #ec4899)' 
+                    : 'rgba(71, 85, 105, 0.3)',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s ease',
+                  transform: openIndex === index ? 'rotate(180deg)' : 'rotate(0deg)',
+                  flexShrink: 0
+                }}>
+                  <svg
+                    style={{
+                      width: '20px',
+                      height: '20px',
+                      color: '#ffffff'
+                    }}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2.5}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Answer */}
+              <div
+                style={{
+                  maxHeight: openIndex === index ? '500px' : '0',
+                  overflow: 'hidden',
+                  transition: 'max-height 0.4s ease, padding 0.4s ease'
+                }}
+              >
+                <div style={{
+                  padding: '0 32px 28px 98px',
+                  color: '#cbd5e1',
+                  fontSize: '16px',
+                  lineHeight: '1.8'
+                }}>
+                  {faq.answer}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Still Have Questions Section */}
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(49, 46, 129, 0.6))',
+          borderRadius: '24px',
+          padding: '60px 40px',
+          border: '2px solid rgba(168, 85, 247, 0.3)',
+          textAlign: 'center'
+        }}>
+          <h2 style={{
+            fontSize: '36px',
+            fontWeight: '800',
+            color: '#ffffff',
+            marginBottom: '16px',
+            letterSpacing: '-0.5px'
+          }}>
+            Still have questions?
+          </h2>
+          <p style={{
+            fontSize: '18px',
+            color: '#94a3b8',
+            marginBottom: '32px',
+            maxWidth: '600px',
+            margin: '0 auto 32px'
+          }}>
+            Can't find the answer you're looking for? Our friendly team is here to help.
+          </p>
+
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}>
+            <button
+              style={{
+                padding: '16px 32px',
+                background: 'linear-gradient(135deg, #a855f7, #ec4899)',
+                border: 'none',
+                borderRadius: '12px',
+                color: '#ffffff',
+                fontSize: '16px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 12px 30px rgba(168, 85, 247, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <span>💬</span>
+              <span>Chat with Support</span>
+            </button>
+
+            <button
+              style={{
+                padding: '16px 32px',
+                background: 'transparent',
+                border: '2px solid rgba(148, 163, 184, 0.4)',
+                borderRadius: '12px',
+                color: '#ffffff',
+                fontSize: '16px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                e.currentTarget.style.borderColor = 'rgba(168, 85, 247, 0.6)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.borderColor = 'rgba(148, 163, 184, 0.4)';
+              }}
+            >
+              <span>📧</span>
+              <span>Email Us</span>
+            </button>
+          </div>
+
+          {/* Contact Info */}
+          <div style={{
+            marginTop: '40px',
+            paddingTop: '30px',
+            borderTop: '1px solid rgba(71, 85, 105, 0.3)',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '40px',
+            flexWrap: 'wrap'
+          }}>
+            <div>
+              <div style={{
+                color: '#94a3b8',
+                fontSize: '14px',
+                marginBottom: '6px'
+              }}>
+                Response Time
+              </div>
+              <div style={{
+                color: '#ffffff',
+                fontSize: '18px',
+                fontWeight: '700'
+              }}>
+                Under 2 hours
+              </div>
+            </div>
+            <div>
+              <div style={{
+                color: '#94a3b8',
+                fontSize: '14px',
+                marginBottom: '6px'
+              }}>
+                Availability
+              </div>
+              <div style={{
+                color: '#ffffff',
+                fontSize: '18px',
+                fontWeight: '700'
+              }}>
+                24/7 Support
+              </div>
+            </div>
+            <div>
+              <div style={{
+                color: '#94a3b8',
+                fontSize: '14px',
+                marginBottom: '6px'
+              }}>
+                Languages
+              </div>
+              <div style={{
+                color: '#ffffff',
+                fontSize: '18px',
+                fontWeight: '700'
+              }}>
+                English, Hindi
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "FAQSection2",
+    category: "FAQ",
+    code: `
+function FAQSection2() {
+  const [openIndex, setOpenIndex] = React.useState(null);
+
+  const faqs = [
+    {
+      question: "What's included in the free plan?",
+      answer: "The free plan includes access to basic features, up to 5 projects, 1GB storage, community support, and all core functionalities. Perfect for individuals and small projects getting started.",
+      icon: "🎁",
+      gradient: "from-cyan-500 to-blue-500"
+    },
+    {
+      question: "How do I upgrade my subscription?",
+      answer: "Upgrading is simple! Go to Settings > Billing, select your desired plan, and confirm. Your new features activate instantly, and we'll prorate any remaining time on your current plan.",
+      icon: "🚀",
+      gradient: "from-purple-500 to-pink-500"
+    },
+    {
+      question: "Do you offer student discounts?",
+      answer: "Yes! Students and educators get 50% off all paid plans. Simply verify your status with a valid .edu email address or student ID to unlock your discount.",
+      icon: "🎓",
+      gradient: "from-green-500 to-emerald-500"
+    },
+    {
+      question: "Can I export my data?",
+      answer: "Absolutely! You own your data. Export everything anytime in multiple formats including JSON, CSV, and PDF. No restrictions, no hassle - your data is always accessible.",
+      icon: "📦",
+      gradient: "from-orange-500 to-red-500"
+    },
+    {
+      question: "What's your uptime guarantee?",
+      answer: "We guarantee 99.9% uptime with redundant servers across multiple regions. If we fall below this, you'll receive automatic service credits. Our infrastructure is monitored 24/7.",
+      icon: "⚡",
+      gradient: "from-yellow-500 to-orange-500"
+    },
+    {
+      question: "Is there a mobile app?",
+      answer: "Yes! Our mobile apps for iOS and Android offer full functionality. Sync seamlessly across all devices, work offline, and get push notifications for important updates.",
+      icon: "📱",
+      gradient: "from-indigo-500 to-purple-500"
+    }
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-6">
+      <div className="max-w-4xl mx-auto">
+        
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 px-4 py-2 rounded-full mb-6">
+            <span className="text-2xl">💡</span>
+            <span className="text-purple-400 font-bold text-sm tracking-wider">HELP CENTER</span>
+          </div>
+
+          <h1 className="text-6xl font-black text-white mb-4">
+            Got Questions?
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            We've got answers. Browse our most commonly asked questions below.
+          </p>
+        </div>
+
+        {/* FAQ Items */}
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className={
+                openIndex === index
+                  ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-purple-500/50 rounded-2xl transition-all duration-500 shadow-lg shadow-purple-500/20"
+                  : "bg-gray-900/50 border border-gray-800 rounded-2xl hover:border-gray-700 transition-all duration-300"
+              }
+            >
+              {/* Question Header */}
+              <div
+                onClick={() => toggleFAQ(index)}
+                className="p-6 cursor-pointer flex items-center justify-between gap-4"
+              >
+                <div className="flex items-center gap-4 flex-1">
+                  {/* Icon */}
+                  <div className={
+                    "w-14 h-14 rounded-xl bg-gradient-to-br " + faq.gradient + " flex items-center justify-center text-2xl shadow-lg transform transition-transform duration-300 " + (openIndex === index ? "scale-110 rotate-12" : "")
+                  }>
+                    {faq.icon}
+                  </div>
+
+                  {/* Question Text */}
+                  <h3 className={
+                    openIndex === index
+                      ? "text-xl font-bold text-white transition-colors"
+                      : "text-xl font-bold text-gray-300 transition-colors"
+                  }>
+                    {faq.question}
+                  </h3>
+                </div>
+
+                {/* Toggle Button */}
+                <div className={
+                  openIndex === index
+                    ? "w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center transform rotate-180 transition-all duration-300"
+                    : "w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center transition-all duration-300"
+                }>
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Answer */}
+              <div
+                className={
+                  openIndex === index
+                    ? "max-h-96 opacity-100 transition-all duration-500 ease-in-out"
+                    : "max-h-0 opacity-0 overflow-hidden transition-all duration-300"
+                }
+              >
+                <div className="px-6 pb-6 pl-24">
+                  <p className="text-gray-400 leading-relaxed text-base">
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Contact Card */}
+        <div className="mt-16 relative overflow-hidden">
+          {/* Animated Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-pink-600/20 to-orange-600/20 rounded-3xl blur-xl"></div>
+          
+          <div className="relative bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-3xl p-10">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl mb-6 shadow-lg shadow-purple-500/50">
+                <span className="text-4xl">🤝</span>
+              </div>
+
+              <h2 className="text-4xl font-black text-white mb-4">
+                Need More Help?
+              </h2>
+              <p className="text-gray-400 text-lg mb-8 max-w-md mx-auto">
+                Our support team is standing by to answer any questions you might have.
+              </p>
+
+              <div className="flex flex-wrap gap-4 justify-center">
+                <button className="group px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-white hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                  </svg>
+                  <span>Call Support</span>
+                </button>
+
+                <button className="px-8 py-4 bg-gray-800 border border-gray-700 rounded-xl font-bold text-white hover:bg-gray-700 hover:border-purple-500/50 hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                  </svg>
+                  <span>Send Email</span>
+                </button>
+
+                <button className="px-8 py-4 bg-gray-800 border border-gray-700 rounded-xl font-bold text-white hover:bg-gray-700 hover:border-purple-500/50 hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
+                  </svg>
+                  <span>Live Chat</span>
+                </button>
+              </div>
+
+              {/* Stats */}
+              <div className="mt-10 pt-8 border-t border-gray-800 grid grid-cols-3 gap-8">
+                <div>
+                  <div className="text-3xl font-black text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">
+                    &lt;5min
+                  </div>
+                  <div className="text-gray-500 text-sm mt-1">Avg Response</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-black text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">
+                    24/7
+                  </div>
+                  <div className="text-gray-500 text-sm mt-1">Available</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-black text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">
+                    98%
+                  </div>
+                  <div className="text-gray-500 text-sm mt-1">Satisfaction</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "PremiumFAQSection",
+    category: "FAQ",
+    code: `
+function PremiumFAQSection() {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const faqs = [
+    {
+      question: "How quickly can I get started?",
+      answer:
+        "You can sign up and start using the platform in under 2 minutes. No credit card required for the trial — just enter your email and you're in. Full access to all premium features during the 14-day trial period.",
+      icon: "⚡",
+      category: "Getting Started",
+    },
+    {
+      question: "What happens after the trial ends?",
+      answer:
+        "After 14 days, your account automatically switches to the Free plan unless you choose a paid subscription. We'll remind you 3 days before the trial ends so you have time to decide. No surprise charges ever.",
+      icon: "⏳",
+      category: "Billing",
+    },
+    {
+      question: "Which payment methods are supported?",
+      answer:
+        "We support all major credit/debit cards (Visa, Mastercard, Amex, RuPay), UPI, net banking, and digital wallets. Annual billing gives you 2 months free (≈25% discount). All payments are processed via secure PCI-DSS compliant providers.",
+      icon: "💳",
+      category: "Billing",
+    },
+    {
+      question: "How secure is my data?",
+      answer:
+        "Bank-grade 256-bit AES encryption at rest & in transit. SOC 2 Type II, GDPR, CCPA & HIPAA compliant (Enterprise). Regular penetration testing, daily encrypted backups, and zero-knowledge architecture for sensitive data.",
+      icon: "🛡️",
+      category: "Security",
+    },
+    {
+      question: "Do you provide refunds?",
+      answer:
+        "Yes — full 30-day money-back guarantee on all paid plans. If you're not 100% satisfied, just reach out within 30 days for a complete refund. No questions, no hassle.",
+      icon: "🔄",
+      category: "Billing",
+    },
+    {
+      question: "Can I cancel my subscription anytime?",
+      answer:
+        "Yes, cancel anytime with one click from your dashboard. No contracts, no cancellation fees. You'll keep full access until the end of your current billing cycle.",
+      icon: "✖",
+      category: "Billing",
+    },
+    {
+      question: "What support options do I get?",
+      answer:
+        "All users get email + help center access. Pro & Business plans include priority email + live chat (avg. response <1h). Enterprise gets dedicated Slack channel, phone support, and 99.9% uptime SLA.",
+      icon: "🎧",
+      category: "Support",
+    },
+    {
+      question: "Is team collaboration included?",
+      answer:
+        "Yes — unlimited team members on all paid plans. Role-based permissions, real-time collaboration, activity logs, and audit trails. Enterprise adds SSO, SCIM, advanced admin controls & usage analytics.",
+      icon: "👥",
+      category: "Team",
+    },
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <div
+      style={{
+        background: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        minHeight: "100vh",
+        padding: "120px 24px",
+        color: "#e2e8f0",
+        fontFamily: "system-ui, -apple-system, sans-serif",
+      }}
+    >
+      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: "100px" }}>
+          <div
+            style={{
+              display: "inline-block",
+              background: "rgba(139, 92, 246, 0.12)",
+              border: "1px solid rgba(139, 92, 246, 0.3)",
+              padding: "10px 24px",
+              borderRadius: "9999px",
+              marginBottom: "32px",
+            }}
+          >
+            <span
+              style={{
+                background: "linear-gradient(90deg, #c084fc, #ec4899)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                fontWeight: "800",
+                fontSize: "15px",
+                letterSpacing: "2.5px",
+              }}
+            >
+              FAQ SECTION
+            </span>
+          </div>
+
+          <h1
+            style={{
+              fontSize: "clamp(48px, 8vw, 72px)",
+              fontWeight: "900",
+              background: "linear-gradient(90deg, #a855f7, #d946ef, #f59e0b)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              marginBottom: "24px",
+              lineHeight: "1.05",
+              letterSpacing: "-1.5px",
+            }}
+          >
+            Got Questions?
+            <br />
+            We've Got Answers
+          </h1>
+
+          <p
+            style={{
+              fontSize: "20px",
+              color: "#94a3b8",
+              maxWidth: "680px",
+              margin: "0 auto",
+            }}
+          >
+            Find quick answers to the most common questions. Still unsure? Our team is just one message away.
+          </p>
+        </div>
+
+        {/* FAQ Items */}
+        <div style={{ display: "grid", gap: "24px", maxWidth: "900px", margin: "0 auto 80px" }}>
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                key={index}
+                onClick={() => toggleFAQ(index)}
+                style={{
+                  background: isOpen
+                    ? "linear-gradient(145deg, rgba(139,92,246,0.22), rgba(236,72,153,0.18))"
+                    : "rgba(30, 41, 59, 0.5)",
+                  borderRadius: "20px",
+                  border: isOpen
+                    ? "1.5px solid rgba(168,85,247,0.6)"
+                    : "1px solid rgba(75, 85, 99, 0.4)",
+                  backdropFilter: "blur(10px)",
+                  boxShadow: isOpen
+                    ? "0 20px 50px -12px rgba(168,85,247,0.35)"
+                    : "0 10px 30px -8px rgba(0,0,0,0.35)",
+                  overflow: "hidden",
+                  transition: "all 0.4s ease",
+                  cursor: "pointer",
+                }}
+              >
+                {/* Question Row */}
+                <div
+                  style={{
+                    padding: "28px 36px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "24px",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "20px", flex: 1 }}>
+                    {/* Icon – अब animation की जगह transition */}
+                    <div
+                      style={{
+                        width: "56px",
+                        height: "56px",
+                        background: isOpen
+                          ? "linear-gradient(135deg, #a855f7, #d946ef, #f59e0b)"
+                          : "linear-gradient(135deg, #6b7280, #4b5563)",
+                        borderRadius: "16px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "28px",
+                        boxShadow: isOpen
+                          ? "0 10px 30px rgba(168,85,247,0.5)"
+                          : "0 4px 15px rgba(0,0,0,0.3)",
+                        transform: isOpen ? "scale(1.12)" : "scale(1)",
+                        transition: "all 0.4s ease",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {faq.icon}
+                    </div>
+
+                    <div style={{ flex: 1 }}>
+                      <div
+                        style={{
+                          fontSize: "13px",
+                          color: "#c084fc",
+                          fontWeight: "700",
+                          letterSpacing: "1.2px",
+                          marginBottom: "8px",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {faq.category}
+                      </div>
+                      <h3
+                        style={{
+                          fontSize: "21px",
+                          fontWeight: "700",
+                          color: "#f1f5f9",
+                          margin: 0,
+                          lineHeight: "1.4",
+                        }}
+                      >
+                        {faq.question}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Arrow */}
+                  <div
+                    style={{
+                      width: "44px",
+                      height: "44px",
+                      background: isOpen
+                        ? "linear-gradient(135deg, #a855f7, #d946ef)"
+                        : "rgba(75,85,99,0.4)",
+                      borderRadius: "12px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transform: isOpen ? "rotate(180deg) scale(1.1)" : "rotate(0deg)",
+                      transition: "all 0.4s ease",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg width="24" height="24" fill="none" stroke="#ffffff" strokeWidth="3" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Answer */}
+                <div
+                  style={{
+                    maxHeight: isOpen ? "600px" : "0",
+                    overflow: "hidden",
+                    transition: "max-height 0.5s ease, padding 0.5s ease",
+                    padding: isOpen ? "0 36px 36px 112px" : "0 36px 0 112px",
+                  }}
+                >
+                  <div
+                    style={{
+                      opacity: isOpen ? 1 : 0,
+                      transform: isOpen ? "translateY(0)" : "translateY(16px)",
+                      transition: "opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s",
+                      color: "#cbd5e1",
+                      fontSize: "17px",
+                      lineHeight: "1.75",
+                    }}
+                  >
+                    {faq.answer}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Contact CTA – बाकी वही */}
+        <div
+          style={{
+            background: "linear-gradient(135deg, rgba(30,41,59,0.7), rgba(49,46,129,0.5))",
+            borderRadius: "28px",
+            padding: "80px 48px",
+            border: "1px solid rgba(168,85,247,0.25)",
+            textAlign: "center",
+            maxWidth: "900px",
+            margin: "0 auto",
+            backdropFilter: "blur(12px)",
+          }}
+        >
+          <h2 style={{ fontSize: "42px", fontWeight: "800", color: "#ffffff", marginBottom: "20px" }}>
+            Still have questions?
+          </h2>
+          <p style={{ fontSize: "19px", color: "#94a3b8", maxWidth: "640px", margin: "0 auto 40px" }}>
+            Our support ninjas are ready 24/7 to help you get the most out of the platform.
+          </p>
+
+          <div style={{ display: "flex", gap: "20px", justifyContent: "center", flexWrap: "wrap" }}>
+            <button
+              style={{
+                padding: "18px 40px",
+                background: "linear-gradient(90deg, #a855f7, #d946ef)",
+                border: "none",
+                borderRadius: "14px",
+                color: "white",
+                fontSize: "18px",
+                fontWeight: "700",
+                cursor: "pointer",
+                boxShadow: "0 10px 30px rgba(168,85,247,0.4)",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px) scale(1.03)";
+                e.currentTarget.style.boxShadow = "0 20px 50px rgba(168,85,247,0.5)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0) scale(1)";
+                e.currentTarget.style.boxShadow = "0 10px 30px rgba(168,85,247,0.4)";
+              }}
+            >
+              Chat with Us Now →
+            </button>
+
+            <button
+              style={{
+                padding: "18px 40px",
+                background: "transparent",
+                border: "2px solid rgba(168,85,247,0.5)",
+                borderRadius: "14px",
+                color: "#e2e8f0",
+                fontSize: "18px",
+                fontWeight: "700",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(168,85,247,0.12)";
+                e.currentTarget.style.borderColor = "#a855f7";
+                e.currentTarget.style.transform = "scale(1.03)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "rgba(168,85,247,0.5)";
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            >
+              Send Email
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "NeumorphismNavbar",
+    category: "Hero",
+    code: `
+function NeumorphismNavbar() {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        padding: "24px 16px",
+        background: "linear-gradient(135deg, #e0e5ec 0%, #f5f7fa 100%)",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{
+          width: "100%",
+          maxWidth: "1100px",
+          padding: "20px 32px",
+          background: "#e0e5ec",
+          borderRadius: "28px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          boxShadow: isHovered
+            ? "18px 18px 40px #bebebe, -18px -18px 40px #ffffff, inset 2px 2px 6px rgba(255,255,255,0.5)"
+            : "14px 14px 28px #bebebe, -14px -14px 28px #ffffff",
+          transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        }}
+      >
+        {/* Logo */}
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <div
+            style={{
+              width: "64px",
+              height: "64px",
+              borderRadius: "20px",
+              background: "#e0e5ec",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: isHovered
+                ? "inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff"
+                : "inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff",
+              transition: "all 0.3s",
+            }}
+          >
+            <div
+              style={{
+                width: "38px",
+                height: "38px",
+                borderRadius: "12px",
+                background:
+                  "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.5rem",
+              }}
+            >
+              🎨
+            </div>
+          </div>
+
+          <div
+            style={{
+              fontSize: "1.8rem",
+              fontWeight: "800",
+              background:
+                "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              letterSpacing: "-0.5px",
+            }}
+          >
+            Soft UI
+          </div>
+        </div>
+
+        {/* Menu */}
+        <div
+          style={{
+            display: "flex",
+            gap: "36px",
+            fontWeight: "700",
+            color: "#6b7280",
+          }}
+        >
+          {["Home", "Features", "Projects", "Contact"].map((item, index) => (
+            <div
+              key={index}
+              style={{
+                cursor: "pointer",
+                position: "relative",
+                transition: "color 0.3s",
+              }}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+
+        {/* Action Buttons */}
+        <div style={{ display: "flex", gap: "16px" }}>
+          {["🔔", "👤"].map((icon, index) => (
+            <div
+              key={index}
+              style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "18px",
+                background: "#e0e5ec",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.3rem",
+                cursor: "pointer",
+                boxShadow: "6px 6px 12px #bebebe, -6px -6px 12px #ffffff",
+                transition: "all 0.3s",
+                transform: isHovered ? "translateY(-3px)" : "translateY(0)",
+              }}
+            >
+              {icon}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "NeumorphismNavbar",
+    category: "Header",
+    code: `
+function NeumorphismNavbar() {
+  const [activeMenu, setActiveMenu] = React.useState('Home');
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    handleResize();
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const menuItems = [
+    { name: 'Home', icon: '🏠' },
+    { name: 'Features', icon: '✨' },
+    { name: 'Pricing', icon: '💎' },
+    { name: 'About', icon: '📖' },
+    { name: 'Contact', icon: '📧' }
+  ];
+
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #e0e5ec 0%, #f5f7fa 100%)',
+      padding: '0'
+    }}>
+      {/* Navbar */}
+      <nav style={{
+        position: 'fixed',
+        top: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 1000,
+        width: '95%',
+        maxWidth: '1200px',
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+      }}>
+        <div style={{
+          background: '#e0e5ec',
+          borderRadius: '30px',
+          padding: '16px 32px',
+          boxShadow: isScrolled 
+            ? '12px 12px 24px #bebebe, -12px -12px 24px #ffffff'
+            : '8px 8px 16px #bebebe, -8px -8px 16px #ffffff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+        }}>
+          
+          {/* Logo */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px'
+          }}>
+            <div style={{
+              width: '50px',
+              height: '50px',
+              background: '#e0e5ec',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: 'inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff',
+              transition: 'all 0.3s'
+            }}>
+              <div style={{
+                width: '32px',
+                height: '32px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.2rem'
+              }}>
+                🎨
+              </div>
+            </div>
+            {!isMobile && (
+              <span style={{
+                fontSize: '1.3rem',
+                fontWeight: '800',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                letterSpacing: '-0.5px'
+              }}>
+                SoftUI
+              </span>
+            )}
+          </div>
+
+          {/* Menu Items */}
+          <div style={{
+            display: 'flex',
+            gap: '8px',
+            alignItems: 'center'
+          }}>
+            {menuItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => setActiveMenu(item.name)}
+                style={{
+                  padding: isMobile ? '12px' : '12px 24px',
+                  background: activeMenu === item.name 
+                    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                    : '#e0e5ec',
+                  border: 'none',
+                  borderRadius: '16px',
+                  cursor: 'pointer',
+                  fontSize: '0.95rem',
+                  fontWeight: '700',
+                  color: activeMenu === item.name ? '#ffffff' : '#6b7280',
+                  boxShadow: activeMenu === item.name
+                    ? 'inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,0.1)'
+                    : '4px 4px 8px #bebebe, -4px -4px 8px #ffffff',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+                onMouseEnter={(e) => {
+                  if (activeMenu !== item.name) {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '6px 6px 12px #bebebe, -6px -6px 12px #ffffff';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (activeMenu !== item.name) {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '4px 4px 8px #bebebe, -4px -4px 8px #ffffff';
+                  }
+                }}
+              >
+                <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
+                {!isMobile && <span>{item.name}</span>}
+              </button>
+            ))}
+          </div>
+
+          {/* Action Buttons */}
+          <div style={{
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'center'
+          }}>
+            {/* Search Button */}
+            <button style={{
+              width: '50px',
+              height: '50px',
+              background: '#e0e5ec',
+              border: 'none',
+              borderRadius: '16px',
+              cursor: 'pointer',
+              boxShadow: '4px 4px 8px #bebebe, -4px -4px 8px #ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.2rem',
+              transition: 'all 0.3s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = '4px 4px 8px #bebebe, -4px -4px 8px #ffffff';
+            }}
+            >
+              🔍
+            </button>
+
+            {/* Notification Button */}
+            <button style={{
+              width: '50px',
+              height: '50px',
+              background: '#e0e5ec',
+              border: 'none',
+              borderRadius: '16px',
+              cursor: 'pointer',
+              boxShadow: '4px 4px 8px #bebebe, -4px -4px 8px #ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.2rem',
+              transition: 'all 0.3s',
+              position: 'relative'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = '4px 4px 8px #bebebe, -4px -4px 8px #ffffff';
+            }}
+            >
+              🔔
+              <div style={{
+                position: 'absolute',
+                top: '8px',
+                right: '8px',
+                width: '10px',
+                height: '10px',
+                background: 'linear-gradient(135deg, #f97316, #ef4444)',
+                borderRadius: '50%',
+                border: '2px solid #e0e5ec'
+              }}></div>
+            </button>
+
+            {/* Get Started Button - Hidden on mobile */}
+            {!isMobile && (
+              <button style={{
+                padding: '12px 28px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                border: 'none',
+                borderRadius: '16px',
+                color: 'white',
+                fontWeight: '700',
+                fontSize: '0.95rem',
+                cursor: 'pointer',
+                boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff, 0 5px 15px rgba(102, 126, 234, 0.3)',
+                transition: 'all 0.3s',
+                letterSpacing: '0.5px'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '7px 7px 14px #bebebe, -7px -7px 14px #ffffff, 0 7px 20px rgba(102, 126, 234, 0.5)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '5px 5px 10px #bebebe, -5px -5px 10px #ffffff, 0 5px 15px rgba(102, 126, 234, 0.3)';
+              }}
+              >
+                Get Started
+              </button>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {/* Demo Content */}
+      <div style={{
+        paddingTop: '120px',
+        padding: '120px 20px 40px',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        textAlign: 'center'
+      }}>
+        <h1 style={{
+          fontSize: isMobile ? '2.5rem' : '4rem',
+          fontWeight: '900',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          marginBottom: '20px',
+          letterSpacing: '-2px'
+        }}>
+          Neumorphism Design
+        </h1>
+        <p style={{
+          fontSize: isMobile ? '1rem' : '1.3rem',
+          color: '#6b7280',
+          maxWidth: '700px',
+          margin: '0 auto',
+          lineHeight: '1.8',
+          fontWeight: '500'
+        }}>
+          Experience the beautiful soft UI design with elegant shadows and modern aesthetics
+        </p>
+
+        {/* Demo Cards */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '30px',
+          marginTop: '60px'
+        }}>
+          {[1, 2, 3].map((i) => (
+            <div key={i} style={{
+              background: '#e0e5ec',
+              borderRadius: '30px',
+              padding: '40px',
+              boxShadow: '10px 10px 20px #bebebe, -10px -10px 20px #ffffff',
+              transition: 'all 0.3s'
+            }}>
+              <div style={{
+                width: '80px',
+                height: '80px',
+                background: '#e0e5ec',
+                borderRadius: '24px',
+                margin: '0 auto 24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: 'inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff',
+                fontSize: '2.5rem'
+              }}>
+                {['🚀', '⚡', '🎯'][i-1]}
+              </div>
+              <h3 style={{
+                fontSize: '1.5rem',
+                fontWeight: '800',
+                color: '#374151',
+                marginBottom: '12px'
+              }}>
+                Feature {i}
+              </h3>
+              <p style={{
+                color: '#9ca3af',
+                fontSize: '1rem',
+                lineHeight: '1.6'
+              }}>
+                Beautiful neumorphic design with soft shadows and elegant style
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "LogoCloudShowcase",
+    category: "Logo Cloud",
+    code: `
+function LogoCloudShowcase() {
+  const companies = [
+    { name: 'NexaFlow', icon: '◈', gradient: 'from-cyan-500 to-blue-500' },
+    { name: 'VortexAI', icon: '◇', gradient: 'from-purple-500 to-pink-500' },
+    { name: 'QuantumEdge', icon: '◆', gradient: 'from-green-500 to-emerald-500' },
+    { name: 'SynergyHub', icon: '◉', gradient: 'from-orange-500 to-red-500' },
+    { name: 'PulseCore', icon: '◎', gradient: 'from-yellow-500 to-orange-500' },
+    { name: 'VelocityX', icon: '◐', gradient: 'from-indigo-500 to-purple-500' },
+    { name: 'NovaSphere', icon: '◑', gradient: 'from-pink-500 to-rose-500' },
+    { name: 'ZenithWave', icon: '◒', gradient: 'from-teal-500 to-cyan-500' }
+  ];
+
+  return (
+    <div className="bg-gradient-to-b from-slate-900 to-black py-24 px-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-block bg-purple-500/10 border border-purple-500/30 px-4 py-2 rounded-full mb-4">
+            <span className="text-purple-400 font-bold text-sm tracking-wider">TRUSTED WORLDWIDE</span>
+          </div>
+          <h2 className="text-5xl font-black text-white mb-4">
+            Powering Innovation
+            <br />
+            <span className="text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text">
+              Across Industries
+            </span>
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Join 10,000+ companies that trust our platform to scale their business and drive growth
+          </p>
+        </div>
+
+        {/* Logo Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+          {companies.map((company, idx) => (
+            <div
+              key={idx}
+              className="group relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-2 cursor-pointer overflow-hidden"
+            >
+              {/* Glow Effect */}
+              <div className={
+                "absolute inset-0 bg-gradient-to-br " + company.gradient + " opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl"
+              }></div>
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col items-center justify-center gap-4">
+                {/* Icon */}
+                <div className={
+                  "w-20 h-20 rounded-xl bg-gradient-to-br " + company.gradient + " flex items-center justify-center text-4xl font-bold text-white shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500"
+                }>
+                  {company.icon}
+                </div>
+
+                {/* Company Name */}
+                <div className="text-center">
+                  <h3 className="text-white font-bold text-lg group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">
+                    {company.name}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Corner Accent */}
+              <div className={
+                "absolute top-0 right-0 w-20 h-20 bg-gradient-to-br " + company.gradient + " opacity-0 group-hover:opacity-20 rounded-bl-full transition-opacity duration-500"
+              }></div>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-12 border-t border-gray-800">
+          <div className="text-center">
+            <div className="text-4xl font-black text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text mb-2">
+              10K+
+            </div>
+            <div className="text-gray-500 text-sm font-semibold">Active Users</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-black text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text mb-2">
+              50M+
+            </div>
+            <div className="text-gray-500 text-sm font-semibold">Transactions</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-black text-transparent bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text mb-2">
+              99.9%
+            </div>
+            <div className="text-gray-500 text-sm font-semibold">Uptime</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-black text-transparent bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text mb-2">
+              24/7
+            </div>
+            <div className="text-gray-500 text-sm font-semibold">Support</div>
+          </div>
+        </div>
+
+        {/* Testimonial */}
+        <div className="mt-16 max-w-3xl mx-auto">
+          <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-3xl p-10 relative overflow-hidden">
+            {/* Quote Icon */}
+            <div className="absolute top-6 left-6 text-6xl text-purple-500/20">"</div>
+            
+            <div className="relative z-10">
+              <p className="text-gray-300 text-lg leading-relaxed mb-6 italic">
+                "This platform transformed how we operate. The reliability, speed, and support are unmatched. We've seen a 300% increase in productivity since switching."
+              </p>
+              
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-2xl font-bold text-white">
+                  S
+                </div>
+                <div>
+                  <div className="text-white font-bold">Sarah Mitchell</div>
+                  <div className="text-gray-500 text-sm">CEO, NexaFlow</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "LogoCloudShowcase2",
+    category: "Logo Cloud",
+    code: `
+function LogoCloudShowcase2() {
+  const companies = [
+    { name: 'NexaFlow', text: 'nexaflow' },
+    { name: 'VortexAI', text: 'vortexai' },
+    { name: 'QuantumEdge', text: 'quantumedge' },
+    { name: 'SynergyHub', text: 'synergyhub' },
+    { name: 'PulseCore', text: 'pulsecore' },
+    { name: 'VelocityX', text: 'velocityx' },
+    { name: 'NovaSphere', text: 'novasphere' },
+    { name: 'ZenithWave', text: 'zenithwave' }
+  ];
+
+  // Triple duplicate for seamless loop
+  const allCompanies = [...companies, ...companies, ...companies];
+
+  return (
+    <div className="bg-black py-20 px-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Trusted by Industry Leaders
+          </h2>
+          <p className="text-gray-400 text-lg">
+            Our platform powers the most ambitious companies in the world.
+          </p>
+        </div>
+
+        {/* Scrolling Logos */}
+        <div className="relative">
+          {/* Left Gradient Fade */}
+          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+          
+          {/* Right Gradient Fade */}
+          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+
+          {/* Scrolling Container */}
+          <div className="flex gap-16 py-8">
+            <div className="flex gap-16 animate-scroll">
+              {allCompanies.map((company, idx) => (
+                <div
+                  key={idx}
+                  className="flex-shrink-0 flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                  style={{ minWidth: '150px' }}
+                >
+                  <span className="text-2xl font-bold text-white tracking-tight">
+                    {company.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* View Network Button */}
+        <div className="text-center mt-12">
+          <button className="bg-transparent border border-gray-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 hover:border-gray-600 transition-all duration-300">
+            View our network
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+  `
+  },
+ {
+    name: "LogoCloudShowcase3",
+    category: "Logo Cloud",
+    code: `
+function LogoCloudShowcase3() {
+  const companies = [
+    'nexaflow', 'stripe', 'quantumedge', 'synergyhub', 'pulsecore', 
+    'velocityx', 'novasphere', 'zenithwave', 'techvault', 'dataflow'
+  ];
+
+  const duplicated = [...companies, ...companies];
+
+  return (
+    <div className="bg-slate-950 py-16 overflow-hidden">
+      <div className="relative">
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-950 via-slate-950 to-transparent z-10"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-950 via-slate-950 to-transparent z-10"></div>
+        <div className="flex">
+          <div 
+            className="flex whitespace-nowrap"
+            style={{
+              animation: 'scrollLogos 30s linear infinite'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.animationPlayState = 'paused';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.animationPlayState = 'running';
+            }}
+          >
+            {duplicated.map((company, idx) => (
+              <div key={idx} className="inline-flex items-center justify-center mx-12">
+                <span className="text-3xl font-bold text-gray-500 hover:text-gray-300 transition-colors duration-300 cursor-pointer">
+                  {company}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <style dangerouslySetInnerHTML={{
+        __html: '@keyframes scrollLogos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }'
+      }} />
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "Testimonials2",
+    category: "Testimonial",
+    code: `
+function Testimonials2() {
+  const testimonials = [
+    {
+      name: "Sarah Chen",
+      role: "CEO at TechFlow",
+      image: "👩‍💼",
+      content: "This platform completely transformed how we operate. The efficiency gains have been remarkable, and our team productivity increased by 300% in just three months.",
+      rating: 5,
+      company: "TechFlow"
+    },
+    {
+      name: "Michael Rodriguez",
+      role: "Founder at DataCore",
+      image: "👨‍💻",
+      content: "Best investment we've made this year. The ROI was immediate, and the support team is absolutely incredible. Can't imagine working without it now.",
+      rating: 5,
+      company: "DataCore"
+    },
+    {
+      name: "Emily Watson",
+      role: "CTO at CloudSync",
+      image: "👩‍🔬",
+      content: "The level of customization and flexibility is unmatched. We've tried dozens of solutions, but this is the only one that truly scales with our needs.",
+      rating: 5,
+      company: "CloudSync"
+    },
+    {
+      name: "James Park",
+      role: "VP Product at NexaLabs",
+      image: "👨‍🚀",
+      content: "Outstanding platform! Our development cycle shortened by 60%, and the integration was seamless. The team was up and running in less than a day.",
+      rating: 5,
+      company: "NexaLabs"
+    },
+    {
+      name: "Lisa Anderson",
+      role: "Director at QuantumAI",
+      image: "👩‍🎨",
+      content: "Game-changer for our workflow. The intuitive interface combined with powerful features makes it perfect for both beginners and experts.",
+      rating: 5,
+      company: "QuantumAI"
+    },
+    {
+      name: "David Kim",
+      role: "Lead Engineer at ByteForce",
+      image: "👨‍🔧",
+      content: "Incredible performance and reliability. We've processed over 10 million transactions without a single hiccup. Truly enterprise-grade solution.",
+      rating: 5,
+      company: "ByteForce"
+    }
+  ];
+
+  return (
+    <div className="bg-gradient-to-b from-slate-950 via-slate-900 to-black py-24 px-8">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-20">
+          <div className="inline-block bg-purple-500/10 border border-purple-500/30 px-4 py-2 rounded-full mb-6">
+            <span className="text-purple-400 font-bold text-sm tracking-wider">TESTIMONIALS</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
+            Loved by
+            <span className="text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text"> Thousands</span>
+          </h2>
+          <p className="text-gray-400 text-xl max-w-3xl mx-auto">
+            Don't just take our word for it. Here's what industry leaders have to say about their experience.
+          </p>
+        </div>
+
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {testimonials.map((testimonial, idx) => (
+            <div
+              key={idx}
+              className="group bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-3xl p-8 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden"
+            >
+              {/* Decorative glow */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-all duration-500"></div>
+              
+              <div className="relative z-10">
+                {/* Rating Stars */}
+                <div className="flex gap-1 mb-6">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+
+                {/* Content */}
+                <p className="text-gray-300 text-base leading-relaxed mb-8">
+                  "{testimonial.content}"
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-4 pt-6 border-t border-gray-800 group-hover:border-purple-500/30 transition-colors">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-3xl shadow-lg">
+                    {testimonial.image}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-lg">{testimonial.name}</h4>
+                    <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-16 border-t border-gray-800">
+          <div className="text-center">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text mb-3">
+              50K+
+            </div>
+            <div className="text-gray-500 font-semibold">Happy Customers</div>
+          </div>
+          <div className="text-center">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text mb-3">
+              4.9/5
+            </div>
+            <div className="text-gray-500 font-semibold">Average Rating</div>
+          </div>
+          <div className="text-center">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text mb-3">
+              99%
+            </div>
+            <div className="text-gray-500 font-semibold">Satisfaction Rate</div>
+          </div>
+          <div className="text-center">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text mb-3">
+              24/7
+            </div>
+            <div className="text-gray-500 font-semibold">Customer Support</div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-20 text-center">
+          <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-3xl p-12 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-orange-500/5"></div>
+            <div className="relative z-10">
+              <h3 className="text-4xl font-black text-white mb-4">
+                Ready to Join Them?
+              </h3>
+              <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                Start your journey today and experience why thousands of companies trust us.
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-white hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300">
+                  Get Started Free
+                </button>
+                <button className="px-8 py-4 bg-gray-800 border border-gray-700 rounded-xl font-bold text-white hover:bg-gray-700 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+                  View All Reviews
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "Testimonials3",
+    category: "Testimonial",
+    code: `
+function Testimonials3() {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+
+  const testimonials = [
+    {
+      name: "Alexandra Morgan",
+      role: "Head of Engineering",
+      company: "NexaTech Solutions",
+      image: "👩‍💼",
+      content: "The best decision we made this year. Our team's velocity doubled, and the learning curve was almost non-existent. The platform just works beautifully.",
+      gradient: "from-blue-500 to-cyan-500",
+      stats: { metric: "2x", label: "Faster Deployment" }
+    },
+    {
+      name: "Marcus Chen",
+      role: "Product Director",
+      company: "CloudVerse Inc",
+      image: "👨‍💻",
+      content: "Absolutely phenomenal. We've seen a 250% increase in user engagement since switching. The analytics alone are worth every penny.",
+      gradient: "from-purple-500 to-pink-500",
+      stats: { metric: "250%", label: "More Engagement" }
+    },
+    {
+      name: "Sophia Rodriguez",
+      role: "Co-Founder & CEO",
+      company: "DataStream Labs",
+      image: "👩‍🚀",
+      content: "This isn't just a tool, it's a competitive advantage. Our clients notice the difference immediately. Can't recommend it enough.",
+      gradient: "from-green-500 to-emerald-500",
+      stats: { metric: "5★", label: "Client Rating" }
+    },
+    {
+      name: "Daniel Park",
+      role: "Tech Lead",
+      company: "Quantum Dynamics",
+      image: "👨‍🔬",
+      content: "Revolutionary platform that actually delivers on its promises. We've cut our operational costs by 40% while improving quality across the board.",
+      gradient: "from-orange-500 to-red-500",
+      stats: { metric: "40%", label: "Cost Reduction" }
+    }
+  ];
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-6xl md:text-7xl font-black text-white mb-6 leading-tight">
+            What People Are
+            <br />
+            <span className="text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text">
+              Saying About Us
+            </span>
+          </h2>
+          <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+            Real stories from real people who transformed their business with our platform
+          </p>
+        </div>
+
+        {/* Main Testimonial Card */}
+        <div className="relative max-w-5xl mx-auto mb-16">
+          <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-12 border border-gray-700 overflow-hidden">
+            
+            {/* Animated Background Blobs */}
+            <div className={
+              "absolute top-0 right-0 w-96 h-96 bg-gradient-to-br " + testimonials[activeIndex].gradient + " opacity-20 rounded-full blur-3xl transition-all duration-1000"
+            }></div>
+            <div className={
+              "absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr " + testimonials[activeIndex].gradient + " opacity-10 rounded-full blur-3xl transition-all duration-1000"
+            }></div>
+
+            <div className="relative z-10">
+              {/* Quote Icon */}
+              <div className="mb-8">
+                <svg className="w-16 h-16 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+              </div>
+
+              {/* Content */}
+              <p className="text-2xl md:text-3xl text-white font-medium leading-relaxed mb-12">
+                {testimonials[activeIndex].content}
+              </p>
+
+              {/* Author Info & Stats */}
+              <div className="flex flex-wrap items-end justify-between gap-8">
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  <div className={
+                    "w-20 h-20 rounded-2xl bg-gradient-to-br " + testimonials[activeIndex].gradient + " flex items-center justify-center text-4xl shadow-2xl"
+                  }>
+                    {testimonials[activeIndex].image}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-2xl mb-1">
+                      {testimonials[activeIndex].name}
+                    </h4>
+                    <p className="text-gray-400 text-base">
+                      {testimonials[activeIndex].role}
+                    </p>
+                    <p className="text-gray-500 text-sm">
+                      {testimonials[activeIndex].company}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Stat Badge */}
+                <div className={
+                  "bg-gradient-to-br " + testimonials[activeIndex].gradient + " rounded-2xl p-6 text-center"
+                }>
+                  <div className="text-4xl font-black text-white mb-1">
+                    {testimonials[activeIndex].stats.metric}
+                  </div>
+                  <div className="text-white/80 text-sm font-semibold">
+                    {testimonials[activeIndex].stats.label}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Dots */}
+          <div className="flex justify-center gap-3 mt-8">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveIndex(idx)}
+                className={
+                  idx === activeIndex
+                    ? "w-12 h-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
+                    : "w-3 h-3 rounded-full bg-gray-700 hover:bg-gray-600 transition-all duration-300"
+                }
+              ></button>
+            ))}
+          </div>
+        </div>
+
+        {/* All Testimonials Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {testimonials.map((testimonial, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveIndex(idx)}
+              className={
+                idx === activeIndex
+                  ? "bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-purple-500 rounded-2xl p-6 text-left transition-all duration-300 transform scale-105"
+                  : "bg-gray-900 border border-gray-800 rounded-2xl p-6 text-left hover:border-gray-700 transition-all duration-300 hover:scale-105"
+              }
+            >
+              <div className={
+                "w-16 h-16 rounded-xl bg-gradient-to-br " + testimonial.gradient + " flex items-center justify-center text-2xl mb-4 shadow-lg"
+              }>
+                {testimonial.image}
+              </div>
+              <h4 className="text-white font-bold text-lg mb-1">
+                {testimonial.name}
+              </h4>
+              <p className="text-gray-500 text-sm mb-3">
+                {testimonial.role}
+              </p>
+              <p className="text-gray-400 text-sm line-clamp-2">
+                {testimonial.content}
+              </p>
+            </button>
+          ))}
+        </div>
+
+        {/* Trust Badges */}
+        <div className="mt-20 text-center">
+          <p className="text-gray-500 text-sm mb-6 uppercase tracking-wider font-semibold">
+            Trusted by industry leaders
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-12 opacity-50">
+            {['TechCrunch', 'Forbes', 'Wired', 'Business Insider'].map((brand) => (
+              <div key={brand} className="text-gray-600 font-bold text-2xl">
+                {brand}
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "CallToAction2",
+    category: "Call to Action",
+    code: `
+function CallToAction2() {
+  return (
+    <div className="bg-black py-24 px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Main CTA Card */}
+        <div className="relative">
+          {/* Animated Background Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-orange-600/20 rounded-3xl blur-3xl animate-pulse"></div>
+          
+          <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black border border-purple-500/30 rounded-3xl p-12 md:p-16 overflow-hidden">
+            
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
+            
+            {/* Floating Icons */}
+            <div className="absolute top-10 left-10 text-4xl animate-bounce">✨</div>
+            <div className="absolute top-20 right-20 text-4xl animate-bounce" style={{ animationDelay: '0.5s' }}>🚀</div>
+            <div className="absolute bottom-10 left-1/4 text-4xl animate-bounce" style={{ animationDelay: '1s' }}>💎</div>
+
+            <div className="relative z-10 text-center">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/40 px-4 py-2 rounded-full mb-8">
+                <span className="text-2xl">🎉</span>
+                <span className="text-purple-300 font-bold text-sm tracking-wider">LIMITED TIME OFFER</span>
+              </div>
+
+              {/* Heading */}
+              <h2 className="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
+                Ready to Transform
+                <br />
+                <span className="text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text">
+                  Your Business?
+                </span>
+              </h2>
+
+              {/* Description */}
+              <p className="text-gray-300 text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
+                Join 50,000+ companies already growing faster with our platform. Start your free trial today — no credit card required.
+              </p>
+
+              {/* Buttons */}
+              <div className="flex flex-wrap gap-4 justify-center mb-12">
+                <button className="group px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-bold text-white text-lg hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300 flex items-center gap-3">
+                  <span>Start Free Trial</span>
+                  <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </button>
+
+                <button className="px-10 py-5 bg-white/5 backdrop-blur-sm border-2 border-white/10 rounded-2xl font-bold text-white text-lg hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 flex items-center gap-3">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                    <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>Watch Demo</span>
+                </button>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap justify-center items-center gap-8 pt-8 border-t border-gray-800">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-gray-400 text-sm font-semibold">No credit card required</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-gray-400 text-sm font-semibold">14-day free trial</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-gray-400 text-sm font-semibold">Cancel anytime</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+          <div className="text-center bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text mb-2">
+              50K+
+            </div>
+            <div className="text-gray-500 font-semibold">Active Users</div>
+          </div>
+          <div className="text-center bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text mb-2">
+              4.9★
+            </div>
+            <div className="text-gray-500 font-semibold">App Rating</div>
+          </div>
+          <div className="text-center bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text mb-2">
+              99.9%
+            </div>
+            <div className="text-gray-500 font-semibold">Uptime</div>
+          </div>
+          <div className="text-center bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text mb-2">
+              24/7
+            </div>
+            <div className="text-gray-500 font-semibold">Support</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "FeatureGrid4",
+    category: "Feature",
+    code: `
+function FeatureGrid4() {
+  const features = [
+    {
+      icon: '🎨',
+      title: 'DESIGN SYSTEM',
+      badge: 'PRO',
+      description: 'Comprehensive component library with customizable themes and design tokens.',
+      gradient: 'from-cyan-500 to-blue-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-cyan-500/50">
+          <div className="grid grid-cols-3 gap-2 mb-3">
+            <div className="h-8 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded group-hover:from-cyan-500/40 group-hover:to-blue-500/40 transition-all"></div>
+            <div className="h-8 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded group-hover:from-cyan-500/40 group-hover:to-blue-500/40 transition-all delay-75"></div>
+            <div className="h-8 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded group-hover:from-cyan-500/40 group-hover:to-blue-500/40 transition-all delay-150"></div>
+          </div>
+          <div className="space-y-2">
+            <div className="h-2 bg-gray-700 rounded-full w-full group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-500 transition-all"></div>
+            <div className="h-2 bg-gray-700 rounded-full w-3/4 group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-500 transition-all delay-75"></div>
+            <div className="h-2 bg-gray-700 rounded-full w-1/2 group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-500 transition-all delay-150"></div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '⚡',
+      title: 'REAL-TIME SYNC',
+      badge: 'BETA',
+      description: 'Instant data synchronization across all devices with conflict resolution.',
+      gradient: 'from-yellow-500 to-orange-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-yellow-500/50">
+          <div className="flex items-center justify-center h-32 relative">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-24 h-24 border-4 border-gray-700 rounded-full group-hover:border-yellow-500 transition-all group-hover:scale-110 duration-500"></div>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-16 h-16 border-4 border-gray-800 rounded-full group-hover:border-orange-500 transition-all group-hover:scale-125 duration-700"></div>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full group-hover:scale-150 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-yellow-500/80"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🔐',
+      title: 'SECURITY LAYER',
+      badge: 'ENTERPRISE',
+      description: 'End-to-end encryption with multi-factor authentication and audit logs.',
+      gradient: 'from-green-500 to-emerald-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-green-500/50">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-green-500/30 group-hover:to-emerald-500/30 transition-all duration-300">
+                <div className="w-3 h-3 bg-green-500 rounded-full group-hover:shadow-lg group-hover:shadow-green-500/80 transition-all"></div>
+              </div>
+              <div className="flex-1 h-3 bg-gray-800 rounded-full group-hover:bg-gradient-to-r group-hover:from-green-500/20 group-hover:to-emerald-500/20 transition-all"></div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-green-500/30 group-hover:to-emerald-500/30 transition-all duration-300 delay-75">
+                <div className="w-3 h-3 bg-green-500 rounded-full group-hover:shadow-lg group-hover:shadow-green-500/80 transition-all"></div>
+              </div>
+              <div className="flex-1 h-3 bg-gray-800 rounded-full group-hover:bg-gradient-to-r group-hover:from-green-500/20 group-hover:to-emerald-500/20 transition-all delay-75"></div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-green-500/30 group-hover:to-emerald-500/30 transition-all duration-300 delay-150">
+                <div className="w-3 h-3 bg-green-500 rounded-full group-hover:shadow-lg group-hover:shadow-green-500/80 transition-all"></div>
+              </div>
+              <div className="flex-1 h-3 bg-gray-800 rounded-full group-hover:bg-gradient-to-r group-hover:from-green-500/20 group-hover:to-emerald-500/20 transition-all delay-150"></div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-green-500/30 group-hover:to-emerald-500/30 transition-all duration-300 delay-200">
+                <div className="w-3 h-3 bg-green-500 rounded-full group-hover:shadow-lg group-hover:shadow-green-500/80 transition-all"></div>
+              </div>
+              <div className="flex-1 h-3 bg-gray-800 rounded-full group-hover:bg-gradient-to-r group-hover:from-green-500/20 group-hover:to-emerald-500/20 transition-all delay-200"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📡',
+      title: 'API GATEWAY',
+      badge: null,
+      description: 'RESTful and GraphQL APIs with rate limiting and webhook support.',
+      gradient: 'from-purple-500 to-pink-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-purple-500/50">
+          <div className="font-mono text-xs space-y-2 text-gray-500 group-hover:text-gray-400 transition-colors">
+            <div className="flex items-center gap-2">
+              <span className="text-green-500 font-bold group-hover:text-green-400">GET</span>
+              <span className="group-hover:text-purple-400 transition-colors">/api/users</span>
+              <span className="ml-auto text-gray-700 group-hover:text-green-500">200</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-blue-500 font-bold group-hover:text-blue-400">POST</span>
+              <span className="group-hover:text-purple-400 transition-colors">/api/auth</span>
+              <span className="ml-auto text-gray-700 group-hover:text-green-500">201</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-yellow-500 font-bold group-hover:text-yellow-400">PUT</span>
+              <span className="group-hover:text-purple-400 transition-colors">/api/profile</span>
+              <span className="ml-auto text-gray-700 group-hover:text-green-500">200</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-red-500 font-bold group-hover:text-red-400">DELETE</span>
+              <span className="group-hover:text-purple-400 transition-colors">/api/data</span>
+              <span className="ml-auto text-gray-700 group-hover:text-green-500">204</span>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📊',
+      title: 'ANALYTICS ENGINE',
+      badge: 'NEW',
+      description: 'Advanced metrics tracking with custom dashboards and real-time insights.',
+      gradient: 'from-pink-500 to-rose-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-pink-500/50">
+          <div className="grid grid-cols-2 gap-3 mb-3">
+            <div className="bg-gray-800 rounded-lg p-3 group-hover:bg-gradient-to-br group-hover:from-pink-500/20 group-hover:to-rose-500/20 transition-all">
+              <div className="text-2xl font-bold text-gray-600 group-hover:text-pink-400 transition-colors">2.4K</div>
+              <div className="text-xs text-gray-700 group-hover:text-gray-500 transition-colors">Users</div>
+            </div>
+            <div className="bg-gray-800 rounded-lg p-3 group-hover:bg-gradient-to-br group-hover:from-pink-500/20 group-hover:to-rose-500/20 transition-all delay-75">
+              <div className="text-2xl font-bold text-gray-600 group-hover:text-pink-400 transition-colors">86%</div>
+              <div className="text-xs text-gray-700 group-hover:text-gray-500 transition-colors">Growth</div>
+            </div>
+          </div>
+          <div className="h-16 flex items-end justify-between gap-1">
+            <div className="flex-1 bg-gray-700 rounded-t h-10 group-hover:bg-gradient-to-t group-hover:from-pink-500 group-hover:to-rose-500 transition-all duration-300"></div>
+            <div className="flex-1 bg-gray-700 rounded-t h-16 group-hover:bg-gradient-to-t group-hover:from-pink-500 group-hover:to-rose-500 transition-all duration-300 delay-75"></div>
+            <div className="flex-1 bg-gray-700 rounded-t h-12 group-hover:bg-gradient-to-t group-hover:from-pink-500 group-hover:to-rose-500 transition-all duration-300 delay-100"></div>
+            <div className="flex-1 bg-gray-700 rounded-t h-14 group-hover:bg-gradient-to-t group-hover:from-pink-500 group-hover:to-rose-500 transition-all duration-300 delay-150"></div>
+            <div className="flex-1 bg-gray-700 rounded-t h-11 group-hover:bg-gradient-to-t group-hover:from-pink-500 group-hover:to-rose-500 transition-all duration-300 delay-200"></div>
+            <div className="flex-1 bg-gray-700 rounded-t h-15 group-hover:bg-gradient-to-t group-hover:from-pink-500 group-hover:to-rose-500 transition-all duration-300 delay-75"></div>
+            <div className="flex-1 bg-gray-700 rounded-t h-13 group-hover:bg-gradient-to-t group-hover:from-pink-500 group-hover:to-rose-500 transition-all duration-300 delay-100"></div>
+            <div className="flex-1 bg-gray-700 rounded-t h-14 group-hover:bg-gradient-to-t group-hover:from-pink-500 group-hover:to-rose-500 transition-all duration-300 delay-150"></div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🚀',
+      title: 'DEPLOYMENT',
+      badge: 'STABLE',
+      description: 'One-click deployments with automatic rollbacks and zero-downtime updates.',
+      gradient: 'from-indigo-500 to-purple-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-indigo-500/50">
+          <div className="space-y-2">
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all">
+                <span className="text-green-500 text-xs">✓</span>
+              </div>
+              <span className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors">Build</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all">
+                <span className="text-green-500 text-xs">✓</span>
+              </div>
+              <span className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors">Test</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-indigo-500/20 border-2 border-indigo-500 flex items-center justify-center animate-pulse group-hover:shadow-lg group-hover:shadow-indigo-500/50 transition-all">
+              </div>
+              <span className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors">Deploy</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-gray-800 border-2 border-gray-700 transition-all">
+              </div>
+              <span className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors">Verify</span>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="inline-block bg-purple-500/10 border border-purple-500/30 px-4 py-2 rounded-full mb-6">
+            <span className="text-purple-400 font-bold text-sm tracking-wider">POWERFUL FEATURES</span>
+          </div>
+          <h2 className="text-5xl font-black text-white mb-4">
+            Everything You Need
+            <br />
+            <span className="text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text">
+              To Build Better
+            </span>
+          </h2>
+          <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+            Production-ready tools designed for modern development teams
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
+            <div 
+              key={idx}
+              className="group bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-2 transition-all duration-500 cursor-pointer relative overflow-hidden"
+            >
+              <div className={
+                "absolute top-0 right-0 w-40 h-40 bg-gradient-to-br " + feature.gradient + " opacity-0 group-hover:opacity-10 rounded-full blur-3xl transition-all duration-500"
+              }></div>
+
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className={
+                      "w-12 h-12 bg-gradient-to-br " + feature.gradient + " rounded-xl flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300"
+                    }>
+                      {feature.icon}
+                    </div>
+                    <h3 className="text-white font-bold text-sm tracking-wide group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all">
+                      {feature.title}
+                    </h3>
+                  </div>
+                  {feature.badge && (
+                    <span className={
+                      "bg-gradient-to-r " + feature.gradient + " text-white text-xs px-3 py-1 rounded-full font-bold shadow-lg"
+                    }>
+                      {feature.badge}
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed group-hover:text-gray-300 transition-colors">
+                  {feature.description}
+                </p>
+
+                <div className="mt-4">
+                  {feature.preview}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "FeatureGrid5",
+    category: "Feature",
+    code: `
+function FeatureGrid5() {
+  const features = [
+    {
+      icon: '🎯',
+      title: 'SMART AUTOMATION',
+      badge: 'AI',
+      description: 'Intelligent workflow automation powered by machine learning algorithms.',
+      gradient: 'from-blue-500 to-cyan-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-blue-500/50">
+          <div className="flex items-center justify-center mb-4">
+            <div className="relative">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-2xl rotate-45 group-hover:rotate-90 transition-all duration-500"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl group-hover:scale-110 transition-all duration-300 flex items-center justify-center text-white font-bold">AI</div>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full group-hover:shadow-lg group-hover:shadow-blue-500/80 animate-pulse"></div>
+              <div className="h-1 flex-1 bg-gray-800 rounded-full group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-cyan-500 transition-all"></div>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-cyan-500 rounded-full group-hover:shadow-lg group-hover:shadow-cyan-500/80 animate-pulse"></div>
+              <div className="h-1 flex-1 bg-gray-800 rounded-full group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-cyan-500 transition-all delay-75"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '💬',
+      title: 'LIVE CHAT',
+      badge: 'HOT',
+      description: 'Real-time messaging with typing indicators and read receipts.',
+      gradient: 'from-violet-500 to-purple-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-violet-500/50">
+          <div className="space-y-2">
+            <div className="flex justify-start">
+              <div className="bg-gray-800 rounded-2xl rounded-tl-none px-4 py-2 max-w-xs group-hover:bg-gradient-to-br group-hover:from-violet-500/20 group-hover:to-purple-500/20 transition-all">
+                <div className="h-2 w-16 bg-gray-700 rounded-full mb-1"></div>
+                <div className="h-2 w-12 bg-gray-700 rounded-full"></div>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <div className="bg-gradient-to-br from-violet-500/30 to-purple-500/30 rounded-2xl rounded-tr-none px-4 py-2 max-w-xs group-hover:from-violet-500/50 group-hover:to-purple-500/50 transition-all">
+                <div className="h-2 w-20 bg-gray-600 rounded-full mb-1"></div>
+                <div className="h-2 w-14 bg-gray-600 rounded-full"></div>
+              </div>
+            </div>
+            <div className="flex justify-start">
+              <div className="bg-gray-800 rounded-2xl rounded-tl-none px-4 py-2 max-w-xs group-hover:bg-gradient-to-br group-hover:from-violet-500/20 group-hover:to-purple-500/20 transition-all">
+                <div className="h-2 w-10 bg-gray-700 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📸',
+      title: 'MEDIA GALLERY',
+      badge: null,
+      description: 'Organize and showcase your media with advanced filtering and search.',
+      gradient: 'from-rose-500 to-pink-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-rose-500/50">
+          <div className="grid grid-cols-3 gap-2">
+            <div className="aspect-square bg-gradient-to-br from-rose-500/20 to-pink-500/20 rounded-lg group-hover:from-rose-500/40 group-hover:to-pink-500/40 group-hover:scale-105 transition-all"></div>
+            <div className="aspect-square bg-gradient-to-br from-rose-500/20 to-pink-500/20 rounded-lg group-hover:from-rose-500/40 group-hover:to-pink-500/40 group-hover:scale-105 transition-all delay-75"></div>
+            <div className="aspect-square bg-gradient-to-br from-rose-500/20 to-pink-500/20 rounded-lg group-hover:from-rose-500/40 group-hover:to-pink-500/40 group-hover:scale-105 transition-all delay-150"></div>
+            <div className="aspect-square bg-gradient-to-br from-rose-500/20 to-pink-500/20 rounded-lg group-hover:from-rose-500/40 group-hover:to-pink-500/40 group-hover:scale-105 transition-all delay-100"></div>
+            <div className="aspect-square bg-gradient-to-br from-rose-500/20 to-pink-500/20 rounded-lg group-hover:from-rose-500/40 group-hover:to-pink-500/40 group-hover:scale-105 transition-all delay-150"></div>
+            <div className="aspect-square bg-gradient-to-br from-rose-500/20 to-pink-500/20 rounded-lg group-hover:from-rose-500/40 group-hover:to-pink-500/40 group-hover:scale-105 transition-all delay-200"></div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🎵',
+      title: 'AUDIO PLAYER',
+      badge: 'PRO',
+      description: 'High-fidelity audio playback with equalizer and playlist management.',
+      gradient: 'from-emerald-500 to-teal-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-emerald-500/50">
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+              </svg>
+            </div>
+          </div>
+          <div className="space-y-3">
+            <div className="h-1 bg-gray-800 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full w-2/3 group-hover:w-3/4 transition-all duration-1000"></div>
+            </div>
+            <div className="flex items-end justify-between gap-1 h-8">
+              <div className="w-1 bg-gray-700 rounded-full h-4 group-hover:bg-gradient-to-t group-hover:from-emerald-500 group-hover:to-teal-500 transition-all"></div>
+              <div className="w-1 bg-gray-700 rounded-full h-6 group-hover:bg-gradient-to-t group-hover:from-emerald-500 group-hover:to-teal-500 transition-all delay-75"></div>
+              <div className="w-1 bg-gray-700 rounded-full h-5 group-hover:bg-gradient-to-t group-hover:from-emerald-500 group-hover:to-teal-500 transition-all delay-100"></div>
+              <div className="w-1 bg-gray-700 rounded-full h-7 group-hover:bg-gradient-to-t group-hover:from-emerald-500 group-hover:to-teal-500 transition-all delay-150"></div>
+              <div className="w-1 bg-gray-700 rounded-full h-4 group-hover:bg-gradient-to-t group-hover:from-emerald-500 group-hover:to-teal-500 transition-all delay-200"></div>
+              <div className="w-1 bg-gray-700 rounded-full h-6 group-hover:bg-gradient-to-t group-hover:from-emerald-500 group-hover:to-teal-500 transition-all delay-75"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🌍',
+      title: 'GLOBAL MAP',
+      badge: 'BETA',
+      description: 'Interactive maps with real-time location tracking and geofencing.',
+      gradient: 'from-amber-500 to-orange-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-amber-500/50">
+          <div className="relative h-24 bg-gray-800 rounded-lg overflow-hidden group-hover:bg-gray-750 transition-all">
+            <div className="absolute top-2 left-2 w-3 h-3 bg-amber-500 rounded-full group-hover:shadow-lg group-hover:shadow-amber-500/80 animate-ping"></div>
+            <div className="absolute top-2 left-2 w-3 h-3 bg-amber-500 rounded-full"></div>
+            
+            <div className="absolute top-4 right-4 w-2 h-2 bg-orange-500 rounded-full group-hover:shadow-lg group-hover:shadow-orange-500/80"></div>
+            
+            <div className="absolute bottom-3 left-1/3 w-2 h-2 bg-amber-400 rounded-full group-hover:shadow-lg group-hover:shadow-amber-400/80"></div>
+            
+            <div className="absolute inset-0 flex items-center justify-center opacity-20">
+              <div className="w-20 h-20 border-2 border-amber-500/30 rounded-full group-hover:scale-150 transition-all duration-1000"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📅',
+      title: 'SMART CALENDAR',
+      badge: 'NEW',
+      description: 'AI-powered scheduling with automatic conflict resolution and reminders.',
+      gradient: 'from-indigo-500 to-blue-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-indigo-500/50">
+          <div className="grid grid-cols-7 gap-1 mb-2">
+            {[...Array(7)].map((_, i) => (
+              <div key={i} className="aspect-square bg-gray-800 rounded text-xs flex items-center justify-center text-gray-600 group-hover:text-gray-500 transition-colors">
+                {i + 1}
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-7 gap-1">
+            <div className="aspect-square bg-gray-800 rounded"></div>
+            <div className="aspect-square bg-gray-800 rounded"></div>
+            <div className="aspect-square bg-gradient-to-br from-indigo-500/30 to-blue-500/30 rounded group-hover:from-indigo-500/50 group-hover:to-blue-500/50 transition-all"></div>
+            <div className="aspect-square bg-gray-800 rounded"></div>
+            <div className="aspect-square bg-gradient-to-br from-indigo-500/30 to-blue-500/30 rounded group-hover:from-indigo-500/50 group-hover:to-blue-500/50 transition-all delay-75"></div>
+            <div className="aspect-square bg-gray-800 rounded"></div>
+            <div className="aspect-square bg-gray-800 rounded"></div>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="inline-block bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 border border-purple-500/30 px-5 py-2 rounded-full mb-6">
+            <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold text-sm tracking-wider">✨ PREMIUM FEATURES</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+            Tools That Work
+            <br />
+            <span className="text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text">
+              As Hard As You Do
+            </span>
+          </h2>
+          <p className="text-gray-400 text-xl max-w-2xl mx-auto leading-relaxed">
+            Built for creators, optimized for performance, designed for scale
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
+            <div 
+              key={idx}
+              className="group bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-800 rounded-3xl p-8 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-3 transition-all duration-500 cursor-pointer relative overflow-hidden"
+            >
+              <div className={
+                "absolute -top-20 -right-20 w-60 h-60 bg-gradient-to-br " + feature.gradient + " opacity-0 group-hover:opacity-20 rounded-full blur-3xl transition-all duration-700"
+              }></div>
+              
+              <div className={
+                "absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-tr " + feature.gradient + " opacity-0 group-hover:opacity-10 rounded-full blur-3xl transition-all duration-700"
+              }></div>
+
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className={
+                      "w-14 h-14 bg-gradient-to-br " + feature.gradient + " rounded-2xl flex items-center justify-center text-3xl shadow-xl group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500"
+                    }>
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-base tracking-wide group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all">
+                        {feature.title}
+                      </h3>
+                    </div>
+                  </div>
+                  {feature.badge && (
+                    <span className={
+                      "bg-gradient-to-r " + feature.gradient + " text-white text-xs px-3 py-1 rounded-full font-black shadow-lg uppercase tracking-wider"
+                    }>
+                      {feature.badge}
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed group-hover:text-gray-300 transition-colors">
+                  {feature.description}
+                </p>
+
+                <div className="mt-6">
+                  {feature.preview}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
     name: "Header",
     category: "Cards",
     code: `
@@ -22821,6 +25516,7 @@ function FeatureGrid3() {
 
   `
   },
+
 
 
 ];
@@ -22850,4 +25546,3 @@ async function seedComponents() {
 
 // Run the seed function
 seedComponents();
-  

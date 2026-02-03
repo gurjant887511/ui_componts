@@ -53,7 +53,41 @@ export default function DynamicHero({ setActiveTab }) {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 overflow-hidden">
+
+    // <div className="relative min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 overflow-hidden">
+//  <div className="relative min-h-screen bg-gradient-to-br from-gray-950 via-purple-950 to-slate-950 overflow-hidden">
+
+<div className="relative min-h-screen bg-gradient-to-br from-[#0f172a] via-[#020617] to-[#020617] overflow-hidden">
+
+
+{/* <div className="relative min-h-screen bg-gradient-to-br from-[#111111] via-[#1a1a1a] to-[#0d0d0d] overflow-hidden"> */}
+
+
+{/* <div className="relative min-h-screen bg-gradient-to-br from-[#0b1020] via-[#1a1233] to-[#0b1020] overflow-hidden"> */}
+
+
+{/* <div className="relative min-h-screen bg-gradient-to-br from-[#020617] via-[#0b1220] to-[#020617] overflow-hidden"> */}
+
+
+{/* <div className="relative min-h-screen bg-gradient-to-br from-[#0f172a] via-[#020617] to-[#020617] overflow-hidden"> */}
+
+{/* <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 overflow-hidden">  */}
+
+{/* // <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 overflow-hidden">  */}
+
+{/* <div className="relative min-h-screen bg-gradient-to-br from-neutral-200 via-stone-300 to-amber-200 overflow-hidden"> */}
+
+
+
+
+
+
+
+
+
+
+
+
       {/* Interactive gradient overlay */}
       <div 
         className="absolute inset-0 opacity-30 transition-all duration-300"

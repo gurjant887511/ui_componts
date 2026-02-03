@@ -6,8 +6,15 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      keyframes: {
+        'scroll-horizontal': {
+          'from': { transform: 'translateX(0)' },
+          'to': { transform: 'translateX(-50%)' }
+        }
+      },
       animation: {
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'scroll-horizontal': 'scroll-horizontal 30s linear infinite',
       },
       backdropBlur: {
         'xl': '24px',

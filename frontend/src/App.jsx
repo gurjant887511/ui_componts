@@ -299,12 +299,12 @@ function ComponentsPreviewPage({ isLoggedIn }) {
   let filteredGrouped = groupedComponents;
 
   if (activeFilter === 'cards') {
-    // Show only card categories (exclude Headers and Footers)
-    displayedCategories = displayedCategories.filter(cat => cat !== 'Headers' && cat !== 'Footers');
+    // Show only Cards category
+    displayedCategories = displayedCategories.filter(cat => cat === 'Cards');
     filteredGrouped = {};
-    displayedCategories.forEach(cat => {
-      filteredGrouped[cat] = groupedComponents[cat];
-    });
+    if (groupedComponents['Cards']) {
+      filteredGrouped['Cards'] = groupedComponents['Cards'];
+    }
   } else if (activeFilter === 'headers') {
     // Show only Headers category
     displayedCategories = displayedCategories.filter(cat => cat === 'Headers');
