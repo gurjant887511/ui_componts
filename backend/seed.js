@@ -20201,309 +20201,6 @@ function BasicDarkFooter() {
 `
   },
 
-  {
-    name: "FuturisticPricing",
-    category: "Pricing",
-    code: `
-
-function FuturisticPricing() {
-  const [hoveredPlan, setHoveredPlan] = useState(null);
-  const [billingCycle, setBillingCycle] = useState('monthly');
-
-  const plans = [
-    {
-      name: 'Starter',
-      tagline: 'For Small Teams',
-      price: { monthly: 29, yearly: 290 },
-      color: 'cyan',
-      popular: false,
-      features: [
-        'Up to 10 team members',
-        '50 GB cloud storage',
-        'Basic analytics',
-        'Email support',
-        'API access',
-        'Mobile app'
-      ]
-    },
-    {
-      name: 'Professional',
-      tagline: 'Most Popular',
-      price: { monthly: 79, yearly: 790 },
-      color: 'green',
-      popular: true,
-      features: [
-        'Up to 50 team members',
-        '500 GB cloud storage',
-        'Advanced analytics',
-        'Priority support 24/7',
-        'Full API access',
-        'Mobile & desktop apps',
-        'Custom integrations',
-        'Advanced security'
-      ]
-    },
-    {
-      name: 'Enterprise',
-      tagline: 'For Large Organizations',
-      price: { monthly: 199, yearly: 1990 },
-      color: 'emerald',
-      popular: false,
-      features: [
-        'Unlimited team members',
-        'Unlimited storage',
-        'Enterprise analytics',
-        'Dedicated support',
-        'Full API access',
-        'All platforms',
-        'Custom integrations',
-        'Enterprise security',
-        'SLA guarantee',
-        'Custom training'
-      ]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-black relative overflow-hidden py-20">
-      
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, #00ff88 0px, transparent 1px, transparent 50px, #00ff88 51px), repeating-linear-gradient(90deg, #00ff88 0px, transparent 1px, transparent 50px, #00ff88 51px)',
-          backgroundSize: '50px 50px'
-        }}></div>
-      </div>
-
-      {/* Gradient Orbs */}
-      <div className="absolute top-20 left-10 w-96 h-96 rounded-full opacity-10 blur-3xl bg-green-400"></div>
-      <div className="absolute bottom-20 right-20 w-80 h-80 rounded-full opacity-10 blur-3xl bg-cyan-400"></div>
-      <div className="absolute top-1/2 right-1/4 w-64 h-64 rounded-full opacity-10 blur-3xl bg-emerald-400"></div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="text-center mb-20">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-            <span className="text-xs font-bold text-green-400 tracking-widest">PRICING PLANS</span>
-          </div>
-          
-          <h1 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tight">
-            Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">Power</span>
-          </h1>
-          
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
-            Select the perfect plan for your needs. Upgrade, downgrade, or cancel anytime.
-          </p>
-
-          {/* Billing Toggle */}
-          <div className="inline-flex items-center gap-4 p-2 bg-gray-900 border border-gray-800 rounded-full">
-            <button
-              onClick={() => setBillingCycle('monthly')}
-              className="px-6 py-2 rounded-full text-sm font-bold transition-all duration-300"
-              style={{
-                backgroundColor: billingCycle === 'monthly' ? '#4ade80' : 'transparent',
-                color: billingCycle === 'monthly' ? '#000' : '#9ca3af'
-              }}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle('yearly')}
-              className="px-6 py-2 rounded-full text-sm font-bold transition-all duration-300"
-              style={{
-                backgroundColor: billingCycle === 'yearly' ? '#4ade80' : 'transparent',
-                color: billingCycle === 'yearly' ? '#000' : '#9ca3af'
-              }}
-            >
-              Yearly
-              <span className="ml-2 text-xs px-2 py-1 bg-green-400 bg-opacity-20 text-green-400 rounded-full">
-                Save 20%
-              </span>
-            </button>
-          </div>
-        </div>
-
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {plans.map((plan) => {
-            const isHovered = hoveredPlan === plan.name;
-            
-            // Color configurations
-            const colorConfig = {
-              cyan: { main: '#22d3ee', text: '#22d3ee' },
-              green: { main: '#4ade80', text: '#4ade80' },
-              emerald: { main: '#34d399', text: '#34d399' }
-            };
-            
-            const currentColor = colorConfig[plan.color];
-            
-            return (
-              <div
-                key={plan.name}
-                className="relative p-8 bg-gradient-to-b from-gray-900 to-black border rounded-2xl transition-all duration-500"
-                style={{
-                  borderColor: plan.popular ? '#4ade80' : (isHovered ? currentColor.main : '#1f2937'),
-                  transform: plan.popular ? 'scale(1.05)' : 'scale(1)',
-                  boxShadow: plan.popular ? '0 25px 50px -12px rgba(74, 222, 128, 0.25)' : 'none'
-                }}
-                onMouseEnter={() => setHoveredPlan(plan.name)}
-                onMouseLeave={() => setHoveredPlan(null)}
-              >
-                
-                {/* Popular Badge */}
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="px-4 py-1 bg-green-400 text-black text-xs font-black rounded-full">
-                      MOST POPULAR
-                    </div>
-                  </div>
-                )}
-
-                {/* Glow Effect */}
-                {isHovered && (
-                  <div 
-                    className="absolute -inset-1 opacity-20 blur-xl rounded-2xl -z-10"
-                    style={{ backgroundColor: currentColor.main }}
-                  ></div>
-                )}
-
-                {/* Plan Header */}
-                <div className="mb-8">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div 
-                      className="w-3 h-3 rounded-full"
-                      style={{ backgroundColor: currentColor.main }}
-                    ></div>
-                    <h3 className="text-2xl font-black text-white">{plan.name}</h3>
-                  </div>
-                  <p 
-                    className="text-sm font-semibold"
-                    style={{ color: currentColor.text }}
-                  >
-                    {plan.tagline}
-                  </p>
-                </div>
-
-                {/* Price */}
-                <div className="mb-8">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-black text-white">
-                      \${plan.price[billingCycle]}
-                    </span>
-                    <span className="text-gray-500 text-sm font-semibold">
-                      /{billingCycle === 'monthly' ? 'mo' : 'yr'}
-                    </span>
-                  </div>
-                  {billingCycle === 'yearly' && (
-                    <p className="text-xs text-gray-500 mt-2">
-                      \${(plan.price.yearly / 12).toFixed(0)}/month billed annually
-                    </p>
-                  )}
-                </div>
-
-                {/* CTA Button */}
-                <button
-                  className="w-full py-3 rounded-lg font-bold text-sm mb-8 transition-all duration-300"
-                  style={{
-                    backgroundColor: plan.popular ? '#4ade80' : 'transparent',
-                    color: plan.popular ? '#000' : currentColor.text,
-                    border: plan.popular ? '2px solid #4ade80' : '2px solid ' + currentColor.main
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!plan.popular) {
-                      e.target.style.backgroundColor = currentColor.main;
-                      e.target.style.color = '#000';
-                    } else {
-                      e.target.style.backgroundColor = '#22c55e';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!plan.popular) {
-                      e.target.style.backgroundColor = 'transparent';
-                      e.target.style.color = currentColor.text;
-                    } else {
-                      e.target.style.backgroundColor = '#4ade80';
-                    }
-                  }}
-                >
-                  Get Started
-                </button>
-
-                {/* Divider */}
-                <div className="h-px mb-8 bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
-
-                {/* Features */}
-                <ul className="space-y-4">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <div 
-                        className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: currentColor.main }}
-                      >
-                        <Check className="w-3 h-3 text-black" strokeWidth={3} />
-                      </div>
-                      <span className="text-sm text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-              </div>
-            );
-          })}
-        </div>
-
-        {/* FAQ Section */}
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-black text-white mb-4">Frequently Asked Questions</h3>
-            <p className="text-gray-400">Everything you need to know about our pricing</p>
-          </div>
-
-          <div className="space-y-4">
-            {[
-              { q: 'Can I change plans later?', a: 'Yes, you can upgrade or downgrade your plan at any time.' },
-              { q: 'What payment methods do you accept?', a: 'We accept all major credit cards, PayPal, and wire transfers for enterprise plans.' },
-              { q: 'Is there a free trial?', a: 'Yes, all plans come with a 14-day free trial. No credit card required.' },
-              { q: 'Do you offer refunds?', a: 'Yes, we offer a 30-day money-back guarantee on all plans.' }
-            ].map((faq, idx) => (
-              <div key={idx} className="p-6 bg-gray-900 border border-gray-800 rounded-xl">
-                <h4 className="text-white font-bold mb-2">{faq.q}</h4>
-                <p className="text-gray-400 text-sm">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-20 text-center p-12 bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-2xl">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-              <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-            </div>
-            <h3 className="text-3xl font-black text-white mb-4">Need a Custom Solution?</h3>
-            <p className="text-gray-400 mb-8">
-              Contact our sales team for custom enterprise solutions tailored to your specific needs.
-            </p>
-            <button className="px-8 py-3 bg-green-400 text-black font-bold rounded-lg hover:bg-green-300 transition-colors duration-300">
-              Contact Sales
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Bottom Gradient Line */}
-      <div className="h-1 mt-20 bg-gradient-to-r from-transparent via-green-400 to-transparent"></div>
-
-    </div>
-  );
-}
-  `
-  },
 
   // Hero Section Components
   {
@@ -20663,35 +20360,6 @@ function Testimonials() {
 }
     `
   },
-
-  // CTA (Call to Action) Components
-  {
-    name: "Call to Action",
-    category: "Call to Action",
-    code: `
-function CallToAction() {
-  return (
-    <div className="bg-gradient-to-r from-purple-900 to-pink-900 py-20 px-8">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-5xl font-bold text-white mb-6">Ready to Get Started?</h2>
-        <p className="text-xl text-gray-200 mb-10">
-          Join thousands of users transforming their digital presence today.
-        </p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <button className="px-10 py-4 bg-white text-purple-600 font-bold rounded-lg hover:scale-105 transition-transform">
-            Start Free Trial
-          </button>
-          <button className="px-10 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all">
-            Schedule Demo
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-    `
-  },
-
  {
     name: "PricingSection",
     category: "Pricing",
@@ -25506,6 +25174,1409 @@ function FeatureGrid5() {
   );
 }
 
+  `
+  },
+
+ {
+    name: "AnotherStylishCTA",
+    category: "Call to Action",
+    code: `
+function AnotherStylishCTA() {
+  return (
+    <div className="bg-gradient-to-b from-slate-950 via-indigo-950 to-slate-950 py-24 px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Main CTA Card */}
+        <div className="relative">
+          {/* Animated Background Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-indigo-600/20 to-violet-600/20 rounded-3xl blur-3xl animate-pulse"></div>
+          
+          <div className="relative bg-gradient-to-br from-slate-900 via-indigo-900/50 to-slate-900 border border-indigo-500/30 rounded-3xl p-12 md:p-16 overflow-hidden">
+            
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-500/30 to-indigo-500/30 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-violet-500/20 to-purple-500/20 rounded-full blur-3xl"></div>
+            
+            {/* Floating Icons */}
+            <div className="absolute top-10 left-10 text-4xl animate-bounce">💡</div>
+            <div className="absolute top-20 right-20 text-4xl animate-bounce" style={{ animationDelay: '0.5s' }}>🎨</div>
+            <div className="absolute bottom-10 left-1/4 text-4xl animate-bounce" style={{ animationDelay: '1s' }}>⭐</div>
+
+            <div className="relative z-10 text-center">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 border border-blue-500/40 px-4 py-2 rounded-full mb-8">
+                <span className="text-2xl">✨</span>
+                <span className="text-blue-300 font-bold text-sm tracking-wider">SPECIAL EARLY ACCESS</span>
+              </div>
+
+              {/* Heading */}
+              <h2 className="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
+                Build Something
+                <br />
+                <span className="text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text">
+                  Extraordinary
+                </span>
+              </h2>
+
+              {/* Description */}
+              <p className="text-slate-300 text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
+                Join 75,000+ innovators who are building the future with our cutting-edge platform. Experience seamless collaboration and unlimited creativity.
+              </p>
+
+              {/* Buttons */}
+              <div className="flex flex-wrap gap-4 justify-center mb-12">
+                <button className="group px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl font-bold text-white text-lg hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-105 transition-all duration-300 flex items-center gap-3">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                  </svg>
+                  <span>Launch Your Project</span>
+                </button>
+
+                <button className="px-10 py-5 bg-white/5 backdrop-blur-sm border-2 border-white/10 rounded-2xl font-bold text-white text-lg hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 flex items-center gap-3">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                  <span>Learn More</span>
+                </button>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap justify-center items-center gap-8 pt-8 border-t border-slate-800">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-slate-400 text-sm font-semibold">Instant access</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-slate-400 text-sm font-semibold">30-day money back</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-slate-400 text-sm font-semibold">Expert support</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Social Proof Avatars */}
+        <div className="flex justify-center items-center gap-4 mt-12">
+          <div className="flex -space-x-4">
+            <div className="w-12 h-12 rounded-full border-4 border-slate-950 bg-gradient-to-br from-blue-400 to-blue-600"></div>
+            <div className="w-12 h-12 rounded-full border-4 border-slate-950 bg-gradient-to-br from-indigo-400 to-indigo-600"></div>
+            <div className="w-12 h-12 rounded-full border-4 border-slate-950 bg-gradient-to-br from-violet-400 to-violet-600"></div>
+            <div className="w-12 h-12 rounded-full border-4 border-slate-950 bg-gradient-to-br from-purple-400 to-purple-600"></div>
+            <div className="w-12 h-12 rounded-full border-4 border-slate-950 bg-gradient-to-br from-pink-400 to-pink-600"></div>
+          </div>
+          <div className="text-slate-400">
+            <span className="text-white font-bold">75,000+</span> creators already joined
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+          <div className="text-center bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text mb-2">
+              75K+
+            </div>
+            <div className="text-slate-500 font-semibold">Active Creators</div>
+          </div>
+          <div className="text-center bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text mb-2">
+              5M+
+            </div>
+            <div className="text-slate-500 font-semibold">Projects Created</div>
+          </div>
+          <div className="text-center bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text mb-2">
+              4.9★
+            </div>
+            <div className="text-slate-500 font-semibold">User Rating</div>
+          </div>
+          <div className="text-center bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300">
+            <div className="text-5xl font-black text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text mb-2">
+              200+
+            </div>
+            <div className="text-slate-500 font-semibold">Integrations</div>
+          </div>
+        </div>
+
+        {/* Feature Cards */}
+        <div className="grid md:grid-cols-2 gap-6 mt-16">
+          <div className="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300 group">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center text-2xl">
+                🚀
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Lightning Fast Performance</h3>
+                <p className="text-slate-400">Experience blazing-fast load times and smooth interactions that keep your workflow uninterrupted.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300 group">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-xl flex items-center justify-center text-2xl">
+                🎯
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">Intelligent Automation</h3>
+                <p className="text-slate-400">Save hours every week with smart automation that learns from your workflow and adapts to your needs.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300 group">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-violet-500 to-purple-500 rounded-xl flex items-center justify-center text-2xl">
+                🔒
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-violet-400 transition-colors">Military-Grade Security</h3>
+                <p className="text-slate-400">Your data is protected with end-to-end encryption and advanced security protocols trusted by Fortune 500 companies.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300 group">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-2xl">
+                🤝
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">Seamless Collaboration</h3>
+                <p className="text-slate-400">Work together in real-time with your team, no matter where they are in the world.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Testimonial Section */}
+        <div className="mt-16 bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-10 md:p-12">
+          <div className="text-center mb-8">
+            <div className="text-yellow-400 text-4xl mb-4">★★★★★</div>
+            <p className="text-slate-300 text-xl md:text-2xl italic max-w-3xl mx-auto leading-relaxed">
+              "This platform transformed the way we work. What used to take hours now takes minutes. The ROI has been incredible!"
+            </p>
+          </div>
+          <div className="flex justify-center items-center gap-4">
+            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600"></div>
+            <div className="text-left">
+              <div className="text-white font-bold">Sarah Johnson</div>
+              <div className="text-slate-500 text-sm">CEO at TechStart Inc.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+
+  `
+  },
+ {
+    name: "UniqueStylishCTA",
+    category: "Call to Action",
+    code: `
+function UniqueStylishCTA() {
+  return (
+    <div className="bg-neutral-50 py-20 px-6 overflow-hidden relative">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-full h-full" 
+             style={{
+               backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #000 2px, #000 4px)',
+               backgroundSize: '100% 20px'
+             }}>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative">
+        
+        {/* Top Label */}
+        <div className="flex items-center gap-4 mb-12">
+          <div className="w-2 h-2 bg-rose-600 rounded-full animate-pulse"></div>
+          <span className="text-xs font-bold tracking-widest uppercase text-neutral-900">Now Available</span>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-12 gap-8 mb-16">
+          
+          {/* Left Side - Headline */}
+          <div className="lg:col-span-7">
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black leading-none text-neutral-900 mb-8">
+              CREATE
+              <br />
+              <span className="text-rose-600">WITH</span>
+              <br />
+              PURPOSE
+            </h1>
+            
+            <div className="max-w-md">
+              <p className="text-xl text-neutral-600 leading-relaxed mb-8">
+                A platform built for those who refuse to settle. Design, collaborate, and ship products that matter.
+              </p>
+              
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-px flex-1 bg-neutral-300"></div>
+                <span className="text-xs font-bold text-neutral-400">JOIN THE MOVEMENT</span>
+                <div className="h-px flex-1 bg-neutral-300"></div>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6 mb-8">
+                <div>
+                  <div className="text-3xl font-black text-neutral-900">92K</div>
+                  <div className="text-xs text-neutral-500 uppercase tracking-wide">Makers</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-black text-neutral-900">4.9</div>
+                  <div className="text-xs text-neutral-500 uppercase tracking-wide">Rating</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-black text-neutral-900">180</div>
+                  <div className="text-xs text-neutral-500 uppercase tracking-wide">Countries</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - CTA Card */}
+          <div className="lg:col-span-5">
+            <div className="bg-neutral-900 p-8 lg:p-12 relative overflow-hidden group">
+              {/* Corner Accent */}
+              <div className="absolute top-0 right-0 w-24 h-24 bg-rose-600"></div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-rose-600 opacity-50 blur-xl"></div>
+              
+              <div className="relative z-10">
+                <div className="mb-8">
+                  <div className="text-xs font-bold text-rose-500 mb-4 uppercase tracking-widest">Early Access</div>
+                  <h3 className="text-4xl font-black text-white mb-4">Start Building Today</h3>
+                  <p className="text-neutral-400 leading-relaxed">
+                    Get instant access to all features. No credit card required.
+                  </p>
+                </div>
+
+                {/* Email Input */}
+                <div className="mb-4">
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email"
+                    className="w-full px-6 py-4 bg-white text-neutral-900 placeholder-neutral-400 font-medium focus:outline-none focus:ring-2 focus:ring-rose-600"
+                  />
+                </div>
+
+                {/* CTA Button */}
+                <button className="w-full px-6 py-4 bg-rose-600 text-white font-bold uppercase tracking-wider hover:bg-rose-700 transition-colors duration-300 mb-6">
+                  Get Started Now →
+                </button>
+
+                {/* Trust Badges */}
+                <div className="flex flex-wrap gap-4 text-xs text-neutral-500">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-rose-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Free forever</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-rose-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>No credit card</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-rose-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Cancel anytime</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative Element */}
+              <div className="absolute bottom-0 left-0 w-32 h-1 bg-rose-600"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Features Grid - Brutalist Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="border-4 border-neutral-900 p-8 hover:border-rose-600 transition-colors duration-300 group">
+            <div className="w-12 h-12 bg-rose-600 mb-6 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
+              <div className="w-6 h-6 bg-white"></div>
+            </div>
+            <h4 className="text-2xl font-black text-neutral-900 mb-3 uppercase">Lightning Fast</h4>
+            <p className="text-neutral-600 leading-relaxed">Built for speed. Deploy in seconds, iterate in real-time.</p>
+          </div>
+
+          <div className="border-4 border-neutral-900 p-8 hover:border-rose-600 transition-colors duration-300 group">
+            <div className="w-12 h-12 bg-neutral-900 mb-6 flex items-center justify-center group-hover:bg-rose-600 transition-colors duration-300">
+              <div className="w-6 h-6 border-4 border-white"></div>
+            </div>
+            <h4 className="text-2xl font-black text-neutral-900 mb-3 uppercase">Fully Secure</h4>
+            <p className="text-neutral-600 leading-relaxed">Enterprise-grade security. Your data is always protected.</p>
+          </div>
+
+          <div className="border-4 border-neutral-900 p-8 hover:border-rose-600 transition-colors duration-300 group">
+            <div className="w-12 h-12 bg-rose-600 mb-6 flex items-center justify-center">
+              <div className="text-white text-2xl font-black">∞</div>
+            </div>
+            <h4 className="text-2xl font-black text-neutral-900 mb-3 uppercase">Unlimited Scale</h4>
+            <p className="text-neutral-600 leading-relaxed">Grow without limits. From startup to enterprise.</p>
+          </div>
+        </div>
+
+        {/* Testimonial Section */}
+        <div className="bg-neutral-900 p-12 lg:p-16 relative overflow-hidden">
+          {/* Decorative bars */}
+          <div className="absolute top-0 left-0 w-full h-2 bg-rose-600"></div>
+          <div className="absolute bottom-0 right-0 w-2 h-full bg-rose-600"></div>
+          
+          <div className="relative z-10 max-w-4xl">
+            <div className="text-rose-500 text-6xl md:text-8xl font-black mb-8">"</div>
+            <blockquote className="text-3xl md:text-4xl font-bold text-white leading-tight mb-8">
+              This tool changed how we ship products. We're moving 10x faster than before.
+            </blockquote>
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 bg-rose-600"></div>
+              <div>
+                <div className="text-white font-bold text-lg">Alex Rivera</div>
+                <div className="text-neutral-400 text-sm">Founder, TechFlow</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom CTA Bar */}
+        <div className="mt-16 bg-rose-600 p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 className="text-3xl lg:text-4xl font-black text-white mb-2">Ready to Get Started?</h3>
+            <p className="text-rose-100">Join 92,000+ makers building the future</p>
+          </div>
+          <button className="px-10 py-4 bg-white text-rose-600 font-bold uppercase tracking-wider hover:bg-neutral-100 transition-colors duration-300 whitespace-nowrap">
+            Start Free Trial
+          </button>
+        </div>
+
+        {/* Footer Note */}
+        <div className="mt-12 text-center text-sm text-neutral-400">
+          <p>Trusted by teams at Google, Netflix, Spotify, and 1,000+ companies worldwide</p>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "RetroFuturisticCTA",
+    category: "Call to Action",
+    code: `
+function RetroFuturisticCTA() {
+  return (
+    <div className="bg-gray-900 py-24 px-6 overflow-hidden relative">
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0" 
+             style={{
+               backgroundSize: '50px 50px',
+               transform: 'perspective(500px) rotateX(60deg)',
+               transformOrigin: 'center bottom',
+               background: 'repeating-linear-gradient(0deg, transparent 0px, transparent 49px, rgba(34, 211, 238, 0.3) 49px, rgba(34, 211, 238, 0.3) 50px), repeating-linear-gradient(90deg, transparent 0px, transparent 49px, rgba(34, 211, 238, 0.3) 49px, rgba(34, 211, 238, 0.3) 50px)'
+             }}>
+        </div>
+      </div>
+
+      {/* Glowing Orbs */}
+      <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500 rounded-full blur-3xl opacity-20"></div>
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-pink-500 rounded-full blur-3xl opacity-20"></div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        
+        {/* Neon Badge */}
+        <div className="text-center mb-8">
+          <div className="inline-block relative">
+            <div className="absolute inset-0 bg-cyan-400 blur-xl opacity-50"></div>
+            <div className="relative border-2 border-cyan-400 px-6 py-2 inline-block" style={{
+              boxShadow: '0 0 20px rgba(34, 211, 238, 0.5), inset 0 0 20px rgba(34, 211, 238, 0.1)'
+            }}>
+              <span className="text-cyan-400 font-bold text-sm tracking-widest uppercase">Next Generation Platform</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Headline */}
+        <div className="text-center mb-12">
+          <h1 className="text-6xl md:text-8xl font-black mb-6 relative inline-block">
+            <span className="text-white relative z-10">ENTER THE</span>
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 relative" style={{
+              textShadow: '0 0 30px rgba(34, 211, 238, 0.5)'
+            }}>
+              FUTURE
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Experience the next evolution of digital creation. Powered by cutting-edge AI and designed for tomorrow's innovators.
+          </p>
+        </div>
+
+        {/* Main CTA Box with Neon Border */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="relative p-1 rounded-2xl" style={{
+            background: 'linear-gradient(45deg, #06b6d4, #ec4899, #8b5cf6)',
+            boxShadow: '0 0 40px rgba(34, 211, 238, 0.4)'
+          }}>
+            <div className="bg-gray-900 rounded-2xl p-8 md:p-12">
+              
+              {/* CTA Content */}
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-4">Start Your Journey</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-3 text-gray-300">
+                      <div className="w-2 h-2 bg-cyan-400 rounded-full" style={{
+                        boxShadow: '0 0 10px rgba(34, 211, 238, 0.8)'
+                      }}></div>
+                      <span>Unlimited AI-powered tools</span>
+                    </li>
+                    <li className="flex items-center gap-3 text-gray-300">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full" style={{
+                        boxShadow: '0 0 10px rgba(236, 72, 153, 0.8)'
+                      }}></div>
+                      <span>Real-time collaboration</span>
+                    </li>
+                    <li className="flex items-center gap-3 text-gray-300">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full" style={{
+                        boxShadow: '0 0 10px rgba(139, 92, 246, 0.8)'
+                      }}></div>
+                      <span>Advanced analytics dashboard</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="flex flex-col justify-center">
+                  <div className="text-4xl font-black text-white mb-2">$0</div>
+                  <div className="text-cyan-400 font-bold mb-4">FREE FOREVER</div>
+                  <div className="text-sm text-gray-400">No credit card required. Upgrade anytime.</div>
+                </div>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex flex-wrap gap-4">
+                <button className="relative px-8 py-4 font-bold text-white overflow-hidden group flex-1 md:flex-initial">
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-pink-500" style={{
+                    boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)'
+                  }}></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative flex items-center justify-center gap-2">
+                    Launch Now
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                </button>
+
+                <button className="relative px-8 py-4 font-bold text-cyan-400 border-2 border-cyan-400 hover:bg-cyan-400 hover:text-gray-900 transition-all duration-300 flex-1 md:flex-initial" style={{
+                  boxShadow: '0 0 20px rgba(34, 211, 238, 0.3)'
+                }}>
+                  Watch Video
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Features Grid with Neon Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+            <div className="relative bg-gray-800/50 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6 hover:border-cyan-400 transition-all duration-300">
+              <div className="text-5xl mb-4">⚡</div>
+              <h4 className="text-xl font-bold text-white mb-2">Blazing Speed</h4>
+              <p className="text-gray-400">Lightning-fast performance with zero latency. Feel the difference instantly.</p>
+            </div>
+          </div>
+
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-transparent rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+            <div className="relative bg-gray-800/50 backdrop-blur-sm border border-pink-500/30 rounded-xl p-6 hover:border-pink-400 transition-all duration-300">
+              <div className="text-5xl mb-4">🔮</div>
+              <h4 className="text-xl font-bold text-white mb-2">AI Enhanced</h4>
+              <p className="text-gray-400">Powered by advanced AI that learns and adapts to your workflow.</p>
+            </div>
+          </div>
+
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+            <div className="relative bg-gray-800/50 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6 hover:border-purple-400 transition-all duration-300">
+              <div className="text-5xl mb-4">🌐</div>
+              <h4 className="text-xl font-bold text-white mb-2">Global Network</h4>
+              <p className="text-gray-400">Deploy worldwide with our edge network. 99.99% uptime guaranteed.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Bar */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-pink-500/10 to-purple-500/10 rounded-xl blur-xl"></div>
+          <div className="relative bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-xl p-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600 mb-1">250K+</div>
+                <div className="text-sm text-gray-400 uppercase tracking-wide">Active Users</div>
+              </div>
+              <div>
+                <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 mb-1">50M+</div>
+                <div className="text-sm text-gray-400 uppercase tracking-wide">Projects</div>
+              </div>
+              <div>
+                <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600 mb-1">99.9%</div>
+                <div className="text-sm text-gray-400 uppercase tracking-wide">Uptime</div>
+              </div>
+              <div>
+                <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 mb-1">4.9★</div>
+                <div className="text-sm text-gray-400 uppercase tracking-wide">Rating</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Testimonial */}
+        <div className="mt-16 text-center">
+          <div className="inline-block relative max-w-3xl">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-pink-500/10 blur-2xl"></div>
+            <div className="relative">
+              <div className="text-cyan-400 text-6xl mb-4 opacity-50">"</div>
+              <p className="text-2xl md:text-3xl text-white font-bold mb-6 leading-relaxed">
+                This platform is from the future. It's literally changed everything about how we work.
+              </p>
+              <div className="flex items-center justify-center gap-4">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-400 to-pink-500 border-2 border-cyan-400" style={{
+                  boxShadow: '0 0 20px rgba(34, 211, 238, 0.5)'
+                }}></div>
+                <div className="text-left">
+                  <div className="text-white font-bold">Marcus Chen</div>
+                  <div className="text-gray-400 text-sm">CEO, NeuralTech</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "GradientWaveCTA",
+    category: "Call to Action",
+    code: `
+function GradientWaveCTA() {
+  return (
+    <div className="relative bg-gradient-to-b from-indigo-900 via-purple-900 to-pink-900 py-24 px-6 overflow-hidden">
+      {/* Wave SVG Background */}
+      <div className="absolute inset-0 opacity-30">
+        <svg className="absolute bottom-0 w-full h-96" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path 
+            fill="rgba(255,255,255,0.1)" 
+            d="M0,128L48,144C96,160,192,192,288,197.3C384,203,480,181,576,181.3C672,181,768,203,864,213.3C960,224,1056,224,1152,208C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
+        <svg className="absolute top-0 w-full h-96" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path 
+            fill="rgba(255,255,255,0.05)" 
+            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+          ></path>
+        </svg>
+      </div>
+
+      <div className="max-w-5xl mx-auto relative z-10">
+        {/* Top Badge */}
+        <div className="text-center mb-8">
+          <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full text-white border border-white/20">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            <span className="font-semibold">2,847 people signed up this week</span>
+          </span>
+        </div>
+
+        {/* Main Headline */}
+        <div className="text-center mb-16">
+          <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-8 leading-tight">
+            Your Success
+            <br />
+            <span className="bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
+              Starts Here
+            </span>
+          </h1>
+          <p className="text-2xl text-white/90 max-w-3xl mx-auto mb-8 leading-relaxed">
+            Join thousands of successful businesses using our platform to achieve extraordinary results
+          </p>
+        </div>
+
+        {/* Main CTA Card */}
+        <div className="bg-white rounded-3xl shadow-2xl p-10 md:p-14 mb-12">
+          <div className="text-center mb-10">
+            <div className="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-bold mb-6">
+              LIMITED TIME OFFER
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Get 50% Off Your First Year
+            </h2>
+            <p className="text-xl text-gray-600">
+              Plus exclusive bonuses worth $2,000
+            </p>
+          </div>
+
+          {/* Benefits Grid */}
+          <div className="grid md:grid-cols-2 gap-8 mb-10">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">What's Included:</h3>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg">Unlimited team members</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg">Advanced analytics & reports</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg">Priority 24/7 support</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg">Custom integrations</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 flex flex-col justify-center">
+              <div className="text-center">
+                <div className="text-gray-500 line-through text-2xl mb-2">$99/month</div>
+                <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-3">
+                  $49
+                </div>
+                <div className="text-gray-600 text-lg mb-6">per month, billed annually</div>
+                <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full inline-block text-sm font-bold">
+                  Save $600/year
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-6">
+            <button className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-10 py-5 rounded-xl font-bold text-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+              Claim Your Discount
+            </button>
+            <button className="flex-1 border-2 border-gray-300 hover:border-gray-400 text-gray-700 px-10 py-5 rounded-xl font-bold text-xl transition-all duration-300 hover:bg-gray-50">
+              Watch Demo
+            </button>
+          </div>
+
+          <div className="text-center space-y-2">
+            <p className="text-sm text-gray-500">✓ No credit card required ✓ 14-day free trial ✓ Cancel anytime</p>
+            <p className="text-xs text-gray-400">Offer expires in 48 hours</p>
+          </div>
+        </div>
+
+        {/* Trust Indicators */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
+          <div>
+            <div className="text-4xl font-bold mb-2">15K+</div>
+            <div className="text-white/70 uppercase text-xs tracking-wider">Happy Customers</div>
+          </div>
+          <div>
+            <div className="text-4xl font-bold mb-2">4.9/5</div>
+            <div className="text-white/70 uppercase text-xs tracking-wider">Average Rating</div>
+          </div>
+          <div>
+            <div className="text-4xl font-bold mb-2">99.9%</div>
+            <div className="text-white/70 uppercase text-xs tracking-wider">Uptime SLA</div>
+          </div>
+          <div>
+            <div className="text-4xl font-bold mb-2">24/7</div>
+            <div className="text-white/70 uppercase text-xs tracking-wider">Support</div>
+          </div>
+        </div>
+
+        {/* Final Social Proof */}
+        <div className="mt-16 text-center">
+          <div className="flex justify-center items-center gap-4 mb-4">
+            <div className="flex -space-x-2">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-red-400 border-2 border-white"></div>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-400 border-2 border-white"></div>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-400 border-2 border-white"></div>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 border-2 border-white"></div>
+            </div>
+          </div>
+          <p className="text-white/90 text-lg">
+            <span className="font-bold">Sarah, Mike, Anna, and 12,844 others</span> joined this month
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "ModernMagazineCTA",
+    category: "Call to Action",
+    code: `
+function ModernMagazineCTA() {
+  return (
+    <div className="bg-neutral-900 py-32 px-6 relative overflow-hidden">
+      {/* Accent elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/20 rounded-full blur-[150px]"></div>
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-rose-500/20 rounded-full blur-[150px]"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left: Content */}
+          <div className="space-y-8">
+            {/* Eyebrow */}
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-px bg-orange-500"></div>
+              <span className="text-orange-500 text-xs uppercase tracking-[0.3em] font-semibold">
+                New Platform Release
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
+              Build the
+              <br />
+              <span className="italic font-light">impossible</span>
+            </h1>
+
+            <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-transparent"></div>
+
+            {/* Description */}
+            <p className="text-xl text-neutral-400 leading-relaxed max-w-lg">
+              The only platform designed for creators who think differently. 
+              Transform ideas into reality with tools that match your ambition.
+            </p>
+
+            {/* Feature list */}
+            <div className="space-y-6 pt-8">
+              <div className="flex items-start gap-4 group">
+                <div className="w-1 h-12 bg-orange-500 group-hover:h-16 transition-all duration-300"></div>
+                <div>
+                  <h3 className="text-white font-semibold text-lg mb-1">Lightning Performance</h3>
+                  <p className="text-neutral-500">Built for speed. Optimized for scale.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="w-1 h-12 bg-orange-500 group-hover:h-16 transition-all duration-300"></div>
+                <div>
+                  <h3 className="text-white font-semibold text-lg mb-1">Intelligent Systems</h3>
+                  <p className="text-neutral-500">AI that learns from your workflow.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="w-1 h-12 bg-orange-500 group-hover:h-16 transition-all duration-300"></div>
+                <div>
+                  <h3 className="text-white font-semibold text-lg mb-1">Enterprise Security</h3>
+                  <p className="text-neutral-500">Bank-grade protection, always.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="flex gap-12 pt-8 border-t border-neutral-800">
+              <div>
+                <div className="text-3xl font-bold text-white mb-1">50K+</div>
+                <div className="text-neutral-600 text-sm uppercase tracking-wider">Creators</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white mb-1">99.9%</div>
+                <div className="text-neutral-600 text-sm uppercase tracking-wider">Uptime</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white mb-1">4.9/5</div>
+                <div className="text-neutral-600 text-sm uppercase tracking-wider">Rating</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: CTA Card */}
+          <div className="lg:pl-8">
+            <div className="bg-neutral-800/50 backdrop-blur-sm border border-neutral-700/50 p-10 relative">
+              {/* Accent corner */}
+              <div className="absolute top-0 right-0 w-24 h-24 border-t-2 border-r-2 border-orange-500/50"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 border-b-2 border-l-2 border-orange-500/50"></div>
+
+              {/* Badge */}
+              <div className="inline-block bg-orange-500 text-neutral-900 px-5 py-2 text-xs font-bold uppercase tracking-wider mb-8">
+                Professional Plan
+              </div>
+
+              {/* Price */}
+              <div className="mb-10">
+                <div className="flex items-baseline gap-2 mb-3">
+                  <span className="text-6xl font-bold text-white">$59</span>
+                  <span className="text-neutral-500 text-xl">/month</span>
+                </div>
+                <p className="text-neutral-400">Billed annually or $79 monthly</p>
+              </div>
+
+              {/* Features */}
+              <div className="space-y-4 mb-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-orange-500/20 border-2 border-orange-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-3 h-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-neutral-300">Unlimited projects & storage</span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-orange-500/20 border-2 border-orange-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-3 h-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-neutral-300">Advanced AI capabilities</span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-orange-500/20 border-2 border-orange-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-3 h-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-neutral-300">Priority support 24/7</span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-orange-500/20 border-2 border-orange-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-3 h-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-neutral-300">Custom integrations</span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-orange-500/20 border-2 border-orange-500 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-3 h-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-neutral-300">Team collaboration tools</span>
+                </div>
+              </div>
+
+              {/* Buttons */}
+              <div className="space-y-3">
+                <button className="w-full bg-orange-500 hover:bg-orange-600 text-neutral-900 px-8 py-5 font-bold text-lg transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/25">
+                  Start Free Trial
+                </button>
+
+                <button className="w-full border-2 border-neutral-700 hover:border-orange-500 text-white px-8 py-4 font-semibold transition-all duration-300">
+                  Schedule Demo
+                </button>
+              </div>
+
+              <p className="text-neutral-600 text-sm text-center mt-6">
+                14-day free trial • No credit card required
+              </p>
+            </div>
+
+            {/* Testimonial */}
+            <div className="mt-8 pl-6 border-l-2 border-orange-500/30">
+              <p className="text-neutral-400 text-lg mb-4 italic">
+                "This platform changed everything for our team. We're shipping faster than ever before."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-rose-500"></div>
+                <div>
+                  <div className="text-white font-semibold">Sarah Martinez</div>
+                  <div className="text-neutral-600 text-sm">VP of Engineering, TechCorp</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+  `
+  },
+ {
+    name: "NeonCyberpunkCTA",
+    category: "Call to Action",
+    code: `
+function NeonCyberpunkCTA() {
+  return (
+    <div className="bg-black py-24 px-6 relative overflow-hidden">
+      {/* Neon glow effects */}
+      <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/30 rounded-full blur-[100px]"></div>
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-fuchsia-500/30 rounded-full blur-[100px]"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/20 rounded-full blur-[120px]"></div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Top badge */}
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-cyan-500/10 border-2 border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.5)]">
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(6,182,212,1)]"></div>
+            <span className="text-cyan-400 font-bold text-sm tracking-[0.2em] uppercase">
+              System Online
+            </span>
+          </div>
+        </div>
+
+        {/* Main headline */}
+        <div className="text-center mb-16">
+          <h1 className="text-7xl md:text-9xl font-black text-white mb-8 leading-none tracking-tighter">
+            <span className="inline-block" style={{
+              textShadow: '0 0 30px rgba(6, 182, 212, 0.8), 0 0 60px rgba(6, 182, 212, 0.4)'
+            }}>
+              POWER
+            </span>
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-violet-400" style={{
+              textShadow: '0 0 40px rgba(217, 70, 239, 0.6)'
+            }}>
+              UNLEASHED
+            </span>
+          </h1>
+          <p className="text-2xl text-gray-300 max-w-3xl mx-auto font-bold tracking-wide">
+            Next-generation platform for the digital elite
+          </p>
+        </div>
+
+        {/* Feature cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="bg-gradient-to-b from-cyan-500/20 to-transparent border border-cyan-500/50 p-8 relative group hover:border-cyan-400 transition-all duration-300">
+            <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-transparent"></div>
+            <div className="relative">
+              <div className="text-5xl mb-4">⚡</div>
+              <h3 className="text-2xl font-black text-white mb-3 tracking-tight">
+                ULTRA SPEED
+              </h3>
+              <p className="text-gray-400 leading-relaxed">
+                Millisecond response times. Process millions of operations instantly.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-b from-fuchsia-500/20 to-transparent border border-fuchsia-500/50 p-8 relative group hover:border-fuchsia-400 transition-all duration-300">
+            <div className="absolute inset-0 bg-fuchsia-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-500 to-transparent"></div>
+            <div className="relative">
+              <div className="text-5xl mb-4">🔮</div>
+              <h3 className="text-2xl font-black text-white mb-3 tracking-tight">
+                AI CORE
+              </h3>
+              <p className="text-gray-400 leading-relaxed">
+                Advanced neural networks that adapt to your every command.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-b from-violet-500/20 to-transparent border border-violet-500/50 p-8 relative group hover:border-violet-400 transition-all duration-300">
+            <div className="absolute inset-0 bg-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-500 to-transparent"></div>
+            <div className="relative">
+              <div className="text-5xl mb-4">🛡️</div>
+              <h3 className="text-2xl font-black text-white mb-3 tracking-tight">
+                FORTRESS
+              </h3>
+              <p className="text-gray-400 leading-relaxed">
+                Military-grade encryption. Impenetrable security architecture.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Main CTA section */}
+        <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-500 p-12 mb-12 relative shadow-[0_0_50px_rgba(6,182,212,0.3)]">
+          {/* Corner accents */}
+          <div className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-fuchsia-500"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 border-t-4 border-r-4 border-cyan-500"></div>
+          <div className="absolute bottom-0 left-0 w-20 h-20 border-b-4 border-l-4 border-cyan-500"></div>
+          <div className="absolute bottom-0 right-0 w-20 h-20 border-b-4 border-r-4 border-fuchsia-500"></div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left: Pricing */}
+            <div>
+              <div className="inline-block bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-black px-5 py-2 font-black text-xs tracking-[0.3em] mb-8 shadow-[0_0_20px_rgba(6,182,212,0.5)]">
+                ELITE ACCESS
+              </div>
+
+              <div className="mb-10">
+                <div className="text-gray-500 line-through text-2xl mb-2">$199/month</div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="text-8xl font-black text-white" style={{
+                    textShadow: '0 0 20px rgba(6, 182, 212, 0.5)'
+                  }}>
+                    $99
+                  </span>
+                  <span className="text-2xl text-gray-400">/mo</span>
+                </div>
+                <div className="inline-block bg-gradient-to-r from-emerald-500 to-cyan-500 text-black px-4 py-1 font-bold text-sm">
+                  SAVE 50% • LIMITED TIME
+                </div>
+              </div>
+
+              {/* Features list */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.6)]">
+                    <span className="text-black font-black">✓</span>
+                  </div>
+                  <span className="text-gray-300 font-bold">Unlimited Everything</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-8 bg-gradient-to-br from-fuchsia-500 to-fuchsia-600 flex items-center justify-center shadow-[0_0_15px_rgba(217,70,239,0.6)]">
+                    <span className="text-black font-black">✓</span>
+                  </div>
+                  <span className="text-gray-300 font-bold">Quantum Processing</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-violet-600 flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.6)]">
+                    <span className="text-black font-black">✓</span>
+                  </div>
+                  <span className="text-gray-300 font-bold">24/7 Elite Support</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-fuchsia-500 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.6)]">
+                    <span className="text-black font-black">✓</span>
+                  </div>
+                  <span className="text-gray-300 font-bold">Advanced AI Models</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: CTA buttons */}
+            <div className="space-y-6">
+              <button className="w-full bg-gradient-to-r from-cyan-500 via-fuchsia-500 to-violet-500 hover:from-cyan-400 hover:via-fuchsia-400 hover:to-violet-400 text-black px-10 py-6 font-black text-xl tracking-wider transition-all duration-300 shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:shadow-[0_0_50px_rgba(6,182,212,0.8)] hover:scale-105 relative group">
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  ACTIVATE NOW
+                  <svg className="w-6 h-6 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
+              </button>
+
+              <button className="w-full border-2 border-cyan-500 hover:bg-cyan-500/10 text-cyan-400 px-10 py-5 font-black text-lg tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.5)]">
+                VIEW SYSTEM DEMO
+              </button>
+
+              <p className="text-gray-600 text-sm text-center tracking-wider">
+                NO CONTRACTS • INSTANT ACCESS • CANCEL ANYTIME
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats bar */}
+        <div className="border-t border-b border-cyan-500/30 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600 mb-2">
+                150K+
+              </div>
+              <div className="text-gray-500 text-sm uppercase tracking-widest font-bold">Users Online</div>
+            </div>
+            <div>
+              <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 mb-2">
+                99.99%
+              </div>
+              <div className="text-gray-500 text-sm uppercase tracking-widest font-bold">Uptime</div>
+            </div>
+            <div>
+              <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-violet-600 mb-2">
+                5.0★
+              </div>
+              <div className="text-gray-500 text-sm uppercase tracking-widest font-bold">Rating</div>
+            </div>
+            <div>
+              <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400 mb-2">
+                2.5M+
+              </div>
+              <div className="text-gray-500 text-sm uppercase tracking-widest font-bold">Operations/Sec</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Final quote */}
+        <div className="mt-16 text-center">
+          <p className="text-3xl text-white font-bold mb-6 leading-relaxed" style={{
+            textShadow: '0 0 20px rgba(6, 182, 212, 0.3)'
+          }}>
+            "The most powerful platform I've ever used. Nothing else comes close."
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400 via-fuchsia-400 to-violet-400 border-2 border-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.5)]"></div>
+            <div className="text-left">
+              <div className="text-white font-black tracking-wide">ALEX RIVERA</div>
+              <div className="text-gray-500 text-sm tracking-wider">CTO • NEXUS SYSTEMS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+  `
+  },
+ {
+    name: "SoftPastelNatureCTA",
+    category: "Call to Action",
+    code: `
+function SoftPastelNatureCTA() {
+  return (
+    <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-32 px-6 relative overflow-hidden">
+      {/* Organic background elements */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-pink-200/40 to-purple-200/40 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-200/40 to-indigo-200/40 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Floating badge */}
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-8 py-4 rounded-full shadow-xl border border-purple-200">
+            <span className="text-2xl">✨</span>
+            <span className="text-purple-600 font-bold text-sm">Designed for Dreamers</span>
+          </div>
+        </div>
+
+        {/* Main headline */}
+        <div className="text-center mb-20">
+          <h1 className="text-7xl md:text-9xl font-black text-gray-800 mb-6 leading-none">
+            Create
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400">
+              Beautiful
+            </span>
+            <br />
+            Things
+          </h1>
+          <p className="text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            A platform that feels as good as it looks. Built with care for people who care.
+          </p>
+        </div>
+
+        {/* Feature cards in organic shapes */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          <div className="bg-white/70 backdrop-blur-sm rounded-[2.5rem] p-10 shadow-xl border border-pink-100 hover:shadow-2xl hover:scale-105 transition-all duration-500">
+            <div className="text-6xl mb-6">🌸</div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">Intuitive Design</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Everything exactly where you'd expect it. No learning curve, just pure creativity.
+            </p>
+          </div>
+
+          <div className="bg-white/70 backdrop-blur-sm rounded-[2.5rem] p-10 shadow-xl border border-purple-100 hover:shadow-2xl hover:scale-105 transition-all duration-500">
+            <div className="text-6xl mb-6">💝</div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">Made with Love</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Every pixel, every interaction thoughtfully crafted for your delight.
+            </p>
+          </div>
+
+          <div className="bg-white/70 backdrop-blur-sm rounded-[2.5rem] p-10 shadow-xl border border-blue-100 hover:shadow-2xl hover:scale-105 transition-all duration-500">
+            <div className="text-6xl mb-6">🌈</div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">Endlessly Flexible</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Adapt to your workflow, your style, your vision. Make it yours.
+            </p>
+          </div>
+        </div>
+
+        {/* Main CTA card */}
+        <div className="bg-white/80 backdrop-blur-lg rounded-[3rem] shadow-2xl border border-purple-100 p-12 md:p-16 mb-16">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            {/* Left side */}
+            <div>
+              <div className="inline-block bg-gradient-to-r from-pink-400 to-purple-400 text-white px-6 py-3 rounded-full font-bold text-sm mb-8 shadow-lg">
+                Special Offer — Limited Time
+              </div>
+
+              <h2 className="text-5xl font-black text-gray-800 mb-6 leading-tight">
+                Start Your
+                <br />
+                Creative Journey
+              </h2>
+
+              <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+                Join our community of creators, makers, and dreamers. Everything you need to bring your ideas to life.
+              </p>
+
+              <div className="space-y-5">
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-300 to-pink-400 flex items-center justify-center flex-shrink-0 shadow-md">
+                    <span className="text-white font-bold text-sm">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="text-gray-800 font-bold text-lg mb-1">Unlimited Projects</h4>
+                    <p className="text-gray-600">Create as many dreams as you can imagine</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-300 to-purple-400 flex items-center justify-center flex-shrink-0 shadow-md">
+                    <span className="text-white font-bold text-sm">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="text-gray-800 font-bold text-lg mb-1">Premium Templates</h4>
+                    <p className="text-gray-600">Start with beautiful designs instantly</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-300 to-blue-400 flex items-center justify-center flex-shrink-0 shadow-md">
+                    <span className="text-white font-bold text-sm">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="text-gray-800 font-bold text-lg mb-1">Caring Support</h4>
+                    <p className="text-gray-600">Real humans who genuinely want to help</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-300 to-purple-400 flex items-center justify-center flex-shrink-0 shadow-md">
+                    <span className="text-white font-bold text-sm">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="text-gray-800 font-bold text-lg mb-1">Regular Updates</h4>
+                    <p className="text-gray-600">New features every month, always improving</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right side - pricing */}
+            <div>
+              <div className="bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-[2.5rem] p-12 shadow-2xl mb-8 text-center text-white">
+                <div className="text-white/80 line-through text-xl mb-3">$59/month</div>
+                <div className="flex items-baseline justify-center gap-3 mb-4">
+                  <span className="text-7xl font-black">$39</span>
+                  <span className="text-2xl font-bold">/month</span>
+                </div>
+                <div className="bg-yellow-300 text-gray-800 px-6 py-2 rounded-full inline-block font-bold text-sm shadow-lg">
+                  Save $240 per year
+                </div>
+                <p className="text-white/90 text-sm mt-6">
+                  Billed annually at $468
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <button className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-10 py-6 rounded-full font-bold text-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                  Start Creating Today
+                </button>
+
+                <button className="w-full bg-white hover:bg-gray-50 text-gray-700 px-10 py-5 rounded-full font-bold text-lg border-2 border-gray-200 transition-all duration-300">
+                  Take a Tour First
+                </button>
+              </div>
+
+              <p className="text-gray-500 text-sm text-center mt-6">
+                ✨ 30-day money-back guarantee • No questions asked
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Social proof */}
+        <div className="bg-white/70 backdrop-blur-sm rounded-[2.5rem] p-10 shadow-xl border border-purple-100">
+          <div className="text-center mb-10">
+            <h3 className="text-3xl font-bold text-gray-800 mb-3">Loved by Creators Worldwide</h3>
+            <p className="text-gray-600">Join our growing community of happy users</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-12">
+            <div>
+              <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 mb-2">
+                45K+
+              </div>
+              <div className="text-gray-600 text-sm font-medium">Happy Creators</div>
+            </div>
+            <div>
+              <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600 mb-2">
+                4.9★
+              </div>
+              <div className="text-gray-600 text-sm font-medium">App Store Rating</div>
+            </div>
+            <div>
+              <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 mb-2">
+                120+
+              </div>
+              <div className="text-gray-600 text-sm font-medium">Countries</div>
+            </div>
+            <div>
+              <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 mb-2">
+                1M+
+              </div>
+              <div className="text-gray-600 text-sm font-medium">Projects Created</div>
+            </div>
+          </div>
+
+          {/* Testimonial */}
+          <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-3xl p-8 border border-purple-100">
+            <p className="text-2xl text-gray-700 font-semibold mb-6 leading-relaxed text-center">
+              "This platform has completely transformed how I work. It's beautiful, intuitive, and just makes me happy every time I use it."
+            </p>
+            <div className="flex items-center justify-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300 border-4 border-white shadow-lg"></div>
+              <div>
+                <div className="text-gray-800 font-bold text-lg">Emma Thompson</div>
+                <div className="text-gray-600">Creative Director & Designer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
   `
   },
  {
