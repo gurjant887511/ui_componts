@@ -26580,10 +26580,851 @@ function SoftPastelNatureCTA() {
   `
   },
  {
-    name: "Header",
-    category: "Cards",
+    name: "LogoCloudShowcase4",
+    category: "Logo Cloud",
     code: `
+function LogoCloudShowcase4() {
+  const companies = [
+    { name: 'nexaflow', logo: '/logos/nexaflow.png' },
+    { name: 'stripe', logo: '/logos/stripe.png' },
+    { name: 'quantumedge', logo: '/logos/quantumedge.png' },
+    { name: 'synergyhub', logo: '/logos/synergyhub.png' },
+    { name: 'pulsecore', logo: '/logos/pulsecore.png' },
+    { name: 'velocityx', logo: '/logos/velocityx.png' },
+    { name: 'novasphere', logo: '/logos/novasphere.png' },
+    { name: 'zenithwave', logo: '/logos/zenithwave.png' },
+    { name: 'techvault', logo: '/logos/techvault.png' },
+    { name: 'dataflow', logo: '/logos/dataflow.png' }
+  ];
+  
+  const duplicated = [...companies, ...companies];
+  
+  return (
+    <div className="bg-slate-950 py-16 overflow-hidden">
+      <div className="relative">
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-950 via-slate-950 to-transparent z-10"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-950 via-slate-950 to-transparent z-10"></div>
+        <div className="flex">
+          <div 
+            className="flex whitespace-nowrap"
+            style={{
+              animation: 'scrollLogos 30s linear infinite'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.animationPlayState = 'paused';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.animationPlayState = 'running';
+            }}
+          >
+            {duplicated.map((company, idx) => (
+              <div key={idx} className="inline-flex items-center justify-center mx-12">
+                <img 
+                  src={company.logo} 
+                  alt={company.name}
+                  className="h-12 w-auto grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <style dangerouslySetInnerHTML={{
+        __html: '@keyframes scrollLogos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }'
+      }} />
+    </div>
+  );
+}
 
+  `
+  },
+ {
+    name: "Testimonials5",
+    category: "Testimonial",
+    code: `
+function Testimonials5() {
+  const testimonials = [
+    {
+      name: "Clara Vandenberg",
+      handle: "@clara.builds",
+      avatar: "https://i.pravatar.cc/150?img=1",
+      content: "It brings order without feeling rigid."
+    },
+    {
+      name: "Luca Bianchi",
+      handle: "@luca.ui",
+      avatar: "https://i.pravatar.cc/150?img=2",
+      content: "It fits into an existing codebase without drama."
+    },
+    {
+      name: "Sofia Müller",
+      handle: "@sofia.frontend",
+      avatar: "https://i.pravatar.cc/150?img=3",
+      content: "The spacing and typography defaults are better."
+    },
+    {
+      name: "Matteo Ricci",
+      handle: "@matteo.dev",
+      avatar: "https://i.pravatar.cc/150?img=4",
+      content: "We stopped arguing about UI details."
+    },
+    {
+      name: "Elodie Martin",
+      handle: "@elodie.ui",
+      avatar: "https://i.pravatar.cc/150?img=5",
+      content: "ForgeUI feels calm."
+    },
+    {
+      name: "Julian Weber",
+      handle: "@julian.codes",
+      avatar: "https://i.pravatar.cc/150?img=6",
+      content: "UI inconsistencies disappeared."
+    }
+  ];
+
+  const TestimonialCard = ({ testimonial }) => (
+    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mx-3" style={{ minWidth: '350px', display: 'inline-block' }}>
+      <p className="text-gray-300 text-sm leading-relaxed mb-6">
+        "{testimonial.content}"
+      </p>
+      <div className="flex items-center gap-3">
+        <img 
+          src={testimonial.avatar} 
+          alt={testimonial.name}
+          className="w-10 h-10 rounded-full object-cover"
+        />
+        <div>
+          <h4 className="text-white font-semibold text-sm">{testimonial.name}</h4>
+          <p className="text-gray-500 text-xs">{testimonial.handle}</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="bg-black py-24 px-4">
+      <div className="max-w-7xl mx-auto">
+        
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Words from our customers
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Feedback from people using our product in their projects
+          </p>
+        </div>
+
+        <div className="overflow-hidden">
+          <marquee behavior="scroll" direction="left" scrollamount="3">
+            {testimonials.map((testimonial, idx) => (
+              <TestimonialCard key={idx} testimonial={testimonial} />
+            ))}
+          </marquee>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+  `
+  },
+ {
+    name: "FeatureGrid6",
+    category: "Feature",
+    code: `
+function FeatureGrid6() {
+  const features = [
+    {
+      icon: '📊',
+      title: 'ANALYTICS DASHBOARD',
+      badge: 'PRO',
+      description: 'Real-time insights and data visualization with advanced reporting tools.',
+      gradient: 'from-purple-500 to-indigo-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-purple-500/50">
+          <div className="space-y-2">
+            <div className="flex items-end justify-between gap-1 h-16">
+              <div className="w-2 bg-gray-700 rounded-t-lg h-8 group-hover:bg-gradient-to-t group-hover:from-purple-500 group-hover:to-indigo-500 group-hover:h-10 transition-all"></div>
+              <div className="w-2 bg-gray-700 rounded-t-lg h-12 group-hover:bg-gradient-to-t group-hover:from-purple-500 group-hover:to-indigo-500 group-hover:h-14 transition-all delay-75"></div>
+              <div className="w-2 bg-gray-700 rounded-t-lg h-6 group-hover:bg-gradient-to-t group-hover:from-purple-500 group-hover:to-indigo-500 group-hover:h-8 transition-all delay-100"></div>
+              <div className="w-2 bg-gray-700 rounded-t-lg h-14 group-hover:bg-gradient-to-t group-hover:from-purple-500 group-hover:to-indigo-500 group-hover:h-16 transition-all delay-150"></div>
+              <div className="w-2 bg-gray-700 rounded-t-lg h-10 group-hover:bg-gradient-to-t group-hover:from-purple-500 group-hover:to-indigo-500 group-hover:h-12 transition-all delay-200"></div>
+            </div>
+            <div className="h-1 bg-gray-800 rounded-full"></div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🎥',
+      title: 'VIDEO CONFERENCE',
+      badge: 'NEW',
+      description: 'Crystal-clear video calls with screen sharing and recording capabilities.',
+      gradient: 'from-green-500 to-emerald-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-green-500/50">
+          <div className="grid grid-cols-2 gap-2">
+            <div className="aspect-square bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg flex items-center justify-center group-hover:from-green-500/40 group-hover:to-emerald-500/40 transition-all">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 group-hover:scale-110 transition-all"></div>
+            </div>
+            <div className="aspect-square bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg flex items-center justify-center group-hover:from-green-500/40 group-hover:to-emerald-500/40 transition-all delay-75">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 group-hover:scale-110 transition-all"></div>
+            </div>
+          </div>
+          <div className="mt-2 flex items-center justify-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center group-hover:shadow-lg group-hover:shadow-green-500/80 transition-all">
+              <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '💾',
+      title: 'CLOUD STORAGE',
+      badge: 'SYNC',
+      description: 'Secure file storage with automatic backup and cross-device sync.',
+      gradient: 'from-sky-500 to-blue-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-sky-500/50">
+          <div className="flex flex-col items-center justify-center space-y-3">
+            <div className="relative">
+              <div className="w-16 h-12 bg-gradient-to-br from-sky-500/30 to-blue-500/30 rounded-lg group-hover:from-sky-500/50 group-hover:to-blue-500/50 transition-all"></div>
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-sky-500 to-blue-500 rounded-lg group-hover:scale-110 transition-all"></div>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-1.5 h-1.5 bg-sky-500 rounded-full group-hover:shadow-lg group-hover:shadow-sky-500/80 animate-bounce"></div>
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full group-hover:shadow-lg group-hover:shadow-blue-500/80 animate-bounce delay-100"></div>
+              <div className="w-1.5 h-1.5 bg-sky-400 rounded-full group-hover:shadow-lg group-hover:shadow-sky-400/80 animate-bounce delay-200"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '✅',
+      title: 'TASK MANAGER',
+      badge: null,
+      description: 'Organize projects with kanban boards, timelines, and team assignments.',
+      gradient: 'from-orange-500 to-red-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-orange-500/50">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/20 transition-all"></div>
+              <div className="h-2 flex-1 bg-gray-800 rounded-full"></div>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded border-2 border-orange-500 bg-orange-500/20 relative group-hover:bg-orange-500 transition-all">
+                <svg className="w-3 h-3 text-white absolute inset-0 m-auto opacity-0 group-hover:opacity-100 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div className="h-2 flex-1 bg-gray-800 rounded-full"></div>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded border-2 border-gray-700 group-hover:border-red-500 group-hover:bg-red-500/20 transition-all delay-75"></div>
+              <div className="h-2 flex-1 bg-gray-800 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '👥',
+      title: 'TEAM COLLABORATION',
+      badge: 'HOT',
+      description: 'Seamless teamwork with shared workspaces and real-time collaboration.',
+      gradient: 'from-fuchsia-500 to-pink-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-fuchsia-500/50">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-500/30 to-pink-500/30 border-2 border-fuchsia-500 group-hover:scale-110 transition-all"></div>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-500/30 to-pink-500/30 border-2 border-pink-500 -ml-3 group-hover:scale-110 transition-all delay-75"></div>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-500/30 to-pink-500/30 border-2 border-fuchsia-400 -ml-3 group-hover:scale-110 transition-all delay-150"></div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white text-xs px-3 py-1 rounded-full font-bold group-hover:shadow-lg group-hover:shadow-fuchsia-500/50 transition-all">
+              +12 Active
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🔒',
+      title: 'SECURITY SHIELD',
+      badge: 'SAFE',
+      description: 'Enterprise-grade encryption with two-factor authentication and monitoring.',
+      gradient: 'from-yellow-500 to-amber-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-yellow-500/50">
+          <div className="flex items-center justify-center">
+            <div className="relative">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-2xl group-hover:from-yellow-500/40 group-hover:to-amber-500/40 transition-all"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <svg className="w-10 h-10 text-yellow-500 group-hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse group-hover:shadow-lg group-hover:shadow-green-500/80"></div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="inline-block bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 border border-purple-500/30 px-5 py-2 rounded-full mb-6">
+            <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold text-sm tracking-wider">✨ PREMIUM FEATURES</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+            Tools That Work
+            <br />
+            <span className="text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text">
+              As Hard As You Do
+            </span>
+          </h2>
+          <p className="text-gray-400 text-xl max-w-2xl mx-auto leading-relaxed">
+            Built for creators, optimized for performance, designed for scale
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
+            <div 
+              key={idx}
+              className="group bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-800 rounded-3xl p-8 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-3 transition-all duration-500 cursor-pointer relative overflow-hidden"
+            >
+              <div className={
+                "absolute -top-20 -right-20 w-60 h-60 bg-gradient-to-br " + feature.gradient + " opacity-0 group-hover:opacity-20 rounded-full blur-3xl transition-all duration-700"
+              }></div>
+              
+              <div className={
+                "absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-tr " + feature.gradient + " opacity-0 group-hover:opacity-10 rounded-full blur-3xl transition-all duration-700"
+              }></div>
+
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className={
+                      "w-14 h-14 bg-gradient-to-br " + feature.gradient + " rounded-2xl flex items-center justify-center text-3xl shadow-xl group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500"
+                    }>
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-base tracking-wide group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all">
+                        {feature.title}
+                      </h3>
+                    </div>
+                  </div>
+                  {feature.badge && (
+                    <span className={
+                      "bg-gradient-to-r " + feature.gradient + " text-white text-xs px-3 py-1 rounded-full font-black shadow-lg uppercase tracking-wider"
+                    }>
+                      {feature.badge}
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed group-hover:text-gray-300 transition-colors">
+                  {feature.description}
+                </p>
+
+                <div className="mt-6">
+                  {feature.preview}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "FeatureGrid7",
+    category: "Feature",
+    code: `
+function FeatureGrid7() {
+  const features = [
+    {
+      icon: '📧',
+      title: 'EMAIL MARKETING',
+      badge: 'AUTO',
+      description: 'Create stunning campaigns with drag-and-drop builder and A/B testing.',
+      gradient: 'from-cyan-500 to-blue-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-cyan-500/50">
+          <div className="space-y-2">
+            <div className="bg-gray-800 rounded-lg p-2 group-hover:bg-gradient-to-r group-hover:from-cyan-500/20 group-hover:to-blue-500/20 transition-all">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
+                <div className="h-1.5 w-20 bg-gray-700 rounded-full"></div>
+              </div>
+              <div className="h-1 w-full bg-gray-700 rounded-full mb-1"></div>
+              <div className="h-1 w-3/4 bg-gray-700 rounded-full"></div>
+            </div>
+            <div className="flex items-center justify-between px-2">
+              <div className="text-xs text-gray-600 group-hover:text-cyan-400 transition-colors">95% Open Rate</div>
+              <div className="w-3 h-3 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full group-hover:animate-ping"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🔌',
+      title: 'API INTEGRATION',
+      badge: 'DEV',
+      description: 'Connect with 1000+ apps using our RESTful API and webhooks.',
+      gradient: 'from-lime-500 to-green-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-lime-500/50">
+          <div className="flex items-center justify-between">
+            <div className="space-y-2">
+              <div className="w-10 h-10 bg-gradient-to-br from-lime-500/30 to-green-500/30 rounded-lg group-hover:from-lime-500/50 group-hover:to-green-500/50 transition-all"></div>
+              <div className="w-10 h-10 bg-gradient-to-br from-lime-500/30 to-green-500/30 rounded-lg group-hover:from-lime-500/50 group-hover:to-green-500/50 transition-all delay-75"></div>
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <div className="w-0.5 h-8 bg-gradient-to-b from-lime-500 to-green-500 group-hover:shadow-lg group-hover:shadow-lime-500/80 transition-all"></div>
+              <div className="w-2 h-2 bg-lime-500 rounded-full animate-pulse"></div>
+            </div>
+            <div className="space-y-2">
+              <div className="w-10 h-10 bg-gradient-to-br from-lime-500/30 to-green-500/30 rounded-lg group-hover:from-lime-500/50 group-hover:to-green-500/50 transition-all delay-100"></div>
+              <div className="w-10 h-10 bg-gradient-to-br from-lime-500/30 to-green-500/30 rounded-lg group-hover:from-lime-500/50 group-hover:to-green-500/50 transition-all delay-150"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '⚡',
+      title: 'PERFORMANCE MONITOR',
+      badge: 'LIVE',
+      description: 'Track system health, uptime, and response times in real-time.',
+      gradient: 'from-red-500 to-rose-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-red-500/50">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="text-xs text-gray-600">CPU</div>
+              <div className="text-xs text-red-400 font-bold group-hover:text-red-300 transition-colors">45%</div>
+            </div>
+            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-red-500 to-rose-500 rounded-full w-[45%] group-hover:shadow-lg group-hover:shadow-red-500/50 transition-all"></div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="text-xs text-gray-600">Memory</div>
+              <div className="text-xs text-rose-400 font-bold group-hover:text-rose-300 transition-colors">78%</div>
+            </div>
+            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-red-500 to-rose-500 rounded-full w-[78%] group-hover:shadow-lg group-hover:shadow-rose-500/50 transition-all"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📁',
+      title: 'FILE SHARING',
+      badge: null,
+      description: 'Share large files securely with password protection and expiry dates.',
+      gradient: 'from-teal-500 to-cyan-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-teal-500/50">
+          <div className="flex flex-col items-center justify-center space-y-3">
+            <div className="w-16 h-20 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 rounded-lg relative group-hover:from-teal-500/40 group-hover:to-cyan-500/40 transition-all">
+              <div className="absolute top-0 right-0 w-4 h-4 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-bl-lg"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-2xl">📄</div>
+              </div>
+            </div>
+            <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full w-0 group-hover:w-full transition-all duration-1000"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🔔',
+      title: 'NOTIFICATIONS',
+      badge: 'PUSH',
+      description: 'Multi-channel alerts via email, SMS, push, and in-app messages.',
+      gradient: 'from-orange-500 to-amber-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-orange-500/50">
+          <div className="space-y-2">
+            <div className="flex items-start gap-2 opacity-60 group-hover:opacity-100 transition-all">
+              <div className="w-2 h-2 bg-orange-500 rounded-full mt-1"></div>
+              <div className="flex-1 space-y-1">
+                <div className="h-1.5 w-16 bg-gray-700 rounded-full"></div>
+                <div className="h-1 w-full bg-gray-800 rounded-full"></div>
+              </div>
+            </div>
+            <div className="flex items-start gap-2 bg-gradient-to-r from-orange-500/20 to-amber-500/20 p-2 rounded-lg group-hover:from-orange-500/30 group-hover:to-amber-500/30 transition-all">
+              <div className="w-2 h-2 bg-amber-500 rounded-full mt-1 animate-pulse"></div>
+              <div className="flex-1 space-y-1">
+                <div className="h-1.5 w-20 bg-gray-600 rounded-full"></div>
+                <div className="h-1 w-full bg-gray-700 rounded-full"></div>
+              </div>
+            </div>
+            <div className="flex items-start gap-2 opacity-40 group-hover:opacity-70 transition-all">
+              <div className="w-2 h-2 bg-orange-400 rounded-full mt-1"></div>
+              <div className="flex-1 space-y-1">
+                <div className="h-1.5 w-14 bg-gray-700 rounded-full"></div>
+                <div className="h-1 w-3/4 bg-gray-800 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🌙',
+      title: 'DARK MODE',
+      badge: 'THEME',
+      description: 'Eye-friendly interface with automatic theme switching and customization.',
+      gradient: 'from-slate-500 to-gray-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-slate-500/50">
+          <div className="flex items-center justify-center gap-2">
+            <div className="relative">
+              <div className="w-12 h-6 bg-gray-800 rounded-full group-hover:bg-gradient-to-r group-hover:from-slate-500/30 group-hover:to-gray-500/30 transition-all"></div>
+              <div className="absolute top-0.5 left-0.5 w-5 h-5 bg-gradient-to-br from-slate-400 to-gray-400 rounded-full group-hover:translate-x-6 transition-all duration-500 shadow-lg"></div>
+            </div>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            <div className="h-8 bg-gray-900 rounded group-hover:bg-gray-800 transition-all"></div>
+            <div className="h-8 bg-white/10 rounded group-hover:bg-white/20 transition-all"></div>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="inline-block bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 border border-purple-500/30 px-5 py-2 rounded-full mb-6">
+            <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold text-sm tracking-wider">✨ PREMIUM FEATURES</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+            Tools That Work
+            <br />
+            <span className="text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text">
+              As Hard As You Do
+            </span>
+          </h2>
+          <p className="text-gray-400 text-xl max-w-2xl mx-auto leading-relaxed">
+            Built for creators, optimized for performance, designed for scale
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
+            <div 
+              key={idx}
+              className="group bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-800 rounded-3xl p-8 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-3 transition-all duration-500 cursor-pointer relative overflow-hidden"
+            >
+              <div className={
+                "absolute -top-20 -right-20 w-60 h-60 bg-gradient-to-br " + feature.gradient + " opacity-0 group-hover:opacity-20 rounded-full blur-3xl transition-all duration-700"
+              }></div>
+              
+              <div className={
+                "absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-tr " + feature.gradient + " opacity-0 group-hover:opacity-10 rounded-full blur-3xl transition-all duration-700"
+              }></div>
+
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className={
+                      "w-14 h-14 bg-gradient-to-br " + feature.gradient + " rounded-2xl flex items-center justify-center text-3xl shadow-xl group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500"
+                    }>
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-base tracking-wide group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all">
+                        {feature.title}
+                      </h3>
+                    </div>
+                  </div>
+                  {feature.badge && (
+                    <span className={
+                      "bg-gradient-to-r " + feature.gradient + " text-white text-xs px-3 py-1 rounded-full font-black shadow-lg uppercase tracking-wider"
+                    }>
+                      {feature.badge}
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed group-hover:text-gray-300 transition-colors">
+                  {feature.description}
+                </p>
+
+                <div className="mt-6">
+                  {feature.preview}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  `
+  },
+ {
+    name: "FeatureGrid8",
+    category: "Feature",
+    code: `
+function FeatureGrid8() {
+  const features = [
+    {
+      icon: '🎨',
+      title: 'DESIGN STUDIO',
+      badge: 'PRO',
+      description: 'Professional design tools with templates, assets, and brand kit.',
+      gradient: 'from-pink-500 to-rose-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-pink-500/50">
+          <div className="grid grid-cols-3 gap-1 mb-2">
+            <div className="h-8 bg-gradient-to-br from-pink-500/30 to-rose-500/30 rounded group-hover:from-pink-500/50 group-hover:to-rose-500/50 transition-all"></div>
+            <div className="h-8 bg-gradient-to-br from-pink-500/30 to-rose-500/30 rounded group-hover:from-pink-500/50 group-hover:to-rose-500/50 transition-all delay-75"></div>
+            <div className="h-8 bg-gradient-to-br from-pink-500/30 to-rose-500/30 rounded group-hover:from-pink-500/50 group-hover:to-rose-500/50 transition-all delay-150"></div>
+          </div>
+          <div className="flex items-center justify-center gap-1">
+            <div className="w-6 h-6 bg-pink-500 rounded-full group-hover:scale-110 transition-all"></div>
+            <div className="w-6 h-6 bg-rose-500 rounded-full group-hover:scale-110 transition-all delay-75"></div>
+            <div className="w-6 h-6 bg-pink-400 rounded-full group-hover:scale-110 transition-all delay-150"></div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🚀',
+      title: 'DEPLOYMENT',
+      badge: 'FAST',
+      description: 'One-click deployment to cloud with automatic scaling and CDN.',
+      gradient: 'from-blue-500 to-indigo-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-blue-500/50">
+          <div className="flex flex-col items-center justify-center space-y-3">
+            <div className="relative">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-all">
+                <svg className="w-6 h-6 text-white transform -rotate-45" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+              </div>
+              <div className="absolute -top-1 -right-1 w-16 h-16 border-2 border-blue-500/30 rounded-full group-hover:scale-150 transition-all duration-700"></div>
+            </div>
+            <div className="flex gap-1">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce"></div>
+              <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-bounce delay-100"></div>
+              <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce delay-200"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '💳',
+      title: 'PAYMENT GATEWAY',
+      badge: 'SECURE',
+      description: 'Accept payments worldwide with support for all major payment methods.',
+      gradient: 'from-green-500 to-teal-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-green-500/50">
+          <div className="bg-gradient-to-br from-green-500/20 to-teal-500/20 rounded-lg p-3 group-hover:from-green-500/30 group-hover:to-teal-500/30 transition-all">
+            <div className="flex items-center justify-between mb-2">
+              <div className="w-8 h-6 bg-gradient-to-br from-green-500 to-teal-500 rounded"></div>
+              <div className="w-4 h-4 bg-green-400 rounded-full"></div>
+            </div>
+            <div className="space-y-1">
+              <div className="h-1 w-3/4 bg-gray-700 rounded-full"></div>
+              <div className="h-1 w-1/2 bg-gray-700 rounded-full"></div>
+            </div>
+            <div className="mt-2 flex items-center justify-end">
+              <div className="text-xs font-bold text-green-400 group-hover:text-green-300 transition-colors">✓ Secured</div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📱',
+      title: 'MOBILE APP',
+      badge: 'iOS/Android',
+      description: 'Native mobile experience with offline mode and push notifications.',
+      gradient: 'from-violet-500 to-fuchsia-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-violet-500/50">
+          <div className="flex items-center justify-center">
+            <div className="w-20 h-28 bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 rounded-2xl border-2 border-violet-500/50 relative group-hover:from-violet-500/30 group-hover:to-fuchsia-500/30 transition-all">
+              <div className="absolute top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-gray-700 rounded-full"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="space-y-1">
+                  <div className="h-1 w-12 bg-violet-500 rounded-full group-hover:bg-gradient-to-r group-hover:from-violet-500 group-hover:to-fuchsia-500 transition-all"></div>
+                  <div className="h-1 w-10 bg-violet-400 rounded-full group-hover:bg-gradient-to-r group-hover:from-violet-400 group-hover:to-fuchsia-400 transition-all delay-75"></div>
+                  <div className="h-1 w-8 bg-violet-300 rounded-full group-hover:bg-gradient-to-r group-hover:from-violet-300 group-hover:to-fuchsia-300 transition-all delay-150"></div>
+                </div>
+              </div>
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-8 h-8 border-2 border-violet-500/50 rounded-full group-hover:bg-violet-500/20 transition-all"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '🤖',
+      title: 'CHATBOT AI',
+      badge: 'AI',
+      description: 'Intelligent customer support with natural language understanding.',
+      gradient: 'from-cyan-500 to-teal-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-cyan-500/50">
+          <div className="space-y-2">
+            <div className="flex items-start gap-2">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex-shrink-0"></div>
+              <div className="bg-gray-800 rounded-2xl rounded-tl-none px-3 py-2 flex-1 group-hover:bg-gradient-to-br group-hover:from-cyan-500/20 group-hover:to-teal-500/20 transition-all">
+                <div className="h-1 w-16 bg-gray-700 rounded-full mb-1"></div>
+                <div className="h-1 w-12 bg-gray-700 rounded-full"></div>
+              </div>
+            </div>
+            <div className="flex items-start gap-2 justify-end">
+              <div className="bg-gradient-to-br from-cyan-500/30 to-teal-500/30 rounded-2xl rounded-tr-none px-3 py-2 max-w-[70%] group-hover:from-cyan-500/50 group-hover:to-teal-500/50 transition-all">
+                <div className="h-1 w-14 bg-gray-600 rounded-full"></div>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 ml-8">
+              <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-bounce"></div>
+              <div className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-bounce delay-100"></div>
+              <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce delay-200"></div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      icon: '📈',
+      title: 'GROWTH TOOLS',
+      badge: 'BOOST',
+      description: 'SEO optimization, A/B testing, and conversion rate analytics.',
+      gradient: 'from-emerald-500 to-green-500',
+      preview: (
+        <div className="bg-black/40 rounded-lg p-4 transition-all group-hover:bg-black/60 group-hover:border group-hover:border-emerald-500/50">
+          <div className="relative h-20">
+            <svg className="w-full h-full" viewBox="0 0 100 60">
+              <path 
+                d="M 0,50 L 20,45 L 40,35 L 60,25 L 80,15 L 100,10" 
+                stroke="url(#gradient)" 
+                strokeWidth="2" 
+                fill="none"
+                className="group-hover:stroke-[3] transition-all"
+              />
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#10b981" />
+                  <stop offset="100%" stopColor="#22c55e" />
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="10" r="3" className="fill-emerald-500 group-hover:r-4 transition-all">
+                <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite" />
+              </circle>
+            </svg>
+            <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-2">
+              <div className="text-xs text-emerald-500 font-bold">+247%</div>
+              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <div className="bg-black min-h-screen py-20 px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="inline-block bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 border border-purple-500/30 px-5 py-2 rounded-full mb-6">
+            <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold text-sm tracking-wider">✨ PREMIUM FEATURES</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+            Tools That Work
+            <br />
+            <span className="text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text">
+              As Hard As You Do
+            </span>
+          </h2>
+          <p className="text-gray-400 text-xl max-w-2xl mx-auto leading-relaxed">
+            Built for creators, optimized for performance, designed for scale
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
+            <div 
+              key={idx}
+              className="group bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-800 rounded-3xl p-8 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-3 transition-all duration-500 cursor-pointer relative overflow-hidden"
+            >
+              <div className={
+                "absolute -top-20 -right-20 w-60 h-60 bg-gradient-to-br " + feature.gradient + " opacity-0 group-hover:opacity-20 rounded-full blur-3xl transition-all duration-700"
+              }></div>
+              
+              <div className={
+                "absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-tr " + feature.gradient + " opacity-0 group-hover:opacity-10 rounded-full blur-3xl transition-all duration-700"
+              }></div>
+
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className={
+                      "w-14 h-14 bg-gradient-to-br " + feature.gradient + " rounded-2xl flex items-center justify-center text-3xl shadow-xl group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500"
+                    }>
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-base tracking-wide group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all">
+                        {feature.title}
+                      </h3>
+                    </div>
+                  </div>
+                  {feature.badge && (
+                    <span className={
+                      "bg-gradient-to-r " + feature.gradient + " text-white text-xs px-3 py-1 rounded-full font-black shadow-lg uppercase tracking-wider"
+                    }>
+                      {feature.badge}
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed group-hover:text-gray-300 transition-colors">
+                  {feature.description}
+                </p>
+
+                <div className="mt-6">
+                  {feature.preview}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
   `
   },
