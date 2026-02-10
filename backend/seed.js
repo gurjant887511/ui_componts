@@ -27428,6 +27428,1109 @@ function FeatureGrid8() {
 
   `
   },
+ {
+    name: "EditorialCTA",
+    category: "Call to Action",
+    code: `
+function EditorialCTA() {
+  return (
+    <div className="bg-white py-24 px-6 relative overflow-hidden">
+      {/* Colorful Background Shapes */}
+      <div className="absolute top-20 -right-20 w-80 h-80 bg-yellow-300 rounded-full opacity-60 blur-3xl"></div>
+      <div className="absolute bottom-40 -left-20 w-96 h-96 bg-blue-400 rounded-full opacity-40 blur-3xl"></div>
+      <div className="absolute top-1/2 right-1/4 w-60 h-60 bg-red-400 rounded-full opacity-50 blur-3xl"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Magazine Header */}
+        <div className="flex items-center justify-between mb-16 pb-6 border-b-4 border-black">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg"></div>
+            <div>
+              <div className="font-black text-2xl tracking-tight">CREATIVEHUB</div>
+              <div className="text-xs uppercase tracking-widest text-gray-600">Est. 2024</div>
+            </div>
+          </div>
+          <div className="hidden md:flex gap-6 text-sm font-bold uppercase">
+            <span className="hover:text-blue-500 cursor-pointer transition-colors">Features</span>
+            <span className="hover:text-blue-500 cursor-pointer transition-colors">Pricing</span>
+            <span className="hover:text-blue-500 cursor-pointer transition-colors">About</span>
+          </div>
+        </div>
+
+        {/* Hero Layout - Magazine Style */}
+        <div className="grid lg:grid-cols-12 gap-12 mb-20">
+          
+          {/* Left Column - Big Statement */}
+          <div className="lg:col-span-7">
+            <div className="bg-gradient-to-br from-yellow-300 via-orange-300 to-red-400 p-2 mb-8 inline-block transform -rotate-2">
+              <span className="bg-white px-4 py-2 inline-block font-black text-sm uppercase tracking-wide">
+                🔥 Hot Off The Press
+              </span>
+            </div>
+
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black leading-none mb-8 tracking-tighter">
+              <span className="block text-black">YOUR</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">IDEAS</span>
+              <span className="block text-black">AMPLIFIED</span>
+            </h1>
+
+            <div className="bg-black text-white p-8 mb-8 transform rotate-1">
+              <p className="text-2xl font-bold leading-relaxed">
+                Stop dreaming. Start building. 
+                <span className="text-yellow-300"> We give you the megaphone.</span>
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-bold text-sm">
+                #CreativeTools
+              </div>
+              <div className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-bold text-sm">
+                #Collaboration
+              </div>
+              <div className="bg-pink-100 text-pink-800 px-4 py-2 rounded-full font-bold text-sm">
+                #Innovation
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - CTA Card */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-8">
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                
+                <div className="bg-yellow-300 inline-block px-4 py-1 mb-6 font-black text-xs uppercase tracking-wider transform -rotate-1">
+                  Limited Offer
+                </div>
+
+                <h2 className="text-4xl font-black mb-4">GET STARTED FREE</h2>
+                
+                <div className="flex items-end gap-2 mb-6">
+                  <span className="text-7xl font-black">$0</span>
+                  <span className="text-2xl font-bold text-gray-600 mb-2">/forever</span>
+                </div>
+
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 bg-green-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-4 h-4 text-white font-bold" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <span className="font-bold text-lg">Unlimited Projects</span>
+                      <p className="text-sm text-gray-600">Create as many as you want, whenever you want</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 bg-blue-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-4 h-4 text-white font-bold" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <span className="font-bold text-lg">AI Superpowers</span>
+                      <p className="text-sm text-gray-600">Smart tools that make you look like a genius</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 bg-purple-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-4 h-4 text-white font-bold" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <span className="font-bold text-lg">Team Collaboration</span>
+                      <p className="text-sm text-gray-600">Work together in real-time, no limits</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <button className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-black text-xl py-5 px-8 mb-4 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-200 uppercase tracking-wide">
+                  Join Now — It's Free!
+                </button>
+
+                <p className="text-center text-sm text-gray-600 font-bold">
+                  No credit card • Cancel anytime • Seriously, it's free
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature Blocks - Newspaper Style */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          
+          <div className="border-4 border-black p-6 hover:bg-yellow-50 transition-colors group">
+            <div className="text-5xl mb-4">🚀</div>
+            <div className="border-b-2 border-black pb-2 mb-4">
+              <h3 className="text-2xl font-black uppercase">Ship Faster</h3>
+            </div>
+            <p className="text-gray-700 font-medium leading-relaxed">
+              From idea to launch in record time. Our tools are built for speed demons who hate waiting around.
+            </p>
+            <div className="mt-4 font-black text-sm uppercase text-blue-600 group-hover:underline cursor-pointer">
+              Learn More →
+            </div>
+          </div>
+
+          <div className="border-4 border-black p-6 hover:bg-blue-50 transition-colors group">
+            <div className="text-5xl mb-4">🎨</div>
+            <div className="border-b-2 border-black pb-2 mb-4">
+              <h3 className="text-2xl font-black uppercase">Design Like A Pro</h3>
+            </div>
+            <p className="text-gray-700 font-medium leading-relaxed">
+              Professional-grade tools that don't require a design degree. Make beautiful things, easily.
+            </p>
+            <div className="mt-4 font-black text-sm uppercase text-purple-600 group-hover:underline cursor-pointer">
+              Explore Tools →
+            </div>
+          </div>
+
+          <div className="border-4 border-black p-6 hover:bg-pink-50 transition-colors group">
+            <div className="text-5xl mb-4">🌟</div>
+            <div className="border-b-2 border-black pb-2 mb-4">
+              <h3 className="text-2xl font-black uppercase">Stand Out</h3>
+            </div>
+            <p className="text-gray-700 font-medium leading-relaxed">
+              Cookie-cutter is boring. Our platform helps you create work that gets noticed and remembered.
+            </p>
+            <div className="mt-4 font-black text-sm uppercase text-pink-600 group-hover:underline cursor-pointer">
+              See Examples →
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Section - Magazine Callout */}
+        <div className="bg-black text-white p-12 mb-20 transform -rotate-1">
+          <div className="transform rotate-1">
+            <h2 className="text-4xl md:text-6xl font-black mb-12 text-center">
+              THE NUMBERS DON'T LIE
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl font-black text-yellow-300 mb-2">1M+</div>
+                <div className="text-sm uppercase tracking-widest font-bold">Creators</div>
+              </div>
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl font-black text-blue-300 mb-2">24/7</div>
+                <div className="text-sm uppercase tracking-widest font-bold">Support</div>
+              </div>
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl font-black text-purple-300 mb-2">99%</div>
+                <div className="text-sm uppercase tracking-widest font-bold">Happy Users</div>
+              </div>
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl font-black text-pink-300 mb-2">∞</div>
+                <div className="text-sm uppercase tracking-widest font-bold">Possibilities</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Testimonial - Pull Quote Style */}
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <div className="relative">
+            <div className="text-yellow-400 text-[200px] leading-none absolute -top-16 -left-8 font-serif opacity-20">"</div>
+            <div className="relative z-10 pt-8">
+              <p className="text-3xl md:text-5xl font-black leading-tight mb-8">
+                I built my entire business on this platform. 
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"> Best decision ever.</span>
+              </p>
+              <div className="flex items-center justify-center gap-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full border-4 border-black"></div>
+                <div className="text-left">
+                  <div className="font-black text-xl">Alex Rivera</div>
+                  <div className="font-bold text-gray-600">Founder, PixelPerfect Studio</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Final CTA - Bold */}
+        <div className="text-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-12 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+          <h2 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase leading-tight">
+            What Are You<br />Waiting For?
+          </h2>
+          <p className="text-2xl text-white font-bold mb-8 max-w-2xl mx-auto">
+            Thousands of creators are already building. Join them today.
+          </p>
+          <button className="bg-yellow-300 text-black font-black text-2xl py-6 px-12 border-4 border-black hover:bg-yellow-400 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-8px] hover:translate-y-[-8px] transition-all duration-200 uppercase">
+            Start Creating Now
+          </button>
+          <p className="text-white font-bold mt-6 text-sm">
+            ✨ Setup takes 30 seconds • No credit card • Free forever
+          </p>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+
+  `
+  },
+ {
+    name: "CyberpunkCTA",
+    category: "Call to Action",
+    code: `
+function CyberpunkCTA() {
+  return (
+    <div className="bg-black min-h-screen py-24 px-6 relative overflow-hidden">
+      {/* Neon Grid Background */}
+      <div className="absolute inset-0 opacity-30">
+  <div className="absolute inset-0 grid grid-cols-[repeat(auto-fill,50px)] grid-rows-[repeat(auto-fill,50px)] gap-0">
+    {[...Array(500)].map((_, i) => (
+      <div key={i} className="border-r border-b border-cyan-400/10"></div>
+    ))}
+  </div>
+</div>
+
+      {/* Glitch Scanlines */}
+      <div className="absolute inset-0 pointer-events-none opacity-10">
+        <div className="w-full h-full" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,255,0.03) 2px, rgba(0,255,255,0.03) 4px)'
+        }}></div>
+      </div>
+
+      {/* Neon Glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-[150px] opacity-20"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-fuchsia-500 rounded-full blur-[150px] opacity-20"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Glitch Header */}
+        <div className="text-center mb-20">
+          <div className="inline-block relative group">
+            <div className="absolute inset-0 bg-cyan-400 blur-xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
+            <div className="relative border border-cyan-400 px-6 py-2 font-mono text-cyan-400 text-sm uppercase tracking-widest" style={{
+              boxShadow: '0 0 20px rgba(6, 182, 212, 0.5), inset 0 0 20px rgba(6, 182, 212, 0.1)',
+              textShadow: '0 0 10px rgba(6, 182, 212, 0.8)'
+            }}>
+              [ SYSTEM_ONLINE ]
+            </div>
+          </div>
+        </div>
+
+        {/* Main Grid Layout */}
+        <div className="grid lg:grid-cols-2 gap-12 mb-20">
+          
+          {/* Left: Typography */}
+          <div>
+            <div className="mb-12">
+              <h1 className="text-7xl md:text-8xl font-black mb-4 leading-none">
+                <span className="text-white block" style={{textShadow: '0 0 30px rgba(255,255,255,0.5)'}}>
+                  NEXT
+                </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-purple-500 block" style={{
+                  textShadow: '0 0 30px rgba(6, 182, 212, 0.5)'
+                }}>
+                  LEVEL
+                </span>
+                <span className="text-white block" style={{textShadow: '0 0 30px rgba(255,255,255,0.5)'}}>
+                  TECH
+                </span>
+              </h1>
+            </div>
+
+            <div className="border-l-4 border-cyan-400 pl-6 mb-12" style={{
+              boxShadow: '-5px 0 20px rgba(6, 182, 212, 0.3)'
+            }}>
+              <p className="text-xl text-gray-300 leading-relaxed mb-4 font-mono">
+                &gt; Quantum-powered infrastructure
+              </p>
+              <p className="text-xl text-gray-300 leading-relaxed mb-4 font-mono">
+                &gt; Neural network integration
+              </p>
+              <p className="text-xl text-gray-300 leading-relaxed font-mono">
+                &gt; Zero-latency performance
+              </p>
+            </div>
+
+            {/* Terminal-style Stats */}
+            <div className="bg-gray-900 border border-cyan-400/30 p-6 font-mono text-sm" style={{
+              boxShadow: '0 0 20px rgba(6, 182, 212, 0.2)'
+            }}>
+              <div className="text-cyan-400 mb-2">$ system.stats --display</div>
+              <div className="text-gray-400 space-y-1">
+                <div className="flex justify-between">
+                  <span>ACTIVE_NODES:</span>
+                  <span className="text-fuchsia-400">3,847,293</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>UPTIME:</span>
+                  <span className="text-green-400">99.99%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>PROCESSING_SPEED:</span>
+                  <span className="text-yellow-400">MAXIMUM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>THREAT_LEVEL:</span>
+                  <span className="text-cyan-400">PROTECTED</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: CTA Panel */}
+          <div className="lg:mt-12">
+            <div className="relative">
+              {/* Neon Border Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 via-fuchsia-500 to-purple-500 blur-sm opacity-50"></div>
+              
+              <div className="relative bg-gray-900 border border-cyan-400/50 p-8" style={{
+                boxShadow: '0 0 40px rgba(6, 182, 212, 0.3), inset 0 0 40px rgba(0, 0, 0, 0.8)'
+              }}>
+                {/* Corner Brackets */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-400"></div>
+                <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-400"></div>
+                <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-cyan-400"></div>
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyan-400"></div>
+
+                <div className="font-mono">
+                  <div className="text-cyan-400 text-xs mb-6 tracking-widest">
+                    [ ACCESS_LEVEL: UNRESTRICTED ]
+                  </div>
+
+                  <div className="mb-8">
+                    <div className="text-6xl font-black text-white mb-2" style={{
+                      textShadow: '0 0 20px rgba(255, 255, 255, 0.5)'
+                    }}>
+                      $0
+                    </div>
+                    <div className="text-fuchsia-400 font-bold mb-2" style={{
+                      textShadow: '0 0 10px rgba(217, 70, 239, 0.8)'
+                    }}>
+                      LIFETIME_ACCESS
+                    </div>
+                    <div className="text-gray-400 text-sm">
+                      &gt; No payment required
+                      <br />
+                      &gt; Instant activation
+                    </div>
+                  </div>
+
+                  {/* Features List */}
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-start gap-3 group">
+                      <div className="w-6 h-6 bg-cyan-400 flex items-center justify-center text-black font-bold text-xs mt-1" style={{
+                        boxShadow: '0 0 15px rgba(6, 182, 212, 0.8)'
+                      }}>
+                        ✓
+                      </div>
+                      <div className="text-gray-300">
+                        <div className="font-bold text-white">QUANTUM_STORAGE</div>
+                        <div className="text-sm">Unlimited data capacity</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 group">
+                      <div className="w-6 h-6 bg-fuchsia-400 flex items-center justify-center text-black font-bold text-xs mt-1" style={{
+                        boxShadow: '0 0 15px rgba(217, 70, 239, 0.8)'
+                      }}>
+                        ✓
+                      </div>
+                      <div className="text-gray-300">
+                        <div className="font-bold text-white">AI_NEURAL_NET</div>
+                        <div className="text-sm">Advanced intelligence core</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 group">
+                      <div className="w-6 h-6 bg-purple-400 flex items-center justify-center text-black font-bold text-xs mt-1" style={{
+                        boxShadow: '0 0 15px rgba(168, 85, 247, 0.8)'
+                      }}>
+                        ✓
+                      </div>
+                      <div className="text-gray-300">
+                        <div className="font-bold text-white">FORTRESS_SECURITY</div>
+                        <div className="text-sm">Military-grade encryption</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <button className="w-full relative group mb-4 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-fuchsia-500 to-purple-500" style={{
+                      boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)'
+                    }}></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="relative py-4 px-6 font-black text-white tracking-wider flex items-center justify-center gap-2">
+                      <span>&gt; INITIALIZE_ACCESS</span>
+                      <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </div>
+                  </button>
+
+                  <button className="w-full border-2 border-cyan-400 text-cyan-400 py-4 px-6 font-bold tracking-wider hover:bg-cyan-400 hover:text-black transition-all duration-300" style={{
+                    boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)'
+                  }}>
+                    &gt; VIEW_DEMO
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-20">
+          <div className="group relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+            <div className="relative bg-gray-900 border border-cyan-400/30 p-6 hover:border-cyan-400 transition-all duration-300" style={{
+              boxShadow: '0 0 20px rgba(6, 182, 212, 0.1)'
+            }}>
+              <div className="text-5xl mb-4">⚡</div>
+              <div className="font-mono">
+                <h3 className="text-xl font-bold text-cyan-400 mb-2" style={{
+                  textShadow: '0 0 10px rgba(6, 182, 212, 0.8)'
+                }}>
+                  HYPER_SPEED
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  Microsecond response times. Experience the speed of light.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="group relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-transparent blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+            <div className="relative bg-gray-900 border border-fuchsia-400/30 p-6 hover:border-fuchsia-400 transition-all duration-300" style={{
+              boxShadow: '0 0 20px rgba(217, 70, 239, 0.1)'
+            }}>
+              <div className="text-5xl mb-4">🛡️</div>
+              <div className="font-mono">
+                <h3 className="text-xl font-bold text-fuchsia-400 mb-2" style={{
+                  textShadow: '0 0 10px rgba(217, 70, 239, 0.8)'
+                }}>
+                  MAX_SECURITY
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  Impenetrable defenses. Your data is locked down tight.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="group relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+            <div className="relative bg-gray-900 border border-purple-400/30 p-6 hover:border-purple-400 transition-all duration-300" style={{
+              boxShadow: '0 0 20px rgba(168, 85, 247, 0.1)'
+            }}>
+              <div className="text-5xl mb-4">🌐</div>
+              <div className="font-mono">
+                <h3 className="text-xl font-bold text-purple-400 mb-2" style={{
+                  textShadow: '0 0 10px rgba(168, 85, 247, 0.8)'
+                }}>
+                  GLOBAL_MESH
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  Distributed worldwide. Always online, everywhere.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Terminal Message */}
+        <div className="bg-black border-2 border-green-400 p-8 font-mono text-sm" style={{
+          boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)'
+        }}>
+          <div className="text-green-400 mb-4">
+            user@system:~$ join_network --now
+          </div>
+          <div className="text-gray-400 space-y-2">
+            <div>&gt; Connecting to neural network...</div>
+            <div>&gt; Authentication: <span className="text-green-400">GRANTED</span></div>
+            <div>&gt; Access level: <span className="text-cyan-400">UNLIMITED</span></div>
+            <div>&gt; Status: <span className="text-yellow-400">READY TO DEPLOY</span></div>
+          </div>
+          <div className="text-green-400 mt-4 animate-pulse">
+            █
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+
+
+  `
+  },
+ {
+    name: "ArtDecoCTA",
+    category: "Call to Action",
+    code: `
+function ArtDecoCTA() {
+  return (
+    <div className="bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 py-24 px-6 relative overflow-hidden">
+      {/* Art Deco Pattern Overlay */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+         backgroundImage: 'repeating-linear-gradient(...), repeating-linear-gradient(...)'
+
+        }}></div>
+      </div>
+
+      {/* Geometric Accent Lines */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-amber-400/30 to-transparent"></div>
+      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-amber-400/30 to-transparent"></div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        
+        {/* Art Deco Header Ornament */}
+        <div className="text-center mb-16">
+          <div className="inline-block relative">
+            {/* Geometric Frame */}
+            <div className="absolute -inset-4">
+              <div className="w-full h-full border-t border-b border-amber-400/50" style={{
+                clipPath: 'polygon(20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%, 0% 50%)'
+              }}></div>
+            </div>
+            <div className="relative bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-900 px-8 py-3 font-bold tracking-[0.3em] text-sm">
+              PREMIUM EXPERIENCE
+            </div>
+          </div>
+        </div>
+
+        {/* Elegant Typography */}
+        <div className="text-center mb-20">
+          <div className="inline-block mb-12">
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold mb-4 leading-none tracking-tight">
+              <span className="block text-amber-400" style={{
+                textShadow: '0 0 40px rgba(251, 191, 36, 0.5), 2px 2px 0 rgba(251, 191, 36, 0.3)'
+              }}>
+                ELEGANCE
+              </span>
+              <span className="block text-white font-light italic" style={{
+                fontFamily: 'Georgia, serif',
+                textShadow: '0 0 20px rgba(255, 255, 255, 0.3)'
+              }}>
+                Refined
+              </span>
+            </h1>
+            
+            {/* Art Deco Divider */}
+            <div className="flex items-center justify-center gap-4 my-8">
+              <div className="w-16 h-px bg-gradient-to-r from-transparent to-amber-400"></div>
+              <div className="w-3 h-3 bg-amber-400 rotate-45"></div>
+              <div className="w-24 h-px bg-amber-400"></div>
+              <div className="w-3 h-3 bg-amber-400 rotate-45"></div>
+              <div className="w-16 h-px bg-gradient-to-l from-transparent to-amber-400"></div>
+            </div>
+          </div>
+
+          <p className="text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light" style={{
+            fontFamily: 'Georgia, serif'
+          }}>
+            Where sophistication meets innovation. A platform designed for those who appreciate the finer details.
+          </p>
+        </div>
+
+        {/* Main Content - Geometric Layout */}
+        <div className="mb-20">
+          {/* Hexagonal Container */}
+          <div className="relative max-w-5xl mx-auto">
+            {/* Decorative Corners */}
+            <div className="absolute -top-8 -left-8 w-16 h-16">
+              <div className="w-full h-full border-t-4 border-l-4 border-amber-400" style={{
+                clipPath: 'polygon(0 0, 100% 0, 0 100%)'
+              }}></div>
+            </div>
+            <div className="absolute -top-8 -right-8 w-16 h-16">
+              <div className="w-full h-full border-t-4 border-r-4 border-amber-400" style={{
+                clipPath: 'polygon(0 0, 100% 0, 100% 100%)'
+              }}></div>
+            </div>
+            <div className="absolute -bottom-8 -left-8 w-16 h-16">
+              <div className="w-full h-full border-b-4 border-l-4 border-amber-400" style={{
+                clipPath: 'polygon(0 0, 0 100%, 100% 100%)'
+              }}></div>
+            </div>
+            <div className="absolute -bottom-8 -right-8 w-16 h-16">
+              <div className="w-full h-full border-b-4 border-r-4 border-amber-400" style={{
+                clipPath: 'polygon(100% 0, 100% 100%, 0 100%)'
+              }}></div>
+            </div>
+
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-amber-400/50 p-12 shadow-2xl">
+              
+              <div className="grid md:grid-cols-2 gap-12 mb-12">
+                
+                {/* Left: Benefits */}
+                <div className="space-y-8">
+                  <div className="flex items-start gap-6">
+                    <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-amber-400 to-yellow-600 flex items-center justify-center relative">
+                      <div className="absolute inset-0 border-2 border-amber-400/30" style={{
+                        clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
+                      }}></div>
+                      <span className="text-2xl">◆</span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-amber-400 mb-2 tracking-wide">Curated Excellence</h3>
+                      <p className="text-gray-400 leading-relaxed">
+                        Every element meticulously crafted to perfection. No detail overlooked.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-6">
+                    <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-amber-400 to-yellow-600 flex items-center justify-center relative">
+                      <div className="absolute inset-0 border-2 border-amber-400/30" style={{
+                        clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
+                      }}></div>
+                      <span className="text-2xl">◆</span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-amber-400 mb-2 tracking-wide">Timeless Design</h3>
+                      <p className="text-gray-400 leading-relaxed">
+                        Classic aesthetics meet modern functionality in perfect harmony.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-6">
+                    <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-amber-400 to-yellow-600 flex items-center justify-center relative">
+                      <div className="absolute inset-0 border-2 border-amber-400/30" style={{
+                        clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
+                      }}></div>
+                      <span className="text-2xl">◆</span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-amber-400 mb-2 tracking-wide">Exclusive Access</h3>
+                      <p className="text-gray-400 leading-relaxed">
+                        Join an elite circle of discerning professionals and creators.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Pricing Showcase */}
+                <div className="flex flex-col justify-center">
+                  <div className="text-center relative">
+                    {/* Decorative Frame */}
+                    <div className="absolute inset-0 border-4 border-amber-400/20" style={{
+                      clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)'
+                    }}></div>
+                    
+                    <div className="relative py-12 px-8">
+                      <div className="text-amber-400 text-sm tracking-[0.3em] uppercase mb-4 font-bold">
+                        Introductory Offer
+                      </div>
+                      <div className="mb-6">
+                        <div className="text-8xl font-bold text-white mb-2" style={{
+                          fontFamily: 'Georgia, serif',
+                          textShadow: '0 0 30px rgba(251, 191, 36, 0.3)'
+                        }}>
+                          $0
+                        </div>
+                        <div className="text-gray-400 font-light tracking-wide">
+                          Full access. Forever.
+                        </div>
+                      </div>
+
+                      {/* Divider */}
+                      <div className="flex items-center justify-center gap-3 my-6">
+                        <div className="w-12 h-px bg-amber-400/50"></div>
+                        <div className="w-2 h-2 bg-amber-400 rotate-45"></div>
+                        <div className="w-12 h-px bg-amber-400/50"></div>
+                      </div>
+
+                      <div className="space-y-3 text-gray-300 text-sm">
+                        <div className="flex items-center justify-center gap-2">
+                          <span className="text-amber-400">✦</span>
+                          <span>Premium features included</span>
+                        </div>
+                        <div className="flex items-center justify-center gap-2">
+                          <span className="text-amber-400">✦</span>
+                          <span>Unlimited projects</span>
+                        </div>
+                        <div className="flex items-center justify-center gap-2">
+                          <span className="text-amber-400">✦</span>
+                          <span>Concierge support</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="group relative px-10 py-5 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <span className="relative text-slate-900 font-bold tracking-widest text-sm uppercase flex items-center justify-center gap-3">
+                    Begin Your Journey
+                    <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </button>
+
+                <button className="px-10 py-5 border-2 border-amber-400 text-amber-400 font-bold tracking-widest text-sm uppercase hover:bg-amber-400/10 transition-all duration-300">
+                  Explore Features
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Geometric Feature Cards */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-amber-400/5 blur-xl"></div>
+            <div className="relative bg-slate-800/50 border-2 border-amber-400/30 p-8 hover:border-amber-400 transition-all duration-300" style={{
+              clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%)'
+            }}>
+              <div className="text-5xl mb-4 text-amber-400">◈</div>
+              <h3 className="text-2xl font-bold text-white mb-3 tracking-wide">Precision</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Every calculation exact. Every result flawless. Engineering excellence at its finest.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative group mt-8 md:mt-0">
+            <div className="absolute inset-0 bg-amber-400/5 blur-xl"></div>
+            <div className="relative bg-slate-800/50 border-2 border-amber-400/30 p-8 hover:border-amber-400 transition-all duration-300" style={{
+              clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%)'
+            }}>
+              <div className="text-5xl mb-4 text-amber-400">◈</div>
+              <h3 className="text-2xl font-bold text-white mb-3 tracking-wide">Heritage</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Built on principles of excellence that have stood the test of time.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative group">
+            <div className="absolute inset-0 bg-amber-400/5 blur-xl"></div>
+            <div className="relative bg-slate-800/50 border-2 border-amber-400/30 p-8 hover:border-amber-400 transition-all duration-300" style={{
+              clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%)'
+            }}>
+              <div className="text-5xl mb-4 text-amber-400">◈</div>
+              <h3 className="text-2xl font-bold text-white mb-3 tracking-wide">Prestige</h3>
+              <p className="text-gray-400 leading-relaxed">
+                A mark of distinction. Reserved for those who demand the extraordinary.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Art Deco Stats */}
+        <div className="relative max-w-4xl mx-auto">
+          <div className="absolute inset-0 border-4 border-amber-400/20" style={{
+            clipPath: 'polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%)'
+          }}></div>
+          
+          <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-12">
+            <div className="grid grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-5xl font-bold text-amber-400 mb-2" style={{fontFamily: 'Georgia, serif'}}>
+                  250K
+                </div>
+                <div className="text-xs text-gray-400 uppercase tracking-[0.2em]">Elite Members</div>
+              </div>
+              <div>
+                <div className="text-5xl font-bold text-amber-400 mb-2" style={{fontFamily: 'Georgia, serif'}}>
+                  100%
+                </div>
+                <div className="text-xs text-gray-400 uppercase tracking-[0.2em]">Satisfaction</div>
+              </div>
+              <div>
+                <div className="text-5xl font-bold text-amber-400 mb-2" style={{fontFamily: 'Georgia, serif'}}>
+                  24/7
+                </div>
+                <div className="text-xs text-gray-400 uppercase tracking-[0.2em]">Concierge</div>
+              </div>
+              <div>
+                <div className="text-5xl font-bold text-amber-400 mb-2" style={{fontFamily: 'Georgia, serif'}}>
+                  EST
+                </div>
+                <div className="text-xs text-gray-400 uppercase tracking-[0.2em]">2024</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+
+  `
+  },
+ {
+    name: "PlayfulCTA",
+    category: "Call to Action",
+    code: `
+function PlayfulCTA() {
+  return (
+    <div className="bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-100 py-24 px-6 relative overflow-hidden min-h-screen">
+      {/* Floating Shapes */}
+      <div className="absolute top-20 left-10 w-32 h-32 bg-pink-400 rounded-full opacity-40 blur-2xl animate-bounce" style={{animationDuration: '3s'}}></div>
+      <div className="absolute bottom-40 right-20 w-40 h-40 bg-blue-400 rounded-full opacity-40 blur-2xl animate-bounce" style={{animationDuration: '4s', animationDelay: '1s'}}></div>
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-green-400 rounded-full opacity-40 blur-2xl animate-bounce" style={{animationDuration: '3.5s', animationDelay: '0.5s'}}></div>
+      <div className="absolute top-1/3 right-1/3 w-28 h-28 bg-orange-400 rounded-full opacity-40 blur-2xl animate-bounce" style={{animationDuration: '4.5s', animationDelay: '1.5s'}}></div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        
+        {/* Fun Badge */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-3 bg-white rounded-full px-6 py-3 shadow-lg border-4 border-pink-300 transform hover:rotate-3 transition-transform">
+            <span className="text-3xl animate-spin" style={{animationDuration: '3s'}}>🎉</span>
+            <span className="font-black text-gray-800 text-sm uppercase tracking-wider">Something Amazing is Here!</span>
+            <span className="text-3xl animate-spin" style={{animationDuration: '3s', animationDirection: 'reverse'}}>✨</span>
+          </div>
+        </div>
+
+        {/* Big Fun Headline */}
+        <div className="text-center mb-16">
+          <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 leading-none">
+            <span className="block text-pink-500 transform hover:scale-110 transition-transform inline-block" style={{
+              textShadow: '4px 4px 0 rgba(236, 72, 153, 0.3)'
+            }}>
+              LET'S
+            </span>
+            <span className="block text-blue-500 transform hover:scale-110 transition-transform inline-block" style={{
+              textShadow: '4px 4px 0 rgba(59, 130, 246, 0.3)'
+            }}>
+              CREATE
+            </span>
+            <span className="block text-green-500 transform hover:scale-110 transition-transform inline-block" style={{
+              textShadow: '4px 4px 0 rgba(34, 197, 94, 0.3)'
+            }}>
+              MAGIC
+            </span>
+          </h1>
+          <div className="flex justify-center gap-4 mb-8">
+            <div className="w-16 h-16 bg-yellow-400 rounded-full animate-bounce"></div>
+            <div className="w-16 h-16 bg-pink-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+            <div className="w-16 h-16 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '0.4s'}}></div>
+          </div>
+          <p className="text-2xl md:text-3xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-bold">
+            The most fun you'll ever have building stuff! 
+            <span className="text-pink-500"> Seriously. </span>
+            <span className="text-blue-500">We're not even joking!</span>
+          </p>
+        </div>
+
+        {/* Main Playful Container */}
+        <div className="max-w-5xl mx-auto mb-16">
+          <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-2xl border-8 border-dashed border-pink-300 transform hover:rotate-1 transition-transform">
+            
+            <div className="grid md:grid-cols-2 gap-12 mb-12">
+              
+              {/* Left: Fun Features */}
+              <div className="space-y-6">
+                <h2 className="text-4xl font-black text-gray-800 mb-8">
+                  Why You'll Love It! 💖
+                </h2>
+
+                <div className="bg-gradient-to-br from-pink-100 to-pink-200 rounded-3xl p-6 border-4 border-pink-400 shadow-lg transform hover:scale-105 transition-transform">
+                  <div className="flex items-start gap-4">
+                    <div className="text-5xl">🚀</div>
+                    <div>
+                      <h3 className="font-black text-xl text-gray-800 mb-2">Super Duper Fast!</h3>
+                      <p className="text-gray-700 font-medium">
+                        Zoom zoom! Everything happens instantly. No waiting around!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-3xl p-6 border-4 border-blue-400 shadow-lg transform hover:scale-105 transition-transform">
+                  <div className="flex items-start gap-4">
+                    <div className="text-5xl">🎨</div>
+                    <div>
+                      <h3 className="font-black text-xl text-gray-800 mb-2">Easy Peasy!</h3>
+                      <p className="text-gray-700 font-medium">
+                        So simple, even your grandma could use it! (No offense, grandma!)
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-3xl p-6 border-4 border-green-400 shadow-lg transform hover:scale-105 transition-transform">
+                  <div className="flex items-start gap-4">
+                    <div className="text-5xl">🎪</div>
+                    <div>
+                      <h3 className="font-black text-xl text-gray-800 mb-2">Tons of Fun!</h3>
+                      <p className="text-gray-700 font-medium">
+                        Work doesn't have to be boring! Let's make it a party! 🎉
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Pricing Fun */}
+              <div className="flex flex-col justify-center">
+                <div className="bg-gradient-to-br from-yellow-200 to-orange-200 rounded-3xl p-8 border-8 border-yellow-400 shadow-xl transform hover:rotate-3 transition-transform">
+                  <div className="text-center mb-6">
+                    <div className="inline-block bg-red-500 text-white font-black px-6 py-2 rounded-full text-sm transform -rotate-3 mb-4">
+                      🔥 HOT DEAL! 🔥
+                    </div>
+                    <div className="text-8xl font-black text-gray-800 mb-2" style={{
+                      textShadow: '3px 3px 0 rgba(0, 0, 0, 0.1)'
+                    }}>
+                      $0
+                    </div>
+                    <div className="text-2xl font-black text-gray-700">
+                      FREE FOREVER! 🎁
+                    </div>
+                    <p className="text-gray-700 font-bold mt-2">
+                      Yep, you read that right!
+                    </p>
+                  </div>
+
+                  <div className="space-y-3 mb-6">
+                    <div className="flex items-center gap-3 bg-white rounded-full px-4 py-3 shadow-md">
+                      <span className="text-2xl">✅</span>
+                      <span className="font-bold text-gray-800">Everything included!</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-white rounded-full px-4 py-3 shadow-md">
+                      <span className="text-2xl">✅</span>
+                      <span className="font-bold text-gray-800">No tricks or traps!</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-white rounded-full px-4 py-3 shadow-md">
+                      <span className="text-2xl">✅</span>
+                      <span className="font-bold text-gray-800">Cancel whenever!</span>
+                    </div>
+                  </div>
+
+                  <div className="text-center text-sm text-gray-600 font-bold bg-white rounded-2xl p-3">
+                    😊 No credit card needed! Seriously!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Big CTA Button */}
+            <div className="text-center">
+              <button className="group relative bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-black text-2xl px-12 py-6 rounded-full shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300 border-8 border-white">
+                <span className="relative flex items-center gap-3">
+                  <span className="text-3xl">🎯</span>
+                  START THE FUN NOW!
+                  <span className="text-3xl group-hover:animate-spin">✨</span>
+                </span>
+              </button>
+              <p className="text-gray-600 font-bold mt-4 text-sm">
+                Takes like 10 seconds to start! ⚡
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Colorful Feature Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="bg-gradient-to-br from-pink-300 to-pink-400 rounded-3xl p-8 border-6 border-pink-500 shadow-xl transform hover:-rotate-3 hover:scale-105 transition-all duration-300">
+            <div className="text-6xl mb-4 text-center">🎮</div>
+            <h3 className="text-2xl font-black text-white text-center mb-3" style={{
+              textShadow: '2px 2px 0 rgba(0, 0, 0, 0.2)'
+            }}>
+              Play Mode
+            </h3>
+            <p className="text-white font-bold text-center leading-relaxed">
+              Turn work into play! Gamification makes everything more fun!
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-blue-300 to-blue-400 rounded-3xl p-8 border-6 border-blue-500 shadow-xl transform hover:rotate-3 hover:scale-105 transition-all duration-300">
+            <div className="text-6xl mb-4 text-center">🌈</div>
+            <h3 className="text-2xl font-black text-white text-center mb-3" style={{
+              textShadow: '2px 2px 0 rgba(0, 0, 0, 0.2)'
+            }}>
+              Super Colorful
+            </h3>
+            <p className="text-white font-bold text-center leading-relaxed">
+              Life's too short for boring colors! We've got ALL the colors!
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-green-300 to-green-400 rounded-3xl p-8 border-6 border-green-500 shadow-xl transform hover:-rotate-3 hover:scale-105 transition-all duration-300">
+            <div className="text-6xl mb-4 text-center">🤝</div>
+            <h3 className="text-2xl font-black text-white text-center mb-3" style={{
+              textShadow: '2px 2px 0 rgba(0, 0, 0, 0.2)'
+            }}>
+              Friends Unite!
+            </h3>
+            <p className="text-white font-bold text-center leading-relaxed">
+              Bring your squad! Everything's better with friends!
+            </p>
+          </div>
+        </div>
+
+        {/* Fun Stats */}
+        <div className="bg-white rounded-[3rem] p-10 border-8 border-dashed border-purple-300 shadow-2xl mb-16">
+          <h2 className="text-4xl font-black text-center text-gray-800 mb-10">
+            Look at These Cool Numbers! 📊
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center transform hover:scale-110 transition-transform">
+              <div className="text-6xl font-black text-pink-500 mb-2">1M+</div>
+              <div className="text-gray-700 font-bold uppercase text-sm">Happy People!</div>
+            </div>
+            <div className="text-center transform hover:scale-110 transition-transform">
+              <div className="text-6xl font-black text-blue-500 mb-2">∞</div>
+              <div className="text-gray-700 font-bold uppercase text-sm">Possibilities!</div>
+            </div>
+            <div className="text-center transform hover:scale-110 transition-transform">
+              <div className="text-6xl font-black text-green-500 mb-2">100%</div>
+              <div className="text-gray-700 font-bold uppercase text-sm">Fun Factor!</div>
+            </div>
+            <div className="text-center transform hover:scale-110 transition-transform">
+              <div className="text-6xl font-black text-orange-500 mb-2">24/7</div>
+              <div className="text-gray-700 font-bold uppercase text-sm">We're Here!</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Happy Testimonial */}
+        <div className="bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 rounded-[3rem] p-10 border-8 border-white shadow-2xl transform hover:rotate-1 transition-transform">
+          <div className="text-center">
+            <div className="text-7xl mb-6">😍</div>
+            <p className="text-3xl md:text-4xl font-black text-gray-800 mb-6 leading-tight" style={{
+              textShadow: '2px 2px 0 rgba(255, 255, 255, 0.5)'
+            }}>
+              "This is THE BEST THING EVER! I can't stop using it!"
+            </p>
+            <div className="flex items-center justify-center gap-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full border-4 border-white shadow-lg"></div>
+              <div className="text-left">
+                <div className="font-black text-xl text-gray-800">Jamie Super</div>
+                <div className="text-gray-700 font-bold">Super Happy Creator! 🎨</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+
+  `
+  },
+ {
+    name: "FeatureGrid8",
+    category: "Feature",
+    code: `
+
+
+  `
+  },
 
 
 
