@@ -370,7 +370,7 @@ function ComponentsPreviewPage({ isLoggedIn }) {
   return (
     <div className="flex h-screen w-full gap-0 overflow-hidden">
       {/* Left Sidebar */}
-      <div className="w-80 bg-gradient-to-b from-slate-900 to-slate-800 text-white overflow-y-auto border-r border-white/10">
+      <div className="w-44 md:w-80 bg-gradient-to-b from-slate-900 to-slate-800 text-white overflow-y-auto border-r border-white/10">
         <div className="p-4 sticky top-0 bg-slate-900/95 backdrop-blur z-10 border-b border-white/10">
           <h2 className="text-lg font-bold mb-4">Components</h2>
           
