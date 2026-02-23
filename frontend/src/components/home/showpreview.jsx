@@ -16,7 +16,7 @@ const Grid9Section = () => {
       <div className="max-w-6xl mx-auto">
         
         <h2 className="text-3xl font-bold text-center mb-12">
-          UI Components Collection
+          UI Inventory Collection
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">

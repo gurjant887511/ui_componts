@@ -212,6 +212,33 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
     }
   };
 
+  const handleOTPPaste = (e) => {
+    e.preventDefault();
+    
+    // Get pasted text from clipboard
+    const pastedText = e.clipboardData.getData('text');
+    
+    // Extract only digits
+    const digits = pastedText.replace(/\D/g, '').split('');
+    
+    // Fill OTP array with up to 6 digits
+    const newOTP = [...otp];
+    digits.slice(0, 6).forEach((digit, index) => {
+      newOTP[index] = digit;
+    });
+    
+    setOTP(newOTP);
+    
+    // Auto-focus to last filled input or next empty input
+    const lastFilledIndex = newOTP.findIndex((val, idx) => digits[idx] && !val);
+    const focusIndex = lastFilledIndex !== -1 ? lastFilledIndex : Math.min(digits.length, 5);
+    
+    setTimeout(() => {
+      const nextInput = document.getElementById(`otp-${focusIndex}`);
+      if (nextInput) nextInput.focus();
+    }, 0);
+  };
+
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
     console.log('✅ Form submitted - handleVerifyOTP triggered');
@@ -408,6 +435,7 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
                   value={digit}
                   onChange={(e) => handleOTPChange(index, e.target.value)}
                   onKeyDown={(e) => handleOTPKeyDown(index, e)}
+                  onPaste={handleOTPPaste}
                   disabled={loading}
                   inputMode="numeric"
                 />

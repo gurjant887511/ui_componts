@@ -151,7 +151,7 @@ export default function DynamicHero({ setActiveTab }) {
         <div className="flex justify-center mb-8 animate-fadeInDown">
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-400/30 backdrop-blur-xl">
             <Sparkles className="w-4 h-4 text-purple-300" />
-            <span className="text-sm font-medium text-purple-200">Welcome to UI Components</span>
+            <span className="text-sm font-medium text-purple-200">Welcome to UI Inventory </span>
           </div>
         </div>
 
