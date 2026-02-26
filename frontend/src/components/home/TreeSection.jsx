@@ -13,7 +13,7 @@ const TreeSection = () => {
   return (
     <section className="py-24 bg-black text-white px-6">
       <h2 className="text-3xl font-bold text-center mb-20">
-        UI Components Structure
+        UI Inventory Structure
       </h2>
 
       <div className="relative max-w-5xl mx-auto">

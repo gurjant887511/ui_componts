@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import { Component } from './models/ComponentModel.js';
 import { Sparkles, Zap, Heart, Star, TrendingUp, Award, Crown, Flame, Check } from 'lucide-react';
 
+dotenv.config();
+
  
 const components = [
   {
@@ -87,6 +89,7 @@ const components = [
     </div>
   );
 }
+
 
 `
   },
@@ -28539,7 +28542,8 @@ function PlayfulCTA() {
 // Use upsert: updates if exists by name, inserts if new
 async function seedComponents() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/ui_componts');
+    const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ui_componts';
+    await mongoose.connect(MONGO_URI);
     console.log('✅ Connected to MongoDB');
 
     for (const componentData of components) {

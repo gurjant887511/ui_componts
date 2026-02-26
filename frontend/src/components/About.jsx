@@ -8,10 +8,10 @@ export default function About() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              About UI Components
+              About UI Inventory
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Welcome to UI Components, a platform built for developers who want to move faster, build cleaner, and ship better React applications.
+              Welcome to UI Inventory, a platform built for developers who want to move faster, build cleaner, and ship better React applications.
             </p>
           </div>
 

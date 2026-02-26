@@ -134,23 +134,114 @@ const sendOTPEmail = async (email, otp) => {
       to: email,
       subject: 'Your OTP for Signup Verification',
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333;">Email Verification</h2>
-          <p style="font-size: 16px; color: #555;">
-            Welcome! To complete your signup, please use the OTP below:
-          </p>
-          <div style="background-color: #f0f0f0; padding: 20px; border-radius: 5px; text-align: center; margin: 20px 0;">
-            <h1 style="color: #22c55e; font-size: 32px; letter-spacing: 5px; margin: 0;">
-              ${otp}
-            </h1>
-          </div>
-          <p style="font-size: 14px; color: #999;">
-            This OTP will expire in 10 minutes.
-          </p>
-          <p style="font-size: 14px; color: #999;">
-            If you didn't request this, please ignore this email.
-          </p>
-        </div>
+        <div style="
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+">
+
+  <!-- Header -->
+  <div style="
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    padding: 24px;
+    text-align: center;
+  ">
+    <h1 style="
+      margin: 0;
+      color: #ffffff;
+      font-size: 26px;
+      letter-spacing: 0.5px;
+    ">
+      UIInventory
+    </h1>
+    <p style="
+      margin: 6px 0 0;
+      color: #dcfce7;
+      font-size: 14px;
+    ">
+      UI Components · Live Preview · Code
+    </p>
+  </div>
+
+  <!-- Body -->
+  <div style="padding: 32px;">
+    <h2 style="
+      margin-top: 0;
+      color: #111827;
+      font-size: 20px;
+    ">
+      Verify your email
+    </h2>
+
+    <p style="
+      font-size: 15px;
+      color: #4b5563;
+      line-height: 1.6;
+    ">
+      Welcome to <strong>UIInventory</strong> 🎉  
+      To complete your signup, please use the verification code below.
+    </p>
+
+    <!-- OTP Box -->
+    <div style="
+      margin: 28px 0;
+      padding: 22px;
+      background: #f0fdf4;
+      border: 1px dashed #22c55e;
+      border-radius: 10px;
+      text-align: center;
+    ">
+      <div style="
+        font-size: 13px;
+        color: #15803d;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+      ">
+        YOUR OTP CODE
+      </div>
+      <div style="
+        font-size: 36px;
+        font-weight: 700;
+        color: #22c55e;
+        letter-spacing: 6px;
+      ">
+        ${otp}
+      </div>
+    </div>
+
+    <p style="
+      font-size: 14px;
+      color: #6b7280;
+    ">
+      ⏱ This code will expire in <strong>10 minutes</strong>.
+    </p>
+
+    <p style="
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: 24px;
+    ">
+      If you didn’t request this email, you can safely ignore it.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div style="
+    background: #f9fafb;
+    padding: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #9ca3af;
+  ">
+    © ${new Date().getFullYear()} UIInventory. All rights reserved.
+  </div>
+
+</div>
+
       `
     };
 
@@ -894,6 +985,279 @@ app.get('/api/auth/debug-user/:email', async (req, res) => {
   } catch (err) {
     console.error('Debug user error:', err);
     res.status(500).json({ message: 'Error fetching user', error: err.message });
+  }
+});
+
+// Account Recovery - Verify unverified account
+app.post('/api/auth/verify-account', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+    
+    // Find the user
+    const user = await User.findOne({ email: normalizedEmail });
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // If already verified, return success
+    if (user.isVerified) {
+      return res.json({ 
+        success: true, 
+        message: 'Account is already verified!',
+        isVerified: true 
+      });
+    }
+
+    // Mark account as verified (account recovery for unverified accounts)
+    user.isVerified = true;
+    await user.save();
+
+    console.log(`[ACCOUNT RECOVERY] Account verified for: ${normalizedEmail}`);
+
+    res.json({ 
+      success: true, 
+      message: 'Account has been verified! You can now login.',
+      isVerified: true,
+      email: user.email
+    });
+  } catch (error) {
+    console.error('Account verification error:', error);
+    res.status(500).json({ 
+      message: 'Error verifying account',
+      error: error.message 
+    });
+  }
+});
+
+// Forgot Password - Send OTP
+app.post('/api/auth/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+    
+    // Find the user
+    const user = await User.findOne({ email: normalizedEmail });
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Generate OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+    // Save OTP to user
+    user.otp = otp;
+    user.otpExpiry = otpExpiry;
+    await user.save();
+
+    // Send OTP via email
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: normalizedEmail,
+        subject: 'Password Reset OTP - UI Components',
+        html: `
+          <h2>Password Reset Request</h2>
+          <p>Your OTP for password reset is: <strong>${otp}</strong></p>
+          <p>This OTP expires in 10 minutes.</p>
+          <p>If you didn't request this, please ignore this email.</p>
+        `,
+      });
+      console.log(`[FORGOT-PASSWORD] OTP sent to ${normalizedEmail}`);
+    } catch (emailErr) {
+      console.error('Error sending OTP email:', emailErr);
+    }
+
+    res.json({ 
+      success: true, 
+      message: 'OTP sent to your email. Check your inbox!',
+      email: normalizedEmail
+    });
+  } catch (error) {
+    console.error('Forgot password error:', error);
+    res.status(500).json({ 
+      message: 'Error processing password reset request',
+      error: error.message 
+    });
+  }
+});
+
+// Reset Password with OTP
+app.post('/api/auth/reset-password', async (req, res) => {
+  try {
+    const { email, otp, newPassword } = req.body;
+
+    if (!email || !otp || !newPassword) {
+      return res.status(400).json({ message: 'Email, OTP, and new password are required' });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+    
+    // Find the user
+    const user = await User.findOne({ email: normalizedEmail });
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Verify OTP
+    const dbOTP = String(user.otp || '').trim();
+    const providedOTP = String(otp).trim();
+    
+    if (dbOTP !== providedOTP) {
+      return res.status(400).json({ message: 'Invalid OTP' });
+    }
+
+    if (new Date() > user.otpExpiry) {
+      return res.status(400).json({ message: 'OTP has expired. Please request a new one.' });
+    }
+
+    // Validate new password
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters' });
+    }
+
+    // Hash and save new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    user.otp = null;
+    user.otpExpiry = null;
+    user.isVerified = true;
+    await user.save();
+
+    console.log(`[RESET-PASSWORD] Password reset successfully for ${normalizedEmail}`);
+
+    res.json({ 
+      success: true, 
+      message: 'Password reset successfully! You can now login with your new password.',
+      email: normalizedEmail
+    });
+  } catch (error) {
+    console.error('Reset password error:', error);
+    res.status(500).json({ 
+      message: 'Error resetting password',
+      error: error.message 
+    });
+  }
+});
+
+// Helper endpoint - Check all users and fix password issues
+app.post('/api/auth/fix-passwords', async (req, res) => {
+  try {
+    const { adminSecret } = req.body;
+    
+    // Simple security check
+    if (adminSecret !== 'temp-admin-secret-12345') {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
+
+    const users = await User.find({});
+    let fixed = 0;
+    const issues = [];
+
+    for (const user of users) {
+      // Check if password is empty or doesn't look like a hash
+      if (!user.password || user.password.length < 20) {
+        issues.push({
+          email: user.email,
+          problem: 'Password missing or too short',
+          passwordLength: user.password ? user.password.length : 0
+        });
+        
+        // Try to fix: set a default password or mark for reset
+        if (!user.password) {
+          // Set temporary password (user must reset)
+          user.password = await bcrypt.hash('temp-reset-required-' + Math.random(), 10);
+          user.isVerified = false; // Force re-verify
+          await user.save();
+          fixed++;
+        }
+      } else if (!user.password.startsWith('$2')) {
+        // Password doesn't look like bcrypt hash
+        issues.push({
+          email: user.email,
+          problem: 'Password not in bcrypt format',
+          passwordPreview: user.password.substring(0, 20)
+        });
+      }
+    }
+
+    res.json({
+      success: true,
+      totalUsers: users.length,
+      fixed: fixed,
+      issues: issues,
+      message: `Checked ${users.length} users. Fixed ${fixed} issues.`
+    });
+  } catch (error) {
+    console.error('Fix passwords error:', error);
+    res.status(500).json({ 
+      message: 'Error checking passwords',
+      error: error.message 
+    });
+  }
+});
+
+// One-time account recovery - Set a new password directly
+app.post('/api/auth/recover-account', async (req, res) => {
+  try {
+    const { email, recoverySecret, newPassword } = req.body;
+
+    if (!email || !newPassword) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
+
+    // Recovery secret for security
+    if (recoverySecret !== 'account-recovery-2025') {
+      return res.status(403).json({ message: 'Invalid recovery secret' });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+    const user = await User.findOne({ email: normalizedEmail });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Validate password
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters' });
+    }
+
+    // Hash and save password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    user.isVerified = true;
+    user.otp = null;
+    user.otpExpiry = null;
+    await user.save();
+
+    console.log(`[ACCOUNT-RECOVERY] Account recovered for ${normalizedEmail}`);
+
+    res.json({
+      success: true,
+      message: 'Account recovered successfully! You can now login with your new password.',
+      email: normalizedEmail
+    });
+  } catch (error) {
+    console.error('Account recovery error:', error);
+    res.status(500).json({
+      message: 'Error recovering account',
+      error: error.message
+    });
   }
 });
 
