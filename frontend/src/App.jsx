@@ -29,7 +29,7 @@ import './styles/globals.css';
 // import { atomDark } from "@codesandbox/sandpack-themes";
 // import ComponentLivePreview from './components/LivePreview';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:7000/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const COMPONENTS_LIST = [
 
@@ -211,8 +211,7 @@ function ComponentsPreviewPage({ isLoggedIn }) {
   useEffect(() => {
     async function fetchComponents() {
       try {
-        // Direct hardcoded API URL for development
-        const apiUrl = 'http://localhost:7000/api';
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
         console.log('Fetching from:', `${apiUrl}/components`);
         const res = await fetch(`${apiUrl}/components`, {
           method: 'GET',
@@ -1517,7 +1516,7 @@ function App() {
 
   const fetchComponents = async () => {
     try {
-      const response = await fetch('http://localhost:7000/api/components');
+      const response = await fetch(`${API_URL}/components`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

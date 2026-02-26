@@ -24,7 +24,8 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
       setError('');
       
       // Send token to backend for verification
-      const response = await fetch('http://localhost:7000/api/auth/google-signup', {
+      const apiBase = import.meta.env.VITE_API_URL || '/api';
+      const response = await fetch(`${apiBase}/auth/google-signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,7 +106,8 @@ function SignupModal({ isOpen, onClose, onSignupSuccess }) {
 
     try {
       // Send signup request to backend
-      const response = await fetch('http://localhost:7000/api/auth/signup', {
+      const apiBase = import.meta.env.VITE_API_URL || '/api';
+      const response = await fetch(`${apiBase}/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

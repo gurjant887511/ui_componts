@@ -23,7 +23,8 @@ app.use(cors({
   origin: (origin, callback) => {
     // allow requests with no origin (like curl, or server-to-server)
     if (!origin) return callback(null, true);
-    // permit development localhost ports (add more if needed)
+
+    // Base allowed origins for local development
     const allowed = [
       'http://localhost:5173',
       'http://localhost:5174',
@@ -36,10 +37,27 @@ app.use(cors({
       'http://localhost:3000',
       'http://localhost:5001'
     ];
+
+    // Add frontend URL from env (if provided) and server IP variants
+    const envFrontend = process.env.FRONTEND_URL;
+    if (envFrontend) {
+      allowed.push(envFrontend);
+      // also allow same host without port and with 0.0.0.0 style
+      try {
+        const parsed = new URL(envFrontend);
+        allowed.push(`${parsed.protocol}//${parsed.hostname}`);
+      } catch (e) {
+        // ignore parse errors
+      }
+    }
+
+    // Allow requests if origin is in allowed list
     if (allowed.indexOf(origin) !== -1) {
       return callback(null, true);
     }
-    // otherwise, allow but you can change to `callback(new Error('Not allowed'))` to block
+
+    // For convenience, allow but log unknown origins — change to block if desired
+    console.warn('CORS: allowing request from unknown origin:', origin);
     return callback(null, true);
   },
   credentials: true,

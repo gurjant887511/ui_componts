@@ -72,7 +72,8 @@ export default function ComponentsByCategory() {
   useEffect(() => {
     const fetchComponents = async () => {
       try {
-        const response = await fetch('http://localhost:7000/api/components');
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/components`);
         const data = await response.json();
 
         // Group components by category and subcategory

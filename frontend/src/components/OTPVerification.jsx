@@ -242,8 +242,8 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
     }
 
     setLoading(true);
-    // Use explicit backend URL (IPv4) to avoid host resolution issues in some environments
-    const apiUrl = 'http://127.0.0.1:7000/api';
+    // Use VITE_API_URL or fallback to relative /api
+    const apiUrl = import.meta.env.VITE_API_URL || '/api';
 
     try {
       // Normalize email
@@ -349,8 +349,8 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
     setError('');
 
     try {
-      // Use explicit backend URL (IPv4) to avoid host resolution issues in some environments
-      const apiUrl = 'http://127.0.0.1:7000/api';
+      // Use VITE_API_URL or fallback to relative /api
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
       
       const response = await fetch(`${apiUrl}/auth/resend-otp`, {
         method: 'POST',

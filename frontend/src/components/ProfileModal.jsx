@@ -13,7 +13,7 @@ function ProfileModal({ isOpen, onClose, userInfo, onUpdateProfile }) {
     
     setIsSaving(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:7000/api';
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
       const response = await fetch(`${apiUrl}/update-profile`, {
         method: 'PUT',
         headers: {

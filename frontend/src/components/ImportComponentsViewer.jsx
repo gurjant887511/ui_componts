@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ComponentLivePreview from './LivePreview';
 
 export default function ImportComponentsViewer() {
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5002/api';
+  const API_URL = import.meta.env.VITE_API_URL || '/api';
   const [items, setItems] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
