@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CodeDisplay from './CodeDisplay';
 import ComponentLivePreview from './LivePreview';
+import EditableCodePreview from './EditableCodePreview';
 
 const CARD_SUBCATEGORIES = {
   'Card Example': 'Basic Cards',
@@ -890,6 +891,17 @@ export default function ComponentsByCategory() {
                     <div className="bg-slate-950 rounded-lg overflow-hidden border border-gray-700 min-h-[250px] sm:min-h-[400px] flex-1">
                       <ComponentLivePreview code={selectedComponent.code} />
                     </div>
+                  </div>
+                </div>
+
+                {/* Editable Code Section */}
+                <div className="mt-8 sm:mt-12 border-t-4 border-purple-600 pt-8">
+                  <div className="text-lg sm:text-xl font-bold text-white mb-4 flex items-center gap-3">
+                    <span className="text-2xl">✏️</span> Editable Code (Live Preview)
+                  </div>
+                  <p className="text-gray-400 text-sm mb-4">Aap niche code ko edit kar sakte hain aur live preview dekh sakte hain. Preview button par click kar ke preview toggle karein.</p>
+                  <div className="bg-gray-800 rounded-xl p-4 border border-purple-700 shadow-lg">
+                    <EditableCodePreview initialCode={selectedComponent.code} />
                   </div>
                 </div>
               </div>

@@ -13,7 +13,7 @@ const OTPContainer = styled.div`
 const OTPCard = styled.div`
   background: white;
   border-radius: 12px;
-  padding: 40px;
+  padding: 25px 30px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   width: 100%;
@@ -216,24 +216,24 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
     e.preventDefault();
     
     // Get pasted text from clipboard
-    const pastedText = e.clipboardData.getData('text');
+    const pastedText = e.clipboardData.getData('text').trim();
     
     // Extract only digits
-    const digits = pastedText.replace(/\D/g, '').split('');
+    const digits = pastedText.replace(/\D/g, '').slice(0, 6).split('');
     
-    // Fill OTP array with up to 6 digits
-    const newOTP = [...otp];
-    digits.slice(0, 6).forEach((digit, index) => {
-      newOTP[index] = digit;
+    // Fill OTP array with the pasted digits
+    const newOTP = ['', '', '', '', '', ''];
+    digits.forEach((digit, index) => {
+      if (index < 6) {
+        newOTP[index] = digit;
+      }
     });
     
     setOTP(newOTP);
     
-    // Auto-focus to last filled input or next empty input
-    const lastFilledIndex = newOTP.findIndex((val, idx) => digits[idx] && !val);
-    const focusIndex = lastFilledIndex !== -1 ? lastFilledIndex : Math.min(digits.length, 5);
-    
+    // Auto-focus: if all 6 digits pasted, stay on last field; otherwise focus on next empty field
     setTimeout(() => {
+      const focusIndex = digits.length >= 6 ? 5 : Math.min(digits.length, 5);
       const nextInput = document.getElementById(`otp-${focusIndex}`);
       if (nextInput) nextInput.focus();
     }, 0);
@@ -414,7 +414,7 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
   };
 
   return (
-    <OTPContainer>
+    // <OTPContainer>
       <OTPCard>
         <Title>Verify Your Email</Title>
         <Subtitle>We sent a 6-digit code to {email}</Subtitle>
@@ -479,7 +479,7 @@ const OTPVerification = ({ email, userId, password, onVerificationSuccess }) => 
           </button>
         </ResendText>
       </OTPCard>
-    </OTPContainer>
+    // </OTPContainer>
   );
 };
 

@@ -156,7 +156,7 @@ const sendOTPEmail = async (email, otp) => {
       font-size: 26px;
       letter-spacing: 0.5px;
     ">
-      UIInventory
+      UI Inventory
     </h1>
     <p style="
       margin: 6px 0 0;
@@ -182,36 +182,51 @@ const sendOTPEmail = async (email, otp) => {
       color: #4b5563;
       line-height: 1.6;
     ">
-      Welcome to <strong>UIInventory</strong> 🎉  
+      Welcome to <strong>UI Inventory</strong> 🎉  
       To complete your signup, please use the verification code below.
     </p>
 
-    <!-- OTP Box -->
-    <div style="
-      margin: 28px 0;
-      padding: 22px;
-      background: #f0fdf4;
-      border: 1px dashed #22c55e;
-      border-radius: 10px;
-      text-align: center;
-    ">
-      <div style="
-        font-size: 13px;
-        color: #15803d;
-        margin-bottom: 8px;
-        letter-spacing: 1px;
-      ">
-        YOUR OTP CODE
-      </div>
-      <div style="
-        font-size: 36px;
-        font-weight: 700;
-        color: #22c55e;
-        letter-spacing: 6px;
-      ">
-        ${otp}
-      </div>
-    </div>
+<!-- OTP Box -->
+<div style="
+  margin: 28px 0;
+  padding: 22px;
+  background: #f0fdf4;
+  border: 1px dashed #22c55e;
+  border-radius: 10px;
+  text-align: center;
+">
+  <div style="
+    font-size: 13px;
+    color: #15803d;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  ">
+    YOUR OTP CODE
+  </div>
+
+  <!-- Copy-friendly OTP -->
+  <div style="
+    font-size: 36px;
+    font-weight: 700;
+    color: #22c55e;
+    letter-spacing: 6px;
+    font-family: monospace;
+    user-select: all;
+    -webkit-user-select: all;
+    -ms-user-select: all;
+    cursor: pointer;
+  ">
+    ${otp}
+  </div>
+
+  <div style="
+    margin-top: 8px;
+    font-size: 12px;
+    color: #166534;
+  ">
+    Click the code to select & copy
+  </div>
+</div>
 
     <p style="
       font-size: 14px;
@@ -237,7 +252,7 @@ const sendOTPEmail = async (email, otp) => {
     font-size: 12px;
     color: #9ca3af;
   ">
-    © ${new Date().getFullYear()} UIInventory. All rights reserved.
+    © ${new Date().getFullYear()} UI Inventory. All rights reserved.
   </div>
 
 </div>

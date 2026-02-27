@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from '../assets/logo.jpg';
 import { Link } from 'react-router-dom';
 import ProfileModal from './ProfileModal';
 
@@ -15,14 +16,15 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
       <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo/Brand */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center gap-2">
             <Link 
               to="/" 
               onClick={() => setActiveTab('home')} 
-              className="relative text-lg sm:text-2xl font-bold group"
+              className="flex items-center gap-2 relative text-lg sm:text-2xl font-bold group"
             >
+              {/* <img src={logo} alt="Logo" className="w-9 h-9 rounded-full shadow-md border-2 border-purple-400 bg-white object-cover" style={{marginRight: '6px'}} /> */}
               <span className="relative z-10 bg-gradient-to-r from-cyan-300 via-purple-300 to-cyan-400 bg-clip-text text-transparent">
-               UI Inventory 
+                UI Inventory
               </span>
               <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-500 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 rounded-lg"></span>
             </Link>
