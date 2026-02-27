@@ -54,6 +54,56 @@ export default function ComponentsByCategory() {
   const [filterMode, setFilterMode] = useState('all'); // 'all', 'cards', 'headers', 'footers', 'hero', 'logocloud', 'feature', 'pricing', 'faq', 'testimonial', 'cta'
   const [selectedHeaderType, setSelectedHeaderType] = useState('all'); // For header filtering
   const [fullScreenPreview, setFullScreenPreview] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(300); // Sidebar width in pixels
+  const [sidebarHeight, setSidebarHeight] = useState(600); // Sidebar height in pixels
+  const [showResizePanel, setShowResizePanel] = useState(true); // Show/hide resize controls
+  const [isDraggingWidth, setIsDraggingWidth] = useState(false);
+  const [isDraggingHeight, setIsDraggingHeight] = useState(false);
+  const [codeDisplayWidth, setCodeDisplayWidth] = useState(50); // Code section width as percentage (0-100)
+  const [isDraggingDivider, setIsDraggingDivider] = useState(false);
+
+  // Handle width dragging
+  const handleWidthMouseDown = () => setIsDraggingWidth(true);
+  const handleHeightMouseDown = () => setIsDraggingHeight(true);
+  const handleDividerMouseDown = () => setIsDraggingDivider(true);
+
+  React.useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (isDraggingWidth) {
+        const newWidth = Math.max(200, Math.min(600, e.clientX - 10));
+        setSidebarWidth(newWidth);
+      }
+      if (isDraggingHeight) {
+        const newHeight = Math.max(300, Math.min(1000, e.clientY - 50));
+        setSidebarHeight(newHeight);
+      }
+      if (isDraggingDivider) {
+        // Get the code-preview container's position
+        const container = document.getElementById('code-preview-container');
+        if (container) {
+          const containerRect = container.getBoundingClientRect();
+          const relativeX = e.clientX - containerRect.left;
+          const percentage = Math.max(20, Math.min(80, (relativeX / containerRect.width) * 100));
+          setCodeDisplayWidth(percentage);
+        }
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDraggingWidth(false);
+      setIsDraggingHeight(false);
+      setIsDraggingDivider(false);
+    };
+
+    if (isDraggingWidth || isDraggingHeight || isDraggingDivider) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isDraggingWidth, isDraggingHeight, isDraggingDivider]);
 
   // All available header types
   const HEADER_TYPES = [
@@ -205,20 +255,158 @@ export default function ComponentsByCategory() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-2 sm:p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        
+
+        {/* Fixed Floating Resize Panel - Top Right Corner / Bottom on Mobile */}
+        <div className="fixed bottom-4 right-4 md:top-4 md:bottom-auto z-50 bg-gray-900/95 backdrop-blur border border-purple-500/50 rounded-xl p-3 sm:p-5 shadow-2xl w-full sm:max-w-sm md:max-w-sm mx-2 sm:mx-0">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-white font-bold text-sm sm:text-lg flex items-center gap-2">
+              <span>🎚️</span> <span className="hidden sm:inline">Resize Panel</span>
+            </h3>
+            <button
+              onClick={() => setShowResizePanel(!showResizePanel)}
+              className="text-gray-400 hover:text-white text-xl"
+            >
+              {showResizePanel ? '−' : '+'}
+            </button>
+          </div>
+
+          {showResizePanel && (
+            <div className="space-y-4">
+              {/* Width Control */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-white font-semibold text-sm">📏 Width</label>
+                  <span className="text-purple-400 font-mono text-xs bg-gray-800 px-2 py-1 rounded">{sidebarWidth}px</span>
+                </div>
+                <input
+                  type="range"
+                  min="200"
+                  max="600"
+                  value={sidebarWidth}
+                  onChange={(e) => setSidebarWidth(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-600"
+                />
+                <div className="flex gap-1 mt-2">
+                  <button
+                    onClick={() => setSidebarWidth(Math.max(200, sidebarWidth - 50))}
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-white rounded transition-colors"
+                  >
+                    −
+                  </button>
+                  <button
+                    onClick={() => setSidebarWidth(300)}
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-blue-600 text-white rounded transition-colors"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    onClick={() => setSidebarWidth(Math.min(600, sidebarWidth + 50))}
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-white rounded transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Height Control */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-white font-semibold text-sm">📏 Height</label>
+                  <span className="text-purple-400 font-mono text-xs bg-gray-800 px-2 py-1 rounded">{sidebarHeight}px</span>
+                </div>
+                <input
+                  type="range"
+                  min="300"
+                  max="1000"
+                  value={sidebarHeight}
+                  onChange={(e) => setSidebarHeight(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-600"
+                />
+                <div className="flex gap-1 mt-2">
+                  <button
+                    onClick={() => setSidebarHeight(Math.max(300, sidebarHeight - 100))}
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-white rounded transition-colors"
+                  >
+                    −
+                  </button>
+                  <button
+                    onClick={() => setSidebarHeight(600)}
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-blue-600 text-white rounded transition-colors"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    onClick={() => setSidebarHeight(Math.min(1000, sidebarHeight + 100))}
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-white rounded transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Code Display Width Control */}
+              <div className="border-t border-gray-700 pt-4">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-white font-semibold text-sm">💻 Code Width</label>
+                  <span className="text-cyan-400 font-mono text-xs bg-gray-800 px-2 py-1 rounded">{codeDisplayWidth.toFixed(0)}%</span>
+                </div>
+                <input
+                  type="range"
+                  min="20"
+                  max="80"
+                  value={codeDisplayWidth}
+                  onChange={(e) => setCodeDisplayWidth(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-cyan-600"
+                />
+                <div className="flex gap-1 mt-2">
+                  <button
+                    onClick={() => setCodeDisplayWidth(Math.max(20, codeDisplayWidth - 5))}
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-cyan-600 text-white rounded transition-colors"
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={() => setCodeDisplayWidth(50)}
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-blue-600 text-white rounded transition-colors"
+                  >
+                    50/50
+                  </button>
+                  <button
+                    onClick={() => setCodeDisplayWidth(Math.min(80, codeDisplayWidth + 5))}
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-cyan-600 text-white rounded transition-colors"
+                  >
+                    →
+                  </button>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">Code: {codeDisplayWidth.toFixed(0)}% | Preview: {(100 - codeDisplayWidth).toFixed(0)}%</p>
+              </div>
+
+              {/* Current Size Display */}
+              <div className="bg-gray-800/50 border border-purple-500/30 rounded p-3 text-xs text-purple-200">
+                <p>📐 {sidebarWidth}px × {sidebarHeight}px</p>
+              </div>
+
+              {/* Drag Tip */}
+              <div className="bg-blue-900/30 border border-blue-500/30 rounded p-3 text-xs text-blue-200">
+                💡 <strong>Tip:</strong> Drag the divider between Code & Preview to resize!
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-5xl font-bold text-white mb-4">Component Library</h1>
-          <p className="text-gray-400 text-lg mb-6">Browse and preview all MongoDB components by category</p>
+        <div className="mb-6 sm:mb-8 pt-16 sm:pt-0">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-4">Component Library</h1>
+          <p className="text-gray-400 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6">Browse and preview all MongoDB components by category</p>
           
           {/* Filter Buttons */}
-          <div className="overflow-x-auto pb-2">
-            <div className="flex gap-3 flex-nowrap min-w-min">
+          <div className="overflow-x-auto pb-2 scrollbar-hide">
+            <div className="flex gap-2 sm:gap-3 flex-nowrap min-w-min">
             <button
               onClick={() => setFilterMode('all')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap ${
                 filterMode === 'all'
                   ? 'bg-purple-600 text-white'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
@@ -228,7 +416,7 @@ export default function ComponentsByCategory() {
             </button>
             <button
               onClick={() => setFilterMode('cards')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap ${
                 filterMode === 'cards'
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
@@ -238,7 +426,7 @@ export default function ComponentsByCategory() {
             </button>
             <button
               onClick={() => setFilterMode('headers')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap ${
                 filterMode === 'headers'
                   ? 'bg-cyan-600 text-white'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
@@ -248,7 +436,7 @@ export default function ComponentsByCategory() {
             </button>
             <button
               onClick={() => setFilterMode('footers')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap ${
                 filterMode === 'footers'
                   ? 'bg-orange-600 text-white'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
@@ -365,7 +553,7 @@ export default function ComponentsByCategory() {
         )}
 
         {/* Categories Grid View */}
-        <div className="space-y-12">
+        <div className="space-y-8 sm:space-y-12">
           {displayedCategories.map((category) => {
             // Get components for this category
             let categoryComps = filteredComponents[category];
@@ -388,38 +576,38 @@ export default function ComponentsByCategory() {
             return (
             <div key={category} className="space-y-4">
               {/* Category Header */}
-              <div className="flex items-center gap-4 pb-4 border-b-2 border-gradient-to-r from-purple-500 via-pink-500 to-transparent">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 pb-3 sm:pb-4 border-b-2 border-gradient-to-r from-purple-500 via-pink-500 to-transparent">
                 <div className="flex-shrink-0">
                   <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600">
                     <span className="text-white font-bold text-lg">{category.charAt(0)}</span>
                   </div>
                 </div>
                 <div className="flex-grow">
-                  <h2 className="text-3xl font-bold text-white">{category}</h2>
-                  <p className="text-gray-400 text-sm">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white">{category}</h2>
+                  <p className="text-gray-400 text-xs sm:text-sm">
                     {Object.values(categoryComps).reduce((sum, arr) => sum + arr.length, 0)} component{Object.values(categoryComps).reduce((sum, arr) => sum + arr.length, 0) !== 1 ? 's' : ''}
                   </p>
                 </div>
                 <div className="flex-shrink-0">
-                  <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/50 text-purple-300 font-semibold text-lg">
+                  <span className="inline-block px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/50 text-purple-300 font-semibold text-sm sm:text-lg">
                     {Object.values(categoryComps).reduce((sum, arr) => sum + arr.length, 0)}
                   </span>
                 </div>
               </div>
 
               {/* Subcategories */}
-              <div className="space-y-8">
+              <div className="space-y-6 sm:space-y-8">
                 {Object.entries(categoryComps).map(([subcategory, comps]) => (
-                  <div key={subcategory} className="pl-4">
+                  <div key={subcategory} className="pl-0 sm:pl-4">
                     {/* Subcategory Header */}
-                    <h3 className="text-xl font-bold text-purple-300 mb-4 flex items-center gap-2">
-                      <div className="h-0.5 w-8 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+                    <h3 className="text-lg sm:text-xl font-bold text-purple-300 mb-3 sm:mb-4 flex items-center gap-2">
+                      <div className="hidden sm:block h-0.5 w-8 bg-gradient-to-r from-purple-500 to-pink-500"></div>
                       {subcategory}
-                      <span className="text-sm bg-purple-600/30 px-3 py-1 rounded-full ml-2">{comps.length}</span>
+                      <span className="text-xs sm:text-sm bg-purple-600/30 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full ml-1 sm:ml-2">{comps.length}</span>
                     </h3>
 
                     {/* Components Grid for This Subcategory */}
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       {comps.map((comp) => (
                         <div
                           key={comp._id}
@@ -429,38 +617,38 @@ export default function ComponentsByCategory() {
                               : 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20'
                           } border`}
                         >
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 p-3 sm:p-4">
                             {/* Component Button - Left Side */}
                             <button
                               onClick={() => {
                                 setSelectedCategory(category);
                                 setSelectedComponent(comp);
                               }}
-                              className="text-left p-5 rounded-lg transition-all duration-300 bg-gray-800/50 hover:bg-gray-800 border border-gray-700 hover:border-purple-500"
+                              className="text-left p-3 sm:p-5 rounded-lg transition-all duration-300 bg-gray-800/50 hover:bg-gray-800 border border-gray-700 hover:border-purple-500"
                             >
                               <div className="flex items-start justify-between mb-3">
                                 <div className="flex-grow">
-                                  <h3 className="font-semibold text-white group-hover:text-purple-300 transition-colors">
+                                  <h3 className="font-semibold text-sm sm:text-base text-white group-hover:text-purple-300 transition-colors">
                                     {comp.name}
                                   </h3>
                                   <p className="text-xs text-gray-500 mt-1">Component</p>
                                 </div>
-                                <svg className="w-5 h-5 text-gray-500 group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 group-hover:text-purple-400 transition-colors flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                               </div>
-                              <div className="pt-3 border-t border-gray-700/30 space-y-2">
-                                <span className="inline-block px-2 py-1 bg-purple-500/20 border border-purple-500/50 rounded text-xs text-purple-300 font-semibold">
+                              <div className="pt-2 sm:pt-3 border-t border-gray-700/30 space-y-1 sm:space-y-2">
+                                <span className="inline-block px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/50 rounded text-xs text-purple-300 font-semibold">
                                   {category}
                                 </span>
-                                <span className="inline-block px-2 py-1 bg-pink-500/20 border border-pink-500/50 rounded text-xs text-pink-300 font-semibold ml-2">
+                                <span className="inline-block px-1.5 sm:px-2 py-0.5 sm:py-1 bg-pink-500/20 border border-pink-500/50 rounded text-xs text-pink-300 font-semibold ml-1 sm:ml-2">
                                   {subcategory}
                                 </span>
                               </div>
                             </button>
 
                             {/* Live Preview - Right Side */}
-                            <div className="rounded-lg overflow-hidden border border-gray-700 bg-slate-950 min-h-[200px]">
+                            <div className="rounded-lg overflow-hidden border border-gray-700 bg-slate-950 min-h-[150px] sm:min-h-[200px]">
                               <ComponentLivePreview code={comp.code} />
                             </div>
                           </div>
@@ -475,75 +663,231 @@ export default function ComponentsByCategory() {
           })}
         </div>
 
+        {/* Components Sidebar with Resizable Dimensions and Drag Handles */}
+        <div 
+          className="relative mb-8 p-6 bg-black/40 backdrop-blur border-2 rounded-xl overflow-auto shadow-xl"
+          style={{
+            width: `${sidebarWidth}px`,
+            height: `${sidebarHeight}px`,
+            transition: isDraggingWidth || isDraggingHeight ? 'none' : 'all 0.3s ease',
+            borderColor: isDraggingWidth || isDraggingHeight ? '#ec4899' : '#a855f7'
+          }}
+        >
+          {/* Right Edge Resize Handle (Width) */}
+          <div
+            onMouseDown={handleWidthMouseDown}
+            className="absolute top-0 right-0 h-full w-1 cursor-col-resize hover:bg-red-500 transition-colors group"
+            style={{
+              backgroundColor: isDraggingWidth ? '#ef4444' : 'rgba(239, 68, 68, 0.3)',
+              cursor: 'col-resize'
+            }}
+            title="Drag to resize width"
+          >
+            <div className="absolute right-2 top-1/2 transform -translate-y-1/2 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold whitespace-nowrap pointer-events-none">
+              ↔️ WIDTH
+            </div>
+          </div>
+
+          {/* Bottom Edge Resize Handle (Height) */}
+          <div
+            onMouseDown={handleHeightMouseDown}
+            className="absolute bottom-0 left-0 h-1 w-full cursor-row-resize hover:bg-blue-500 transition-colors group"
+            style={{
+              backgroundColor: isDraggingHeight ? '#3b82f6' : 'rgba(59, 130, 246, 0.3)',
+              cursor: 'row-resize'
+            }}
+            title="Drag to resize height"
+          >
+            <div className="absolute left-1/2 transform -translate-x-1/2 bottom-1 text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold whitespace-nowrap pointer-events-none">
+              ↕️ HEIGHT
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <span className="text-2xl">📦</span> Components
+          </h2>
+
+          {/* Sidebar Height/Width Info */}
+          <div className="mb-4 p-3 bg-purple-600/20 border border-purple-500/30 rounded text-xs text-purple-200">
+            <p>📐 Size: {sidebarWidth}px × {sidebarHeight}px</p>
+            <p className="text-purple-300 text-xs mt-1">💡 Drag red/blue edges to resize</p>
+          </div>
+
+          {/* Category Filters in Sidebar */}
+          <div className="space-y-2 mb-6">
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setFilterMode('all')}
+                className={`px-2 py-1 text-xs rounded font-semibold transition-all ${
+                  filterMode === 'all'
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                All
+              </button>
+              <button
+                onClick={() => setFilterMode('cards')}
+                className={`px-2 py-1 text-xs rounded font-semibold transition-all ${
+                  filterMode === 'cards'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                Cards
+              </button>
+              <button
+                onClick={() => setFilterMode('headers')}
+                className={`px-2 py-1 text-xs rounded font-semibold transition-all ${
+                  filterMode === 'headers'
+                    ? 'bg-cyan-600 text-white'
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                Headers
+              </button>
+            </div>
+          </div>
+
+          {/* Component List */}
+          <div className="space-y-2 text-xs overflow-y-auto">
+            <p className="text-gray-400 font-semibold mb-3 sticky top-0 bg-black/40">📋 COMPONENTS</p>
+            {selectedComponent && (
+              <div className="p-2 bg-purple-600/20 border border-purple-500 rounded text-purple-200 font-semibold">
+                ✅ {selectedComponent.name}
+              </div>
+            )}
+            <div className="p-2 bg-gray-700/40 hover:bg-gray-700 rounded text-gray-300 cursor-pointer transition-colors">
+              Card Components
+            </div>
+            <div className="p-2 bg-gray-700/40 hover:bg-gray-700 rounded text-gray-300 cursor-pointer transition-colors">
+              Header Templates
+            </div>
+            <div className="p-2 bg-gray-700/40 hover:bg-gray-700 rounded text-gray-300 cursor-pointer transition-colors">
+              Footer Section
+            </div>
+            <div className="p-2 bg-gray-700/40 hover:bg-gray-700 rounded text-gray-300 cursor-pointer transition-colors">
+              Call To Action
+            </div>
+            <div className="p-2 bg-gray-700/40 hover:bg-gray-700 rounded text-gray-300 cursor-pointer transition-colors">
+              Hero Sections
+            </div>
+            <div className="p-2 bg-gray-700/40 hover:bg-gray-700 rounded text-gray-300 cursor-pointer transition-colors">
+              Feature Blocks
+            </div>
+            <div className="p-2 bg-gray-700/40 hover:bg-gray-700 rounded text-gray-300 cursor-pointer transition-colors">
+              Pricing Tables
+            </div>
+          </div>
+        </div>
+
         {/* Selected Component Details */}
         {selectedComponent && (
           <div className="mt-12">
             <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden">
               
               {/* Component Header */}
-              <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 border-b border-gray-700/50 p-8">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-3xl font-bold text-white mb-3">{selectedComponent.name}</h3>
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <span className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/50 rounded-lg text-sm text-purple-300 font-semibold">
+              <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 border-b border-gray-700/50 p-4 sm:p-8">
+                <div className="flex flex-col sm:flex-row items-start sm:items-start justify-between gap-4">
+                  <div className="flex-grow">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-3">{selectedComponent.name}</h3>
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                      <span className="px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/50 rounded-lg text-xs sm:text-sm text-purple-300 font-semibold">
                         {selectedComponent.category}
                       </span>
                       {selectedComponent.subcategory && (
-                        <span className="px-4 py-2 bg-gradient-to-r from-pink-500/20 to-rose-500/20 border border-pink-500/50 rounded-lg text-sm text-pink-300 font-semibold">
+                        <span className="px-3 py-1 bg-gradient-to-r from-pink-500/20 to-rose-500/20 border border-pink-500/50 rounded-lg text-xs sm:text-sm text-pink-300 font-semibold">
                           {selectedComponent.subcategory}
                         </span>
                       )}
                       {selectedComponent.headerType && (
-                        <span className="px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-lg text-sm text-cyan-300 font-semibold">
+                        <span className="px-3 py-1 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-lg text-xs sm:text-sm text-cyan-300 font-semibold">
                           {selectedComponent.headerType}
                         </span>
                       )}
-                      <span className="text-gray-400 text-sm">Component Code & Preview</span>
+                      <span className="text-xs sm:text-sm text-gray-400">Component Code & Preview</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Code + Live Preview Section */}
-              <div className="p-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {/* Code Display */}
-                  <div>
-                    <div className="text-sm text-gray-400 font-semibold mb-4">Component Code</div>
-                    <CodeDisplay code={selectedComponent.code} />
+              {/* Code + Live Preview Section - Mobile Stack */}
+              <div className="p-2 sm:p-4 md:p-8">
+                <div 
+                  id="code-preview-container"
+                  className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6 items-stretch"
+                  style={{
+                    display: 'flex',
+                    gap: 'var(--gap)',
+                    flexDirection: window.innerWidth < 1024 ? 'column' : 'row'
+                  }}
+                >
+                  {/* Code Display - Full Width Mobile, Dynamic Width Desktop */}
+                  <div style={{
+                    flex: `0 0 ${codeDisplayWidth}%`,
+                    minWidth: 0,
+                    position: 'relative',
+                    width: window.innerWidth < 1024 ? '100%' : 'auto'
+                  }}>
+                    <div className="text-xs sm:text-sm text-gray-400 font-semibold mb-2 sm:mb-4">Component Code</div>
+                    <div className="overflow-auto max-h-96 lg:max-h-screen">
+                      <CodeDisplay code={selectedComponent.code} />
+                    </div>
                   </div>
                   
-                  {/* Live Preview */}
-                  <div>
-                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem'}}>
+                  {/* Draggable Divider - Hidden on Mobile */}
+                  <div
+                    onMouseDown={handleDividerMouseDown}
+                    className="hidden lg:block relative group"
+                    style={{
+                      flex: '0 0 2px',
+                      cursor: isDraggingDivider ? 'col-resize' : 'col-resize',
+                      backgroundColor: isDraggingDivider ? '#06b6d4' : '#4b5563',
+                      transition: isDraggingDivider ? 'none' : 'background-color 0.2s ease'
+                    }}
+                    title="Drag to resize Code and Preview"
+                  >
+                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 bg-gray-900 rounded text-xs text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                      ↔️ Drag
+                    </div>
+                  </div>
+                  
+                  {/* Live Preview - Full Width Mobile, Dynamic Width Desktop */}
+                  <div style={{
+                    flex: `0 0 ${100 - codeDisplayWidth}%`,
+                    minWidth: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: window.innerWidth < 1024 ? '100%' : 'auto'
+                  }}>
+                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem'}}>
                       <div style={{fontSize: '0.875rem', color: '#9ca3af', fontWeight: '600'}}>Live Preview</div>
                       <button
                         onClick={() => setFullScreenPreview(true)}
                         style={{
-                          padding: '0.75rem 1rem',
+                          padding: '0.5rem 0.75rem',
                           backgroundColor: '#9333ea',
                           color: 'white',
-                          fontSize: '0.875rem',
+                          fontSize: '0.75rem',
                           fontWeight: '600',
                           borderRadius: '0.5rem',
                           border: 'none',
                           cursor: 'pointer',
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '0.5rem',
+                          gap: '0.25rem',
                           transition: 'all 0.2s'
                         }}
                         onMouseOver={(e) => e.target.style.backgroundColor = '#7e22ce'}
                         onMouseOut={(e) => e.target.style.backgroundColor = '#9333ea'}
                       >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
                         </svg>
-                        Full Preview
+                        Preview
                       </button>
                     </div>
-                    <div className="bg-slate-950 rounded-lg overflow-hidden border border-gray-700 min-h-[400px]">
+                    <div className="bg-slate-950 rounded-lg overflow-hidden border border-gray-700 min-h-[250px] sm:min-h-[400px] flex-1">
                       <ComponentLivePreview code={selectedComponent.code} />
                     </div>
                   </div>

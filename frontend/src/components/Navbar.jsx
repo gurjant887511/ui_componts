@@ -4,6 +4,7 @@ import ProfileModal from './ProfileModal';
 
 function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLoggedIn, onLogout, userInfo, onUpdateProfile }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleProfileClick = () => {
     setIsProfileOpen(true);
@@ -11,14 +12,14 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
 
   return (
     <nav className="bg-gray-900 text-white fixed w-full top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-3">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
             <Link 
               to="/" 
               onClick={() => setActiveTab('home')} 
-              className="relative text-2xl font-bold group"
+              className="relative text-lg sm:text-2xl font-bold group"
             >
               <span className="relative z-10 bg-gradient-to-r from-cyan-300 via-purple-300 to-cyan-400 bg-clip-text text-transparent">
                UI Inventory 
@@ -27,8 +28,18 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
             </Link>
           </div>
 
-          {/* Navigation Links */}
-          <div className="flex space-x-4 flex-1 ml-8">
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded hover:bg-gray-800 transition"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          {/* Navigation Links - Desktop */}
+          <div className="hidden md:flex space-x-2 lg:space-x-4 flex-1 ml-4 lg:ml-8">
             {/* Home Button */}
             <button
               onClick={() => setActiveTab('home')}
@@ -91,8 +102,8 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
 
           </div>
 
-          {/* Auth Buttons */}
-          <div className="flex items-center space-x-4">
+          {/* Auth Buttons - Desktop */}
+          <div className="hidden sm:flex items-center space-x-2 sm:space-x-4">
             {isLoggedIn ? (
               <>
                 <button
@@ -116,13 +127,13 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
               <>
                 <button
                   onClick={onLoginClick}
-                  className="px-4 py-2 text-white hover:text-purple-400 transition font-medium"
+                  className="px-2 sm:px-4 py-2 text-white hover:text-purple-400 transition font-medium text-sm sm:text-base"
                 >
                   Login
                 </button>
                 <button
                   onClick={onSignupClick}
-                  className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-medium"
+                  className="px-2 sm:px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-medium text-sm sm:text-base"
                 >
                   Signup
                 </button>
@@ -130,6 +141,95 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
             )}
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-gray-700 pt-4 space-y-2 animate-in fade-in">
+            <button
+              onClick={() => {
+                setActiveTab('home');
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left px-4 py-2 rounded transition font-medium ${
+                activeTab === 'home'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:bg-gray-800'
+              }`}
+            >
+              Home
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('components');
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left px-4 py-2 rounded transition font-medium ${
+                activeTab === 'components'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:bg-gray-800'
+              }`}
+            >
+              Components
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('fullweb');
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left px-4 py-2 rounded transition font-medium ${
+                activeTab === 'fullweb'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:bg-gray-800'
+              }`}
+            >
+              Full Web
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('about');
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left px-4 py-2 rounded transition font-medium ${
+                activeTab === 'about'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:bg-gray-800'
+              }`}
+            >
+              About
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('template');
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left px-4 py-2 rounded transition font-medium ${
+                activeTab === 'template'
+                  ? 'bg-purple-600 text-white'
+                  : 'text-white hover:bg-gray-800'
+              }`}
+            >
+              Template
+            </button>
+            
+            {/* Mobile Auth Options */}
+            {!isLoggedIn && (
+              <>
+                <button
+                  onClick={onLoginClick}
+                  className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 transition font-medium"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={onSignupClick}
+                  className="block w-full text-left px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition font-medium"
+                >
+                  Signup
+                </button>
+              </>
+            )}
+          </div>
+        )}
       </div>
 
       <ProfileModal 

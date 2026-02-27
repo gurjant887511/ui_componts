@@ -29,6 +29,19 @@ import './styles/globals.css';
 // import { atomDark } from "@codesandbox/sandpack-themes";
 // import ComponentLivePreview from './components/LivePreview';
 
+import OurStory from './components/footerbutton/OurStory'
+import MissionAndVision from './components/footerbutton/Mission&Vision'
+import Testimonials from './components/footerbutton/Testimonials'
+import UIKit from './components/footerbutton/UIKit'
+import Icons from './components/footerbutton/Icons'
+import Illustrations from './components/footerbutton/Illustrations'
+import Blog from './components/footerbutton/Blog'
+import Documentation from './components/footerbutton/Documentation'
+import Changelog from './components/footerbutton/Changelog'
+import EmailUs from './components/footerbutton/EmailUs'
+import SupportCenter from './components/footerbutton/SupportCenter'
+import LiveChat from './components/footerbutton/LiveChat'
+
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const COMPONENTS_LIST = [
@@ -1491,6 +1504,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [viewingInternal, setViewingInternal] = useState(null);
+  const [footerPage, setFooterPage] = useState(null);
 
   // sample imported components to preview in "imports" tab
   
@@ -1729,43 +1743,76 @@ window.location.href
             <About />
           ) : null}
         </Main>
+        {footerPage && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/50" onClick={() => setFooterPage(null)} />
+            <div className="relative bg-white dark:bg-slate-800 rounded-lg max-w-3xl w-full mx-4 p-6 overflow-auto z-10">
+              <button
+                className="absolute right-4 top-4 text-sm text-gray-600 hover:text-gray-900"
+                onClick={() => setFooterPage(null)}
+              >
+                Close
+              </button>
+              <div className="mt-6">
+                {(() => {
+                  switch (footerPage) {
+                    case 'OurStory': return <OurStory />;
+                    case 'MissionVision': return <MissionAndVision />;
+                    case 'Testimonials': return <Testimonials />;
+                    case 'UIKit': return <UIKit />;
+                    case 'Icons': return <Icons />;
+                    case 'Illustrations': return <Illustrations />;
+                    case 'Blog': return <Blog />;
+                    case 'Documentation': return <Documentation />;
+                    case 'Changelog': return <Changelog />;
+                    case 'EmailUs': return <EmailUs />;
+                    case 'SupportCenter': return <SupportCenter />;
+                    case 'LiveChat': return <LiveChat />;
+                    default: return null;
+                  }
+                })()}
+              </div>
+            </div>
+          </div>
+        )}
+
         <Footer>
           <FooterContent>
             <FooterColumn>
               <h3>About Us</h3>
               <ul>
-                <li><a href="#">Our Story</a></li>
-                <li><a href="#">Mission &amp; Vision</a></li>
-                <li><a href="#">Testimonials</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('OurStory')}}>Our Story</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('MissionVision')}}>Mission &amp; Vision</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('Testimonials')}}>Testimonials</a></li>
               </ul>
             </FooterColumn>
             <FooterColumn>
               <h3>Component</h3>
               <ul>
-                <li><a href="#">UI Kit</a></li>
-                <li><a href="#">Icons</a></li>
-                <li><a href="#">Illustrations</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('UIKit')}}>UI Kit</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('Icons')}}>Icons</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('Illustrations')}}>Illustrations</a></li>
               </ul>
             </FooterColumn>
             <FooterColumn>
               <h3>Resources</h3>
               <ul>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Documentation</a></li>
-                <li><a href="#">Changelog</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('Blog')}}>Blog</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('Documentation')}}>Documentation</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('Changelog')}}>Changelog</a></li>
               </ul>
             </FooterColumn>
             <FooterColumn>
               <h3>Contact</h3>
               <ul>
-                <li><a href="#">Email Us</a></li>
-                <li><a href="#">Support Center</a></li>
-                <li><a href="#">Live Chat</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('EmailUs')}}>Email Us</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('SupportCenter')}}>Support Center</a></li>
+                <li><a href="#" onClick={(e)=>{e.preventDefault(); setFooterPage('LiveChat')}}>Live Chat</a></li>
               </ul>
             </FooterColumn>
           </FooterContent>
           <FooterBottom>
-            &copy; 2023 UI Components. All rights reserved.
+            &copy; 2026 UI Inventory. All rights reserved.
           </FooterBottom>
         </Footer>
       </Container>

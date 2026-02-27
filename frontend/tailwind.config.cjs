@@ -5,6 +5,14 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      screens: {
+        'xs': '370px',    // Small mobile
+        'sm': '640px',    // Standard mobile
+        'md': '768px',    // Tablet  
+        'lg': '1024px',   // Desktop
+        'xl': '1280px',   // Large desktop
+        '2xl': '1536px',  // Extra large
+      },
       animation: {
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
