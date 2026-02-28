@@ -17,30 +17,37 @@ dotenv.config();
 const app = express();
 
 // Enhanced CORS configuration
-// Development-friendly CORS: reflect the incoming origin (allows local dev ports)
-// NOTE: In production, restrict the allowed origins to trusted hosts.
+// Production-safe CORS configuration
+// Only allows requests from configured frontend domains
 app.use(cors({
   origin: (origin, callback) => {
     // allow requests with no origin (like curl, or server-to-server)
     if (!origin) return callback(null, true);
 
-    // Base allowed origins for local development
+    // Base allowed origins - includes both production and development
     const allowed = [
+      // Production
+      'https://uiinventory.com',
+      'https://www.uiinventory.com',
+      'https://api.uiinventory.com',
+      // Development - Local ports
       'http://localhost:5173',
       'http://localhost:5174',
       'http://localhost:5175',
       'http://localhost:5176',
+      'http://localhost:7001',
       'http://127.0.0.1:5173',
       'http://127.0.0.1:5174',
       'http://127.0.0.1:5175',
       'http://127.0.0.1:5176',
+      'http://127.0.0.1:7001',
       'http://localhost:3000',
       'http://localhost:5001'
     ];
 
     // Add frontend URL from env (if provided) and server IP variants
     const envFrontend = process.env.FRONTEND_URL;
-    if (envFrontend) {
+    if (envFrontend && allowed.indexOf(envFrontend) === -1) {
       allowed.push(envFrontend);
       // also allow same host without port and with 0.0.0.0 style
       try {
@@ -56,9 +63,9 @@ app.use(cors({
       return callback(null, true);
     }
 
-    // For convenience, allow but log unknown origins — change to block if desired
-    console.warn('CORS: allowing request from unknown origin:', origin);
-    return callback(null, true);
+    // Log unauthorized origins (strict mode for production)
+    console.warn('⚠️  CORS: Blocked request from unauthorized origin:', origin);
+    return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],

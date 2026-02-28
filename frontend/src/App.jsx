@@ -42,7 +42,7 @@ import EmailUs from './components/footerbutton/EmailUs'
 import SupportCenter from './components/footerbutton/SupportCenter'
 import LiveChat from './components/footerbutton/LiveChat'
 
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const COMPONENTS_LIST = [
 

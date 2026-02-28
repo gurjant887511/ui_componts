@@ -19,13 +19,7 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }) {
   const [forgotError, setForgotError] = useState('');
   const [forgotSuccess, setForgotSuccess] = useState('');
 
-  const apiUrl = (() => {
-    let url = import.meta.env.VITE_API_URL || 'http://localhost:7000/api';
-    if (!url.includes('127.0.0.1')) {
-      url = url.replace('localhost', '127.0.0.1');
-    }
-    return url;
-  })();
+  const apiUrl = import.meta.env.VITE_API_URL || '/api';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,13 +29,6 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }) {
     console.log('[LOGIN] Attempting login with email:', email);
 
     try {
-      // Prefer VITE_API_URL, but fall back to explicit IPv4 to avoid localhost resolution issues
-      let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:7000/api';
-      if (!apiUrl.includes('127.0.0.1')) {
-        // If VITE_API_URL uses localhost, prefer IPv4 to avoid IPv6/hostname resolution problems
-        apiUrl = apiUrl.replace('localhost', '127.0.0.1');
-      }
-
       const response = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: {

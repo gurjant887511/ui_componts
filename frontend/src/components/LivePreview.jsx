@@ -80,7 +80,7 @@ render(<__LiveWrapper />);
       noInline={true}
     >
       <div className="space-y-4">
-        <div className="relative p-4 bg-slate-50 dark:bg-slate-900 rounded-lg min-h-[600px]">
+        <div className="relative p-4 bg-gradient-to-br from-slate-950 via-purple-900 to-slate-900 rounded-lg min-h-[600px]">
           <style>{`
             @import url('https://cdn.tailwindcss.com');
             

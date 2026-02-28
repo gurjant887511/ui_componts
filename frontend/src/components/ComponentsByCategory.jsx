@@ -888,7 +888,7 @@ export default function ComponentsByCategory() {
                         Preview
                       </button>
                     </div>
-                    <div className="bg-slate-950 rounded-lg overflow-hidden border border-gray-700 min-h-[250px] sm:min-h-[400px] flex-1">
+                    <div className="bg-gradient-to-br from-slate-950 via-purple-900 to-slate-900 rounded-lg overflow-hidden border border-gray-700 min-h-[250px] sm:min-h-[400px] flex-1">
                       <ComponentLivePreview code={selectedComponent.code} />
                     </div>
                   </div>
