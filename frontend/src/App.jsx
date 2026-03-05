@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import logo from './assets/logo.jpg';
 
 import Navbar from './components/Navbar';
 import LoginModal from './components/LoginModal';
@@ -139,6 +140,14 @@ function ComponentsPreviewPage({ isLoggedIn }) {
   const [importsMessage, setImportsMessage] = useState('');
   const [requirementsMessage, setRequirementsMessage] = useState('');
   const [viewMode, setViewMode] = useState('both'); // 'code', 'preview', 'both'
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  // Track screen width for mobile detection
+  React.useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Card subcategories mapping
   const CARD_SUBCATEGORIES = {
@@ -631,16 +640,18 @@ function ComponentsPreviewPage({ isLoggedIn }) {
             >
               Preview
             </button>
-            <button
-              onClick={() => setViewMode('both')}
-              className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
-                viewMode === 'both'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
-              }`}
-            >
-              Both
-            </button>
+            {screenWidth >= 700 && (
+              <button
+                onClick={() => setViewMode('both')}
+                className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
+                  viewMode === 'both'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
+                }`}
+              >
+                Both
+              </button>
+            )}
           </div>
           )}
         </div>
@@ -766,16 +777,18 @@ function ComponentsPreviewPage({ isLoggedIn }) {
             >
               Preview
             </button>
-            <button
-              onClick={() => setViewMode('both')}
-              className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
-                viewMode === 'both'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
-              }`}
-            >
-              Both
-            </button>
+            {screenWidth >= 700 && (
+              <button
+                onClick={() => setViewMode('both')}
+                className={`px-3 py-1 text-xs font-semibold rounded transition-all ${
+                  viewMode === 'both'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
+                }`}
+              >
+                Both
+              </button>
+            )}
           </div>
         </div>
         <div className="flex-1 overflow-hidden">
@@ -1427,10 +1440,119 @@ const CodeBlock = styled.pre`
 `;
 
 const Footer = styled.footer`
-  background: #1a202c;
+  background: linear-gradient(135deg, #0f172a 0%, #1a202c 50%, #0f172a 100%);
   padding: 4rem 2rem;
   margin-top: 6rem;
   color: #CBD5E0;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top right, rgba(168, 85, 247, 0.1), transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(59, 130, 246, 0.1), transparent 50%);
+    pointer-events: none;
+  }
+`;
+
+const FooterTop = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(203, 213, 224, 0.2);
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+`;
+
+const LogoSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+`;
+
+const LogoImage = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 12px rgba(168, 85, 247, 0.3));
+
+  &:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 8px 20px rgba(168, 85, 247, 0.5));
+  }
+`;
+
+const BrandInfo = styled.div`
+  h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #a855f7, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  p {
+    margin: 0.25rem 0 0 0;
+    font-size: 0.875rem;
+    color: #94a3b8;
+  }
+`;
+
+const SocialLinks = styled.div`
+  display: flex;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+`;
+
+const SocialLink = styled.a`
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(51, 65, 85, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(203, 213, 224, 0.1);
+
+  &:hover {
+    background: linear-gradient(135deg, #a855f7, #3b82f6);
+    transform: translateY(-4px) scale(1.1);
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 8px 16px rgba(168, 85, 247, 0.3);
+  }
 `;
 
 const FooterContent = styled.div`
@@ -1439,6 +1561,8 @@ const FooterContent = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+  position: relative;
+  z-index: 1;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -1573,6 +1697,8 @@ window.location.href
           onLoginClick={() => setIsLoginOpen(true)}
           onSignupClick={() => setIsSignupOpen(true)}
           isLoggedIn={isLoggedIn}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
           onLogout={() => {
             console.log('[LOGOUT] Starting logout process...');
             setIsLoggedIn(false);
@@ -1777,6 +1903,22 @@ window.location.href
         )}
 
         <Footer>
+          <FooterTop>
+            <LogoSection>
+              <LogoImage src={logo} alt="UI Inventory Logo" />
+              <BrandInfo>
+                <h2>UI Inventory</h2>
+                <p>Beautiful React Components</p>
+              </BrandInfo>
+            </LogoSection>
+            <SocialLinks>
+              <SocialLink href="#" title="Twitter">📱</SocialLink>
+              <SocialLink href="#" title="LinkedIn">💼</SocialLink>
+              <SocialLink href="#" title="GitHub">🐙</SocialLink>
+              <SocialLink href="#" title="Discord">💬</SocialLink>
+            </SocialLinks>
+          </FooterTop>
+
           <FooterContent>
             <FooterColumn>
               <h3>About Us</h3>

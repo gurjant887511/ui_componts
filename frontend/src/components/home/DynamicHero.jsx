@@ -57,7 +57,7 @@ export default function DynamicHero({ setActiveTab }) {
     // <div className="relative min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 overflow-hidden">
 //  <div className="relative min-h-screen bg-gradient-to-br from-gray-950 via-purple-950 to-slate-950 overflow-hidden">
 
-<div className="relative min-h-screen bg-gradient-to-br from-[#0f172a] via-[#020617] to-[#020617] overflow-hidden">
+<div className="relative min-h-screen bg-gradient-to-br from-[#0f172a] via-[#020617] to-[#020617] overflow-hidden hero-section mt-0">
 
 
 {/* <div className="relative min-h-screen bg-gradient-to-br from-[#111111] via-[#1a1a1a] to-[#0d0d0d] overflow-hidden"> */}
@@ -146,7 +146,7 @@ export default function DynamicHero({ setActiveTab }) {
       </svg>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 sm:pt-24 pb-16">
         {/* Top badge */}
         <div className="flex justify-center mb-8 animate-fadeInDown">
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-400/30 backdrop-blur-xl">
@@ -159,7 +159,6 @@ export default function DynamicHero({ setActiveTab }) {
         <div className="text-center space-y-8 mb-16">
           <h1 
             className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight animate-fadeInUp"
-            style={{ transform: `translateY(${scrollY * 0.5}px)` }}
           >
             <span className="text-white">Beautiful UI</span>
             <br />
@@ -273,7 +272,19 @@ export default function DynamicHero({ setActiveTab }) {
         .animation-delay-1000 {
           animation-delay: 1s;
         }
+        /* Responsive Hero Section - Mobile vs Desktop */
+        @media (max-width: 639px) {
+          .hero-section {
+            padding-top: 56px; /* Mobile navbar height = min-h-14 */
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-section {
+            padding-top: 64px; /* Desktop navbar height = sm:h-16 */
+          }
+        }
       `}</style>
     </div>
   );
 }
+

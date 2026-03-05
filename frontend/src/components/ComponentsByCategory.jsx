@@ -62,11 +62,29 @@ export default function ComponentsByCategory() {
   const [isDraggingHeight, setIsDraggingHeight] = useState(false);
   const [codeDisplayWidth, setCodeDisplayWidth] = useState(50); // Code section width as percentage (0-100)
   const [isDraggingDivider, setIsDraggingDivider] = useState(false);
+  const [mobileShowCode, setMobileShowCode] = useState(false); // Toggle for mobile: false = show preview by default, true = show code
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [previewContainerHeight, setPreviewContainerHeight] = useState(450); // Height of code-preview container in pixels
+  const [isDraggingContainerHeight, setIsDraggingContainerHeight] = useState(false);
+  const dragStartHeightRef = React.useRef(0);
+  const dragStartYRef = React.useRef(0);
+
+  // Track screen width for responsive behavior
+  React.useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Handle width dragging
   const handleWidthMouseDown = () => setIsDraggingWidth(true);
   const handleHeightMouseDown = () => setIsDraggingHeight(true);
   const handleDividerMouseDown = () => setIsDraggingDivider(true);
+  const handleContainerHeightMouseDown = (e) => {
+    setIsDraggingContainerHeight(true);
+    dragStartYRef.current = e.clientY;
+    dragStartHeightRef.current = previewContainerHeight;
+  };
 
   React.useEffect(() => {
     const handleMouseMove = (e) => {
@@ -88,15 +106,22 @@ export default function ComponentsByCategory() {
           setCodeDisplayWidth(percentage);
         }
       }
+      if (isDraggingContainerHeight) {
+        // Calculate new height based on mouse movement
+        const deltaY = e.clientY - dragStartYRef.current;
+        const newHeight = Math.max(250, Math.min(800, dragStartHeightRef.current + deltaY));
+        setPreviewContainerHeight(newHeight);
+      }
     };
 
     const handleMouseUp = () => {
       setIsDraggingWidth(false);
       setIsDraggingHeight(false);
       setIsDraggingDivider(false);
+      setIsDraggingContainerHeight(false);
     };
 
-    if (isDraggingWidth || isDraggingHeight || isDraggingDivider) {
+    if (isDraggingWidth || isDraggingHeight || isDraggingDivider || isDraggingContainerHeight) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
       return () => {
@@ -104,7 +129,7 @@ export default function ComponentsByCategory() {
         document.removeEventListener('mouseup', handleMouseUp);
       };
     }
-  }, [isDraggingWidth, isDraggingHeight, isDraggingDivider]);
+  }, [isDraggingWidth, isDraggingHeight, isDraggingDivider, isDraggingContainerHeight]);
 
   // All available header types
   const HEADER_TYPES = [
@@ -814,83 +839,172 @@ export default function ComponentsByCategory() {
 
               {/* Code + Live Preview Section - Mobile Stack */}
               <div className="p-2 sm:p-4 md:p-8">
+                {/* Mobile Toggle Buttons - Only show below 700px */}
+                {screenWidth < 700 && (
+                  <div className="flex gap-2 mb-4">
+                    <button
+                      onClick={() => setMobileShowCode(true)}
+                      className={`flex-1 px-3 py-2 rounded-lg font-semibold text-sm transition-all ${
+                        mobileShowCode
+                          ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/50'
+                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
+                    >
+                      📝 Code
+                    </button>
+                    <button
+                      onClick={() => setMobileShowCode(false)}
+                      className={`flex-1 px-3 py-2 rounded-lg font-semibold text-sm transition-all ${
+                        !mobileShowCode
+                          ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/50'
+                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
+                    >
+                      🔍 Preview
+                    </button>
+                  </div>
+                )}
+
+                {/* Container Height and Width Info */}
+                <div className="text-xs text-gray-400 mb-3 flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <span>📐 Height: {previewContainerHeight}px</span>
+                    <span className="text-cyan-400">↕️ Drag bottom edge to resize height</span>
+                  </div>
+                  {screenWidth >= 700 && (
+                    <div className="flex items-center justify-between">
+                      <span>📏 Code: {codeDisplayWidth.toFixed(0)}% | Preview: {(100 - codeDisplayWidth).toFixed(0)}%</span>
+                      <span className="text-cyan-400">↔️ Drag center divider to resize width</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Resizable Code & Preview Container Wrapper */}
                 <div 
-                  id="code-preview-container"
-                  className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6 items-stretch"
+                  id="code-preview-wrapper"
+                  className="relative border border-gray-600 rounded-lg overflow-hidden"
                   style={{
-                    display: 'flex',
-                    gap: 'var(--gap)',
-                    flexDirection: window.innerWidth < 1024 ? 'column' : 'row'
+                    height: `${previewContainerHeight}px`,
+                    transition: isDraggingContainerHeight ? 'none' : 'height 0.2s ease'
                   }}
                 >
-                  {/* Code Display - Full Width Mobile, Dynamic Width Desktop */}
-                  <div style={{
-                    flex: `0 0 ${codeDisplayWidth}%`,
-                    minWidth: 0,
-                    position: 'relative',
-                    width: window.innerWidth < 1024 ? '100%' : 'auto'
-                  }}>
-                    <div className="text-xs sm:text-sm text-gray-400 font-semibold mb-2 sm:mb-4">Component Code</div>
-                    <div className="overflow-auto max-h-96 lg:max-h-screen">
-                      <CodeDisplay code={selectedComponent.code} />
-                    </div>
-                  </div>
-                  
-                  {/* Draggable Divider - Hidden on Mobile */}
-                  <div
-                    onMouseDown={handleDividerMouseDown}
-                    className="hidden lg:block relative group"
+                  <div 
+                    id="code-preview-container"
+                    className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6 items-stretch h-full"
                     style={{
-                      flex: '0 0 2px',
-                      cursor: isDraggingDivider ? 'col-resize' : 'col-resize',
-                      backgroundColor: isDraggingDivider ? '#06b6d4' : '#4b5563',
-                      transition: isDraggingDivider ? 'none' : 'background-color 0.2s ease'
+                      display: 'flex',
+                      gap: 'var(--gap)',
+                      flexDirection: window.innerWidth < 1024 ? 'column' : 'row',
+                      height: '100%'
                     }}
-                    title="Drag to resize Code and Preview"
                   >
-                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 bg-gray-900 rounded text-xs text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                      ↔️ Drag
-                    </div>
-                  </div>
-                  
-                  {/* Live Preview - Full Width Mobile, Dynamic Width Desktop */}
-                  <div style={{
-                    flex: `0 0 ${100 - codeDisplayWidth}%`,
-                    minWidth: 0,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: window.innerWidth < 1024 ? '100%' : 'auto'
-                  }}>
-                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem'}}>
-                      <div style={{fontSize: '0.875rem', color: '#9ca3af', fontWeight: '600'}}>Live Preview</div>
-                      <button
-                        onClick={() => setFullScreenPreview(true)}
+                    {/* Code Display - Hidden toggle on mobile below 700px */}
+                    {(screenWidth >= 700 || mobileShowCode) && (
+                      <div style={{
+                        flex: `0 0 ${screenWidth >= 700 ? codeDisplayWidth : '100%'}%`,
+                        minWidth: 0,
+                        position: 'relative',
+                        width: window.innerWidth < 1024 ? '100%' : 'auto',
+                        display: 'flex',
+                        flexDirection: 'column'
+                      }}>
+                        <div className="text-xs sm:text-sm text-gray-400 font-semibold mb-2 sm:mb-4">Component Code</div>
+                        <div className="overflow-auto flex-1">
+                          <CodeDisplay code={selectedComponent.code} />
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Draggable Divider - Hidden on Mobile */}
+                    {screenWidth >= 700 && (
+                      <div
+                        onMouseDown={handleDividerMouseDown}
+                        className="relative group"
                         style={{
-                          padding: '0.5rem 0.75rem',
-                          backgroundColor: '#9333ea',
-                          color: 'white',
-                          fontSize: '0.75rem',
-                          fontWeight: '600',
-                          borderRadius: '0.5rem',
-                          border: 'none',
-                          cursor: 'pointer',
+                          flex: '0 0 8px',
+                          cursor: isDraggingDivider ? 'col-resize' : 'col-resize',
+                          backgroundColor: isDraggingDivider ? '#06b6d4' : '#3f4654',
+                          transition: isDraggingDivider ? 'none' : 'background-color 0.2s ease',
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '0.25rem',
-                          transition: 'all 0.2s'
+                          justifyContent: 'center',
+                          userSelect: 'none'
                         }}
-                        onMouseOver={(e) => e.target.style.backgroundColor = '#7e22ce'}
-                        onMouseOut={(e) => e.target.style.backgroundColor = '#9333ea'}
+                        title="Drag to resize Code and Preview"
                       >
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
-                        </svg>
-                        Preview
-                      </button>
+                        <div
+                          style={{
+                            width: '4px',
+                            height: '60px',
+                            backgroundColor: isDraggingDivider ? '#06b6d4' : '#606d80',
+                            borderRadius: '2px',
+                            transition: isDraggingDivider ? 'none' : 'background-color 0.2s ease'
+                          }}
+                        />
+                        <div className="absolute px-3 py-1 bg-gray-900 rounded text-xs text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-semibold" style={{left: '50%', transform: 'translateX(-50%)', top: '-30px'}}>
+                          Drag ↔️
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Live Preview - Hidden toggle on mobile below 700px */}
+                    {(screenWidth >= 700 || !mobileShowCode) && (
+                      <div style={{
+                        flex: `0 0 ${screenWidth >= 700 ? 100 - codeDisplayWidth : '100%'}%`,
+                        minWidth: 0,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: window.innerWidth < 1024 ? '100%' : 'auto'
+                      }}>
+                      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem'}}>
+                        <div style={{fontSize: '0.875rem', color: '#9ca3af', fontWeight: '600'}}>Live Preview</div>
+                        <button
+                          onClick={() => setFullScreenPreview(true)}
+                          style={{
+                            padding: '0.5rem 0.75rem',
+                            backgroundColor: '#9333ea',
+                            color: 'white',
+                            fontSize: '0.75rem',
+                            fontWeight: '600',
+                            borderRadius: '0.5rem',
+                            border: 'none',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.25rem',
+                            transition: 'all 0.2s'
+                          }}
+                          onMouseOver={(e) => e.target.style.backgroundColor = '#7e22ce'}
+                          onMouseOut={(e) => e.target.style.backgroundColor = '#9333ea'}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                          </svg>
+                          Preview
+                        </button>
+                      </div>
+                      <div className="bg-gradient-to-br from-slate-950 via-purple-900 to-slate-900 rounded-lg overflow-hidden border border-gray-700 min-h-[250px] sm:min-h-[400px] flex-1">
+                        <ComponentLivePreview code={selectedComponent.code} />
+                      </div>
                     </div>
-                    <div className="bg-gradient-to-br from-slate-950 via-purple-900 to-slate-900 rounded-lg overflow-hidden border border-gray-700 min-h-[250px] sm:min-h-[400px] flex-1">
-                      <ComponentLivePreview code={selectedComponent.code} />
-                    </div>
+                  )}
+                  </div>
+                </div>
+
+                {/* Resize Handle - Bottom Edge */}
+                <div
+                  onMouseDown={handleContainerHeightMouseDown}
+                  className="w-full h-2 bg-gray-600 hover:bg-cyan-500 cursor-row-resize transition-colors group relative z-10"
+                  style={{
+                    backgroundColor: isDraggingContainerHeight ? '#06b6d4' : '#4b5563',
+                    cursor: 'row-resize',
+                    transition: isDraggingContainerHeight ? 'none' : 'background-color 0.2s ease',
+                    userSelect: 'none'
+                  }}
+                  title="Drag to resize container height"
+                >
+                  <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 rounded text-xs text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-semibold">
+                    ↕️ Drag to Resize Height
                   </div>
                 </div>
 

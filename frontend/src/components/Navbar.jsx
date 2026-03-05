@@ -3,7 +3,7 @@ import logo from '../assets/logo.jpg';
 import { Link } from 'react-router-dom';
 import ProfileModal from './ProfileModal';
 
-function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLoggedIn, onLogout, userInfo, onUpdateProfile }) {
+function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLoggedIn, onLogout, userInfo, onUpdateProfile, isDarkMode, setIsDarkMode }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -12,9 +12,9 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
   };
 
   return (
-    <nav className="bg-gray-900 text-white fixed w-full top-0 z-50">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3">
-        <div className="flex items-center justify-between h-14 sm:h-16">
+    <nav className="bg-gray-900 text-white fixed w-full top-0 z-50 mb-0">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3 bg-gray-900">
+        <div className="flex items-center justify-between min-h-16 sm:h-16 bg-gray-900">
           {/* Logo/Brand */}
           <div className="flex-shrink-0 flex items-center gap-2">
             <Link 
@@ -42,7 +42,6 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
 
           {/* Navigation Links - Desktop */}
           <div className="hidden md:flex space-x-2 lg:space-x-4 flex-1 ml-4 lg:ml-8">
-            {/* Home Button */}
             <button
               onClick={() => setActiveTab('home')}
               className={`px-4 py-2 rounded transition font-medium ${
@@ -106,6 +105,23 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
 
           {/* Auth Buttons - Desktop */}
           <div className="hidden sm:flex items-center space-x-2 sm:space-x-4">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="w-10 h-10 bg-gray-700 hover:bg-gray-600 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+              title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.12-2.12a4 4 0 00-5.656 0l1.414-1.414a2 2 0 012.828 0l2.828 2.828a2 2 0 01-2.828 2.828l-1.414-1.414a4 4 0 000 5.656l2.12 2.12a1 1 0 001.414-1.414l-2.12-2.12a2 2 0 010-2.828l1.414 1.414a1 1 0 001.414-1.414l-1.414-1.414a2 2 0 010-2.828z" clipRule="evenodd" />
+                </svg>
+              )}
+            </button>
+
             {isLoggedIn ? (
               <>
                 <button
@@ -146,7 +162,7 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-gray-700 pt-4 space-y-2 animate-in fade-in">
+          <div className="md:hidden mt-2 pb-4 pt-2 space-y-2 animate-in fade-in">
             <button
               onClick={() => {
                 setActiveTab('home');
@@ -230,6 +246,28 @@ function Navbar({ activeTab, setActiveTab, onLoginClick, onSignupClick, isLogged
                 </button>
               </>
             )}
+            
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="block w-full text-left px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded transition font-medium flex items-center gap-2"
+            >
+              {isDarkMode ? (
+                <>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  </svg>
+                  Light Mode
+                </>
+              ) : (
+                <>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.12-2.12a4 4 0 00-5.656 0l1.414-1.414a2 2 0 012.828 0l2.828 2.828a2 2 0 01-2.828 2.828l-1.414-1.414a4 4 0 000 5.656l2.12 2.12a1 1 0 001.414-1.414l-2.12-2.12a2 2 0 010-2.828l1.414 1.414a1 1 0 001.414-1.414l-1.414-1.414a2 2 0 010-2.828z" clipRule="evenodd" />
+                  </svg>
+                  Dark Mode
+                </>
+              )}
+            </button>
           </div>
         )}
       </div>
