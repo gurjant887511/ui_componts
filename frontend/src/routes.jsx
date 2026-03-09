@@ -16,6 +16,18 @@ import MyWebsite from './components/MyWebsite';
 import DynamicWeb from './components/DynamicWeb';
 import ElectroTech from './components/ElectroTech';
 import WebsiteFullPreview from './components/WebsiteFullPreview';
+import Blog from './components/footerbutton/Blog';
+import OurStory from './components/footerbutton/OurStory';
+import MissionAndVision from './components/footerbutton/Mission&Vision';
+import Testimonials from './components/footerbutton/Testimonials';
+import UIKit from './components/footerbutton/UIKit';
+import Icons from './components/footerbutton/Icons';
+import Illustrations from './components/footerbutton/Illustrations';
+import Documentation from './components/footerbutton/Documentation';
+import Changelog from './components/footerbutton/Changelog';
+import EmailUs from './components/footerbutton/EmailUs';
+import SupportCenter from './components/footerbutton/SupportCenter';
+import LiveChat from './components/footerbutton/LiveChat';
 
 function AppRoutes({ components }) {
   return (
@@ -54,6 +66,20 @@ function AppRoutes({ components }) {
       
       {/* Full Page Preview Routes */}
       <Route path="/preview/website/:websiteName" element={<WebsiteFullPreview />} />
+      
+      {/* Footer Pages Routes */}
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/our-story" element={<OurStory />} />
+      <Route path="/mission-vision" element={<MissionAndVision />} />
+      <Route path="/testimonials" element={<Testimonials />} />
+      <Route path="/ui-kit" element={<UIKit />} />
+      <Route path="/icons" element={<Icons />} />
+      <Route path="/illustrations" element={<Illustrations />} />
+      <Route path="/documentation" element={<Documentation />} />
+      <Route path="/changelog" element={<Changelog />} />
+      <Route path="/email-us" element={<EmailUs />} />
+      <Route path="/support-center" element={<SupportCenter />} />
+      <Route path="/live-chat" element={<LiveChat />} />
     </Routes>
   );
 }

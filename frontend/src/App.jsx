@@ -8,7 +8,7 @@ import SignupModal from './components/SignupModal';
 import CustomizeWeb from './components/CustomizeWeb';
 import WebsiteGallery from './components/WebsiteGallery';
 import ComponentsByCategory from './components/ComponentsByCategory';
-import StylishX from './components/StylishX';
+import StylishX from './components/StylishX'; 
 import Nexus from './components/Nexus';
 import Lumina from './components/Lumina';
 import RaiboWeb from './components/RaiboWeb';
@@ -148,6 +148,13 @@ function ComponentsPreviewPage({ isLoggedIn }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Handle mobile view mode - set to preview by default on screens below 700px
+  React.useEffect(() => {
+    if (screenWidth < 700 && viewMode === 'both') {
+      setViewMode('preview');
+    }
+  }, [screenWidth]);
 
   // Card subcategories mapping
   const CARD_SUBCATEGORIES = {
