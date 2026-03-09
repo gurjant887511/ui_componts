@@ -1261,6 +1261,7 @@ const WEB_EXAMPLES = [
 function FullWebPreview() {
   const [selectedExample, setSelectedExample] = useState('dynamic-react');
   const [iframeKey, setIframeKey] = useState(0);
+  const [activeTab, setActiveTab] = useState('preview');
 
   const example = WEB_EXAMPLES.find(e => e.id === selectedExample);
 
@@ -1282,7 +1283,7 @@ function FullWebPreview() {
               className={`p-4 rounded-lg border-2 transition-all text-sm font-medium ${
                 selectedExample === ex.id
                   ? 'border-blue-600 bg-blue-50 text-blue-900'
-                  : 'border-gray-200 bg-white hover:border-blue-300'
+                  : 'border-gray-200 bg-white text-gray-800 hover:border-blue-300'
               }`}
             >
               {ex.name}
@@ -1292,45 +1293,73 @@ function FullWebPreview() {
       </div>
 
       {example && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Code Display */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
-            <div className="bg-gray-800 text-white px-4 py-3 font-mono text-sm flex justify-between items-center">
-              <span>{example.name}</span>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(example.code);
-                  alert('Code copied to clipboard!');
-                }}
-                className="text-xs bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded"
-              >
-                Copy Code
-              </button>
-            </div>
-            <pre className="p-4 overflow-auto max-h-96 bg-gray-900 text-gray-100 text-xs leading-relaxed">
-              <code>{example.code}</code>
-            </pre>
+        <div>
+          {/* Toggle Buttons */}
+          <div className="flex gap-3 mb-4">
+            <button
+              onClick={() => setActiveTab('code')}
+              className={`px-6 py-2 rounded-lg font-medium transition-all ${
+                activeTab === 'code'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+              }`}
+            >
+              Code
+            </button>
+            <button
+              onClick={() => setActiveTab('preview')}
+              className={`px-6 py-2 rounded-lg font-medium transition-all ${
+                activeTab === 'preview'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+              }`}
+            >
+              Preview
+            </button>
           </div>
 
+          {/* Code Display */}
+          {activeTab === 'code' && (
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+              <div className="bg-gray-800 text-white px-4 py-3 font-mono text-sm flex justify-between items-center">
+                <span>{example.name}</span>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(example.code);
+                    alert('Code copied to clipboard!');
+                  }}
+                  className="text-xs bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded"
+                >
+                  Copy Code
+                </button>
+              </div>
+              <pre className="p-4 overflow-auto max-h-96 bg-gray-900 text-gray-100 text-xs leading-relaxed">
+                <code>{example.code}</code>
+              </pre>
+            </div>
+          )}
+
           {/* Live Preview with Iframe */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
-            <div className="bg-gray-800 text-white px-4 py-3 font-mono text-sm">
-              Live Preview
+          {activeTab === 'preview' && (
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+              <div className="bg-gray-800 text-white px-4 py-3 font-mono text-sm">
+                Live Preview
+              </div>
+              <div className="h-96 bg-gray-50 overflow-auto border-t">
+                <iframe
+                  key={iframeKey}
+                  srcDoc={generateHTML(example.code)}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    border: 'none',
+                    backgroundColor: '#000000ff'
+                  }}
+                  sandbox="allow-scripts allow-same-origin allow-modals"
+                />
+              </div>
             </div>
-            <div className="h-96 bg-gray-50 overflow-auto border-t">
-              <iframe
-                key={iframeKey}
-                srcDoc={generateHTML(example.code)}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  border: 'none',
-                  backgroundColor: '#000000ff'
-                }}
-                sandbox="allow-scripts allow-same-origin allow-modals"
-              />
-            </div>
-          </div>
+          )}
         </div>
       )}
 
@@ -1351,7 +1380,7 @@ function FullWebPreview() {
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: ${(props) => (props.theme.mode === 'dark' ? '#1a202c' : '#f7fafc')};
+  background: linear-gradient(135deg, #030718 0%, #020718 25%, #020617 50%, #030819 75%, #030719 100%);
 `;
 
 const Header = styled.header`
@@ -1370,17 +1399,22 @@ const HeaderContent = styled.div`
 
 const NavButton = styled.button`
   background: transparent;
-  color: white;
-  border: 1px solid white;
+  color: #030718;
+  border: 1px solid #030718;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.2s;
+  
+  @media (max-width: 700px) {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem;
+  }
 
   &:hover {
-    background: white;
-    color: #1a202c;
+    background: #030718;
+    color: white;
   }
 `;
 

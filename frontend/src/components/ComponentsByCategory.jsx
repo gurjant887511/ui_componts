@@ -317,19 +317,19 @@ export default function ComponentsByCategory() {
                 <div className="flex gap-1 mt-2">
                   <button
                     onClick={() => setSidebarWidth(Math.max(200, sidebarWidth - 50))}
-                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-white rounded transition-colors"
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-slate-900 rounded transition-colors"
                   >
                     −
                   </button>
                   <button
                     onClick={() => setSidebarWidth(300)}
-                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-blue-600 text-white rounded transition-colors"
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-blue-600 text-slate-900 rounded transition-colors"
                   >
                     Reset
                   </button>
                   <button
                     onClick={() => setSidebarWidth(Math.min(600, sidebarWidth + 50))}
-                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-white rounded transition-colors"
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-slate-900 rounded transition-colors"
                   >
                     +
                   </button>
@@ -353,19 +353,19 @@ export default function ComponentsByCategory() {
                 <div className="flex gap-1 mt-2">
                   <button
                     onClick={() => setSidebarHeight(Math.max(300, sidebarHeight - 100))}
-                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-white rounded transition-colors"
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-slate-900 rounded transition-colors"
                   >
                     −
                   </button>
                   <button
                     onClick={() => setSidebarHeight(600)}
-                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-blue-600 text-white rounded transition-colors"
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-blue-600 text-slate-900 rounded transition-colors"
                   >
                     Reset
                   </button>
                   <button
                     onClick={() => setSidebarHeight(Math.min(1000, sidebarHeight + 100))}
-                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-white rounded transition-colors"
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-purple-600 text-slate-900 rounded transition-colors"
                   >
                     +
                   </button>
@@ -389,19 +389,19 @@ export default function ComponentsByCategory() {
                 <div className="flex gap-1 mt-2">
                   <button
                     onClick={() => setCodeDisplayWidth(Math.max(20, codeDisplayWidth - 5))}
-                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-cyan-600 text-white rounded transition-colors"
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-cyan-600 text-slate-900 rounded transition-colors"
                   >
                     ←
                   </button>
                   <button
                     onClick={() => setCodeDisplayWidth(50)}
-                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-blue-600 text-white rounded transition-colors"
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-blue-600 text-slate-900 rounded transition-colors"
                   >
                     50/50
                   </button>
                   <button
                     onClick={() => setCodeDisplayWidth(Math.min(80, codeDisplayWidth + 5))}
-                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-cyan-600 text-white rounded transition-colors"
+                    className="flex-1 px-2 py-1 text-xs bg-gray-700 hover:bg-cyan-600 text-slate-900 rounded transition-colors"
                   >
                     →
                   </button>
@@ -424,7 +424,7 @@ export default function ComponentsByCategory() {
 
         {/* Header */}
         <div className="mb-6 sm:mb-8 pt-16 sm:pt-0">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-4">Component Library</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-2 sm:mb-4">Component Library</h1>
           <p className="text-gray-400 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6">Browse and preview all MongoDB components by category</p>
           
           {/* Filter Buttons */}
@@ -434,7 +434,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('all')}
               className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap ${
                 filterMode === 'all'
-                  ? 'bg-purple-600 text-white'
+                  ? 'bg-purple-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -444,7 +444,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('cards')}
               className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap ${
                 filterMode === 'cards'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-blue-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -454,7 +454,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('headers')}
               className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap ${
                 filterMode === 'headers'
-                  ? 'bg-cyan-600 text-white'
+                  ? 'bg-cyan-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -464,7 +464,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('footers')}
               className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap ${
                 filterMode === 'footers'
-                  ? 'bg-orange-600 text-white'
+                  ? 'bg-orange-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -474,7 +474,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('hero')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 filterMode === 'hero'
-                  ? 'bg-red-600 text-white'
+                  ? 'bg-red-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -484,7 +484,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('logocloud')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 filterMode === 'logocloud'
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-indigo-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -494,7 +494,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('feature')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 filterMode === 'feature'
-                  ? 'bg-teal-600 text-white'
+                  ? 'bg-teal-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -504,7 +504,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('pricing')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 filterMode === 'pricing'
-                  ? 'bg-green-600 text-white'
+                  ? 'bg-green-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -514,7 +514,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('faq')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 filterMode === 'faq'
-                  ? 'bg-yellow-600 text-white'
+                  ? 'bg-yellow-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -524,7 +524,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('testimonial')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 filterMode === 'testimonial'
-                  ? 'bg-pink-600 text-white'
+                  ? 'bg-pink-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -534,7 +534,7 @@ export default function ComponentsByCategory() {
               onClick={() => setFilterMode('cta')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 filterMode === 'cta'
-                  ? 'bg-fuchsia-600 text-white'
+                  ? 'bg-fuchsia-600 text-slate-900'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -548,13 +548,13 @@ export default function ComponentsByCategory() {
         {filterMode === 'headers' && displayedCategories.includes('Header') && (
           <div className="mb-8 space-y-6">
             <div>
-              <h3 className="text-lg font-bold text-white mb-4">Filter Headers by Type</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-4">Filter Headers by Type</h3>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setSelectedHeaderType('all')}
                   className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                     selectedHeaderType === 'all'
-                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/50'
+                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-slate-900 shadow-lg shadow-purple-500/50'
                       : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                   }`}
                 >
@@ -566,7 +566,7 @@ export default function ComponentsByCategory() {
                     onClick={() => setSelectedHeaderType(headerType)}
                     className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                       selectedHeaderType === headerType
-                        ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
+                        ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-slate-900 shadow-lg shadow-cyan-500/50'
                         : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                     }`}
                   >
@@ -609,7 +609,7 @@ export default function ComponentsByCategory() {
                   </div>
                 </div>
                 <div className="flex-grow">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white">{category}</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">{category}</h2>
                   <p className="text-gray-400 text-xs sm:text-sm">
                     {Object.values(categoryComps).reduce((sum, arr) => sum + arr.length, 0)} component{Object.values(categoryComps).reduce((sum, arr) => sum + arr.length, 0) !== 1 ? 's' : ''}
                   </p>
@@ -845,7 +845,7 @@ export default function ComponentsByCategory() {
                     <button
                       onClick={() => setMobileShowCode(true)}
                       className={`flex-1 px-3 py-2 rounded-lg font-semibold text-sm transition-all ${
-                        mobileShowCode
+                        mobileShowCode === true
                           ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/50'
                           : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                       }`}
@@ -855,7 +855,7 @@ export default function ComponentsByCategory() {
                     <button
                       onClick={() => setMobileShowCode(false)}
                       className={`flex-1 px-3 py-2 rounded-lg font-semibold text-sm transition-all ${
-                        !mobileShowCode
+                        mobileShowCode === false
                           ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/50'
                           : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                       }`}
@@ -877,6 +877,66 @@ export default function ComponentsByCategory() {
                       <span className="text-cyan-400">↔️ Drag center divider to resize width</span>
                     </div>
                   )}
+                </div>
+
+                {/* Quick Expand/Shrink Controls - Width (Desktop) */}
+                {screenWidth >= 700 && (
+                  <div className="mb-3 p-3 bg-gray-800/50 border border-gray-700 rounded-lg flex flex-wrap gap-2 items-center">
+                    <span className="text-xs font-semibold text-gray-300">📏 Width:</span>
+                    <button
+                      onClick={() => setCodeDisplayWidth(Math.max(20, codeDisplayWidth - 10))}
+                      className="px-3 py-2 text-xs bg-cyan-600 hover:bg-cyan-700 text-white rounded font-semibold transition-colors flex items-center gap-1"
+                      title="Shrink Code Panel"
+                    >
+                      <span>◀</span> Shrink Code
+                    </button>
+                    <button
+                      onClick={() => setCodeDisplayWidth(50)}
+                      className="px-3 py-2 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded font-semibold transition-colors"
+                      title="Equal 50/50 split"
+                    >
+                      50/50
+                    </button>
+                    <button
+                      onClick={() => setCodeDisplayWidth(Math.min(80, codeDisplayWidth + 10))}
+                      className="px-3 py-2 text-xs bg-cyan-600 hover:bg-cyan-700 text-white rounded font-semibold transition-colors flex items-center gap-1"
+                      title="Expand Code Panel"
+                    >
+                      Expand Code <span>▶</span>
+                    </button>
+                    <div className="ml-auto text-xs text-cyan-400 font-mono bg-gray-900/70 px-2 py-1 rounded">
+                      {codeDisplayWidth.toFixed(0)}% / {(100 - codeDisplayWidth).toFixed(0)}%
+                    </div>
+                  </div>
+                )}
+
+                {/* Quick Expand/Shrink Controls - Height */}
+                <div className="mb-3 p-3 bg-gray-800/50 border border-gray-700 rounded-lg flex flex-wrap gap-2 items-center">
+                  <span className="text-xs font-semibold text-gray-300">📐 Height:</span>
+                  <button
+                    onClick={() => setPreviewContainerHeight(Math.max(250, previewContainerHeight - 50))}
+                    className="px-3 py-2 text-xs bg-purple-600 hover:bg-purple-700 text-white rounded font-semibold transition-colors flex items-center gap-1"
+                    title="Decrease Height"
+                  >
+                    <span>▲</span> Shrink
+                  </button>
+                  <button
+                    onClick={() => setPreviewContainerHeight(450)}
+                    className="px-3 py-2 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded font-semibold transition-colors"
+                    title="Reset to default height"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    onClick={() => setPreviewContainerHeight(Math.min(800, previewContainerHeight + 50))}
+                    className="px-3 py-2 text-xs bg-purple-600 hover:bg-purple-700 text-white rounded font-semibold transition-colors flex items-center gap-1"
+                    title="Increase Height"
+                  >
+                    Expand <span>▼</span>
+                  </button>
+                  <div className="ml-auto text-xs text-purple-400 font-mono bg-gray-900/70 px-2 py-1 rounded">
+                    {previewContainerHeight}px
+                  </div>
                 </div>
 
                 {/* Resizable Code & Preview Container Wrapper */}

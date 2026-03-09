@@ -98,6 +98,11 @@ const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  
+  @media (max-width: 700px) {
+    font-size: 14px;
+    padding: 10px;
+  }
 
   &:hover {
     transform: translateY(-2px);
