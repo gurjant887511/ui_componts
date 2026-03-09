@@ -16,7 +16,7 @@ const Card = ({ title, description, image, buttonText, onButtonClick }) => {
         {buttonText && (
           <button
             onClick={onButtonClick}
-            className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition-colors duration-300"
+            className="bg-blue-600 text-slate-900 px-4 py-2 rounded-xl hover:bg-blue-700 transition-colors duration-300"
           >
             {buttonText}
           </button>
